@@ -1,23 +1,24 @@
-<p>
-  <b>Name:</b>
-  <%=h @category.name %>
-</p>
+<ul class="ancestors">
+  <li><%= link_to "Top", categories_url %></li>
+  <% for ancestor in @category.ancestors -%>
+    <li><%= link_to ancestor.name, ancestor %></li>
+  <% end %>
+</ul>
 
 <p>
-  <b>Parent:</b>
-  <%=h @category.parent_id %>
+  <%= link_to 'editieren', edit_category_path(@category) %>
+  <%= link_to 'löschen', @category, :confirm => 'Sind Sie sicher?', :method => :delete %>
 </p>
 
-<p>
-  <b>Lft:</b>
-  <%=h @category.lft %>
-</p>
+<h1><%=h @category.name %></h1>
 
-<p>
-  <b>Rgt:</b>
-  <%=h @category.rgt %>
-</p>
+<ul>
+  <% for child in @children %>
+    <li>
+      <%=link_to child.name, child %>
+    </li>
+  <% end %>
+</ul>
 
+<%= render :partial => "new_category", :locals => { :account => @category } %>
 
-<%= link_to 'Edit', edit_category_path(@category) %> |
-<%= link_to 'Back', categories_path %>

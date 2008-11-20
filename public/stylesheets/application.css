@@ -30,12 +30,31 @@ body {
     color: #fff;
     text-align: center;
   }
+#callout {
+    background-color: #666;
+    border-bottom: 1px solid #555;
+  }
+#callout h6 {
+    color: #fff;
+    text-align: center;
+  }
 
 /**************************************/
 /*             NAVIGATION             */
 /**************************************/
+ul.ancestors {
+  list-style-type: none;
+  margin-left: 0;
+  padding-left: 0;
+  }
 
+ul.ancestors li {
+  display: inline;
+  }
 
+ul.ancestors li:before {
+  content: " » ";
+  }
 
 /**************************************/
 /*            MAIN CONTENT            */

@@ -1,26 +1,14 @@
-<h1>Listing categories</h1>
+<h1>Themengebiete</h1>
 
-<table>
-  <tr>
-    <th>Name</th>
-    <th>Parent</th>
-    <th>Lft</th>
-    <th>Rgt</th>
-  </tr>
-
-<% for category in @categories %>
-  <tr>
-    <td><%=h category.name %></td>
-    <td><%=h category.parent_id %></td>
-    <td><%=h category.lft %></td>
-    <td><%=h category.rgt %></td>
-    <td><%= link_to 'Show', category %></td>
-    <td><%= link_to 'Edit', edit_category_path(category) %></td>
-    <td><%= link_to 'Destroy', category, :confirm => 'Are you sure?', :method => :delete %></td>
-  </tr>
-<% end %>
-</table>
+<ul>
+  <% for category in @categories %>
+    <li>
+      <%=link_to category.name, category %>
+    </li>
+  <% end %>
+</ul>
 
 <br />
 
-<%= link_to 'New category', new_category_path %>
+<%= render :partial => "new_category" %>
+

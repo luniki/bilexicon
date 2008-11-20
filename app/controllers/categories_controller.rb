@@ -2,7 +2,7 @@ class CategoriesController < ApplicationController
   # GET /categories
   # GET /categories.xml
   def index
-    @categories = Category.find(:all)
+    @categories = Category.find_all_by_parent_id(nil)
 
     respond_to do |format|
       format.html # index.html.erb
@@ -14,6 +14,7 @@ class CategoriesController < ApplicationController
   # GET /categories/1.xml
   def show
     @category = Category.find(params[:id])
+    @children = @category.children
 
     respond_to do |format|
       format.html # show.html.erb
@@ -41,16 +42,24 @@ class CategoriesController < ApplicationController
   # POST /categories.xml
   def create
     @category = Category.new(params[:category])
+    @category.save!
+
+    unless params[:category][:parent_id].blank?
+      parent = Category.find(params[:category][:parent_id])
+      @category.move_to_child_of parent if parent
+    end
 
     respond_to do |format|
-      if @category.save
-        flash[:notice] = 'Category was successfully created.'
-        format.html { redirect_to(@category) }
-        format.xml  { render :xml => @category, :status => :created, :location => @category }
-      else
-        format.html { render :action => "new" }
-        format.xml  { render :xml => @category.errors, :status => :unprocessable_entity }
-      end
+      flash[:notice] = 'Category was successfully created.'
+      format.html { redirect_to(@category) }
+      format.xml  { render :xml => @category, :status => :created, :location => @category }
+    end
+
+  rescue Exception => err
+    # TODO (mlunzena) what to do with the exception
+    respond_to do |format|
+      format.html { render :action => "new" }
+      format.xml  { render :xml => @category.errors, :status => :unprocessable_entity }
     end
   end
 
@@ -58,16 +67,27 @@ class CategoriesController < ApplicationController
   # PUT /categories/1.xml
   def update
     @category = Category.find(params[:id])
+    @category.update_attributes!(params[:category])
+
+    if params[:category].key? :parent_id
+      if params[:category][:parent_id].blank?
+        @category.move_to_root
+      else parent = Category.find(params[:category][:parent_id])
+        @category.move_to_child_of parent if parent
+      end
+    end
 
     respond_to do |format|
-      if @category.update_attributes(params[:category])
-        flash[:notice] = 'Category was successfully updated.'
-        format.html { redirect_to(@category) }
-        format.xml  { head :ok }
-      else
-        format.html { render :action => "edit" }
-        format.xml  { render :xml => @category.errors, :status => :unprocessable_entity }
-      end
+      flash[:notice] = 'Category was successfully updated.'
+      format.html { redirect_to(@category) }
+      format.xml  { head :ok }
+    end
+
+  rescue
+    # TODO (mlunzena) what to do with the exception
+    respond_to do |format|
+      format.html { render :action => "edit" }
+      format.xml  { render :xml => @category.errors, :status => :unprocessable_entity }
     end
   end
 
