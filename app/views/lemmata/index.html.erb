@@ -1,0 +1,38 @@
+<h1>Listing lemmata</h1>
+
+<table>
+  <tr>
+    <th>Short1</th>
+    <th>Short2</th>
+    <th>Long1</th>
+    <th>Long2</th>
+    <th>Phonetic1</th>
+    <th>Phonetic2</th>
+    <th>Class1</th>
+    <th>Class2</th>
+    <th>Level1</th>
+    <th>Level2</th>
+  </tr>
+
+<% for lemma in @lemmata %>
+  <tr>
+    <td><%=h lemma.short1 %></td>
+    <td><%=h lemma.short2 %></td>
+    <td><%=h lemma.long1 %></td>
+    <td><%=h lemma.long2 %></td>
+    <td><%=h lemma.phonetic1 %></td>
+    <td><%=h lemma.phonetic2 %></td>
+    <td><%=h lemma.class1 %></td>
+    <td><%=h lemma.class2 %></td>
+    <td><%=h lemma.level1 %></td>
+    <td><%=h lemma.level2 %></td>
+    <td><%= link_to 'Show', lemma %></td>
+    <td><%= link_to 'Edit', edit_lemma_path(lemma) %></td>
+    <td><%= link_to 'Destroy', lemma, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New lemma', new_lemma_path %>

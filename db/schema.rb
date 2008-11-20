@@ -9,13 +9,43 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20081114095701) do
+ActiveRecord::Schema.define(:version => 20081120113857) do
 
   create_table "categories", :force => true do |t|
     t.string   "name"
     t.integer  "parent_id"
     t.integer  "lft"
     t.integer  "rgt"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "lemmata", :force => true do |t|
+    t.string   "short1"
+    t.string   "short2"
+    t.string   "long1"
+    t.string   "long2"
+    t.string   "phonetic1"
+    t.string   "phonetic2"
+    t.string   "class1"
+    t.string   "class2"
+    t.string   "level1"
+    t.string   "level2"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "users", :force => true do |t|
+    t.string   "login"
+    t.string   "crypted_password"
+    t.string   "password_salt"
+    t.string   "remember_token"
+    t.integer  "login_count"
+    t.datetime "last_request_at"
+    t.datetime "last_login_at"
+    t.datetime "current_login_at"
+    t.string   "last_login_ip"
+    t.string   "current_login_ip"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

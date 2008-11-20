@@ -1,0 +1,25 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  short1: MyString
+  short2: MyString
+  long1: MyString
+  long2: MyString
+  phonetic1: MyString
+  phonetic2: MyString
+  class1: MyString
+  class2: MyString
+  level1: MyString
+  level2: MyString
+
+two:
+  short1: MyString
+  short2: MyString
+  long1: MyString
+  long2: MyString
+  phonetic1: MyString
+  phonetic2: MyString
+  class1: MyString
+  class2: MyString
+  level1: MyString
+  level2: MyString
