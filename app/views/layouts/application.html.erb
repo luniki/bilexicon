@@ -12,20 +12,32 @@
   <!--[if IE]>
     <%= stylesheet_link_tag "blueprint/ie", :media => "screen, projection" %>
   <![endif]-->
+  <%= stylesheet_link_tag "application", :media => "screen, projection" %>
 
 </head>
 <body>
 
-<div class="container">
+<div id="header">
+  <h1>Gomasio - die onomasiologische Lernplattform</h1>
+</div>
 
-  <div id="header" class="span-24 last">
-    <h1>Wortschatz</h1>
+<div id="main" class="container">
+
+  <div id="navigtion" class="span-23 box last">
+    <%= link_to "Home", '/' %> ·  <%= link_to "Themengebiete", categories_url %>
   </div>
 
   <div id="content" class="span-24 last">
     <p style="color: green"><%= flash[:notice] %></p>
 
+
     <%= yield  %>
+  </div>
+
+
+  <div id="footer" class="prepend-2 span-20 last">
+    <hr />
+    2008 - Zentrum virtUOS
   </div>
 
 </div>
