@@ -18,7 +18,17 @@
 <body>
 
 <div id="header">
-  <h1>Gomasio</h1>
+  <div class="container">
+    <div class="span-8">
+      <h1>Gomasio</h1>
+    </div>
+    <div id="navigation" class="span-16 last">
+      <ul>
+        <li><%= link_to "Home", '/' %></li>
+        <li><%= link_to "Themengebiete", categories_url %></li>
+      </ul>
+    </div>
+  </div>
 </div>
 
 <div id="callout">
@@ -28,19 +38,20 @@
 
 <div id="main" class="container">
 
-  <div id="navigtion" class="span-23 box last">
-    <%= link_to "Home", '/' %> ·  <%= link_to "Themengebiete", categories_url %>
-  </div>
-
   <div id="content" class="span-24 last">
-    <p style="color: green"><%= flash[:notice] %></p>
 
+    <hr class="space" />
+
+    <% if flash[:notice] then %>
+      <div class="notice"><%= flash[:notice] %></div>
+    <% end %>
 
     <%= yield  %>
   </div>
 
 
   <div id="footer" class="prepend-2 span-20 last">
+    <hr class="space" />
     <hr />
     2008 - Zentrum virtUOS
   </div>

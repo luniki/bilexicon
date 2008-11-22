@@ -47,13 +47,29 @@ ul.ancestors {
   margin-left: 0;
   padding-left: 0;
   }
-
 ul.ancestors li {
   display: inline;
   }
-
 ul.ancestors li:before {
   content: " » ";
+  }
+
+#navigation ul {
+  list-style-type: none;
+  text-align: right;
+  }
+#navigation ul li {
+  display: inline;
+  margin: 0 3px;
+  padding: 0;
+  }
+#navigation ul li a {
+  display: inline;
+  padding: 0.5em;
+  text-decoration: none;
+  }
+#navigation ul li a:hover {
+  background-color: #eee;
   }
 
 /**************************************/
@@ -70,3 +86,9 @@ ul.ancestors li:before {
   text-align: center;
   }
 
+/**************************************/
+/*               MISC                 */
+/**************************************/
+th[scope="row"] {
+  text-align: right;
+  }
