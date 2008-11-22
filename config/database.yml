@@ -18,6 +18,7 @@ development:
   adapter: mysql
   encoding: utf8
   database: wortschatz_development
+  pool: 5
   username: root
   password:
   socket: /var/run/mysqld/mysqld.sock
@@ -29,6 +30,7 @@ test:
   adapter: mysql
   encoding: utf8
   database: wortschatz_test
+  pool: 5
   username: root
   password:
   socket: /var/run/mysqld/mysqld.sock
@@ -37,6 +39,7 @@ production:
   adapter: mysql
   encoding: utf8
   database: wortschatz_production
+  pool: 5
   username: root
   password: 
   socket: /var/run/mysqld/mysqld.sock
