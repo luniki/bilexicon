@@ -4,8 +4,6 @@ ActionController::Routing::Routes.draw do |map|
     category.resources :lemmata
   end
 
-  map.resources :lemmata
-
   # The priority is based upon order of creation: first created -> highest priority.
 
   # Sample of regular route:

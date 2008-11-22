@@ -1,51 +1,56 @@
-<h1>New lemma</h1>
+<h1>Neues Lemma</h1>
 
-<% form_for(@lemma) do |f| %>
+<h2>für das Themengebiet "<%= h @category.name %>"</h2>
+
+<% form_for([@category, @lemma]) do |f| %>
   <%= f.error_messages %>
 
-  <p>
-    <%= f.label :short1 %><br />
-    <%= f.text_field :short1 %>
-  </p>
-  <p>
-    <%= f.label :short2 %><br />
-    <%= f.text_field :short2 %>
-  </p>
-  <p>
-    <%= f.label :long1 %><br />
-    <%= f.text_field :long1 %>
-  </p>
-  <p>
-    <%= f.label :long2 %><br />
-    <%= f.text_field :long2 %>
-  </p>
-  <p>
-    <%= f.label :phonetic1 %><br />
-    <%= f.text_field :phonetic1 %>
-  </p>
-  <p>
-    <%= f.label :phonetic2 %><br />
-    <%= f.text_field :phonetic2 %>
-  </p>
-  <p>
-    <%= f.label :class1 %><br />
-    <%= f.text_field :class1 %>
-  </p>
-  <p>
-    <%= f.label :class2 %><br />
-    <%= f.text_field :class2 %>
-  </p>
-  <p>
-    <%= f.label :level1 %><br />
-    <%= f.text_field :level1 %>
-  </p>
-  <p>
-    <%= f.label :level2 %><br />
-    <%= f.text_field :level2 %>
-  </p>
+  <table>
+
+    <thead>
+      <tr>
+        <td></td>
+        <th>Englisch</th>
+        <th>Deutsch</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr>
+        <th scope="row">Kurzform</th>
+        <td><%= f.text_field :short1 %></td>
+        <td><%= f.text_field :short2 %></td>
+      </tr>
+
+      <tr>
+        <th scope="row">Langform</th>
+        <td><%= f.text_field :long1 %></td>
+        <td><%= f.text_field :long2 %></td>
+      </tr>
+
+      <tr>
+        <th scope="row">phonetische Umschrift</th>
+        <td><%= f.text_field :phonetic1 %></td>
+        <td><%= f.text_field :phonetic2 %></td>
+      </tr>
+
+      <tr>
+        <th scope="row">Klasse</th>
+        <td><%= f.text_field :class1 %></td>
+        <td><%= f.text_field :class2 %></td>
+      </tr>
+
+      <tr>
+        <th scope="row">Level</th>
+        <td><%= f.text_field :level1 %></td>
+        <td><%= f.text_field :level2 %></td>
+      </tr>
+    </tbody>
+  </table>
+
   <p>
     <%= f.submit "Create" %>
   </p>
 <% end %>
 
-<%= link_to 'Back', lemmata_path %>
+<%= link_to 'Back', category_path(@category) %>

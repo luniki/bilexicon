@@ -1,38 +1,19 @@
-<h1>Listing lemmata</h1>
+<h1>Lemmata</h1>
 
-<table>
-  <tr>
-    <th>Short1</th>
-    <th>Short2</th>
-    <th>Long1</th>
-    <th>Long2</th>
-    <th>Phonetic1</th>
-    <th>Phonetic2</th>
-    <th>Class1</th>
-    <th>Class2</th>
-    <th>Level1</th>
-    <th>Level2</th>
-  </tr>
+<h2>für das Themengebiet "<%= h @category.name %>"</h2>
 
-<% for lemma in @lemmata %>
-  <tr>
-    <td><%=h lemma.short1 %></td>
-    <td><%=h lemma.short2 %></td>
-    <td><%=h lemma.long1 %></td>
-    <td><%=h lemma.long2 %></td>
-    <td><%=h lemma.phonetic1 %></td>
-    <td><%=h lemma.phonetic2 %></td>
-    <td><%=h lemma.class1 %></td>
-    <td><%=h lemma.class2 %></td>
-    <td><%=h lemma.level1 %></td>
-    <td><%=h lemma.level2 %></td>
-    <td><%= link_to 'Show', lemma %></td>
-    <td><%= link_to 'Edit', edit_lemma_path(lemma) %></td>
-    <td><%= link_to 'Destroy', lemma, :confirm => 'Are you sure?', :method => :delete %></td>
-  </tr>
+<% if @lemmata.empty? then %>
+  <div class="notice">
+    Diesem Themengebiet sind bisher keine Lemmata zugeordnet.
+  </div>
 <% end %>
-</table>
+
+<ul>
+  <% for lemma in @lemmata %>
+    <li><%= h lemma.short1 %> | <%= h lemma.short2 %></li>
+  <% end %>
+</ul>
 
 <br />
 
-<%= link_to 'New lemma', new_lemma_path %>
+<%= link_to 'New lemma', new_category_lemma_path(@category) %>

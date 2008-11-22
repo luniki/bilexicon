@@ -1,6 +1,7 @@
 class LemmataController < ApplicationController
-  # GET /lemmata
-  # GET /lemmata.xml
+
+  before_filter :capture_category
+
   def index
     @lemmata = Lemma.find(:all)
 
@@ -10,8 +11,6 @@ class LemmataController < ApplicationController
     end
   end
 
-  # GET /lemmata/1
-  # GET /lemmata/1.xml
   def show
     @lemma = Lemma.find(params[:id])
 
@@ -21,8 +20,6 @@ class LemmataController < ApplicationController
     end
   end
 
-  # GET /lemmata/new
-  # GET /lemmata/new.xml
   def new
     @lemma = Lemma.new
 
@@ -32,20 +29,17 @@ class LemmataController < ApplicationController
     end
   end
 
-  # GET /lemmata/1/edit
   def edit
     @lemma = Lemma.find(params[:id])
   end
 
-  # POST /lemmata
-  # POST /lemmata.xml
   def create
-    @lemma = Lemma.new(params[:lemma])
+    @lemma = @category.lemmata.build(params[:lemma])
 
     respond_to do |format|
       if @lemma.save
         flash[:notice] = 'Lemma was successfully created.'
-        format.html { redirect_to(@lemma) }
+        format.html { redirect_to([@category, @lemma]) }
         format.xml  { render :xml => @lemma, :status => :created, :location => @lemma }
       else
         format.html { render :action => "new" }
@@ -54,8 +48,6 @@ class LemmataController < ApplicationController
     end
   end
 
-  # PUT /lemmata/1
-  # PUT /lemmata/1.xml
   def update
     @lemma = Lemma.find(params[:id])
 
@@ -71,15 +63,27 @@ class LemmataController < ApplicationController
     end
   end
 
-  # DELETE /lemmata/1
-  # DELETE /lemmata/1.xml
   def destroy
     @lemma = Lemma.find(params[:id])
     @lemma.destroy
 
     respond_to do |format|
-      format.html { redirect_to(lemmata_url) }
+      format.html { redirect_to(@category) }
       format.xml  { head :ok }
     end
+  end
+
+  private
+
+  def capture_category
+    @category = Category.find(params[:category_id]) if params[:category_id]
+    @lemma = @category.lemmata.find(params[:id]) if params[:id]
+  rescue ActiveRecord::RecordNotFound
+    not_found
+  end
+
+  def not_found
+    flash[:notice] = "Das gesuchte Lemma konnte nicht gefunden werden."
+    redirect_to categories_path
   end
 end

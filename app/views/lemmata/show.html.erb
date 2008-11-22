@@ -49,5 +49,6 @@
 </p>
 
 
-<%= link_to 'Edit', edit_lemma_path(@lemma) %> |
-<%= link_to 'Back', lemmata_path %>
+<%= link_to 'Edit', edit_category_lemma_path(@category, @lemma) %> |
+<%= link_to 'löschen', category_lemma_path(@category, @lemma), :method => "delete", :confirm => "Sind Sie sicher, dass dieses Lemma gelöscht werden soll?" %>
+<%= link_to 'Back', @category %>

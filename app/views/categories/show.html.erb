@@ -1,5 +1,5 @@
 <ul class="ancestors">
-  <li><%= link_to "Top", categories_url %></li>
+  <li><%= link_to "Top", categories_path %></li>
   <% for ancestor in @category.ancestors -%>
     <li><%= link_to ancestor.name, ancestor %></li>
   <% end %>
@@ -21,4 +21,22 @@
 </ul>
 
 <%= render :partial => "new_category", :locals => { :account => @category } %>
+
+
+<h2>Lemmata</h2>
+
+<% if @lemmata.empty? then %>
+  <div class="notice">
+    Diesem Themengebiet sind bisher keine Lemmata zugeordnet.
+  </div>
+<% end %>
+
+<ul>
+  <% for lemma in @lemmata %>
+    <li><%= link_to "#{lemma.short1} · #{lemma.short2}",
+                    category_lemma_path(@category, lemma) %></li>
+  <% end %>
+</ul>
+
+<%=link_to 'Lemma hinzufügen', new_category_lemma_url(@category) %>
 
