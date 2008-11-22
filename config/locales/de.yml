@@ -2,4 +2,22 @@
 # See http://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
 
 de:
-  hello: "Hallo Welt"
+  add_subcategory: "Themengebiet hinzufügen"
+  add_lemma: "Lemma hinzufügen"
+  back: "zurück"
+  categories: "Themengebiete"
+  category_created: "Das Themengebiet wurde erfolgreich angelegt."
+  category_edited: "Das Themengebiet wurde erfolgreich geändert."
+  category_has_no_lemmata_yet: "Diesem Themengebiet sind bisher keine Lemmata zugeordnet."
+  category_name: "Name"
+  confirm_question: "Sind Sie sicher?"
+  create: "anlegen"
+  delete: "löschen"
+  edit: "ändern"
+  edit_category: "Themengebiet editieren"
+  lemmata: "Lemmata"
+  new_category: "Neues Themengebiet"
+  parent_category: "übergeordnetes Themengebiet"
+  show: "anzeigen"
+  top: "Top"
+

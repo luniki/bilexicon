@@ -1,46 +1,29 @@
 class CategoriesController < ApplicationController
-  # GET /categories
-  # GET /categories.xml
+
   def index
     @categories = Category.find_all_by_parent_id(nil)
 
     respond_to do |format|
-      format.html # index.html.erb
+      format.html
       format.xml  { render :xml => @categories }
     end
   end
 
-  # GET /categories/1
-  # GET /categories/1.xml
   def show
     @category = Category.find(params[:id])
     @children = @category.children
     @lemmata  = @category.lemmata
 
     respond_to do |format|
-      format.html # show.html.erb
+      format.html
       format.xml  { render :xml => @category }
     end
   end
 
-  # GET /categories/new
-  # GET /categories/new.xml
-  def new
-    @category = Category.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.xml  { render :xml => @category }
-    end
-  end
-
-  # GET /categories/1/edit
   def edit
     @category = Category.find(params[:id])
   end
 
-  # POST /categories
-  # POST /categories.xml
   def create
     @category = Category.new(params[:category])
     @category.save!
@@ -51,7 +34,7 @@ class CategoriesController < ApplicationController
     end
 
     respond_to do |format|
-      flash[:notice] = 'Category was successfully created.'
+      flash[:notice] = t(:category_created)
       format.html { redirect_to(@category) }
       format.xml  { render :xml => @category, :status => :created, :location => @category }
     end
@@ -64,8 +47,6 @@ class CategoriesController < ApplicationController
     end
   end
 
-  # PUT /categories/1
-  # PUT /categories/1.xml
   def update
     @category = Category.find(params[:id])
     @category.update_attributes!(params[:category])
@@ -79,7 +60,7 @@ class CategoriesController < ApplicationController
     end
 
     respond_to do |format|
-      flash[:notice] = 'Category was successfully updated.'
+      flash[:notice] = t(:category_edited)
       format.html { redirect_to(@category) }
       format.xml  { head :ok }
     end
@@ -92,8 +73,6 @@ class CategoriesController < ApplicationController
     end
   end
 
-  # DELETE /categories/1
-  # DELETE /categories/1.xml
   def destroy
     @category = Category.find(params[:id])
     @category.destroy

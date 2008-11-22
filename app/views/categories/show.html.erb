@@ -1,13 +1,13 @@
 <ul class="ancestors">
-  <li><%= link_to "Top", categories_path %></li>
+  <li><%= link_to t(:top), categories_path %></li>
   <% for ancestor in @category.ancestors -%>
     <li><%= link_to ancestor.name, ancestor %></li>
   <% end %>
 </ul>
 
 <p>
-  <%= link_to 'editieren', edit_category_path(@category) %>
-  <%= link_to 'löschen', @category, :confirm => 'Sind Sie sicher?', :method => :delete %>
+  <%= link_to t(:edit), edit_category_path(@category) %>
+  <%= link_to t(:delete), @category, :confirm => t(:confirm_question), :method => :delete %>
 </p>
 
 <h1><%=h @category.name %></h1>
@@ -23,11 +23,11 @@
 <%= render :partial => "new_category", :locals => { :account => @category } %>
 
 
-<h2>Lemmata</h2>
+<h2><%= t :lemmata %></h2>
 
 <% if @lemmata.empty? then %>
   <div class="notice">
-    Diesem Themengebiet sind bisher keine Lemmata zugeordnet.
+    <%= t :category_has_no_lemmata_yet %>
   </div>
 <% end %>
 
@@ -38,5 +38,5 @@
   <% end %>
 </ul>
 
-<%=link_to 'Lemma hinzufügen', new_category_lemma_url(@category) %>
+<%=link_to t(:add_lemma), new_category_lemma_url(@category) %>
 
