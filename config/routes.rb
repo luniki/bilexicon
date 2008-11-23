@@ -1,6 +1,6 @@
 ActionController::Routing::Routes.draw do |map|
 
-  map.resources :categories do |category|
+  map.resources :categories, :shallow => true do |category|
     category.resources :lemmata
   end
 

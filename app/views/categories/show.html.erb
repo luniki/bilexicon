@@ -34,7 +34,7 @@
 <ul>
   <% for lemma in @lemmata %>
     <li><%= link_to "#{lemma.short1} · #{lemma.short2}",
-                    category_lemma_path(@category, lemma) %></li>
+                    lemma_path(lemma) %></li>
   <% end %>
 </ul>
 

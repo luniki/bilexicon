@@ -1,6 +1,6 @@
 <h1>Editing lemma</h1>
 
-<% form_for([@category, @lemma]) do |f| %>
+<% form_for(@lemma) do |f| %>
   <%= f.error_messages %>
 
   <p>
@@ -48,5 +48,4 @@
   </p>
 <% end %>
 
-<%= link_to 'Show', [@category, @lemma] %> |
-<%= link_to 'Back', @category %>
+<%= link_to 'Back', @lemma %>
