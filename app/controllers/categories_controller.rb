@@ -2,22 +2,12 @@ class CategoriesController < ApplicationController
 
   def index
     @categories = Category.find_all_by_parent_id(nil)
-
-    respond_to do |format|
-      format.html
-      format.xml  { render :xml => @categories }
-    end
   end
 
   def show
     @category = Category.find(params[:id])
     @children = @category.children
     @lemmata  = @category.lemmata
-
-    respond_to do |format|
-      format.html
-      format.xml  { render :xml => @category }
-    end
   end
 
   def edit
@@ -33,18 +23,13 @@ class CategoriesController < ApplicationController
       @category.move_to_child_of parent if parent
     end
 
-    respond_to do |format|
-      flash[:notice] = t(:category_created)
-      format.html { redirect_to(@category) }
-      format.xml  { render :xml => @category, :status => :created, :location => @category }
-    end
+    flash[:notice] = t(:category_created)
+    redirect_to(@category)
 
   rescue Exception => err
     # TODO (mlunzena) what to do with the exception
-    respond_to do |format|
-      format.html { render :action => "new" }
-      format.xml  { render :xml => @category.errors, :status => :unprocessable_entity }
-    end
+    flash[:notice] = err
+    render :action => "new"
   end
 
   def update
@@ -59,27 +44,19 @@ class CategoriesController < ApplicationController
       end
     end
 
-    respond_to do |format|
-      flash[:notice] = t(:category_edited)
-      format.html { redirect_to(@category) }
-      format.xml  { head :ok }
-    end
+    flash[:notice] = t(:category_edited)
+    redirect_to(@category)
 
   rescue
     # TODO (mlunzena) what to do with the exception
-    respond_to do |format|
-      format.html { render :action => "edit" }
-      format.xml  { render :xml => @category.errors, :status => :unprocessable_entity }
-    end
+    flash[:notice] = err
+    render :action => "edit"
   end
 
   def destroy
     @category = Category.find(params[:id])
     @category.destroy
 
-    respond_to do |format|
-      format.html { redirect_to(categories_url) }
-      format.xml  { head :ok }
-    end
+    redirect_to(categories_url)
   end
 end
