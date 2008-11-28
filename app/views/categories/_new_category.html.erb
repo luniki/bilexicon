@@ -1,9 +1,0 @@
-<% form_tag categories_path do %>
-  <%= hidden_field_tag 'category[parent_id]', @category.id unless @category.nil? %>
-  <p>
-    <%= label_tag 'category[name]', t(:add_subcategory) %>
-    <%= text_field_tag 'category[name]' %>
-    <%= submit_tag t(:create) %>
-  </p>
-<% end %>
-
