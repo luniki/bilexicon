@@ -14,7 +14,6 @@
 /*              GLOBALS               */
 /**************************************/
 body {
-    background: #ccc url(../images/background.png) 50% top repeat-y;
   }
 
 
@@ -76,14 +75,21 @@ ul.ancestors li:before {
 /*            MAIN CONTENT            */
 /**************************************/
 #main {
+  margin-top: 1em;
   }
 
+#content {
+  background-color: #fff;
+  }
 
 /**************************************/
 /*               FOOTER               */
 /**************************************/
 #footer {
-  text-align: center;
+  width: 955px;
+  text-align: left;
+  margin: 1em auto 1em auto;
+  padding-left: 40px;
   }
 
 /**************************************/
