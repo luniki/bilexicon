@@ -5,25 +5,13 @@ describe CategoriesController do
   def mock_category(stubs={})
     @mock_category ||= mock_model(Category, stubs)
   end
-  
+
   describe "responding to GET index" do
 
-    it "should expose all categories as @categories" do
-      Category.should_receive(:find).with(:all).and_return([mock_category])
+    it "should expose all top categories as @categories" do
+      Category.should_receive(:roots).and_return([mock_category])
       get :index
       assigns[:categories].should == [mock_category]
-    end
-
-    describe "with mime type of xml" do
-  
-      it "should render all categories as xml" do
-        request.env["HTTP_ACCEPT"] = "application/xml"
-        Category.should_receive(:find).with(:all).and_return(categories = mock("Array of Categories"))
-        categories.should_receive(:to_xml).and_return("generated XML")
-        get :index
-        response.body.should == "generated XML"
-      end
-    
     end
 
   end
@@ -32,26 +20,15 @@ describe CategoriesController do
 
     it "should expose the requested category as @category" do
       Category.should_receive(:find).with("37").and_return(mock_category)
+
       get :show, :id => "37"
       assigns[:category].should equal(mock_category)
     end
-    
-    describe "with mime type of xml" do
 
-      it "should render the requested category as xml" do
-        request.env["HTTP_ACCEPT"] = "application/xml"
-        Category.should_receive(:find).with("37").and_return(mock_category)
-        mock_category.should_receive(:to_xml).and_return("generated XML")
-        get :show, :id => "37"
-        response.body.should == "generated XML"
-      end
-
-    end
-    
   end
 
   describe "responding to GET new" do
-  
+
     it "should expose a new category as @category" do
       Category.should_receive(:new).and_return(mock_category)
       get :new
@@ -61,7 +38,7 @@ describe CategoriesController do
   end
 
   describe "responding to GET edit" do
-  
+
     it "should expose the requested category as @category" do
       Category.should_receive(:find).with("37").and_return(mock_category)
       get :edit, :id => "37"
@@ -73,21 +50,27 @@ describe CategoriesController do
   describe "responding to POST create" do
 
     describe "with valid params" do
-      
+
       it "should expose a newly created category as @category" do
-        Category.should_receive(:new).with({'these' => 'params'}).and_return(mock_category(:save => true))
-        post :create, :category => {:these => 'params'}
+        Category.should_receive(:new).with({'name' => 'valid name'}).and_return(mock_category(:save => true))
+        post :create, :category => {:name => 'valid name'}
         assigns(:category).should equal(mock_category)
+      end
+
+      it "should show a flash notice" do
+        post :create, :category => {:name => 'valid name'}
+        flash[:notice].should == I18n.translate(:category_created)
       end
 
       it "should redirect to the created category" do
         Category.stub!(:new).and_return(mock_category(:save => true))
-        post :create, :category => {}
+        post :create, :category => {:name => 'valid name'}
         response.should redirect_to(category_url(mock_category))
       end
-      
+
+
     end
-    
+
     describe "with invalid params" do
 
       it "should expose a newly created but unsaved category as @category" do
@@ -101,9 +84,29 @@ describe CategoriesController do
         post :create, :category => {}
         response.should render_template('new')
       end
-      
+
     end
-    
+
+
+    describe "with a parent ID" do
+
+      it "should insert the created category as a child of that parent" do
+        new_category = mock_model(Category, {:save => true})
+        Category.should_receive(:new).and_return(new_category)
+        Category.stub!(:find).with("23").and_return(mock_category)
+        new_category.should_receive(:move_to_child_of).with(mock_category)
+        post :create, :category => {:parent_id => "23"}
+      end
+    end
+
+    describe "without a parent ID" do
+      it "should move the created category to the top" do
+        Category.should_receive(:new).and_return(mock_category(:save => true))
+        Category.should_not_receive(:move_to_child_of)
+        post :create, :category => {}
+      end
+    end
+
   end
 
   describe "responding to PUT udpate" do
@@ -118,7 +121,7 @@ describe CategoriesController do
 
       it "should expose the requested category as @category" do
         Category.stub!(:find).and_return(mock_category(:update_attributes => true))
-        put :update, :id => "1"
+        put :update, :id => "1", :category => {:name => 'a name'}
         assigns(:category).should equal(mock_category)
       end
 
@@ -128,8 +131,26 @@ describe CategoriesController do
         response.should redirect_to(category_url(mock_category))
       end
 
+      describe "and with a parent ID" do
+        it "should move the requested category to its new parent" do
+          parent = mock_model(Category)
+          Category.stub!(:find).with("37").and_return(mock_category(:update_attributes => true))
+          Category.stub!(:find).with("42").and_return(parent)
+          mock_category.should_receive(:move_to_child_of).with(parent)
+          put :update, :id => "37", :category => {:parent_id => "42"}
+        end
+      end
+
+      describe "and with a blank parent ID" do
+        it "should move the requested category to the root" do
+          Category.stub!(:find).with("37").and_return(mock_category(:update_attributes => true))
+          mock_category.should_receive(:move_to_root)
+          put :update, :id => "37", :category => {:parent_id => ""}
+        end
+      end
+
     end
-    
+
     describe "with invalid params" do
 
       it "should update the requested category" do
@@ -161,7 +182,7 @@ describe CategoriesController do
       mock_category.should_receive(:destroy)
       delete :destroy, :id => "37"
     end
-  
+
     it "should redirect to the categories list" do
       Category.stub!(:find).and_return(mock_category(:destroy => true))
       delete :destroy, :id => "1"

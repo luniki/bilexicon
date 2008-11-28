@@ -3,6 +3,7 @@ require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 describe Category do
   before(:each) do
     @valid_attributes = {
+      :name => "a name"
     }
   end
 
