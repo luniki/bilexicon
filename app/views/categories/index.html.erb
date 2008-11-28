@@ -3,12 +3,12 @@
 <ul>
   <% for category in @categories %>
     <li>
-      <%=link_to category.name, category %>
+      <%=link_to h(category.name), category %>
     </li>
   <% end %>
 </ul>
 
-<br />
-
-<%= render :partial => "new_category" %>
+<% content_for :sidebar do %>
+<%= link_to t(:add_category), new_category_path  %>
+<% end %>
 

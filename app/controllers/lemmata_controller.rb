@@ -1,6 +1,6 @@
 class LemmataController < ApplicationController
 
-  before_filter :capture_category, :only => [:index, :create, :new]
+  before_filter :capture_category, :only => [:create, :new]
 
   def show
     @lemma = Lemma.find(params[:id])
@@ -48,7 +48,6 @@ class LemmataController < ApplicationController
 
   def capture_category
     @category = Category.find(params[:category_id])
-    @lemma = @category.lemmata.find(params[:id]) if params[:id]
   rescue ActiveRecord::RecordNotFound
     not_found
   end

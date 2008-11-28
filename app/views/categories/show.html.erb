@@ -1,42 +1,49 @@
+<h1><%=h @category.name %></h1>
+
 <ul class="ancestors">
   <li><%= link_to t(:top), categories_path %></li>
   <% for ancestor in @category.ancestors -%>
-    <li><%= link_to ancestor.name, ancestor %></li>
+    <li><%= link_to h(ancestor.name), ancestor %></li>
   <% end %>
 </ul>
 
-<p>
-  <%= link_to t(:edit), edit_category_path(@category) %>
-  <%= link_to t(:delete), @category, :confirm => t(:confirm_question), :method => :delete %>
-</p>
-
-<h1><%=h @category.name %></h1>
+<h2><%= t :category_children %></h2>
 
 <ul>
-  <% for child in @children %>
+  <% for child in @category.children %>
     <li>
-      <%=link_to child.name, child %>
+      <%=link_to h(child.name), child %>
     </li>
   <% end %>
 </ul>
 
-<%= render :partial => "new_category", :locals => { :account => @category } %>
-
+<hr class="space" />
 
 <h2><%= t :lemmata %></h2>
 
-<% if @lemmata.empty? then %>
-  <div class="notice">
-    <%= t :category_has_no_lemmata_yet %>
-  </div>
+<% if @category.lemmata.empty? then %>
+  <p><%= t :category_has_no_lemmata_yet %></p>
 <% end %>
 
 <ul>
-  <% for lemma in @lemmata %>
-    <li><%= link_to "#{lemma.short1} · #{lemma.short2}",
+  <% for lemma in @category.lemmata %>
+    <li><%= link_to h("#{lemma.short1} · #{lemma.short2}"),
                     lemma_path(lemma) %></li>
   <% end %>
 </ul>
 
-<%=link_to t(:add_lemma), new_category_lemma_url(@category) %>
+<% content_for :sidebar do %>
+<p>
+  <%= link_to t(:edit), edit_category_path(@category) %>
+</p>
+<p>
+  <%= link_to t(:delete), @category, :confirm => t(:confirm_question), :method => :delete %>
+</p>
+<p>
+  <%= link_to t(:add_category), new_category_path  %>
+</p>
+<p>
+  <%=link_to t(:add_lemma), new_category_lemma_url(@category) %>
+</p>
+<% end %>
 

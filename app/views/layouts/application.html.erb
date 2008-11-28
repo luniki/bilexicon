@@ -9,6 +9,7 @@
 
   <%= stylesheet_link_tag "blueprint/screen", :media => "screen, projection" %>
   <%= stylesheet_link_tag "blueprint/print", :media => "print" %>
+  <%= stylesheet_link_tag "blueprint/buttons", :media => "screen, projection" %>
   <!--[if IE]>
     <%= stylesheet_link_tag "blueprint/ie", :media => "screen, projection" %>
   <![endif]-->
@@ -38,9 +39,7 @@
 
 <div id="main" class="container">
 
-  <div id="content" class="span-24 last">
-
-    <hr class="space" />
+  <div id="content" class="span-17 colborder">
 
     <% if flash[:notice] then %>
       <div class="notice"><%= flash[:notice] %></div>
@@ -50,12 +49,15 @@
   </div>
 
 
-  <div id="footer" class="prepend-2 span-20 last">
-    <hr class="space" />
-    <hr />
-    2008 - Zentrum virtUOS
+  <div id="sidebar" class="span-6 last">
+
+    <%= yield :sidebar %>
   </div>
 
+</div>
+
+<div id="footer">
+  2008 - Zentrum virtUOS
 </div>
 
 </body>

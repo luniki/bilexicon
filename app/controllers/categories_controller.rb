@@ -1,13 +1,15 @@
 class CategoriesController < ApplicationController
 
   def index
-    @categories = Category.find_all_by_parent_id(nil)
+    @categories = Category.roots
   end
 
   def show
     @category = Category.find(params[:id])
-    @children = @category.children
-    @lemmata  = @category.lemmata
+  end
+
+  def new
+    @category = Category.new
   end
 
   def edit
@@ -16,41 +18,42 @@ class CategoriesController < ApplicationController
 
   def create
     @category = Category.new(params[:category])
-    @category.save!
 
-    unless params[:category][:parent_id].blank?
-      parent = Category.find(params[:category][:parent_id])
-      @category.move_to_child_of parent if parent
+    if @category.save
+      if params[:category][:parent_id]
+        parent = Category.find(params[:category][:parent_id])
+        @category.move_to_child_of parent if parent
+      end
+
+      flash[:notice] = t(:category_created)
+      redirect_to(@category)
+    else
+      flash.now[:notice] = t(:category_name_missing)
+      render :action => "new"
     end
-
-    flash[:notice] = t(:category_created)
-    redirect_to(@category)
-
-  rescue Exception => err
-    # TODO (mlunzena) what to do with the exception
-    flash[:notice] = err
-    render :action => "new"
   end
 
   def update
     @category = Category.find(params[:id])
-    @category.update_attributes!(params[:category])
 
-    if params[:category].key? :parent_id
-      if params[:category][:parent_id].blank?
-        @category.move_to_root
-      else parent = Category.find(params[:category][:parent_id])
-        @category.move_to_child_of parent if parent
+    if @category.update_attributes(params[:category])
+
+      if params[:category] and params[:category][:parent_id]
+        if params[:category][:parent_id].blank?
+          @category.move_to_root
+        else parent = Category.find(params[:category][:parent_id])
+          @category.move_to_child_of parent if parent
+        end
       end
+
+      flash[:notice] = t(:category_edited)
+      redirect_to(@category)
+
+    else
+
+      render :action => "edit"
+
     end
-
-    flash[:notice] = t(:category_edited)
-    redirect_to(@category)
-
-  rescue
-    # TODO (mlunzena) what to do with the exception
-    flash[:notice] = err
-    render :action => "edit"
   end
 
   def destroy
