@@ -18,11 +18,34 @@ describe CategoriesController do
 
   describe "responding to GET show" do
 
-    it "should expose the requested category as @category" do
-      Category.should_receive(:find).with("37").and_return(mock_category)
+    before (:each) do
+      @ancestors = [mock_model(Category)]
+      @children = [mock_model(Category)]
+      @lemmata = [mock_model(Lemma), mock_model(Lemma)]
+      @category = mock_category(:ancestors => @ancestors,
+                                :children => @children,
+                                :lemmata => @lemmata)
+      Category.should_receive(:find).with("37").and_return(@category)
+    end
 
+    it "should expose the requested category as @category" do
       get :show, :id => "37"
-      assigns[:category].should equal(mock_category)
+      assigns[:category].should equal(@category)
+    end
+
+    it "should expose the requested category's ancestors as @ancestors" do
+      get :show, :id => "37"
+      assigns[:ancestors].should equal(@ancestors)
+    end
+
+    it "should expose the requested category's children as @children" do
+      get :show, :id => "37"
+      assigns[:children].should equal(@children)
+    end
+
+    it "should expose the requested category's lemmata as @lemmata" do
+      get :show, :id => "37"
+      assigns[:lemmata].should equal(@lemmata)
     end
 
   end

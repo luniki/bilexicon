@@ -1,10 +1,10 @@
 <h1><%= t :categories %></h1>
 
-<ul>
+<ul id="categories">
   <% for category in @categories %>
-    <li>
+    <% content_tag_for(:li, category) do %>
       <%=link_to h(category.name), category %>
-    </li>
+    <% end %>
   <% end %>
 </ul>
 

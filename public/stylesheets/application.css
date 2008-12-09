@@ -41,15 +41,15 @@ body {
 /**************************************/
 /*             NAVIGATION             */
 /**************************************/
-ul.ancestors {
+ul#ancestors {
   list-style-type: none;
   margin-left: 0;
   padding-left: 0;
   }
-ul.ancestors li {
+ul#ancestors li {
   display: inline;
   }
-ul.ancestors li:before {
+ul#ancestors li:before {
   content: " » ";
   }
 

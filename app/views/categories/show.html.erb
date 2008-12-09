@@ -1,19 +1,21 @@
 <h1><%=h @category.name %></h1>
 
-<ul class="ancestors">
+<ul id="ancestors">
   <li><%= link_to t(:top), categories_path %></li>
-  <% for ancestor in @category.ancestors -%>
-    <li><%= link_to h(ancestor.name), ancestor %></li>
+  <% for ancestor in @ancestors -%>
+    <% content_tag_for(:li, ancestor) do %>
+      <%= link_to h(ancestor.name), ancestor %>
+    <% end %>
   <% end %>
 </ul>
 
 <h2><%= t :category_children %></h2>
 
-<ul>
-  <% for child in @category.children %>
-    <li>
-      <%=link_to h(child.name), child %>
-    </li>
+<ul id="children">
+  <% for child in @children -%>
+    <% content_tag_for(:li, child) do %>
+      <%= link_to h(child.name), child %>
+    <% end %>
   <% end %>
 </ul>
 
@@ -21,14 +23,15 @@
 
 <h2><%= t :lemmata %></h2>
 
-<% if @category.lemmata.empty? then %>
+<% if @lemmata.empty? then -%>
   <p><%= t :category_has_no_lemmata_yet %></p>
 <% end %>
 
-<ul>
-  <% for lemma in @category.lemmata %>
-    <li><%= link_to h("#{lemma.short1} · #{lemma.short2}"),
-                    lemma_path(lemma) %></li>
+<ul id="lemmata">
+  <% for lemma in @lemmata -%>
+    <% content_tag_for(:li, lemma) do %>
+      <%= link_to h("#{lemma.short1} · #{lemma.short2}"), lemma_path(lemma) %>
+    <% end %>
   <% end %>
 </ul>
 
@@ -40,10 +43,10 @@
   <%= link_to t(:delete), @category, :confirm => t(:confirm_question), :method => :delete %>
 </p>
 <p>
-  <%= link_to t(:add_category), new_category_path  %>
+  <%= link_to t(:add_category), new_category_path(:category_id => @category)  %>
 </p>
 <p>
-  <%=link_to t(:add_lemma), new_category_lemma_url(@category) %>
+  <%=link_to t(:add_lemma), new_category_lemma_path(@category) %>
 </p>
 <% end %>
 

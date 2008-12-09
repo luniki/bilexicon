@@ -1,13 +1,24 @@
-<p>
-  <b>Short1:</b>
-  <%=h @lemma.short1 %>
-</p>
+<table>
+  <thead>
+    <% content_tag_for(:tr, @lemma) do %>
+      <th class="">
+        <span class="phonetic">{<%= h @lemma.phonetic1 %>};</span>
+        <span class="class">cl: <%= h @lemma.class1 %>;</span>
+        <span class="level">l: <%= h @lemma.level1 %>;</span>
+      </th>
+      <th class="short"><%= h @lemma.short1 %></th>
+      <th class="short"><%= h @lemma.short2 %></th>
+      <th class="">
+        <span class="phonetic">{<%= h @lemma.phonetic2 %>};</span>
+        <span class="class">cl: <%= h @lemma.class2 %>;</span>
+        <span class="level">l: <%= h @lemma.level1 %>;</span>
+      </th>
+    <% end %>
+  </thead>
+  <tbody></tbody>
+</table>
 
-<p>
-  <b>Short2:</b>
-  <%=h @lemma.short2 %>
-</p>
-
+<!--
 <p>
   <b>Long1:</b>
   <%=h @lemma.long1 %>
@@ -18,36 +29,16 @@
   <%=h @lemma.long2 %>
 </p>
 
-<p>
-  <b>Phonetic1:</b>
-  <%=h @lemma.phonetic1 %>
-</p>
+ -->
 
-<p>
-  <b>Phonetic2:</b>
-  <%=h @lemma.phonetic2 %>
-</p>
-
-<p>
-  <b>Class1:</b>
-  <%=h @lemma.class1 %>
-</p>
-
-<p>
-  <b>Class2:</b>
-  <%=h @lemma.class2 %>
-</p>
-
-<p>
-  <b>Level1:</b>
-  <%=h @lemma.level1 %>
-</p>
-
-<p>
-  <b>Level2:</b>
-  <%=h @lemma.level2 %>
-</p>
-
-
-<%= link_to 'Edit', edit_lemma_path(@lemma) %> |
-<%= link_to 'löschen', lemma_path(@lemma), :method => "delete", :confirm => "Sind Sie sicher, dass dieses Lemma gelöscht werden soll?" %>
+<% content_for :sidebar do %>
+  <p>
+    <%= link_to t(:edit), edit_lemma_path(@lemma) %>
+  </p>
+  <p>
+    <%= link_to t(:delete), lemma_path(@lemma), :confirm => t(:confirm_question), :method => :delete %>
+  </p>
+  <p>
+    <%= link_to h(@category.name), @category %>
+  </p>
+<% end %>

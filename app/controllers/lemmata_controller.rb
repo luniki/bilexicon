@@ -4,6 +4,7 @@ class LemmataController < ApplicationController
 
   def show
     @lemma = Lemma.find(params[:id])
+    @category = @lemma.category
   end
 
   def new

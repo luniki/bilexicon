@@ -8,10 +8,21 @@ describe LemmataController do
 
   describe "responding to GET show" do
 
+    before (:each) do
+      @category = mock_model(Category)
+      @lemma = mock_lemma(:category => @category)
+    end
+
     it "should expose the requested lemma as @lemma" do
-      Lemma.should_receive(:find).with("37").and_return(mock_lemma)
+      Lemma.should_receive(:find).with("37").and_return(@lemma)
       get :show, :id => "37"
-      assigns[:lemma].should equal(mock_lemma)
+      assigns[:lemma].should equal(@lemma)
+    end
+
+    it "should expose the requested lemma's category as @category" do
+      Lemma.should_receive(:find).with("37").and_return(@lemma)
+      get :show, :id => "37"
+      assigns[:category].should equal(@category)
     end
 
   end

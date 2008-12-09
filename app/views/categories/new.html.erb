@@ -3,14 +3,18 @@
 <% form_for(@category) do |f| %>
 
   <p>
-    <%= f.label t(:category_name) %><br/>
+    <%= f.label :name, t(:category_name) %><br/>
     <%= f.text_field :name %>
   </p>
 
   <p>
-    <%= f.submit t(:create) %>
+    <%= f.label :parent_id, t(:parent_category) %><br />
+    <%= f.select :parent_id, nested_set_options(Category, @category) {|i| "#{'-' * i.level} #{i.name}" }.insert(0, ["", ""]),
+                 :selected => @parent && @parent.id.to_i %>
+  </p>
+
+  <p>
+    <%= f.submit t(:create) %> <%= link_to t(:back), @parent ? @parent : categories_path %>
   </p>
 <% end %>
-
-<%= link_to t(:back), categories_path %>
 

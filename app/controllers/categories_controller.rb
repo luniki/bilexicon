@@ -6,9 +6,16 @@ class CategoriesController < ApplicationController
 
   def show
     @category = Category.find(params[:id])
+    @ancestors = @category.ancestors
+    @children = @category.children
+    @lemmata = @category.lemmata
   end
 
   def new
+    if params[:category_id]
+      @parent = Category.find(params[:category_id])
+    end
+
     @category = Category.new
   end
 

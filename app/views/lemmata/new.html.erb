@@ -2,55 +2,6 @@
 
 <h2>für das Themengebiet "<%= h @category.name %>"</h2>
 
-<% form_for([@category, @lemma]) do |f| %>
-  <%= f.error_messages %>
-
-  <table>
-
-    <thead>
-      <tr>
-        <td></td>
-        <th>Englisch</th>
-        <th>Deutsch</th>
-      </tr>
-    </thead>
-
-    <tbody>
-      <tr>
-        <th scope="row">Kurzform</th>
-        <td><%= f.text_field :short1 %></td>
-        <td><%= f.text_field :short2 %></td>
-      </tr>
-
-      <tr>
-        <th scope="row">Langform</th>
-        <td><%= f.text_field :long1 %></td>
-        <td><%= f.text_field :long2 %></td>
-      </tr>
-
-      <tr>
-        <th scope="row">phonetische Umschrift</th>
-        <td><%= f.text_field :phonetic1 %></td>
-        <td><%= f.text_field :phonetic2 %></td>
-      </tr>
-
-      <tr>
-        <th scope="row">Klasse</th>
-        <td><%= f.text_field :class1 %></td>
-        <td><%= f.text_field :class2 %></td>
-      </tr>
-
-      <tr>
-        <th scope="row">Level</th>
-        <td><%= f.text_field :level1 %></td>
-        <td><%= f.text_field :level2 %></td>
-      </tr>
-    </tbody>
-  </table>
-
-  <p>
-    <%= f.submit "Create" %>
-  </p>
-<% end %>
+<%= render :partial => "form" %>
 
 <%= link_to 'Back', category_path(@category) %>
