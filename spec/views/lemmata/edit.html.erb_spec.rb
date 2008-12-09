@@ -24,5 +24,11 @@ describe "/lemmata/edit.html.erb" do
       (1..2).each { |i| response.should have_tag("select#lemma_level#{i}") }
     end
   end
+
+  it "should show a cancel link" do
+    render "/lemmata/edit.html.erb"
+
+    response.should have_tag("a[href=?]", lemma_path(@lemma))
+  end
 end
 

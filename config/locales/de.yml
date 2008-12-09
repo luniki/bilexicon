@@ -122,6 +122,7 @@ de:
   add_category: "Themengebiet hinzufügen"
   add_lemma: "Lemma hinzufügen"
   back: "zurück"
+  cancel: "abbrechen"
   categories: "Themengebiete"
   category_children: "Untergeordnete Themengebiete"
   category_created: "Das Themengebiet wurde erfolgreich angelegt."

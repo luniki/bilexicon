@@ -46,6 +46,7 @@
 
   <p>
     <%= f.submit "Create" %>
+    <%= link_to t(:cancel), @category ? @category : @lemma %>
   </p>
 <% end %>
 

@@ -25,5 +25,11 @@ describe "/lemmata/new.html.erb" do
       (1..2).each { |i| response.should have_tag("form select#lemma_level#{i}") }
     end
   end
+
+  it "should show a cancel link" do
+    render "/lemmata/new.html.erb"
+
+    response.should have_tag("a[href=?]", category_lemmata_path(@category))
+  end
 end
 
