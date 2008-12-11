@@ -27,7 +27,7 @@ class CategoriesController < ApplicationController
     @category = Category.new(params[:category])
 
     if @category.save
-      if params[:category][:parent_id]
+      unless params[:category][:parent_id].blank?
         parent = Category.find(params[:category][:parent_id])
         @category.move_to_child_of parent if parent
       end
