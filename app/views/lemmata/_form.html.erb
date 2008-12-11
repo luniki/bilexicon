@@ -45,8 +45,13 @@
   </table>
 
   <p>
-    <%= f.submit "Create" %>
-    <%= link_to t(:cancel), @category ? @category : @lemma %>
+    <% if @lemma.new_record? -%>
+      <%= f.submit t(:create) %>
+      <%= link_to t(:cancel), @category %>
+    <% else -%>
+      <%= f.submit t(:edit) %>
+      <%= link_to t(:cancel), @lemma %>
+    <% end %>
   </p>
 <% end %>
 
