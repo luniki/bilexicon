@@ -82,6 +82,12 @@ ul#ancestors li:before {
   background-color: #fff;
   }
 
+.lemma .phonetic:hover,
+.lemma .class:hover,
+.lemma .level:hover {
+  color: red;
+}
+
 /**************************************/
 /*               FOOTER               */
 /**************************************/
