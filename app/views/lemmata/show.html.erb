@@ -40,4 +40,7 @@
   <p>
     <%= link_to h(@category.name), @category %>
   </p>
+  <p>
+    <%= link_to t(:add_example), new_lemma_example_path(@lemma) %>
+  </p>
 <% end %>

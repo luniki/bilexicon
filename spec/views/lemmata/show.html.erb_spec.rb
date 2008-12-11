@@ -60,6 +60,13 @@ describe "/lemmata/show.html.erb" do
                                          :text => I18n.translate(:delete))
     end
 
+    it "should have a link to add another example" do
+
+      response[:sidebar].should have_tag("a[href=?]",
+                                         new_lemma_example_path(@lemma),
+                                         :text => I18n.translate(:add_example))
+    end
+
   end
 end
 

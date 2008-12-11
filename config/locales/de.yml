@@ -120,6 +120,7 @@ de:
       models:
 
   add_category: "Themengebiet hinzufügen"
+  add_example: "Beispiel hinzufügen"
   add_lemma: "Lemma hinzufügen"
   back: "zurück"
   cancel: "abbrechen"
