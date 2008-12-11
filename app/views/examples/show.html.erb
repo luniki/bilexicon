@@ -1,0 +1,23 @@
+<p>
+  <b>Form1:</b>
+  <%=h @example.form1 %>
+</p>
+
+<p>
+  <b>Form2:</b>
+  <%=h @example.form2 %>
+</p>
+
+<p>
+  <b>Exampleable:</b>
+  <%=h @example.exampleable_id %>
+</p>
+
+<p>
+  <b>Exampleable type:</b>
+  <%=h @example.exampleable_type %>
+</p>
+
+
+<%= link_to 'Edit', edit_example_path(@example) %> |
+<%= link_to 'Back', examples_path %>

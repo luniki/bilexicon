@@ -1,0 +1,28 @@
+<h1>Editing example</h1>
+
+<% form_for(@example) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :form1 %><br />
+    <%= f.text_field :form1 %>
+  </p>
+  <p>
+    <%= f.label :form2 %><br />
+    <%= f.text_field :form2 %>
+  </p>
+  <p>
+    <%= f.label :exampleable_id %><br />
+    <%= f.text_field :exampleable_id %>
+  </p>
+  <p>
+    <%= f.label :exampleable_type %><br />
+    <%= f.text_field :exampleable_type %>
+  </p>
+  <p>
+    <%= f.submit "Update" %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @example %> |
+<%= link_to 'Back', examples_path %>

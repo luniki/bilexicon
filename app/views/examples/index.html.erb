@@ -1,0 +1,26 @@
+<h1>Listing examples</h1>
+
+<table>
+  <tr>
+    <th>Form1</th>
+    <th>Form2</th>
+    <th>Exampleable</th>
+    <th>Exampleable type</th>
+  </tr>
+
+<% for example in @examples %>
+  <tr>
+    <td><%=h example.form1 %></td>
+    <td><%=h example.form2 %></td>
+    <td><%=h example.exampleable_id %></td>
+    <td><%=h example.exampleable_type %></td>
+    <td><%= link_to 'Show', example %></td>
+    <td><%= link_to 'Edit', edit_example_path(example) %></td>
+    <td><%= link_to 'Destroy', example, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New example', new_example_path %>

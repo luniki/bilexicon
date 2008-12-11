@@ -9,13 +9,22 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20081120131803) do
+ActiveRecord::Schema.define(:version => 20081211130226) do
 
   create_table "categories", :force => true do |t|
     t.string   "name"
     t.integer  "parent_id"
     t.integer  "lft"
     t.integer  "rgt"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "examples", :force => true do |t|
+    t.string   "form1"
+    t.string   "form2"
+    t.integer  "exampleable_id"
+    t.string   "exampleable_type"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

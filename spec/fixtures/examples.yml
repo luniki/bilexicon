@@ -1,0 +1,13 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  form1: 
+  form2: 
+  exampleable_id: 
+  exampleable_type: MyString
+
+two:
+  form1: 
+  form2: 
+  exampleable_id: 
+  exampleable_type: MyString
