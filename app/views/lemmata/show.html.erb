@@ -15,7 +15,16 @@
       </th>
     <% end %>
   </thead>
-  <tbody></tbody>
+  <tbody>
+    <% @lemma.examples.each do |example| -%>
+      <% content_tag_for(:tr, example) do %>
+        <td class=""></td>
+        <td class=""><%= h example.form1 %></td>
+        <td class=""><%= h example.form2 %></td>
+        <td class=""></td>
+      <% end %>
+    <% end %>
+  </tbody>
 </table>
 
 <!--

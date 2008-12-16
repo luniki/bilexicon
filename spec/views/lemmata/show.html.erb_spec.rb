@@ -7,7 +7,7 @@ describe "/lemmata/show.html.erb" do
     assigns[:lemma] = @lemma = stub_model(Lemma,
       :short1 => "wheel",    :short2 => "Rad",
       :phonetic1 => "ˈhwēl", :phonetic2 => "'það",
-      :class1 => "V",   :class2 => "V",
+      :class1 => "V",        :class2 => "V",
       :level1 => "B1 R/P",   :level2 => "B1 R/P"
       )
     assigns[:category] = @category = stub_model(Category, :name => "a name")
@@ -33,6 +33,13 @@ describe "/lemmata/show.html.erb" do
       end
     end
 
+    describe "and its examples" do
+      it "should render as a list" do
+        @lemma.should_receive(:examples).and_return([mock_model(Example, :form1 => 'a', :form2 => 'b')])
+        render "/lemmata/show.html.erb"
+        response.should have_tag("tr.example")
+      end
+    end
   end
 
   describe "and the sidebar" do

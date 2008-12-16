@@ -86,8 +86,11 @@ ul#ancestors li:before {
 .lemma .class:hover,
 .lemma .level:hover {
   color: red;
-}
+  }
 
+.example {
+  font-style: italic;
+  }
 /**************************************/
 /*               FOOTER               */
 /**************************************/

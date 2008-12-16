@@ -57,42 +57,73 @@ describe ExamplesController do
 
 #  end
 
-#  describe "responding to POST create" do
+
+
+  describe "responding to POST create" do
+
+      before(:each) do
+        @lemma = mock_model(Lemma, :save => true)
+        Lemma.stub!(:find).and_return(@lemma)
+      end
+
+    describe "with valid params" do
+
+      it "should expose a newly created example as @example" do
+        Example.should_receive(:new).with({'these' => 'params'}).and_return(mock_example(:save => true))
+        mock_example.should_receive(:'exampleable=').with(@lemma)
+        post :create, :example => {:these => 'params'}, :lemma_id => "37"
+        assigns(:example).should equal(mock_example)
+      end
+
+      it "should redirect to the created example" do
+        Example.stub!(:new).and_return(mock_example(:save => true, :'exampleable=' => nil))
+        post :create, :example => {}, :lemma_id => "37"
+        response.should redirect_to(lemma_url(@lemma))
+      end
+
+    end
+
 
 #    describe "with valid params" do
-#
+
+#      before(:each) do
+##        lemma = mock_model(Lemma, :save => true, :examples => mock("users", :build => mock_example(:save => true)))
+#        lemma = mock_model(Lemma, :save => true)
+#        Lemma.stub!(:find).and_return(lemma)
+#      end
+
 #      it "should expose a newly created example as @example" do
-#        Example.should_receive(:new).with({'these' => 'params'}).and_return(mock_example(:save => true))
-#        post :create, :example => {:these => 'params'}
-#        assigns(:example).should equal(mock_example)
+#        post :create, :lemma_id => "37", :example => {}
+#        assigns(:example).should equal(mock_example(:save => true))
 #      end
 
 #      it "should redirect to the created example" do
-#        Example.stub!(:new).and_return(mock_example(:save => true))
-#        post :create, :example => {}
+#        post :create, :lemma_id => "37", :example => {}
 #        response.should redirect_to(example_url(mock_example))
 #      end
-#
+
 #    end
-#
+
 #    describe "with invalid params" do
 
+#      before(:each) do
+#        lemma = mock_model(Lemma, :save => true, :examples => mock("users", :build => mock_example(:save => false)))
+#        Lemma.stub!(:find).and_return(lemma)
+#      end
+
 #      it "should expose a newly created but unsaved example as @example" do
-#        Example.stub!(:new).with({'these' => 'params'}).and_return(mock_example(:save => false))
-#        post :create, :example => {:these => 'params'}
+#        post :create, :example => {}
 #        assigns(:example).should equal(mock_example)
 #      end
 
 #      it "should re-render the 'new' template" do
-#        Example.stub!(:new).and_return(mock_example(:save => false))
 #        post :create, :example => {}
 #        response.should render_template('new')
 #      end
-#
-#    end
-#
-#  end
 
+#    end
+
+  end
 #  describe "responding to PUT udpate" do
 
 #    describe "with valid params" do
