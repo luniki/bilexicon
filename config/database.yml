@@ -17,7 +17,7 @@
 development:
   adapter: mysql
   encoding: utf8
-  database: wortschatz_development
+  database: bilexicon_development
   pool: 5
   username: root
   password:
@@ -29,7 +29,7 @@ development:
 test:
   adapter: mysql
   encoding: utf8
-  database: wortschatz_test
+  database: bilexicon_test
   pool: 5
   username: root
   password:
@@ -38,8 +38,8 @@ test:
 production:
   adapter: mysql
   encoding: utf8
-  database: wortschatz_production
+  database: bilexicon_production
   pool: 5
   username: root
-  password: 
+  password:
   socket: /var/run/mysqld/mysqld.sock
