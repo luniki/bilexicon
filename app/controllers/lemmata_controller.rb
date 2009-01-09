@@ -2,6 +2,10 @@ class LemmataController < ApplicationController
 
   before_filter :capture_category, :only => [:create, :new]
 
+  def index
+    @lemmata = Lemma.search(params[:q]) unless params[:q].blank?
+  end
+
   def show
     @lemma = Lemma.find(params[:id])
     @category = @lemma.category

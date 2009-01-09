@@ -145,6 +145,9 @@ de:
   lemmata: "Lemmata"
   new_category: "Neues Themengebiet"
   parent_category: "übergeordnetes Themengebiet"
+  search: "suchen"
+  search_for: "Suche nach:"
+  search_results_for: "Ergebnisse für"
   show: "anzeigen"
   top: "Top"
 

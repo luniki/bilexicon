@@ -91,6 +91,10 @@ ul#ancestors li:before {
 .example {
   font-style: italic;
   }
+
+.search_button {
+  vertical-align: middle;
+  }
 /**************************************/
 /*               FOOTER               */
 /**************************************/
