@@ -1,8 +1,10 @@
 ActionController::Routing::Routes.draw do |map|
 
-  map.resources :categories, :shallow => true do |category|
-    category.resources :lemmata, :except => :index, :has_many => :examples
+  map.resources :categories do |category|
+    category.resources :lemmata, :has_many => :examples
   end
+
+  map.resources :lemmata, :has_many => :examples
 
   # The priority is based upon order of creation: first created -> highest priority.
 
@@ -36,7 +38,7 @@ ActionController::Routing::Routes.draw do |map|
   #   end
 
   # You can have the root of your site routed with map.root -- just remember to delete public/index.html.
-  map.root :controller => "categories"
+  map.root :controller => "lemmata"
 
   # See how all your routes lay out with "rake routes"
 
