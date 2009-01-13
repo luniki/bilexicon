@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20081211130226) do
+ActiveRecord::Schema.define(:version => 20090113090324) do
 
   create_table "categories", :force => true do |t|
     t.string   "name"
@@ -18,6 +18,11 @@ ActiveRecord::Schema.define(:version => 20081211130226) do
     t.integer  "rgt"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "category_lemmata", :id => false, :force => true do |t|
+    t.integer "category_id", :null => false
+    t.integer "lemma_id",    :null => false
   end
 
   create_table "examples", :force => true do |t|
@@ -42,7 +47,6 @@ ActiveRecord::Schema.define(:version => 20081211130226) do
     t.string   "level2"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "category_id"
   end
 
 end
