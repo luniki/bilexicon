@@ -10,3 +10,6 @@
 [submodule "vendor/plugins/exception_notification"]
 	path = vendor/plugins/exception_notification
 	url = git://github.com/rails/exception_notification.git
+[submodule "vendor/plugins/rewrite_rails"]
+	path = vendor/plugins/rewrite_rails
+	url = git://github.com/raganwald/rewrite_rails.git
