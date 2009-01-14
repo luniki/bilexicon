@@ -10,7 +10,8 @@ describe "/lemmata/show.html.erb" do
       :class1 => "V",        :class2 => "V",
       :level1 => "B1 R/P",   :level2 => "B1 R/P"
       )
-    assigns[:category] = @category = stub_model(Category, :name => "a name")
+    assigns[:categories] = @categories = [stub_model(Category, :name => "a name")]
+    assigns[:examples] = @examples = [stub_model(Example, :form1 => 'a', :form2 => 'b')]
   end
 
   describe "the lemma" do
@@ -35,7 +36,6 @@ describe "/lemmata/show.html.erb" do
 
     describe "and its examples" do
       it "should render as a list" do
-        @lemma.should_receive(:examples).and_return([mock_model(Example, :form1 => 'a', :form2 => 'b')])
         render "/lemmata/show.html.erb"
         response.should have_tag("tr.example")
       end
@@ -48,11 +48,12 @@ describe "/lemmata/show.html.erb" do
       render "/lemmata/show.html.erb"
     end
 
-    it "should have a link to the parent category" do
-
-      response[:sidebar].should have_tag("a[href=?]",
-                                         category_path(@category),
-                                         :text => @category.name)
+    it "should have a link to the lemma's categories" do
+      @categories.each do |category|
+        response[:sidebar].should have_tag("a[href=?]",
+                                           category_path(category),
+                                           :text => category.name)
+      end
     end
 
     it "should have an edit link" do

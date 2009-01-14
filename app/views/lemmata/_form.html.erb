@@ -1,4 +1,4 @@
-<% form_for([@category, @lemma]) do |f| %>
+<% form_for(@lemma) do |f| %>
   <%= f.error_messages %>
 
   <table>
@@ -41,13 +41,23 @@
         <td><%= f.text_field :level1 %></td>
         <td><%= f.text_field :level2 %></td>
       </tr>
+
+      <tr>
+        <th scope="row"><%= t :lemma_categories %></th>
+        <td rowspan="2">
+           <%= select_tag :categories,
+                          options_for_select(nested_set_options(Category) {|i| "#{'-' * i.level} #{i.name}" },
+                                             @lemma.categories.collect{|i| i.id}),
+                          {:multiple => :multiple, :size => 5} %>
+        </td>
+      </tr>
     </tbody>
   </table>
 
   <p>
     <% if @lemma.new_record? -%>
       <%= f.submit t(:create) %>
-      <%= link_to t(:cancel), @category %>
+      <%= link_to t(:cancel), lemmata_path %>
     <% else -%>
       <%= f.submit t(:edit) %>
       <%= link_to t(:cancel), @lemma %>

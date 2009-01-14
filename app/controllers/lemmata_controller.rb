@@ -1,26 +1,28 @@
 class LemmataController < ApplicationController
 
-  before_filter :capture_category, :only => [:create, :new]
-
   def index
     @lemmata = Lemma.search(params[:q]) unless params[:q].blank?
   end
 
   def show
     @lemma = Lemma.find(params[:id])
-    @category = @lemma.category
+    @examples = @lemma.examples
+    @categories = @lemma.categories
   end
 
   def new
     @lemma = Lemma.new
+    @lemma.categories << Category.find(params[:category_id]) if params[:category_id]
+    @categories = Category.find(:all)
   end
 
   def edit
     @lemma = Lemma.find(params[:id])
+    @categories = Category.find(:all)
   end
 
   def create
-    @lemma = @category.lemmata.build(params[:lemma])
+    @lemma = Lemma.new(params[:lemma])
     if @lemma.save
       flash[:notice] = 'Lemma was successfully created.'
       redirect_to(@lemma)
@@ -42,23 +44,9 @@ class LemmataController < ApplicationController
 
   def destroy
     @lemma = Lemma.find(params[:id])
-    @category = @lemma.category
     @lemma.destroy
 
-    redirect_to(@category)
+    redirect_to(lemmata_path)
   end
 
-
-  private
-
-  def capture_category
-    @category = Category.find(params[:category_id])
-  rescue ActiveRecord::RecordNotFound
-    not_found
-  end
-
-  def not_found
-    flash[:notice] = "Das gesuchte Lemma konnte nicht gefunden werden."
-    redirect_to categories_path
-  end
 end

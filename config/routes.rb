@@ -1,9 +1,6 @@
 ActionController::Routing::Routes.draw do |map|
 
-  map.resources :categories do |category|
-    category.resources :lemmata, :has_many => :examples
-  end
-
+  map.resources :categories
   map.resources :lemmata, :has_many => :examples
 
   # The priority is based upon order of creation: first created -> highest priority.

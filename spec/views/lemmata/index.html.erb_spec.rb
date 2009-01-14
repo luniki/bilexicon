@@ -14,13 +14,13 @@ describe "/lemmata/index.html.erb" do
   describe "after searching without success" do
     before(:each) do
       assigns[:lemmata] = []
-      params[:q] = "not found"
+      params[:q] = "a word that cannot be found"
     end
 
     it "should render failure message" do
       render "/lemmata/index.html.erb"
 
-      response.should have_tag("p", "0 #{I18n.translate(:search_results_for)} \"not found\"")
+      response.should have_tag("p", "0 #{I18n.translate(:search_results_for)} \"a word that cannot be found\"")
     end
   end
 
@@ -30,13 +30,13 @@ describe "/lemmata/index.html.erb" do
         stub_model(Lemma, :short1 => "to be", :short2 => "sein"),
         stub_model(Lemma, :short1 => "or",    :short2 => "oder"),
       ]
-      params[:q] = "o"
+      params[:q] = "a result"
     end
 
     it "should render the number of matches" do
       render "/lemmata/index.html.erb"
 
-      response.should have_tag("p", "#{assigns[:lemmata].size} #{I18n.translate(:search_results_for)} \"o\"")
+      response.should have_tag("p", "#{assigns[:lemmata].size} #{I18n.translate(:search_results_for)} \"a result\"")
     end
 
     it "should render a list of matching" do

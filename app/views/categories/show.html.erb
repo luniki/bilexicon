@@ -46,7 +46,7 @@
   <%= link_to t(:add_category), new_category_path(:category_id => @category)  %>
 </p>
 <p>
-  <%=link_to t(:add_lemma), new_category_lemma_path(@category) %>
+  <%=link_to t(:add_lemma), new_lemma_path(:category_id => @category) %>
 </p>
 <% end %>
 

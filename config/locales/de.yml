@@ -137,6 +137,7 @@ de:
   delete: "löschen"
   edit: "ändern"
   edit_category: "Themengebiet editieren"
+  lemma_categories: "Themengebiete"
   lemma_class: "Klasse"
   lemma_level: "Level"
   lemma_long: "Langform"

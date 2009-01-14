@@ -20,7 +20,7 @@ ActiveRecord::Schema.define(:version => 20090113090324) do
     t.datetime "updated_at"
   end
 
-  create_table "category_lemmata", :id => false, :force => true do |t|
+  create_table "categories_lemmata", :id => false, :force => true do |t|
     t.integer "category_id", :null => false
     t.integer "lemma_id",    :null => false
   end

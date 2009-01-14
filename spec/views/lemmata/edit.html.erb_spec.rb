@@ -25,6 +25,11 @@ describe "/lemmata/edit.html.erb" do
     end
   end
 
+  it "should show the available  categories" do
+    render "/lemmata/new.html.erb"
+    pending
+  end
+
   it "should show a cancel link" do
     render "/lemmata/edit.html.erb"
 
