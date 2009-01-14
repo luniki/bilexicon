@@ -3,6 +3,8 @@
 
 require 'webrat' if !defined?(Webrat) # Because some people have it installed as a Gem
 
+require "webrat/rails"
+
 When /^I press "(.*)"$/ do |button|
   clicks_button(button)
 end
@@ -12,20 +14,20 @@ When /^I follow "(.*)"$/ do |link|
 end
 
 When /^I fill in "(.*)" with "(.*)"$/ do |field, value|
-  fills_in(field, :with => value) 
+  fills_in(field, :with => value)
 end
 
 When /^I select "(.*)" from "(.*)"$/ do |value, field|
-  selects(value, :from => field) 
+  selects(value, :from => field)
 end
 
 # Use this step in conjunction with Rail's datetime_select helper. For example:
-# When I select "December 25, 2008 10:00" as the date and time 
+# When I select "December 25, 2008 10:00" as the date and time
 When /^I select "(.*)" as the date and time$/ do |time|
   selects_datetime(time)
 end
 
-# Use this step when using multiple datetime_select helpers on a page or 
+# Use this step when using multiple datetime_select helpers on a page or
 # you want to specify which datetime to select. Given the following view:
 #   <%= f.label :preferred %><br />
 #   <%= f.datetime_select :preferred %>
@@ -41,7 +43,7 @@ end
 # Use this step in conjuction with Rail's time_select helper. For example:
 # When I select "2:20PM" as the time
 # Note: Rail's default time helper provides 24-hour time-- not 12 hour time. Webrat
-# will convert the 2:20PM to 14:20 and then select it. 
+# will convert the 2:20PM to 14:20 and then select it.
 When /^I select "(.*)" as the time$/ do |time|
   selects_time(time)
 end
@@ -67,11 +69,11 @@ When /^I select "(.*)" as the "(.*)" date$/ do |date, date_label|
 end
 
 When /^I check "(.*)"$/ do |field|
-  checks(field) 
+  checks(field)
 end
 
 When /^I uncheck "(.*)"$/ do |field|
-  unchecks(field) 
+  unchecks(field)
 end
 
 When /^I choose "(.*)"$/ do |field|
