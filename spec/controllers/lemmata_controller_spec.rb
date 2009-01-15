@@ -6,6 +6,15 @@ describe LemmataController do
     @mock_lemma ||= mock_model(Lemma, stubs)
   end
 
+  describe "responding to GET index" do
+
+    it "should expose @lemmata after searching" do
+      Lemma.should_receive(:search).with("a search word").and_return([mock_lemma])
+      get :index, :q => "a search word"
+      assigns[:lemmata].should == [mock_lemma]
+    end
+  end
+
   describe "responding to GET show" do
 
     before (:each) do
@@ -53,10 +62,8 @@ describe LemmataController do
   describe "responding to POST create" do
 
     before (:each) do
-      @categories = [mock_model(Category)]
-      @examples = [mock_model(Example)]
-      @lemma = mock_lemma(:categories => @categories,
-                          :examples => @examples)
+      @categories = [mock_model(Category), mock_model(Category)]
+      @lemma = mock_lemma(:categories => [], :examples => [])
       Lemma.should_receive(:new).and_return(@lemma)
     end
 

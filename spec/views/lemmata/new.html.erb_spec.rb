@@ -35,7 +35,7 @@ describe "/lemmata/new.html.erb" do
     template.should_receive(:nested_set_options).and_return(@categories.collect {|i| [i.name, i.id]} )
     render "/lemmata/new.html.erb"
 
-    response.should have_tag("form select#categories") do
+    response.should have_tag("form select#lemma_categories") do
       @categories.each do |c|
         if @lemma.categories.include?(c) then
           with_tag("option[selected][value=?]", c.id, :text => c.name)
