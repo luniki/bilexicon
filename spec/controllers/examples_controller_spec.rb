@@ -6,186 +6,141 @@ describe ExamplesController do
     @mock_example ||= mock_model(Example, stubs)
   end
 
-#  describe "responding to GET index" do
-
-#    it "should expose all examples as @examples" do
-#      Example.should_receive(:find).with(:all).and_return([mock_example])
-#      get :index
-#      assigns[:examples].should == [mock_example]
-#    end
-
-#  end
-
-#  describe "responding to GET show" do
-
-#    it "should expose the requested example as @example" do
-#      Example.should_receive(:find).with("37").and_return(mock_example)
-#      get :show, :id => "37"
-#      assigns[:example].should equal(mock_example)
-#    end
-#
-#  end
+  before(:each) do
+    @lemma = mock_model(Lemma, :save => true)
+    Lemma.stub!(:find).with("37").and_return(@lemma)
+  end
 
   describe "responding to GET new" do
 
     it "should expose a the example's lemma as @exampleable" do
-      lemma = mock_model(Lemma)
-      Lemma.stub!(:find).with("37").and_return(lemma)
       Example.stub!(:new)
-      get :new, :lemma_id => "37"
+      get :new, :lemma_id => "37", :context_type => "lemma"
       response.should be_success
-      assigns[:exampleable].should equal(lemma)
+      assigns[:exampleable].should equal(@lemma)
     end
 
     it "should expose a new example as @example" do
-      Lemma.stub!(:find).with("37")
       Example.should_receive(:new).and_return(mock_example)
-      get :new, :lemma_id => "37"
+      get :new, :lemma_id => "37", :context_type => "lemma"
       response.should be_success
       assigns[:example].should equal(mock_example)
     end
 
   end
 
-#  describe "responding to GET edit" do
-#
-#    it "should expose the requested example as @example" do
-#      Example.should_receive(:find).with("37").and_return(mock_example)
-#      get :edit, :id => "37"
-#      assigns[:example].should equal(mock_example)
-#    end
+  describe "responding to GET edit" do
 
-#  end
+    it "should expose the requested example as @example" do
+      Example.should_receive(:find).with("37").and_return(mock_example)
+      get :edit, :id => "37", :lemma_id => "37", :context_type => "lemma"
+      assigns[:example].should equal(mock_example)
+    end
 
-
+  end
 
   describe "responding to POST create" do
 
-      before(:each) do
-        @lemma = mock_model(Lemma, :save => true)
-        Lemma.stub!(:find).and_return(@lemma)
-      end
-
     describe "with valid params" do
 
-      it "should expose a newly created example as @example" do
-        Example.should_receive(:new).with({'these' => 'params'}).and_return(mock_example(:save => true))
-        mock_example.should_receive(:'exampleable=').with(@lemma)
-        post :create, :example => {:these => 'params'}, :lemma_id => "37"
-        assigns(:example).should equal(mock_example)
+      before(:each) do
+        @example = mock_example(:save => true)
       end
 
-      it "should redirect to the created example" do
-        Example.stub!(:new).and_return(mock_example(:save => true, :'exampleable=' => nil))
-        post :create, :example => {}, :lemma_id => "37"
+      it "should expose a newly created example as @example" do
+        param_example = {"form1" => "To be or not to be.",
+                         "form2" => "Sein oder nicht sein."}
+        Example.should_receive(:new).with(param_example).and_return(@example)
+        @example.should_receive(:'exampleable=')
+        post :create, :example => param_example,
+                      :lemma_id => "37",
+                      :context_type => "lemma"
+        assigns(:example).should equal(@example)
+      end
+
+      it "should redirect to the lemma of the example" do
+        post :create, :example => {}, :lemma_id => "37", :context_type => "lemma"
         response.should redirect_to(lemma_url(@lemma))
       end
 
     end
 
+    describe "with invalid params" do
 
-#    describe "with valid params" do
+      before(:each) do
+        @example = mock_example(:save => false, :'exampleable=' => nil)
+        Example.should_receive(:new).and_return(@example)
+      end
 
-#      before(:each) do
-##        lemma = mock_model(Lemma, :save => true, :examples => mock("users", :build => mock_example(:save => true)))
-#        lemma = mock_model(Lemma, :save => true)
-#        Lemma.stub!(:find).and_return(lemma)
-#      end
+      it "should expose a newly created but unsaved example as @example" do
+        post :create, :example => {}, :lemma_id => "37", :context_type => "lemma"
+        assigns(:example).should equal(@example)
+      end
 
-#      it "should expose a newly created example as @example" do
-#        post :create, :lemma_id => "37", :example => {}
-#        assigns(:example).should equal(mock_example(:save => true))
-#      end
-
-#      it "should redirect to the created example" do
-#        post :create, :lemma_id => "37", :example => {}
-#        response.should redirect_to(example_url(mock_example))
-#      end
-
-#    end
-
-#    describe "with invalid params" do
-
-#      before(:each) do
-#        lemma = mock_model(Lemma, :save => true, :examples => mock("users", :build => mock_example(:save => false)))
-#        Lemma.stub!(:find).and_return(lemma)
-#      end
-
-#      it "should expose a newly created but unsaved example as @example" do
-#        post :create, :example => {}
-#        assigns(:example).should equal(mock_example)
-#      end
-
-#      it "should re-render the 'new' template" do
-#        post :create, :example => {}
-#        response.should render_template('new')
-#      end
-
-#    end
-
+      it "should re-render the 'new' template" do
+        post :create, :example => {}, :lemma_id => "37", :context_type => "lemma"
+        response.should render_template('new')
+      end
+    end
   end
-#  describe "responding to PUT udpate" do
 
-#    describe "with valid params" do
+  describe "responding to PUT udpate" do
 
-#      it "should update the requested example" do
-#        Example.should_receive(:find).with("37").and_return(mock_example)
-#        mock_example.should_receive(:update_attributes).with({'these' => 'params'})
-#        put :update, :id => "37", :example => {:these => 'params'}
-#      end
+    describe "with valid params" do
 
-#      it "should expose the requested example as @example" do
-#        Example.stub!(:find).and_return(mock_example(:update_attributes => true))
-#        put :update, :id => "1"
-#        assigns(:example).should equal(mock_example)
-#      end
+      it "should update the requested example" do
+        Example.should_receive(:find).with("37").and_return(mock_example)
+        mock_example.should_receive(:update_attributes).with({'these' => 'params'})
+        put :update, :id => "37", :example => {:these => 'params'}, :lemma_id => "37", :context_type => "lemma"
+      end
 
-#      it "should redirect to the example" do
-#        Example.stub!(:find).and_return(mock_example(:update_attributes => true))
-#        put :update, :id => "1"
-#        response.should redirect_to(example_url(mock_example))
-#      end
+      it "should expose the requested example as @example" do
+        Example.stub!(:find).and_return(mock_example(:update_attributes => true))
+        put :update, :id => "1", :lemma_id => "37", :context_type => "lemma"
+        assigns(:example).should equal(mock_example)
+      end
 
-#    end
-#
-#    describe "with invalid params" do
+      it "should redirect to the example" do
+        Example.stub!(:find).and_return(mock_example(:update_attributes => true))
+        put :update, :id => "1", :lemma_id => "37", :context_type => "lemma"
+        response.should redirect_to(lemma_url(@lemma))
+      end
+    end
 
-#      it "should update the requested example" do
-#        Example.should_receive(:find).with("37").and_return(mock_example)
-#        mock_example.should_receive(:update_attributes).with({'these' => 'params'})
-#        put :update, :id => "37", :example => {:these => 'params'}
-#      end
+    describe "with invalid params" do
 
-#      it "should expose the example as @example" do
-#        Example.stub!(:find).and_return(mock_example(:update_attributes => false))
-#        put :update, :id => "1"
-#        assigns(:example).should equal(mock_example)
-#      end
+      it "should update the requested example" do
+        Example.should_receive(:find).with("37").and_return(mock_example)
+        mock_example.should_receive(:update_attributes).with({'these' => 'params'})
+        put :update, :id => "37", :example => {:these => 'params'}, :lemma_id => "37", :context_type => "lemma"
+      end
 
-#      it "should re-render the 'edit' template" do
-#        Example.stub!(:find).and_return(mock_example(:update_attributes => false))
-#        put :update, :id => "1"
-#        response.should render_template('edit')
-#      end
+      it "should expose the example as @example" do
+        Example.stub!(:find).and_return(mock_example(:update_attributes => false))
+        put :update, :id => "1", :lemma_id => "37", :context_type => "lemma"
+        assigns(:example).should equal(mock_example)
+      end
 
-#    end
+      it "should re-render the 'edit' template" do
+        Example.stub!(:find).and_return(mock_example(:update_attributes => false))
+        put :update, :id => "1", :lemma_id => "37", :context_type => "lemma"
+        response.should render_template('edit')
+      end
+    end
+  end
 
-#  end
+  describe "responding to DELETE destroy" do
 
-#  describe "responding to DELETE destroy" do
+    it "should destroy the requested example" do
+      Example.should_receive(:find).with("37").and_return(mock_example)
+      mock_example.should_receive(:destroy)
+      delete :destroy, :id => "37", :lemma_id => "37", :context_type => "lemma"
+    end
 
-#    it "should destroy the requested example" do
-#      Example.should_receive(:find).with("37").and_return(mock_example)
-#      mock_example.should_receive(:destroy)
-#      delete :destroy, :id => "37"
-#    end
-#
-#    it "should redirect to the examples list" do
-#      Example.stub!(:find).and_return(mock_example(:destroy => true))
-#      delete :destroy, :id => "1"
-#      response.should redirect_to(examples_url)
-#    end
-
-#  end
-
+    it "should redirect to the examples list" do
+      Example.stub!(:find).and_return(mock_example(:destroy => true))
+      delete :destroy, :id => "1", :lemma_id => "37", :context_type => "lemma"
+      response.should redirect_to(lemma_url(@lemma))
+    end
+  end
 end

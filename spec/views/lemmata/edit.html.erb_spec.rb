@@ -8,14 +8,20 @@ describe "/lemmata/edit.html.erb" do
     assigns[:lemma_categories] = []
   end
 
-  it "should render edit form with short & long form, phonetics and classes" do
+  it "should render edit form with short & long form and phonetics" do
     render "/lemmata/edit.html.erb"
 
     response.should have_tag("form[action=?][method=post]", lemma_path(@lemma)) do
-      %w(short long phonetic word_class).each do |name|
+      %w(short long phonetic).each do |name|
         (1..2).each { |i| with_tag("input#lemma_#{name}#{i}") }
       end
     end
+  end
+
+  it "should render edit form with a select for the world_klass" do
+    render "/lemmata/edit.html.erb"
+
+    response.should have_tag("select#lemma_word_class")
   end
 
   it "should render edit form with a select for the level" do

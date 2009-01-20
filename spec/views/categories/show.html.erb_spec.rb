@@ -85,7 +85,7 @@ describe "/categories/show.html.erb" do
 
     it "should have a link to add another lemma" do
       response[:sidebar].should have_tag("a[href=?]",
-                                         new_category_lemma_path(@category),
+                                         new_lemma_path(:category_id => @category.id),
                                          :text => I18n.translate(:add_lemma))
     end
   end

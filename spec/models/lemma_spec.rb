@@ -3,6 +3,9 @@ require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 describe Lemma do
   before(:each) do
     @valid_attributes = {
+      :short1 => "to be", :short2 => "sein",
+      :level_rezeptiv => "A1", :level_produktiv => "A1",
+      :word_class => "V"
     }
   end
 

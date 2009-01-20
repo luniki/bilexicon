@@ -4,7 +4,7 @@ describe LemmataController do
   describe "route generation" do
 
     it "should map #new" do
-      route_for(:controller => "lemmata", :action => "new", :category_id => "37").should == "/categories/37/lemmata/new"
+      route_for(:controller => "lemmata", :action => "new", :category_id => "37").should == "/lemmata/new?category_id=37"
     end
 
     it "should map #show" do
@@ -26,11 +26,11 @@ describe LemmataController do
 
   describe "route recognition" do
     it "should generate params for #new" do
-      params_from(:get, "/categories/37/lemmata/new").should == {:controller => "lemmata", :action => "new", :category_id => "37"}
+      params_from(:get, "/lemmata/new").should == {:controller => "lemmata", :action => "new"}
     end
 
     it "should generate params for #create" do
-      params_from(:post, "/categories/37/lemmata").should == {:controller => "lemmata", :action => "create", :category_id => "37"}
+      params_from(:post, "/lemmata").should == {:controller => "lemmata", :action => "create"}
     end
 
     it "should generate params for #show" do

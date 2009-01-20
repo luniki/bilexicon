@@ -1,6 +1,6 @@
 <h1>Editing example</h1>
 
-<% form_for(@example) do |f| %>
+<% form_for([@exampleable, @example]) do |f| %>
   <%= f.error_messages %>
 
   <p>
@@ -12,17 +12,8 @@
     <%= f.text_field :form2 %>
   </p>
   <p>
-    <%= f.label :exampleable_id %><br />
-    <%= f.text_field :exampleable_id %>
-  </p>
-  <p>
-    <%= f.label :exampleable_type %><br />
-    <%= f.text_field :exampleable_type %>
-  </p>
-  <p>
     <%= f.submit "Update" %>
   </p>
 <% end %>
 
-<%= link_to 'Show', @example %> |
-<%= link_to 'Back', examples_path %>
+<%= link_to 'Back', @exampleable %>

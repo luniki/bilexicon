@@ -43,7 +43,7 @@ describe LemmataController do
   describe "responding to GET new" do
 
     it "should expose a new lemma as @lemma" do
-      Lemma.should_receive(:new).and_return(mock_lemma)
+      Lemma.should_receive(:new).and_return(mock_lemma(:categories => []))
       get :new
       response.should be_success
       assigns[:lemma].should equal(mock_lemma)
@@ -53,7 +53,7 @@ describe LemmataController do
   describe "responding to GET edit" do
 
     it "should expose the requested lemma as @lemma" do
-      Lemma.should_receive(:find).with("37").and_return(mock_lemma)
+      Lemma.should_receive(:find).with("37").and_return(mock_lemma(:categories => []))
       get :edit, :id => "37"
       assigns[:lemma].should equal(mock_lemma)
     end
