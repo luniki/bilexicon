@@ -7,8 +7,7 @@ class CreateLemmata < ActiveRecord::Migration
       t.string :long2
       t.string :phonetic1
       t.string :phonetic2
-      t.string :class1
-      t.string :class2
+      t.string :word_class
       t.string :level_rezeptiv
       t.string :level_produktiv
 

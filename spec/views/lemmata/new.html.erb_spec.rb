@@ -17,7 +17,7 @@ describe "/lemmata/new.html.erb" do
     render "/lemmata/new.html.erb"
 
     response.should have_tag("form[action=?][method=post]", lemmata_path) do
-      %w(short long phonetic class).each do |name|
+      %w(short long phonetic word_class).each do |name|
         (1..2).each { |i| with_tag("input#lemma_#{name}#{i}") }
       end
     end

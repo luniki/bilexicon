@@ -12,7 +12,7 @@ describe "/lemmata/edit.html.erb" do
     render "/lemmata/edit.html.erb"
 
     response.should have_tag("form[action=?][method=post]", lemma_path(@lemma)) do
-      %w(short long phonetic class).each do |name|
+      %w(short long phonetic word_class).each do |name|
         (1..2).each { |i| with_tag("input#lemma_#{name}#{i}") }
       end
     end

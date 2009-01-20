@@ -138,7 +138,7 @@ de:
   edit: "ändern"
   edit_category: "Themengebiet editieren"
   lemma_categories: "Themengebiete"
-  lemma_class: "Klasse"
+  lemma_word_class: "Wortart"
   lemma_level: "Niveaustufe"
   lemma_level_produktiv: "produktiv"
   lemma_level_rezeptiv: "rezeptiv"
