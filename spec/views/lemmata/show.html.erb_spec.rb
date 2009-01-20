@@ -8,7 +8,7 @@ describe "/lemmata/show.html.erb" do
       :short1 => "wheel",    :short2 => "Rad",
       :phonetic1 => "ˈhwēl", :phonetic2 => "'það",
       :class1 => "V",        :class2 => "V",
-      :level1 => "B1 R/P",   :level2 => "B1 R/P"
+      :level => "B1 R/P"
       )
     assigns[:categories] = @categories = [stub_model(Category, :name => "a name")]
     assigns[:examples] = @examples = [stub_model(Example, :form1 => 'a', :form2 => 'b')]
@@ -24,13 +24,21 @@ describe "/lemmata/show.html.erb" do
       end
     end
 
-    it "should render phonetics, classes and levels" do
+    it "should render phonetics and classes" do
       render "/lemmata/show.html.erb"
       response.should have_tag("tr#? th", "lemma_#{@lemma.id}") do
         with_tag("span.phonetic", /#{@lemma.phonetic1}/)
         with_tag("span.phonetic", /#{@lemma.phonetic2}/)
         with_tag("span.class", /#{@lemma.class1}/)
         with_tag("span.class", /#{@lemma.class2}/)
+        with_tag("span.level", /#{@lemma.level}/)
+      end
+    end
+
+    it "should render the level" do
+      render "/lemmata/show.html.erb"
+      response.should have_tag("tr#? th", "lemma_#{@lemma.id}") do
+        with_tag("span.level", /#{@lemma.level}/)
       end
     end
 

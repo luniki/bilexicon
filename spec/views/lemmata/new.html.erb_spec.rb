@@ -9,8 +9,8 @@ describe "/lemmata/new.html.erb" do
        stub_model(Category, :name => "another category name")]
 
     assigns[:categories] = @categories
-    assigns[:lemma] = @lemma = stub_model(Lemma, :new_record? => true,
-                                          :categories => [@categories[0]])
+    assigns[:lemma] = @lemma = stub_model(Lemma, :new_record? => true)
+    assigns[:lemma_categories] = @lemma_categories = [@categories[0]]
   end
 
   it "should render form with short & long form, phonetics and classes" do
@@ -26,9 +26,8 @@ describe "/lemmata/new.html.erb" do
   it "should render form with level" do
     render "/lemmata/new.html.erb"
 
-    pending do
-      (1..2).each { |i| response.should have_tag("form select#lemma_level#{i}") }
-    end
+    response.should have_tag("form select#lemma_level_rezeptiv")
+    response.should have_tag("form select#lemma_level_produktiv")
   end
 
   it "should show the available  categories" do
@@ -37,7 +36,7 @@ describe "/lemmata/new.html.erb" do
 
     response.should have_tag("form select#lemma_categories") do
       @categories.each do |c|
-        if @lemma.categories.include?(c) then
+        if @lemma_categories.include?(c) then
           with_tag("option[selected][value=?]", c.id, :text => c.name)
         else
           with_tag("option[value=?]:not([selected])", c.id, :text => c.name)

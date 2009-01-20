@@ -43,8 +43,8 @@ ActiveRecord::Schema.define(:version => 20090113090324) do
     t.string   "phonetic2"
     t.string   "class1"
     t.string   "class2"
-    t.string   "level1"
-    t.string   "level2"
+    t.string   "level_rezeptiv"
+    t.string   "level_produktiv"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

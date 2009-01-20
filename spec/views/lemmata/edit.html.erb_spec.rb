@@ -5,6 +5,7 @@ describe "/lemmata/edit.html.erb" do
 
   before(:each) do
     assigns[:lemma] = @lemma = stub_model(Lemma, :new_record? => false)
+    assigns[:lemma_categories] = []
   end
 
   it "should render edit form with short & long form, phonetics and classes" do
@@ -20,14 +21,14 @@ describe "/lemmata/edit.html.erb" do
   it "should render edit form with a select for the level" do
     render "/lemmata/edit.html.erb"
 
-    pending do
-      (1..2).each { |i| response.should have_tag("select#lemma_level#{i}") }
-    end
+    response.should have_tag("select#lemma_level_rezeptiv")
+    response.should have_tag("select#lemma_level_produktiv")
   end
 
-  it "should show the available  categories" do
+  it "should show the available categories" do
     render "/lemmata/new.html.erb"
-    pending
+
+    response.should have_tag("select[name=?]", "lemma[category_ids][]")
   end
 
   it "should show a cancel link" do
