@@ -33,7 +33,7 @@
       <tr>
         <th scope="row"><%= t :lemma_word_class %></th>
         <td colspan="2">
-          <%= f.text_field :word_class %>
+          <%= f.select :word_class, Lemma::WORD_CLASSES %>
         </td>
       </tr>
 
