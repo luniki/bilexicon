@@ -1,3 +1,4 @@
+doc/spec/
 log/
 Capfile
 config/deploy.rb
