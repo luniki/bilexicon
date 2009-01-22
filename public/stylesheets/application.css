@@ -149,9 +149,10 @@ thead th {
 #speedy .input {
   border: none;
   font-size: 1.5em;
-  height: 36px;
+/*  height: 36px;*/
   padding: 6px 5px 4px 5px;
 }
+
 
 ul#ancestors {
   list-style-type: none;

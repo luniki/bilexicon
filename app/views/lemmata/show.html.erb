@@ -20,7 +20,12 @@
       <% content_tag_for(:tr, example) do %>
         <td class=""></td>
         <td class=""><%= h example.form1 %></td>
-        <td class=""><%= h example.form2 %></td>
+        <td class="">
+          <%= h example.form2 %>
+          <% link_to(edit_lemma_example_path(@lemma, example)) do %>
+            <%= image_submit_tag 'icons/pencil.png' %>
+          <% end %>
+        </td>
         <td class=""></td>
       <% end %>
     <% end %>

@@ -14,6 +14,7 @@ class ExamplesController < ApplicationController
   end
 
   def edit
+    @exampleable = context_object
     @example = Example.find(params[:id])
   end
 

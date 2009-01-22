@@ -2,7 +2,7 @@ ActionController::Routing::Routes.draw do |map|
 
   map.resources :categories
   map.resources :lemmata do |lemma|
-    lemma.resources :examples, :except => [:index, :show],
+    lemma.resources :examples,
                                :requirements => { :context_type => 'lemma' }
   end
 
