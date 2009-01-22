@@ -13,6 +13,7 @@
   <![endif]-->
   <%= stylesheet_link_tag "application", :media => "screen, projection" %>
 
+  <%= javascript_include_tag :defaults %>
 </head>
 
 <body>
@@ -45,7 +46,7 @@
 
   <div class="prepend-1 span-20 append-3 last">
     <div id="speedy">
-      <input type="text" autocomplete="off" value="SEARCH" size="30" id="search_input" name="search" class="input"/>
+      <%= render :partial => "/speedy" %>
     </div>
   </div>
 

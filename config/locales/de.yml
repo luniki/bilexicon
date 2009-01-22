@@ -150,7 +150,7 @@ de:
   or: "oder"
   parent_category: "übergeordnetes Themengebiet"
   search: "suchen"
-  search_for: "Suche nach:"
+  search_hint: "Suchwort"
   search_results_for: "Ergebnisse für"
   show: "anzeigen"
   top: "Top"

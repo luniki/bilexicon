@@ -15,12 +15,29 @@
 /**************************************/
 body {
   background: #F6FFE0 url(../images/background.png) repeat-x scroll left top;
+  color: #10222B;
+}
+
+a:focus,
+a:hover {
+  color:#10222B;
+}
+
+a {
+  color:#95AB63;
+}
+
+thead th {
+  background:  #BDD684;
 }
 
 .container {
   margin: 0;
 }
 
+.hint {
+  color: #BDD684;
+}
 
 /**************************************/
 /*              HEADER                */
