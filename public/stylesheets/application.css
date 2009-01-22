@@ -14,7 +14,7 @@
 /*              GLOBALS               */
 /**************************************/
 body {
-  background: #FFFFFF url(../images/background.png) repeat-x scroll left top;
+  background: #F6FFE0 url(../images/background.png) repeat-x scroll left top;
 }
 
 .container {
@@ -43,11 +43,11 @@ body {
 }
 
 #head ul li {
-  border-left: 1px solid #586669;
+  border-left: 1px solid #10222B;
 }
 
 #head ul li.last {
-  border-right: 1px solid #586669;
+  border-right: 1px solid #10222B;
 }
 
 #head .active {
@@ -58,8 +58,8 @@ body {
 #head .active a {
   color: #FFFFFF;
   padding: 0 12px;
-  border-left: 1px solid #586669;
-  border-right: 1px solid #586669;
+  border-left: 1px solid #10222B;
+  border-right: 1px solid #10222B;
   text-decoration: none;
   text-transform: lowercase;
 }
@@ -89,18 +89,32 @@ body {
 /**************************************/
 
 #sidebar {
-  background-color: #586669;
+  background-color: #BDD684;
   padding: 0;
   margin: 0;
 }
 
 #sidebar a, #sidebar a:focus, #sidebar a:hover, #sidebar a:visited {
-  color: #FFFFFF;
+  color: #10222B;
   text-transform: uppercase;
   text-decoration: none;
-  border-bottom: 1px solid #FFFFFF;
   display: block;
   padding: 5px 0 5px 3px;
+}
+
+#sidebar li:first-child a,
+#sidebar li:first-child a:focus,
+#sidebar li:first-child a:hover,
+#sidebar li:first-child a:visited {
+  border-top: none;
+}
+
+#sidebar a, #sidebar a:focus, #sidebar a:hover, #sidebar a:visited {
+  border-top: 1px solid #95AB63;
+}
+
+#sidebar ul {
+  margin: 1.5em;
 }
 
 #sidebar li {
@@ -110,8 +124,8 @@ body {
 
 #speedy {
   margin-top: 24px;
-  background-color: #0B1D2B;
-  color: white;
+  background-color: #95AB63;
+  color: #F6FFE0;
   padding: 1.5em;
 }
 
@@ -141,7 +155,7 @@ ul#ancestors li:before {
 /**************************************/
 
 #content {
-  border: 1px solid #0B1D2B;
+  border: 1px solid #95AB63;
   padding: 17px 0.5em;
 }
 
