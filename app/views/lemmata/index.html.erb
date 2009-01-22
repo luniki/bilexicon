@@ -25,3 +25,11 @@
     <% end %>
   </ul>
 <% end %>
+
+<% content_for :sidebar do %>
+  <ul>
+    <li>
+      <%= link_to t(:add_lemma), new_lemma_path() %>
+    </li>
+  </ul>
+<% end %>
