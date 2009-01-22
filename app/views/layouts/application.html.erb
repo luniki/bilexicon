@@ -1,11 +1,9 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+  "http://www.w3.org/TR/html4/strict.dtd">
+<html>
 <head>
   <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
   <title><%= controller.controller_name %>: <%= controller.action_name %></title>
-  <%= stylesheet_link_tag 'scaffold' %>
 
   <%= stylesheet_link_tag "blueprint/screen", :media => "screen, projection" %>
   <%= stylesheet_link_tag "blueprint/print", :media => "print" %>
@@ -16,49 +14,61 @@
   <%= stylesheet_link_tag "application", :media => "screen, projection" %>
 
 </head>
-<body>
 
-<div id="header">
-  <div class="container">
-    <div class="span-8">
-      <h1>Bilexicon</h1>
+<body>
+<div class="container">
+  <div id="head" class="prepend-1 span-22 append-1 last">
+
+    <div class="span-4">
+      <%= image_tag("logo.png", :class => "logo") %>
     </div>
-    <div id="navigation" class="span-16 last">
+
+    <div class="span-2 active">
+      <a href="#search">Suche</a>
+    </div>
+
+    <div id="session" class="span-16 last">
       <ul>
-        <li><%= link_to "Home", '/' %></li>
-        <li><%= link_to "Themengebiete", categories_url %></li>
+        <li>
+          <a href="#help">Hilfe</a>
+        </li>
+        <li>
+          <a href="#admin">Administration</a>
+        </li>
+        <li>
+          <a href="#signout">Ausloggen</a>
+        </li>
       </ul>
     </div>
-  </div>
-</div>
 
-<div id="callout">
-  <h6 class="loud">die onomasiologische Lernplattform</h6>
-</div>
-
-
-<div id="main" class="container">
-
-  <div id="content" class="span-17 colborder">
-
-    <% if flash[:notice] then %>
-      <div class="notice"><%= flash[:notice] %></div>
-    <% end %>
-
-    <%= yield  %>
   </div>
 
+  <div class="prepend-1 span-20 append-3 last">
+    <div id="speedy">
+      <input type="text" autocomplete="off" value="SEARCH" size="30" id="search_input" name="search" class="input"/>
+    </div>
+  </div>
 
-  <div id="sidebar" class="span-6 last">
+  <div class="prepend-1 span-20">
+    <div id="content">
+      <% if flash[:notice] then %>
+        <div class="notice"><%= flash[:notice] %></div>
+      <% end %>
 
-    <%= yield :sidebar %>
+      <%= yield  %>
+    </div>
+  </div>
+
+  <div class="span-3 last">
+    <div id="sidebar" class="span-6 last">
+      <%= yield :sidebar %>
+    </div>
+  </div>
+
+  <div id="footer" class="prepend-1 span-20 last">
+    2008 - Zentrum virtUOS
   </div>
 
 </div>
-
-<div id="footer">
-  2008 - Zentrum virtUOS
-</div>
-
 </body>
 </html>

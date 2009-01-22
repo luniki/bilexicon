@@ -36,17 +36,19 @@
 </ul>
 
 <% content_for :sidebar do %>
-<p>
-  <%= link_to t(:edit), edit_category_path(@category) %>
-</p>
-<p>
-  <%= link_to t(:delete), @category, :confirm => t(:confirm_question), :method => :delete %>
-</p>
-<p>
-  <%= link_to t(:add_category), new_category_path(:category_id => @category)  %>
-</p>
-<p>
-  <%=link_to t(:add_lemma), new_lemma_path(:category_id => @category) %>
-</p>
+<ul>
+  <li>
+    <%= link_to t(:edit), edit_category_path(@category) %>
+  </li>
+  <li>
+    <%= link_to t(:delete), @category, :confirm => t(:confirm_question), :method => :delete %>
+  </li>
+  <li>
+    <%= link_to t(:add_category), new_category_path(:category_id => @category)  %>
+  </li>
+  <li>
+    <%=link_to t(:add_lemma), new_lemma_path(:category_id => @category) %>
+  </li>
+</ul>
 <% end %>
 
