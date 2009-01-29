@@ -21,7 +21,9 @@
   <div id="head" class="prepend-1 span-22 append-1 last">
 
     <div class="span-4">
-      <%= image_tag("logo.png", :class => "logo") %>
+      <% link_to('/') do %>
+        <%= image_tag("logo.png", :class => "logo") %>
+      <% end %>
     </div>
 
     <div class="span-2 active">
