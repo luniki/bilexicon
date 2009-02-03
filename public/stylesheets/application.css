@@ -27,7 +27,7 @@ a {
   color:#95AB63;
 }
 
-thead th {
+th {
   background:  #BDD684;
 }
 
@@ -189,6 +189,10 @@ ul#ancestors li:before {
 
 .search_button {
   vertical-align: middle;
+}
+
+th.subentries {
+  background: #E2F0D6;
 }
 /**************************************/
 /*               FOOTER               */

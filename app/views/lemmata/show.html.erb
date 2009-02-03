@@ -1,48 +1,56 @@
 <table>
-  <thead>
-    <% content_tag_for(:tr, @lemma) do %>
-      <th class="">
-        <span class="phonetic" title="<%= t(:lemma_phonetic) %>">{<%= h @lemma.phonetic1 %>};</span>
-        <span class="word_class" title="<%= t(:lemma_word_class) %>">cl: <%= h @lemma.word_class %>;</span>
-        <span class="level" title="<%= t(:lemma_level) %>">l: <%= h @lemma.level %></span>
-      </th>
-      <th class="short"><%= h @lemma.short1 %></th>
-      <th class="short"><%= h @lemma.short2 %></th>
-      <th class="">
-        <span class="phonetic" title="<%= t(:lemma_phonetic) %>">{<%= h @lemma.phonetic2 %>};</span>
-        <span class="word_class" title="<%= t(:lemma_word_class) %>">cl: <%= h @lemma.word_class %>;</span>
-        <span class="level" title="<%= t(:lemma_level) %>">l: <%= h @lemma.level %></span>
-      </th>
+
+  <% content_tag_for(:tr, @lemma) do %>
+    <th class="">
+      <span class="phonetic" title="<%= t(:lemma_phonetic) %>">{<%= h @lemma.phonetic1 %>};</span>
+      <span class="word_class" title="<%= t(:lemma_word_class) %>">cl: <%= h @lemma.word_class %>;</span>
+      <span class="level" title="<%= t(:lemma_level) %>">l: <%= h @lemma.level %></span>
+    </th>
+    <th class="short"><%= h @lemma.short1 %></th>
+    <th class="short"><%= h @lemma.short2 %></th>
+    <th class="">
+      <span class="phonetic" title="<%= t(:lemma_phonetic) %>">{<%= h @lemma.phonetic2 %>};</span>
+      <span class="word_class" title="<%= t(:lemma_word_class) %>">cl: <%= h @lemma.word_class %>;</span>
+      <span class="level" title="<%= t(:lemma_level) %>">l: <%= h @lemma.level %></span>
+    </th>
+  <% end %>
+
+  <% @examples.each do |example| -%>
+    <% content_tag_for(:tr, example) do %>
+      <td class=""></td>
+      <td class=""><%= h example.form1 %></td>
+      <td class="">
+        <%= h example.form2 %>
+        <% link_to(edit_lemma_example_path(@lemma, example)) do %>
+          <%= image_submit_tag 'icons/pencil.png' %>
+        <% end %>
+      </td>
+      <td class=""></td>
     <% end %>
-  </thead>
-  <tbody>
-    <% @examples.each do |example| -%>
-      <% content_tag_for(:tr, example) do %>
-        <td class=""></td>
-        <td class=""><%= h example.form1 %></td>
-        <td class="">
-          <%= h example.form2 %>
-          <% link_to(edit_lemma_example_path(@lemma, example)) do %>
-            <%= image_submit_tag 'icons/pencil.png' %>
-          <% end %>
-        </td>
-        <td class=""></td>
+  <% end %>
+
+  <tr>
+    <th colspan="4" class="subentries">
+      <%= t(:valencies) %>
+    </th>
+  </tr>
+
+  <tr>
+    <th colspan="4" class="subentries">
+      <%= t(:collocations) %>
+      <% link_to(new_lemma_collocation_path(@lemma)) do %>
+        <%= image_tag 'icons/notebook_plus.png' %>
       <% end %>
-    <% end %>
-  </tbody>
+    </th>
+  </tr>
+
+  <tr>
+    <th colspan="4" class="subentries">
+      <%= t(:phraseologisms) %>
+    </th>
+  </tr>
+
 </table>
-
-<!--
-<p>
-  <b>Long1:</b>
-  <%=h @lemma.long1 %>
-</p>
-
-<p>
-  <b>Long2:</b>
-  <%=h @lemma.long2 %>
-</p>
- -->
 
 <% content_for :sidebar do %>
   <ul>
