@@ -4,6 +4,8 @@ class Lemma < ActiveRecord::Base
 
   has_many :collocations, :dependent => :destroy
 
+  has_many :phraseologisms, :dependent => :destroy
+
   validates_presence_of :short1, :short2,
                         :word_class, :level_rezeptiv, :level_produktiv
 

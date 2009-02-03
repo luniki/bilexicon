@@ -1,0 +1,31 @@
+<h1><?= t(:edit_phraseologism) ?></h1>
+
+<% form_for([@lemma, @phraseologism]) do |f| %>
+  <%= f.error_messages %>
+
+  <table>
+    <thead>
+      <tr>
+        <td></td>
+        <th>Englisch</th>
+        <th>Deutsch</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr>
+        <th scope="row"><%= t :phraseologism_form %></th>
+        <td><%= f.text_field :form1 %></td>
+        <td><%= f.text_field :form2 %></td>
+      </tr>
+
+    </tbody>
+  </table>
+
+  <p>
+    <%= f.submit t(:edit) %>
+    <%= t :or %>
+    <%= link_to t(:cancel), @lemma %>
+  </p>
+<% end %>
+

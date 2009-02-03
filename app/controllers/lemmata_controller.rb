@@ -6,8 +6,10 @@ class LemmataController < ApplicationController
 
   def show
     @lemma = Lemma.find(params[:id])
-    @examples = @lemma.examples
     @categories = @lemma.categories
+    @examples = @lemma.examples
+    @collocations = @lemma.collocations
+    @phraseologisms = @lemma.phraseologisms
   end
 
   def new

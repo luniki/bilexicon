@@ -11,6 +11,7 @@ describe "/lemmata/show.html.erb" do
       )
     assigns[:categories] = @categories = [stub_model(Category, :name => "a name")]
     assigns[:examples] = @examples = [stub_model(Example, :form1 => 'a', :form2 => 'b')]
+    assigns[:collocations] = @collocations = [stub_model(Collocation, :form1 => 'a', :form2 => 'b')]
   end
 
   describe "the lemma" do
@@ -44,6 +45,13 @@ describe "/lemmata/show.html.erb" do
       it "should render as a list" do
         render "/lemmata/show.html.erb"
         response.should have_tag("tr.example")
+      end
+    end
+
+    describe "and its collocations" do
+      it "should render as a list" do
+        render "/lemmata/show.html.erb"
+        response.should have_tag("tr.collocation")
       end
     end
   end

@@ -1,10 +1,17 @@
 ActionController::Routing::Routes.draw do |map|
 
   map.resources :categories
+
   map.resources :lemmata do |lemma|
+
     lemma.resources :examples, :requirements => { :context_type => 'lemma' }
+
     lemma.resources :collocations do |collocation|
       collocation.resources :examples, :requirements => { :context_type => 'collocation' }
+    end
+
+    lemma.resources :phraseologisms do |phraseologism|
+      phraseologism.resources :examples, :requirements => { :context_type => 'phraseologism' }
     end
   end
 
