@@ -14,9 +14,9 @@
 </p>
 
 <% if not params[:q].blank? -%>
-  <p>
+  <h2>
     <%= @lemmata.size %> <%= t(:search_results_for) %> "<%= h(params[:q]) %>"
-  </p>
+  </h2>
   <ul id="lemmata">
     <% for lemma in @lemmata -%>
       <% content_tag_for(:li, lemma) do %>
@@ -24,6 +24,8 @@
       <% end %>
     <% end %>
   </ul>
+
+  <%= render :partial => "other_dictionaries" %>
 <% end %>
 
 <% content_for :sidebar do %>
