@@ -20,7 +20,14 @@ describe LemmataController do
     before (:each) do
       @categories = [mock_model(Category)]
       @examples = [mock_model(Example)]
-      @lemma = mock_lemma(:categories => @categories, :examples => @examples)
+      @valencies = [mock_model(Valency)]
+      @collocations = [mock_model(Collocation)]
+      @phraseologisms = [mock_model(Phraseologism)]
+      @lemma = mock_lemma(:categories     => @categories,
+                          :examples       => @examples,
+                          :collocations   => @collocations,
+                          :phraseologisms => @phraseologisms,
+                          :valencies      => @valencies)
       Lemma.should_receive(:find).with("37").and_return(@lemma)
     end
 

@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090203084050) do
+ActiveRecord::Schema.define(:version => 20090217084226) do
 
   create_table "categories", :force => true do |t|
     t.string   "name"
@@ -59,6 +59,14 @@ ActiveRecord::Schema.define(:version => 20090203084050) do
   end
 
   create_table "phraseologisms", :force => true do |t|
+    t.integer  "lemma_id"
+    t.string   "form1"
+    t.string   "form2"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "valencies", :force => true do |t|
     t.integer  "lemma_id"
     t.string   "form1"
     t.string   "form2"

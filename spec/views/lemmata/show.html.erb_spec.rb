@@ -12,6 +12,8 @@ describe "/lemmata/show.html.erb" do
     assigns[:categories] = @categories = [stub_model(Category, :name => "a name")]
     assigns[:examples] = @examples = [stub_model(Example, :form1 => 'a', :form2 => 'b')]
     assigns[:collocations] = @collocations = [stub_model(Collocation, :form1 => 'a', :form2 => 'b')]
+    assigns[:phraseologisms] = @phraseologisms = [stub_model(Phraseologism, :form1 => 'a', :form2 => 'b')]
+    assigns[:valencies] = @valencies = [stub_model(Valency, :form1 => 'a', :form2 => 'b')]
   end
 
   describe "the lemma" do
@@ -52,6 +54,20 @@ describe "/lemmata/show.html.erb" do
       it "should render as a list" do
         render "/lemmata/show.html.erb"
         response.should have_tag("tr.collocation")
+      end
+    end
+
+    describe "and its phraseologisms" do
+      it "should render as a list" do
+        render "/lemmata/show.html.erb"
+        response.should have_tag("tr.phraseologism")
+      end
+    end
+
+    describe "and its valencies" do
+      it "should render as a list" do
+        render "/lemmata/show.html.erb"
+        response.should have_tag("tr.valency")
       end
     end
   end

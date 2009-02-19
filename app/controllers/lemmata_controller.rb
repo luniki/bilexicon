@@ -8,6 +8,7 @@ class LemmataController < ApplicationController
     @lemma = Lemma.find(params[:id])
     @categories = @lemma.categories
     @examples = @lemma.examples
+    @valencies = @lemma.valencies
     @collocations = @lemma.collocations
     @phraseologisms = @lemma.phraseologisms
   end

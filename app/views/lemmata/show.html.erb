@@ -47,8 +47,31 @@
   <tr>
     <th colspan="4" class="subentries">
       <%= t(:valencies) %>
+      <% link_to(new_lemma_valency_path(@lemma)) do %>
+        <%= image_tag 'icons/notebook_plus.png' %>
+      <% end %>
     </th>
   </tr>
+
+  <% @valencies.each do |valency| -%>
+    <% content_tag_for(:tr, valency) do %>
+      <td class=""></td>
+      <td class="">
+        <%= h valency.form1 %>
+      </td>
+      <td class="">
+        <%= h valency.form2 %>
+      </td>
+      <td class="">
+        <% link_to(edit_lemma_valency_path(@lemma, valency)) do %>
+          <%= image_submit_tag 'icons/notebook_pencil.png' %>
+        <% end %>
+        <% link_to([@lemma, valency], {:confirm => t(:confirm_question), :method => :delete}) do -%>
+          <%= image_submit_tag 'icons/notebook_minus.png' %>
+        <% end %>
+      </td>
+    <% end %>
+  <% end %>
 
   <tr>
     <th colspan="4" class="subentries">

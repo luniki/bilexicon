@@ -141,6 +141,8 @@ de:
   edit: "ändern"
   edit_category: "Themengebiet editieren"
   edit_collocation: "Kollokation editieren"
+  edit_phraseologism: "Phrasem editieren"
+  edit_valency: "Valenz editieren"
   examples: "Beispiele"
   lemma_categories: "Themengebiete"
   lemma_word_class: "Wortart"
@@ -153,6 +155,8 @@ de:
   lemmata: "Lemmata"
   new_category: "Neues Themengebiet"
   new_collocation: "Neue Kollokation"
+  new_phraseologism: "Neues Phrasem"
+  new_valency: "Neue Valenz"
   or: "oder"
   parent_category: "übergeordnetes Themengebiet"
   phraseologisms: "Phraseme"
@@ -163,4 +167,5 @@ de:
   show: "anzeigen"
   top: "Top"
   valencies: "Valenzen"
+  valency_form: "Form"
 

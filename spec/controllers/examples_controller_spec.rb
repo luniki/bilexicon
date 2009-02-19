@@ -59,7 +59,13 @@ describe ExamplesController do
       end
 
       it "should redirect to the lemma of the example" do
-        post :create, :example => {}, :lemma_id => "37", :context_type => "lemma"
+        param_example = {"form1" => "To be or not to be.",
+                         "form2" => "Sein oder nicht sein."}
+        Example.should_receive(:new).with(param_example).and_return(@example)
+        @example.should_receive(:'exampleable=')
+        post :create, :example => param_example,
+                      :lemma_id => "37",
+                      :context_type => "lemma"
         response.should redirect_to(lemma_url(@lemma))
       end
 

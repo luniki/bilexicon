@@ -3,14 +3,6 @@ require File.expand_path(File.dirname(__FILE__) + '/../../spec_helper')
 describe "/lemmata/index.html.erb" do
   include LemmataHelper
 
-  it "should render an empty search form" do
-    render "/lemmata/index.html.erb"
-    response.should have_tag("form[action=?]", lemmata_path) do
-      with_tag("input[name=q]")
-    end
-  end
-
-
   describe "after searching without success" do
     before(:each) do
       assigns[:lemmata] = []
