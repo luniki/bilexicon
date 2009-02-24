@@ -1,0 +1,35 @@
+<% form_for([@lemma, @phraseologism]) do |f| %>
+  <%= f.error_messages %>
+
+  <table>
+    <thead>
+      <tr>
+        <td></td>
+        <th>Englisch</th>
+        <th>Deutsch</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr>
+        <th scope="row"><%= t :phraseologism_form %></th>
+        <td><%= f.text_field :form1 %></td>
+        <td><%= f.text_field :form2 %></td>
+      </tr>
+
+    </tbody>
+  </table>
+
+  <p>
+    <% if @phraseologism.new_record? -%>
+      <%= f.submit t(:create) %>
+      <%= t :or %>
+      <%= link_to t(:cancel), lemmata_path %>
+    <% else -%>
+      <%= f.submit t(:edit) %>
+      <%= t :or %>
+      <%= link_to t(:cancel), [@lemma, @phraseologism] %>
+    <% end %>
+  </p>
+<% end %>
+
