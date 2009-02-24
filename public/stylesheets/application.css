@@ -105,40 +105,6 @@ th {
 /*             NAVIGATION             */
 /**************************************/
 
-#sidebar {
-  background-color: #BDD684;
-  padding: 0;
-  margin: 0;
-}
-
-#sidebar a, #sidebar a:focus, #sidebar a:hover, #sidebar a:visited {
-  color: #10222B;
-  text-transform: uppercase;
-  text-decoration: none;
-  display: block;
-  padding: 5px 0 5px 3px;
-}
-
-#sidebar li:first-child a,
-#sidebar li:first-child a:focus,
-#sidebar li:first-child a:hover,
-#sidebar li:first-child a:visited {
-  border-top: none;
-}
-
-#sidebar a, #sidebar a:focus, #sidebar a:hover, #sidebar a:visited {
-  border-top: 1px solid #95AB63;
-}
-
-#sidebar ul {
-  margin: 1.5em;
-}
-
-#sidebar li {
-  list-style: none;
-}
-
-
 #speedy {
   margin-top: 24px;
   background-color: #95AB63;

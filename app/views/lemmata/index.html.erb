@@ -28,10 +28,8 @@
   <%= render :partial => "other_dictionaries" %>
 <% end %>
 
-<% content_for :sidebar do %>
-  <ul>
-    <li>
-      <%= link_to t(:add_lemma), new_lemma_path() %>
-    </li>
-  </ul>
-<% end %>
+<ul>
+  <li>
+    <%= link_to t(:add_lemma), new_lemma_path() %>
+  </li>
+</ul>

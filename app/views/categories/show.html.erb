@@ -35,7 +35,6 @@
   <% end %>
 </ul>
 
-<% content_for :sidebar do %>
 <ul>
   <li>
     <%= link_to t(:edit), edit_category_path(@category) %>
@@ -50,5 +49,4 @@
     <%=link_to t(:add_lemma), new_lemma_path(:category_id => @category) %>
   </li>
 </ul>
-<% end %>
 

@@ -22,13 +22,10 @@ describe "/categories/index.html.erb" do
     end
   end
 
-  describe "and the sidebar" do
+  it "should have a link to add another category" do
+    render "/categories/index.html.erb"
 
-    it "should have a link to add another category" do
-      render "/categories/index.html.erb"
-
-      response[:sidebar].should have_tag("a[href=?]", new_category_path)
-    end
+    response.should have_tag("a[href=?]", new_category_path)
   end
 end
 

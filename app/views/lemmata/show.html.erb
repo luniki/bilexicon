@@ -61,21 +61,19 @@
 
 </table>
 
-<% content_for :sidebar do %>
-  <ul>
+<ul>
+  <li>
+    <%= link_to t(:edit), edit_lemma_path(@lemma) %>
+  </li>
+  <li>
+    <%= link_to t(:delete), lemma_path(@lemma), :confirm => t(:confirm_question), :method => :delete %>
+  </li>
+  <% @categories.each do |category| -%>
     <li>
-      <%= link_to t(:edit), edit_lemma_path(@lemma) %>
+      <%= link_to h(category.name), category %>
     </li>
-    <li>
-      <%= link_to t(:delete), lemma_path(@lemma), :confirm => t(:confirm_question), :method => :delete %>
-    </li>
-    <% @categories.each do |category| -%>
-      <li>
-        <%= link_to h(category.name), category %>
-      </li>
-    <% end %>
-    <li>
-      <%= link_to t(:add_example), new_lemma_example_path(@lemma) %>
-    </li>
-  </ul>
-<% end %>
+  <% end %>
+  <li>
+    <%= link_to t(:add_example), new_lemma_example_path(@lemma) %>
+  </li>
+</ul>

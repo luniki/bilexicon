@@ -59,35 +59,32 @@ describe "/categories/show.html.erb" do
   end
 
 
-  describe "and the sidebar" do
+  it "should have an edit link" do
+    render "/categories/show.html.erb"
+    response.should have_tag("a[href=?]",
+                                        edit_category_path(@category),
+                                        :text => I18n.translate(:edit))
+  end
 
-    before(:each) do
-      render "/categories/show.html.erb"
-    end
+  it "should have a delete link" do
+    render "/categories/show.html.erb"
+    response.should have_tag("a[href=?][onclick]",
+                                        category_path(@category),
+                                        :text => I18n.translate(:delete))
+  end
 
-    it "should have an edit link" do
-      response[:sidebar].should have_tag("a[href=?]",
-                                         edit_category_path(@category),
-                                         :text => I18n.translate(:edit))
-    end
+  it "should have a link to add another subcategory" do
+    render "/categories/show.html.erb"
+    response.should have_tag("a[href=?]",
+                                        new_category_path(:category_id => @category.id),
+                                        :text => I18n.translate(:add_category))
+  end
 
-    it "should have a delete link" do
-      response[:sidebar].should have_tag("a[href=?][onclick]",
-                                         category_path(@category),
-                                         :text => I18n.translate(:delete))
-    end
-
-    it "should have a link to add another subcategory" do
-      response[:sidebar].should have_tag("a[href=?]",
-                                         new_category_path(:category_id => @category.id),
-                                         :text => I18n.translate(:add_category))
-    end
-
-    it "should have a link to add another lemma" do
-      response[:sidebar].should have_tag("a[href=?]",
-                                         new_lemma_path(:category_id => @category.id),
-                                         :text => I18n.translate(:add_lemma))
-    end
+  it "should have a link to add another lemma" do
+    render "/categories/show.html.erb"
+    response.should have_tag("a[href=?]",
+                                        new_lemma_path(:category_id => @category.id),
+                                        :text => I18n.translate(:add_lemma))
   end
 end
 

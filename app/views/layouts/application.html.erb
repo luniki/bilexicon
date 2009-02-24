@@ -46,25 +46,19 @@
 
   </div>
 
-  <div class="prepend-1 span-20 append-3 last">
+  <div class="prepend-1 span-23 last">
     <div id="speedy">
       <%= render :partial => "/speedy" %>
     </div>
   </div>
 
-  <div class="prepend-1 span-20">
+  <div class="prepend-1 span-23 last">
     <div id="content">
       <% if flash[:notice] then %>
         <div class="notice"><%= flash[:notice] %></div>
       <% end %>
 
       <%= yield  %>
-    </div>
-  </div>
-
-  <div class="span-3 last">
-    <div id="sidebar" class="span-6 last">
-      <%= yield :sidebar %>
     </div>
   </div>
 
