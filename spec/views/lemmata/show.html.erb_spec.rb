@@ -13,7 +13,7 @@ describe "/lemmata/show.html.erb" do
     assigns[:examples] = @examples = [stub_model(Example, :form1 => 'a', :form2 => 'b')]
     assigns[:valencies] = @valencies = [stub_model(Valency, :form1 => 'a', :form2 => 'b', :synonym1 => "a", :synonym2 => "b")]
     assigns[:collocations] = @collocations = [stub_model(Collocation, :form1 => 'a', :form2 => 'b', :synonym1 => "a", :synonym2 => "b", :syntax1 => "a", :syntax2 => "b")]
-    assigns[:phraseologisms] = @phraseologisms = [stub_model(Phraseologism, :form1 => 'a', :form2 => 'b')]
+    assigns[:phraseologisms] = @phraseologisms = [stub_model(Phraseologism, :form1 => 'a', :form2 => 'b', :synonym1 => "a", :synonym2 => "b")]
   end
 
   describe "the lemma" do
@@ -87,6 +87,11 @@ describe "/lemmata/show.html.erb" do
       it "should render as a list" do
         render "/lemmata/show.html.erb"
         response.should have_tag("tr.phraseologism")
+      end
+
+      it "should show the synonyms" do
+        render "/lemmata/show.html.erb"
+        response.should have_tag("tr.phraseologism td span.synonym")
       end
     end
   end

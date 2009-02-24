@@ -7,7 +7,9 @@ describe "/phraseologisms/new.html.erb" do
     assigns[:phraseologism] = stub_model(Phraseologism,
       :new_record? => true,
       :form1 => "",
-      :form2 => ""
+      :form2 => "",
+      :synonym1 => "",
+      :synonym2 => ""
     )
     assigns[:lemma] = @lemma = stub_model(Lemma)
   end
@@ -18,6 +20,8 @@ describe "/phraseologisms/new.html.erb" do
     response.should have_tag("form[action=?][method=post]", lemma_phraseologisms_path(@lemma)) do
       with_tag("input#phraseologism_form1[name=?]", "phraseologism[form1]")
       with_tag("input#phraseologism_form2[name=?]", "phraseologism[form2]")
+      with_tag("input#phraseologism_synonym1[name=?]", "phraseologism[synonym1]")
+      with_tag("input#phraseologism_synonym2[name=?]", "phraseologism[synonym2]")
     end
   end
 end

@@ -1,12 +1,29 @@
 <% content_tag_for(:tr, phraseologism) do %>
-  <td class=""></td>
+
+  <td class="">
+    phr:
+
+    <% if phraseologism.synonym1 -%>
+      <span class="synonym"><%= h phraseologism.synonym1 %>;</span>
+    <% end %>
+  </td>
+
   <td class="">
     <%= h phraseologism.form1 %>
   </td>
+
   <td class="">
     <%= h phraseologism.form2 %>
   </td>
+
   <td class="">
+
+    phr:
+
+    <% if phraseologism.synonym2 -%>
+      <span class="synonym"><%= h phraseologism.synonym2 %>;</span>
+    <% end %>
+
     <% link_to(edit_lemma_phraseologism_path(@lemma, phraseologism)) do %>
       <%= image_submit_tag 'icons/notebook_pencil.png' -%>
     <% end %>
