@@ -7,7 +7,9 @@ describe "/valencies/new.html.erb" do
     assigns[:valency] = stub_model(Valency,
       :new_record? => true,
       :form1 => "",
-      :form2 => ""
+      :form2 => "",
+      :synonym1 => "",
+      :synonym2 => ""
     )
     assigns[:lemma] = @lemma = stub_model(Lemma)
   end
@@ -18,6 +20,8 @@ describe "/valencies/new.html.erb" do
     response.should have_tag("form[action=?][method=post]", lemma_valencies_path(@lemma)) do
       with_tag("input#valency_form1[name=?]", "valency[form1]")
       with_tag("input#valency_form2[name=?]", "valency[form2]")
+      with_tag("input#valency_synonym1[name=?]", "valency[synonym1]")
+      with_tag("input#valency_synonym2[name=?]", "valency[synonym2]")
     end
   end
 end

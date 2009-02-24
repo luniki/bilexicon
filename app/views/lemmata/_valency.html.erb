@@ -1,12 +1,25 @@
 <% content_tag_for(:tr, valency) do %>
-  <td class=""></td>
+  <td class="">
+
+    <% if valency.synonym1 -%>
+      <span class="synonym">syn: <%= h valency.synonym1 %></span>
+    <% end %>
+  </td>
+
   <td class="">
     <%= h valency.form1 %>
   </td>
+
   <td class="">
     <%= h valency.form2 %>
   </td>
+
   <td class="">
+
+    <% if valency.synonym2 -%>
+      <span class="synonym">syn: <%= h valency.synonym2 %></span>
+    <% end %>
+
     <% link_to(edit_lemma_valency_path(@lemma, valency)) do %>
       <%= image_submit_tag 'icons/notebook_pencil.png' %>
     <% end %>
