@@ -1,0 +1,47 @@
+<% form_for([@lemma, @collocation]) do |f| %>
+  <%= f.error_messages %>
+
+  <table>
+    <thead>
+      <tr>
+        <td></td>
+        <th>Englisch</th>
+        <th>Deutsch</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr>
+        <th scope="row"><%= t :collocation_form %></th>
+        <td><%= f.text_field :form1 %></td>
+        <td><%= f.text_field :form2 %></td>
+      </tr>
+
+      <tr>
+        <th scope="row"><%= t :collocation_syntax %></th>
+        <td><%= f.text_field :syntax1 %></td>
+        <td><%= f.text_field :syntax2 %></td>
+      </tr>
+
+      <tr>
+        <th scope="row"><%= t :collocation_synonym %></th>
+        <td><%= f.text_field :synonym1 %></td>
+        <td><%= f.text_field :synonym2 %></td>
+      </tr>
+
+    </tbody>
+  </table>
+
+  <p>
+    <% if @collocation.new_record? -%>
+      <%= f.submit t(:create) %>
+      <%= t :or %>
+      <%= link_to t(:cancel), lemmata_path %>
+    <% else -%>
+      <%= f.submit t(:edit) %>
+      <%= t :or %>
+      <%= link_to t(:cancel), [@lemma, @collocation] %>
+    <% end %>
+  </p>
+<% end %>
+

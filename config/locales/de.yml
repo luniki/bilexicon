@@ -133,6 +133,7 @@ de:
   category_name_missing: "Bitte geben Sie einen Namen für das Themengebiet an."
   category_name: "Name"
   collocation_form: "Form"
+  collocation_synonym: "Synonym"
   collocation_syntax: "Syntax"
   collocations: "Kollokationen"
   confirm_question: "Sind Sie sicher?"

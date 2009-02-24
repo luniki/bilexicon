@@ -9,7 +9,9 @@ describe "/collocations/edit.html.erb" do
       :form1 => "",
       :form2 => "",
       :syntax1 => "",
-      :syntax2 => ""
+      :syntax2 => "",
+      :synonym1 => "",
+      :synonym2 => ""
     )
     assigns[:lemma] = @lemma = stub_model(Lemma)
   end
@@ -20,6 +22,10 @@ describe "/collocations/edit.html.erb" do
     response.should have_tag("form[action=?][method=post]", lemma_collocation_path(@lemma, @collocation)) do
       with_tag('input#collocation_form1[name=?]', "collocation[form1]")
       with_tag('input#collocation_form2[name=?]', "collocation[form2]")
+      with_tag("input#collocation_syntax1[name=?]", "collocation[syntax1]")
+      with_tag("input#collocation_syntax2[name=?]", "collocation[syntax2]")
+      with_tag("input#collocation_synonym1[name=?]", "collocation[synonym1]")
+      with_tag("input#collocation_synonym2[name=?]", "collocation[synonym2]")
     end
   end
 end
