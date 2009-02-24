@@ -24,25 +24,7 @@
     </th>
   </tr>
 
-  <% @examples.each do |example| -%>
-    <% content_tag_for(:tr, example) do %>
-      <td class=""></td>
-      <td class="">
-        <%= h example.form1 %>
-      </td>
-      <td class="">
-        <%= h example.form2 %>
-      </td>
-      <td class="">
-        <% link_to(edit_lemma_example_path(@lemma, example)) do %>
-          <%= image_submit_tag 'icons/notebook_pencil.png' %>
-        <% end %>
-        <% link_to([@lemma, example], {:confirm => t(:confirm_question), :method => :delete}) do -%>
-          <%= image_submit_tag 'icons/notebook_minus.png' %>
-        <% end %>
-      </td>
-    <% end %>
-  <% end %>
+  <%= render :partial => "example", :collection => @examples %>
 
   <tr>
     <th colspan="4" class="subentries">
@@ -53,25 +35,7 @@
     </th>
   </tr>
 
-  <% @valencies.each do |valency| -%>
-    <% content_tag_for(:tr, valency) do %>
-      <td class=""></td>
-      <td class="">
-        <%= h valency.form1 %>
-      </td>
-      <td class="">
-        <%= h valency.form2 %>
-      </td>
-      <td class="">
-        <% link_to(edit_lemma_valency_path(@lemma, valency)) do %>
-          <%= image_submit_tag 'icons/notebook_pencil.png' %>
-        <% end %>
-        <% link_to([@lemma, valency], {:confirm => t(:confirm_question), :method => :delete}) do -%>
-          <%= image_submit_tag 'icons/notebook_minus.png' %>
-        <% end %>
-      </td>
-    <% end %>
-  <% end %>
+  <%= render :partial => "valency", :collection => @valencies %>
 
   <tr>
     <th colspan="4" class="subentries">
@@ -82,25 +46,7 @@
     </th>
   </tr>
 
-  <% @collocations.each do |collocation| -%>
-    <% content_tag_for(:tr, collocation) do %>
-      <td class=""></td>
-      <td class="">
-        <%= h collocation.form1 %>
-      </td>
-      <td class="">
-        <%= h collocation.form2 %>
-      </td>
-      <td class="">
-        <% link_to(edit_lemma_collocation_path(@lemma, collocation)) do %>
-          <%= image_submit_tag 'icons/notebook_pencil.png' %>
-        <% end %>
-        <% link_to([@lemma, collocation], {:confirm => t(:confirm_question), :method => :delete}) do -%>
-          <%= image_submit_tag 'icons/notebook_minus.png' %>
-        <% end %>
-      </td>
-    <% end %>
-  <% end %>
+  <%= render :partial => "collocation", :collection => @collocations %>
 
   <tr>
     <th colspan="4" class="subentries">
@@ -111,26 +57,7 @@
     </th>
   </tr>
 
-
-  <% @phraseologisms.each do |phraseologism| -%>
-    <% content_tag_for(:tr, phraseologism) do %>
-      <td class=""></td>
-      <td class="">
-        <%= h phraseologism.form1 %>
-      </td>
-      <td class="">
-        <%= h phraseologism.form2 %>
-      </td>
-      <td class="">
-        <% link_to(edit_lemma_phraseologism_path(@lemma, phraseologism)) do %>
-          <%= image_submit_tag 'icons/notebook_pencil.png' -%>
-        <% end %>
-        <% link_to([@lemma, phraseologism], {:confirm => t(:confirm_question), :method => :delete}) do -%>
-          <%= image_submit_tag 'icons/notebook_minus.png' %>
-        <% end %>
-      </td>
-    <% end %>
-  <% end %>
+  <%= render :partial => "phraseologism", :collection => @phraseologisms %>
 
 </table>
 

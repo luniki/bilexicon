@@ -1,0 +1,45 @@
+<% content_tag_for(:tr, collocation) do %>
+
+  <td class="">
+
+    C:
+
+    <% if collocation.syntax1 -%>
+      <span class="syntax"><%= h collocation.syntax1 %>;</span>
+    <% end %>
+
+    <% if collocation.synonym1 -%>
+      <span class="synonym">syn: <%= h collocation.synonym1 %></span>
+    <% end %>
+
+  </td>
+
+  <td class="">
+    <%= h collocation.form1 %>
+  </td>
+
+  <td class="">
+    <%= h collocation.form2 %>
+  </td>
+
+  <td class="">
+
+    C:
+
+    <% if collocation.syntax2 -%>
+      <span class="syntax"><%= h collocation.syntax2 %>;</span>
+    <% end %>
+
+    <% if collocation.synonym1 -%>
+      <span class="synonym">syn: <%= h collocation.synonym2 %></span>
+    <% end %>
+
+    <% link_to(edit_lemma_collocation_path(@lemma, collocation)) do %>
+      <%= image_submit_tag 'icons/notebook_pencil.png' %>
+    <% end %>
+    <% link_to([@lemma, collocation], {:confirm => t(:confirm_question), :method => :delete}) do -%>
+      <%= image_submit_tag 'icons/notebook_minus.png' %>
+    <% end %>
+  </td>
+<% end %>
+

@@ -1,0 +1,18 @@
+<% content_tag_for(:tr, phraseologism) do %>
+  <td class=""></td>
+  <td class="">
+    <%= h phraseologism.form1 %>
+  </td>
+  <td class="">
+    <%= h phraseologism.form2 %>
+  </td>
+  <td class="">
+    <% link_to(edit_lemma_phraseologism_path(@lemma, phraseologism)) do %>
+      <%= image_submit_tag 'icons/notebook_pencil.png' -%>
+    <% end %>
+    <% link_to([@lemma, phraseologism], {:confirm => t(:confirm_question), :method => :delete}) do -%>
+      <%= image_submit_tag 'icons/notebook_minus.png' %>
+    <% end %>
+  </td>
+<% end %>
+
