@@ -119,6 +119,15 @@ th {
   padding: 6px 5px 4px 5px;
 }
 
+.search_button {
+  vertical-align: middle;
+  border: none;
+  margin: 0;
+  /* TODO */
+  margin-top: -4px;
+  padding: 8px;
+  background-color: #E2F0D6;
+}
 
 ul#ancestors {
   list-style-type: none;
@@ -153,9 +162,6 @@ ul#ancestors li:before {
   font-style: italic;
 }
 
-.search_button {
-  vertical-align: middle;
-}
 
 th.subentries {
   background: #E2F0D6;
