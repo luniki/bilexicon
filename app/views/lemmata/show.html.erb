@@ -18,8 +18,10 @@
   <tr>
     <th colspan="4" class="subentries">
       <%= t(:examples) %>
-      <% link_to(new_lemma_example_path(@lemma)) do %>
-        <%= image_tag 'icons/notebook_plus.png' %>
+      <% if current_user_is_admin then %>
+        <% link_to(new_lemma_example_path(@lemma)) do %>
+          <%= image_tag 'icons/notebook_plus.png' %>
+        <% end %>
       <% end %>
     </th>
   </tr>
@@ -29,8 +31,10 @@
   <tr>
     <th colspan="4" class="subentries">
       <%= t(:valencies) %>
-      <% link_to(new_lemma_valency_path(@lemma)) do %>
-        <%= image_tag 'icons/notebook_plus.png' %>
+      <% if current_user_is_admin then %>
+        <% link_to(new_lemma_valency_path(@lemma)) do %>
+          <%= image_tag 'icons/notebook_plus.png' %>
+        <% end %>
       <% end %>
     </th>
   </tr>
@@ -40,8 +44,10 @@
   <tr>
     <th colspan="4" class="subentries">
       <%= t(:collocations) %>
-      <% link_to(new_lemma_collocation_path(@lemma)) do %>
-        <%= image_tag 'icons/notebook_plus.png' %>
+      <% if current_user_is_admin then %>
+        <% link_to(new_lemma_collocation_path(@lemma)) do %>
+          <%= image_tag 'icons/notebook_plus.png' %>
+        <% end %>
       <% end %>
     </th>
   </tr>
@@ -51,8 +57,10 @@
   <tr>
     <th colspan="4" class="subentries">
       <%= t(:phraseologisms) %>
-      <% link_to(new_lemma_phraseologism_path(@lemma)) do %>
-        <%= image_tag 'icons/notebook_plus.png' %>
+      <% if current_user_is_admin then %>
+        <% link_to(new_lemma_phraseologism_path(@lemma)) do %>
+          <%= image_tag 'icons/notebook_plus.png' %>
+        <% end %>
       <% end %>
     </th>
   </tr>
@@ -61,19 +69,21 @@
 
 </table>
 
-<ul>
-  <li>
-    <%= link_to t(:edit), edit_lemma_path(@lemma) %>
-  </li>
-  <li>
-    <%= link_to t(:delete), lemma_path(@lemma), :confirm => t(:confirm_question), :method => :delete %>
-  </li>
-  <% @categories.each do |category| -%>
+<% if current_user_is_admin then %>
+  <ul>
     <li>
-      <%= link_to h(category.name), category %>
+      <%= link_to t(:edit), edit_lemma_path(@lemma) %>
     </li>
-  <% end %>
-  <li>
-    <%= link_to t(:add_example), new_lemma_example_path(@lemma) %>
-  </li>
-</ul>
+    <li>
+      <%= link_to t(:delete), lemma_path(@lemma), :confirm => t(:confirm_question), :method => :delete %>
+    </li>
+    <% @categories.each do |category| -%>
+      <li>
+        <%= link_to h(category.name), category %>
+      </li>
+    <% end %>
+    <li>
+      <%= link_to t(:add_example), new_lemma_example_path(@lemma) %>
+    </li>
+  </ul>
+<% end %>

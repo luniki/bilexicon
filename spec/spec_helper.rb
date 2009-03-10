@@ -42,6 +42,35 @@ Spec::Runner.configure do |config|
   # config.mock_with :rr
   #
   # == Notes
-  # 
+  #
   # For more information take a look at Spec::Example::Configuration and Spec::Runner
+
+  Spec::Runner.configure do |config|
+    config.before(:each, :type => :view) do
+      template.stub!(:current_user).and_return(nil)
+      template.stub!(:current_user_is_admin).and_return(nil)
+    end
+  end
+
+  describe "an authenticated controller", :shared => true do
+
+    before (:each) do
+      controller.should_receive(:require_user).and_return(:true)
+    end
+  end
+
+  describe "an admin-authorized controller", :shared => true do
+
+    before (:each) do
+      controller.should_receive(:require_admin).and_return(:true)
+    end
+  end
+
+  describe "an admin-authorized view", :shared => true do
+
+    before (:each) do
+      template.stub!(:current_user).and_return(mock("user", :"admin?" => true))
+      template.stub!(:current_user_is_admin).and_return(true)
+    end
+  end
 end

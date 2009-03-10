@@ -96,34 +96,38 @@ describe "/lemmata/show.html.erb" do
     end
   end
 
-  it "should have a link to the lemma's categories" do
-    render "/lemmata/show.html.erb"
-    @categories.each do |category|
-      response.should have_tag("a[href=?]",
-                                          category_path(category),
-                                          :text => category.name)
+  describe "for authorized users" do
+    it_should_behave_like "an admin-authorized view"
+
+    it "should have a link to the lemma's categories" do
+      render "/lemmata/show.html.erb"
+      @categories.each do |category|
+        response.should have_tag("a[href=?]",
+                                            category_path(category),
+                                            :text => category.name)
+      end
     end
-  end
 
-  it "should have an edit link" do
-    render "/lemmata/show.html.erb"
-    response.should have_tag("a[href=?]",
-                                        edit_lemma_path(@lemma),
-                                        :text => I18n.translate(:edit))
-  end
+    it "should have an edit link" do
+      render "/lemmata/show.html.erb"
+      response.should have_tag("a[href=?]",
+                                          edit_lemma_path(@lemma),
+                                          :text => I18n.translate(:edit))
+    end
 
-  it "should have a delete link" do
-    render "/lemmata/show.html.erb"
-    response.should have_tag("a[href=?][onclick]",
-                                        lemma_path(@lemma),
-                                        :text => I18n.translate(:delete))
-  end
+    it "should have a delete link" do
+      render "/lemmata/show.html.erb"
+      response.should have_tag("a[href=?][onclick]",
+                                          lemma_path(@lemma),
+                                          :text => I18n.translate(:delete))
+    end
 
-  it "should have a link to add another example" do
-    render "/lemmata/show.html.erb"
-    response.should have_tag("a[href=?]",
-                                        new_lemma_example_path(@lemma),
-                                        :text => I18n.translate(:add_example))
+    it "should have a link to add another example" do
+      render "/lemmata/show.html.erb"
+      response.should have_tag("a[href=?]",
+                                          new_lemma_example_path(@lemma),
+                                          :text => I18n.translate(:add_example))
+    end
   end
 end
 

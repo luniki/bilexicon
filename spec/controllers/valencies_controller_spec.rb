@@ -2,6 +2,8 @@ require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
 describe ValenciesController do
 
+  it_should_behave_like "an admin-authorized controller"
+
   def mock_valency(stubs={})
     @mock_valency ||= mock_model(Valency, stubs)
   end

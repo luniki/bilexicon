@@ -35,12 +35,22 @@
         <li>
           <a href="#help">Hilfe</a>
         </li>
-        <li>
-          <a href="#admin">Administration</a>
-        </li>
-        <li>
-          <a href="#signout">Ausloggen</a>
-        </li>
+
+        <% if !current_user %>
+          <li>
+            <%= link_to "Sign Up", new_account_path %>
+          </li>
+          <li>
+            <%= link_to "Sign In", new_user_session_path %>
+          </li>
+        <% else %>
+          <li>
+          <%= link_to "My Account", account_path %>
+          </li>
+          <li>
+          <%= link_to "Sign Out", user_session_path, :method => :delete %>
+          </li>
+        <% end %>
       </ul>
     </div>
 

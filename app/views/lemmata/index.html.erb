@@ -28,8 +28,10 @@
   <%= render :partial => "other_dictionaries" %>
 <% end %>
 
-<ul>
-  <li>
-    <%= link_to t(:add_lemma), new_lemma_path() %>
-  </li>
-</ul>
+<% if current_user_is_admin then %>
+  <ul>
+    <li>
+      <%= link_to t(:add_lemma), new_lemma_path() %>
+    </li>
+  </ul>
+<% end %>

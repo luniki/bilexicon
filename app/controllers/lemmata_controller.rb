@@ -1,5 +1,7 @@
 class LemmataController < ApplicationController
 
+  before_filter :require_admin, :except => [:index, :show]
+
   def index
     @lemmata = Lemma.search(params[:q]) unless params[:q].blank?
   end

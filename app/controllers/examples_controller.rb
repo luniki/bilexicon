@@ -1,12 +1,7 @@
 class ExamplesController < ApplicationController
 
-  def context_object(*finder_options)
-    params[:context_type].classify.constantize.find(context_id, *finder_options)
-  end
+  before_filter :require_admin
 
-  def context_id
-    params["#{params[:context_type]}_id"]
-  end
 
   def new
     @exampleable = context_object
@@ -51,4 +46,13 @@ class ExamplesController < ApplicationController
 
     redirect_to(@exampleable)
   end
+
+  private
+    def context_object(*finder_options)
+      params[:context_type].classify.constantize.find(context_id, *finder_options)
+    end
+
+    def context_id
+      params["#{params[:context_type]}_id"]
+    end
 end

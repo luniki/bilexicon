@@ -35,18 +35,19 @@
   <% end %>
 </ul>
 
-<ul>
-  <li>
-    <%= link_to t(:edit), edit_category_path(@category) %>
-  </li>
-  <li>
-    <%= link_to t(:delete), @category, :confirm => t(:confirm_question), :method => :delete %>
-  </li>
-  <li>
-    <%= link_to t(:add_category), new_category_path(:category_id => @category)  %>
-  </li>
-  <li>
-    <%=link_to t(:add_lemma), new_lemma_path(:category_id => @category) %>
-  </li>
-</ul>
-
+<% if current_user_is_admin then %>
+  <ul>
+    <li>
+      <%= link_to t(:edit), edit_category_path(@category) %>
+    </li>
+    <li>
+      <%= link_to t(:delete), @category, :confirm => t(:confirm_question), :method => :delete %>
+    </li>
+    <li>
+      <%= link_to t(:add_category), new_category_path(:category_id => @category)  %>
+    </li>
+    <li>
+      <%=link_to t(:add_lemma), new_lemma_path(:category_id => @category) %>
+    </li>
+  </ul>
+<% end %>

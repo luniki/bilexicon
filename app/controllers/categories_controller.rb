@@ -1,5 +1,7 @@
 class CategoriesController < ApplicationController
 
+  before_filter :require_admin, :except => [:index, :show]
+
   def index
     @categories = Category.roots
   end
