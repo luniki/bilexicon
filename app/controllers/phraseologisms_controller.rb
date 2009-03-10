@@ -1,7 +1,7 @@
 class PhraseologismsController < ApplicationController
 
   before_filter :populate_lemma
-  before_filter :require_user
+  before_filter :require_admin
 
   def new
     @phraseologism = Phraseologism.new

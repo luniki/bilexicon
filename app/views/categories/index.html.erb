@@ -8,4 +8,6 @@
   <% end %>
 </ul>
 
-<p><%= link_to t(:add_category), new_category_path  %></p>
+<% if current_user_is_admin then %>
+  <p><%= link_to t(:add_category), new_category_path  %></p>
+<% end %>

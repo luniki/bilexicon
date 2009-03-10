@@ -22,10 +22,13 @@ describe "/categories/index.html.erb" do
     end
   end
 
-  it "should have a link to add another category" do
-    render "/categories/index.html.erb"
+  describe "for authorized users" do
+    it_should_behave_like "an admin-authorized view"
 
-    response.should have_tag("a[href=?]", new_category_path)
+    it "should have a link to add another category" do
+      render "/categories/index.html.erb"
+      response.should have_tag("a[href=?]", new_category_path)
+    end
   end
 end
 

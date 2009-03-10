@@ -34,11 +34,13 @@
       <span class="synonym">syn: <%= h collocation.synonym2 %></span>
     <% end %>
 
-    <% link_to(edit_lemma_collocation_path(@lemma, collocation)) do %>
-      <%= image_submit_tag 'icons/notebook_pencil.png' %>
-    <% end %>
-    <% link_to([@lemma, collocation], {:confirm => t(:confirm_question), :method => :delete}) do -%>
-      <%= image_submit_tag 'icons/notebook_minus.png' %>
+    <% if current_user_is_admin then %>
+      <% link_to(edit_lemma_collocation_path(@lemma, collocation)) do %>
+        <%= image_submit_tag 'icons/notebook_pencil.png' %>
+      <% end %>
+      <% link_to([@lemma, collocation], {:confirm => t(:confirm_question), :method => :delete}) do -%>
+        <%= image_submit_tag 'icons/notebook_minus.png' %>
+      <% end %>
     <% end %>
   </td>
 <% end %>

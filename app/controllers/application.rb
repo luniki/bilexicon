@@ -20,7 +20,7 @@ class ApplicationController < ActionController::Base
   end
 
 
-  helper_method :current_user_session, :current_user
+  helper_method :current_user_session, :current_user, :current_user_is_admin
   filter_parameter_logging :password, :password_confirmation
 
   private
@@ -32,6 +32,18 @@ class ApplicationController < ActionController::Base
     def current_user
       return @current_user if defined?(@current_user)
       @current_user = current_user_session && current_user_session.record
+    end
+
+    def current_user_is_admin
+      current_user# && current_user.admin?
+    end
+
+    def require_admin
+      unless current_user && current_user.admin?
+        flash[:notice] = "You must be admin to access this page"
+        render :file => "#{Rails.public_path}/401.html", :status => :unauthorized
+        return false
+      end
     end
 
     def require_user

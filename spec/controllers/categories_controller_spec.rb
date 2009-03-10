@@ -52,7 +52,7 @@ describe CategoriesController do
 
   describe "with a valid user session" do
 
-    it_should_behave_like "an authenticated controller"
+    it_should_behave_like "an admin-authorized controller"
 
     describe "responding to GET new" do
 
