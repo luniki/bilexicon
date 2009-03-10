@@ -42,6 +42,13 @@ Spec::Runner.configure do |config|
   # config.mock_with :rr
   #
   # == Notes
-  # 
+  #
   # For more information take a look at Spec::Example::Configuration and Spec::Runner
+
+  describe "an authenticated controller", :shared => true do
+
+    before (:each) do
+      controller.should_receive(:require_user).and_return(:true)
+    end
+  end
 end

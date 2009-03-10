@@ -1,5 +1,7 @@
 class CollocationsController < ApplicationController
+
   before_filter :populate_lemma
+  before_filter :require_user
 
   def new
     @collocation = Collocation.new

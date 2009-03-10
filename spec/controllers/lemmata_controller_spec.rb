@@ -47,129 +47,136 @@ describe LemmataController do
     end
   end
 
-  describe "responding to GET new" do
+  describe "with a valid user session" do
 
-    it "should expose a new lemma as @lemma" do
-      Lemma.should_receive(:new).and_return(mock_lemma(:categories => []))
-      get :new
-      response.should be_success
-      assigns[:lemma].should equal(mock_lemma)
-    end
-  end
+    it_should_behave_like "an authenticated controller"
 
-  describe "responding to GET edit" do
 
-    it "should expose the requested lemma as @lemma" do
-      Lemma.should_receive(:find).with("37").and_return(mock_lemma(:categories => []))
-      get :edit, :id => "37"
-      assigns[:lemma].should equal(mock_lemma)
-    end
-  end
+    describe "responding to GET new" do
 
-  describe "responding to POST create" do
-
-    before (:each) do
-      @categories = [mock_model(Category), mock_model(Category)]
-      @lemma = mock_lemma(:categories => [], :examples => [])
-      Lemma.should_receive(:new).and_return(@lemma)
-    end
-
-    describe "with valid params" do
-
-      before (:each) do
-        @lemma.stub!(:save).and_return(true)
-      end
-
-      it "should expose a newly created lemma as @lemma" do
-        post :create, :lemma => {}
-        assigns(:lemma).should equal(@lemma)
-      end
-
-      it "should redirect to the created lemma" do
-        post :create, :lemma => {}
-        response.should redirect_to(lemma_url(@lemma))
-      end
-
-    end
-
-    describe "with invalid params" do
-
-      before(:each) do
-        @lemma.stub!(:save).and_return(false)
-      end
-
-      it "should expose a newly created but unsaved lemma as @lemma" do
-        post :create, :lemma => {}
-        assigns(:lemma).should equal(@lemma)
-      end
-
-      it "should re-render the 'new' template" do
-        post :create, :lemma => {}
-        response.should render_template('new')
+      it "should expose a new lemma as @lemma" do
+        Lemma.should_receive(:new).and_return(mock_lemma(:categories => []))
+        get :new
+        response.should be_success
+        assigns[:lemma].should equal(mock_lemma)
       end
     end
-  end
 
-  describe "responding to PUT udpate" do
-
-    describe "with valid params" do
-
-      it "should update the requested lemma" do
-        Lemma.should_receive(:find).with("37").and_return(mock_lemma)
-        mock_lemma.should_receive(:update_attributes).with({'these' => 'params'})
-        put :update, :id => "37", :lemma => {:these => 'params'}
-      end
+    describe "responding to GET edit" do
 
       it "should expose the requested lemma as @lemma" do
-        Lemma.stub!(:find).and_return(mock_lemma(:update_attributes => true))
-        put :update, :id => "1"
-        assigns(:lemma).should equal(mock_lemma)
+        Lemma.should_receive(:find).with("37").and_return(mock_lemma(:categories => []))
+        get :edit, :id => "37"
+        assigns[:lemma].should equal(mock_lemma)
+      end
+    end
+
+    describe "responding to POST create" do
+
+      before (:each) do
+        @categories = [mock_model(Category), mock_model(Category)]
+        @lemma = mock_lemma(:categories => [], :examples => [])
+        Lemma.should_receive(:new).and_return(@lemma)
       end
 
-      it "should redirect to the lemma" do
-        Lemma.stub!(:find).and_return(mock_lemma(:update_attributes => true))
-        put :update, :id => "1"
-        response.should redirect_to(lemma_url(mock_lemma))
+      describe "with valid params" do
+
+        before (:each) do
+          @lemma.stub!(:save).and_return(true)
+        end
+
+        it "should expose a newly created lemma as @lemma" do
+          post :create, :lemma => {}
+          assigns(:lemma).should equal(@lemma)
+        end
+
+        it "should redirect to the created lemma" do
+          post :create, :lemma => {}
+          response.should redirect_to(lemma_url(@lemma))
+        end
+
+      end
+
+      describe "with invalid params" do
+
+        before(:each) do
+          @lemma.stub!(:save).and_return(false)
+        end
+
+        it "should expose a newly created but unsaved lemma as @lemma" do
+          post :create, :lemma => {}
+          assigns(:lemma).should equal(@lemma)
+        end
+
+        it "should re-render the 'new' template" do
+          post :create, :lemma => {}
+          response.should render_template('new')
+        end
+      end
+    end
+
+    describe "responding to PUT udpate" do
+
+      describe "with valid params" do
+
+        it "should update the requested lemma" do
+          Lemma.should_receive(:find).with("37").and_return(mock_lemma)
+          mock_lemma.should_receive(:update_attributes).with({'these' => 'params'})
+          put :update, :id => "37", :lemma => {:these => 'params'}
+        end
+
+        it "should expose the requested lemma as @lemma" do
+          Lemma.stub!(:find).and_return(mock_lemma(:update_attributes => true))
+          put :update, :id => "1"
+          assigns(:lemma).should equal(mock_lemma)
+        end
+
+        it "should redirect to the lemma" do
+          Lemma.stub!(:find).and_return(mock_lemma(:update_attributes => true))
+          put :update, :id => "1"
+          response.should redirect_to(lemma_url(mock_lemma))
+        end
+
+      end
+
+      describe "with invalid params" do
+
+        it "should update the requested lemma" do
+          Lemma.should_receive(:find).with("37").and_return(mock_lemma)
+          mock_lemma.should_receive(:update_attributes).with({'these' => 'params'})
+          put :update, :id => "37", :lemma => {:these => 'params'}
+        end
+
+        it "should expose the lemma as @lemma" do
+          Lemma.stub!(:find).and_return(mock_lemma(:update_attributes => false))
+          put :update, :id => "1"
+          assigns(:lemma).should equal(mock_lemma)
+        end
+
+        it "should re-render the 'edit' template" do
+          Lemma.stub!(:find).and_return(mock_lemma(:update_attributes => false))
+          put :update, :id => "1"
+          response.should render_template('edit')
+        end
+
       end
 
     end
 
-    describe "with invalid params" do
+    describe "responding to DELETE destroy" do
 
-      it "should update the requested lemma" do
-        Lemma.should_receive(:find).with("37").and_return(mock_lemma)
-        mock_lemma.should_receive(:update_attributes).with({'these' => 'params'})
-        put :update, :id => "37", :lemma => {:these => 'params'}
+      it "should destroy the requested lemma" do
+        Lemma.should_receive(:find).with("37").and_return(mock_lemma())
+        mock_lemma.should_receive(:destroy)
+        delete :destroy, :id => "37"
       end
 
-      it "should expose the lemma as @lemma" do
-        Lemma.stub!(:find).and_return(mock_lemma(:update_attributes => false))
-        put :update, :id => "1"
-        assigns(:lemma).should equal(mock_lemma)
+      it "should redirect to the lemmata's index" do
+        Lemma.stub!(:find).with("1").and_return(mock_lemma(:destroy => true))
+        delete :destroy, :id => "1"
+        response.should redirect_to(lemmata_path)
       end
 
-      it "should re-render the 'edit' template" do
-        Lemma.stub!(:find).and_return(mock_lemma(:update_attributes => false))
-        put :update, :id => "1"
-        response.should render_template('edit')
-      end
-
-    end
-
-  end
-
-  describe "responding to DELETE destroy" do
-
-    it "should destroy the requested lemma" do
-      Lemma.should_receive(:find).with("37").and_return(mock_lemma())
-      mock_lemma.should_receive(:destroy)
-      delete :destroy, :id => "37"
-    end
-
-    it "should redirect to the lemmata's index" do
-      Lemma.stub!(:find).with("1").and_return(mock_lemma(:destroy => true))
-      delete :destroy, :id => "1"
-      response.should redirect_to(lemmata_path)
     end
 
   end

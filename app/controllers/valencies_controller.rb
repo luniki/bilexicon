@@ -1,5 +1,7 @@
 class ValenciesController < ApplicationController
+
   before_filter :populate_lemma
+  before_filter :require_user
 
   def new
     @valency = Valency.new
