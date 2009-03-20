@@ -54,7 +54,9 @@ describe ExamplesController do
                          "form1" => "To be or not to be.",
                          "form2" => "Sein oder nicht sein.",
                          "syntax1" => "X + Y + Z",
-                         "syntax1" => "X + Y + Z",
+                         "syntax2" => "X + Y + Z",
+                         "synonym1" => "a synonym",
+                         "synonym2" => "ein Synonym",
                         }
         Example.should_receive(:new).with(param_example).and_return(@example)
         @example.should_receive(:'exampleable=')
@@ -70,6 +72,8 @@ describe ExamplesController do
                          "form2" => "Sein oder nicht sein.",
                          "syntax1" => "X + Y + Z",
                          "syntax1" => "X + Y + Z",
+                         "synonym1" => "a synonym",
+                         "synonym2" => "ein Synonym",
                         }
         Example.should_receive(:new).with(param_example).and_return(@example)
         @example.should_receive(:'exampleable=')

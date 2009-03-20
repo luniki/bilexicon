@@ -13,7 +13,7 @@ describe ExamplesController do
     it "should map #edit" do
       route_for(:controller => "examples",
                 :action => "edit",
-                :id => 1,
+                :id => "1",
                 :lemma_id => "37",
                 :context_type=>"lemma").should == "/lemmata/37/examples/1/edit"
     end
@@ -21,17 +21,17 @@ describe ExamplesController do
     it "should map #update" do
       route_for(:controller => "examples",
                 :action => "update",
-                :id => 1,
+                :id => "1",
                 :lemma_id => "37",
-                :context_type=>"lemma").should == "/lemmata/37/examples/1"
+                :context_type=>"lemma").should == {:path => "/lemmata/37/examples/1", :method => :put}
     end
 
     it "should map #destroy" do
       route_for(:controller => "examples",
                 :action => "destroy",
-                :id => 1,
+                :id => "1",
                 :lemma_id => "37",
-                :context_type=>"lemma").should == "/lemmata/37/examples/1"
+                :context_type=>"lemma").should == {:path => "/lemmata/37/examples/1", :method => :delete}
     end
   end
 

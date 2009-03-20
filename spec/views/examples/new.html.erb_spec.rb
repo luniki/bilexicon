@@ -10,6 +10,8 @@ describe "/examples/new.html.erb" do
       :form2 => "",
       :syntax1 => "",
       :syntax2 => "",
+      :synonym1 => "",
+      :synonym2 => "",
       :exampleable_type => "value for exampleable_type"
     )
     assigns[:exampleable] = @lemma = stub_model(Lemma)
@@ -23,6 +25,8 @@ describe "/examples/new.html.erb" do
       with_tag("input#example_form2[name=?]", "example[form2]")
       with_tag('input#example_syntax1[name=?]', "example[syntax1]")
       with_tag('input#example_syntax2[name=?]', "example[syntax2]")
+      with_tag('input#example_synonym1[name=?]', "example[synonym1]")
+      with_tag('input#example_synonym2[name=?]', "example[synonym2]")
     end
   end
 end

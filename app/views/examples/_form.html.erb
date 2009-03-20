@@ -20,6 +20,15 @@
   </p>
 
   <p>
+    <%= f.label :synonym1 %><br />
+    <%= f.text_field :synonym1 %>
+  </p>
+  <p>
+    <%= f.label :synonym2 %><br />
+    <%= f.text_field :synonym2 %>
+  </p>
+
+  <p>
     <% if @example.new_record? -%>
       <%= f.submit t(:create) %>
       <%= t :or %>
