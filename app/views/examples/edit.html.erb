@@ -1,19 +1,4 @@
-<h1>Editing example</h1>
+<h1><%= t(:edit_example)  %></h1>
 
-<% form_for([@exampleable, @example]) do |f| %>
-  <%= f.error_messages %>
+<%= render :partial => "form" %>
 
-  <p>
-    <%= f.label :form1 %><br />
-    <%= f.text_field :form1 %>
-  </p>
-  <p>
-    <%= f.label :form2 %><br />
-    <%= f.text_field :form2 %>
-  </p>
-  <p>
-    <%= f.submit t(:edit) %>
-  </p>
-<% end %>
-
-<%= link_to 'Back', @exampleable %>

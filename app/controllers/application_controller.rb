@@ -35,11 +35,12 @@ class ApplicationController < ActionController::Base
     end
 
     def current_user_is_admin
-      current_user# && current_user.admin?
+      current_user && current_user.admin?
     end
 
     def require_admin
       unless current_user && current_user.admin?
+        puts  current_user.inspect
         flash[:notice] = "You must be admin to access this page"
         render :file => "#{Rails.public_path}/401.html", :status => :unauthorized
         return false

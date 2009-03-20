@@ -50,8 +50,12 @@ describe ExamplesController do
       end
 
       it "should expose a newly created example as @example" do
-        param_example = {"form1" => "To be or not to be.",
-                         "form2" => "Sein oder nicht sein."}
+        param_example = {
+                         "form1" => "To be or not to be.",
+                         "form2" => "Sein oder nicht sein.",
+                         "syntax1" => "X + Y + Z",
+                         "syntax1" => "X + Y + Z",
+                        }
         Example.should_receive(:new).with(param_example).and_return(@example)
         @example.should_receive(:'exampleable=')
         post :create, :example => param_example,
@@ -61,8 +65,12 @@ describe ExamplesController do
       end
 
       it "should redirect to the lemma of the example" do
-        param_example = {"form1" => "To be or not to be.",
-                         "form2" => "Sein oder nicht sein."}
+        param_example = {
+                         "form1" => "To be or not to be.",
+                         "form2" => "Sein oder nicht sein.",
+                         "syntax1" => "X + Y + Z",
+                         "syntax1" => "X + Y + Z",
+                        }
         Example.should_receive(:new).with(param_example).and_return(@example)
         @example.should_receive(:'exampleable=')
         post :create, :example => param_example,

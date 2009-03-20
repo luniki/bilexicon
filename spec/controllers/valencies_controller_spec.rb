@@ -47,8 +47,10 @@ describe ValenciesController do
 
       before(:each) do
         @param_valency = {
-          "form1" => "a car bound to somewhere",
-          "form2" => "ein Auto, das irgendwo hinfährt"
+          "form1" => "s.o. drives s.o.",
+          "form2" => "j-m fährt jemanden",
+          "syntax1" => "N(P) + V + N(P)",
+          "syntax2" => "N(P) + V + N(P)",
         }
         @valency = mock_valency(:save => true)
         Valency.should_receive(:new).with(@param_valency).and_return(@valency)
@@ -95,8 +97,10 @@ describe ValenciesController do
 
     before(:each) do
       @param_valency = {
-          "form1" => "a car bound to somewhere",
-          "form2" => "ein Auto, das irgendwo hinfährt"
+          "form1" => "s.o. drives s.o.",
+          "form2" => "j-m fährt jemanden",
+          "syntax1" => "N(P) + V + N(P)",
+          "syntax2" => "N(P) + V + N(P)",
       }
     end
 

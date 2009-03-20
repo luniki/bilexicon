@@ -9,7 +9,9 @@ describe "/valencies/new.html.erb" do
       :form1 => "",
       :form2 => "",
       :synonym1 => "",
-      :synonym2 => ""
+      :synonym2 => "",
+      :syntax1 => "",
+      :syntax2 => ""
     )
     assigns[:lemma] = @lemma = stub_model(Lemma)
   end
@@ -22,6 +24,8 @@ describe "/valencies/new.html.erb" do
       with_tag("input#valency_form2[name=?]", "valency[form2]")
       with_tag("input#valency_synonym1[name=?]", "valency[synonym1]")
       with_tag("input#valency_synonym2[name=?]", "valency[synonym2]")
+      with_tag("input#valency_syntax1[name=?]", "valency[syntax1]")
+      with_tag("input#valency_syntax2[name=?]", "valency[syntax2]")
     end
   end
 end

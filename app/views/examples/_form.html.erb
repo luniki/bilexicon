@@ -1,0 +1,35 @@
+<% form_for([@exampleable, @example]) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :form1 %><br />
+    <%= f.text_field :form1 %>
+  </p>
+  <p>
+    <%= f.label :form2 %><br />
+    <%= f.text_field :form2 %>
+  </p>
+
+  <p>
+    <%= f.label :syntax1 %><br />
+    <%= f.text_field :syntax1 %>
+  </p>
+  <p>
+    <%= f.label :syntax2 %><br />
+    <%= f.text_field :syntax2 %>
+  </p>
+
+  <p>
+    <% if @example.new_record? -%>
+      <%= f.submit t(:create) %>
+      <%= t :or %>
+      <%= link_to t(:cancel), @exampleable %>
+    <% else -%>
+      <%= f.submit t(:edit) %>
+      <%= t :or %>
+      <%= link_to t(:cancel), @exampleable %>
+    <% end %>
+  </p>
+<% end %>
+
+<%= link_to 'Back', @exampleable %>

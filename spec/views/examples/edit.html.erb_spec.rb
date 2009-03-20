@@ -8,6 +8,8 @@ describe "/examples/edit.html.erb" do
       :new_record? => false,
       :form1 => "",
       :form2 => "",
+      :syntax1 => "",
+      :syntax2 => "",
       :exampleable_type => "value for exampleable_type"
     )
     assigns[:exampleable] = @lemma = stub_model(Lemma)
@@ -19,6 +21,8 @@ describe "/examples/edit.html.erb" do
     response.should have_tag("form[action=?][method=post]", lemma_example_path(@lemma, @example)) do
       with_tag('input#example_form1[name=?]', "example[form1]")
       with_tag('input#example_form2[name=?]', "example[form2]")
+      with_tag('input#example_syntax1[name=?]', "example[syntax1]")
+      with_tag('input#example_syntax2[name=?]', "example[syntax2]")
     end
   end
 end
