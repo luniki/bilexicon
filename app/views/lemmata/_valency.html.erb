@@ -1,25 +1,6 @@
-<% content_tag_for(:tr, valency) do %>
-  <td class="">
+<div id="valency_<%= valency.id %>" class="valency span-24 last">
 
-    <% if valency.synonym1 -%>
-      <span class="synonym">syn: <%= h valency.synonym1 %></span>
-    <% end %>
-  </td>
-
-  <td class="">
-    <%= h valency.form1 %>
-  </td>
-
-  <td class="">
-    <%= h valency.form2 %>
-  </td>
-
-  <td class="">
-
-    <% if valency.synonym2 -%>
-      <span class="synonym">syn: <%= h valency.synonym2 %></span>
-    <% end %>
-
+  <div class="span-2">
     <% if current_user_is_admin then %>
       <% link_to(edit_lemma_valency_path(@lemma, valency)) do %>
         <%= image_submit_tag 'icons/notebook_pencil.png' %>
@@ -27,7 +8,39 @@
       <% link_to([@lemma, valency], {:confirm => t(:confirm_question), :method => :delete}) do -%>
         <%= image_submit_tag 'icons/notebook_minus.png' %>
       <% end %>
+    <% else %>
+      &nbsp;
     <% end %>
-  </td>
-<% end %>
+  </div>
+
+
+  <div class="span-5">
+    vp:
+    <% if valency.syntax1 -%>
+      <span class="syntax"><%= h valency.syntax1 %></span>
+    <% end %>
+    <% if valency.synonym1 -%>
+      <span class="synonym">syn: <%= h valency.synonym1 %></span>
+    <% end %>
+  </div>
+
+  <div class="span-6">
+    <%= h valency.form1 %>
+  </div>
+
+  <div class="span-6">
+    <%= h valency.form2 %>
+  </div>
+
+  <div class="span-5 last">
+    vp:
+    <% if valency.syntax2 -%>
+      <span class="syntax"><%= h valency.syntax2 %></span>
+    <% end %>
+    <% if valency.synonym2 -%>
+      <span class="synonym">syn: <%= h valency.synonym2 %></span>
+    <% end %>
+  </div>
+
+</div>
 

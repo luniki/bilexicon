@@ -39,6 +39,12 @@ th {
   color: #BDD684;
 }
 
+hr, hr.space {
+  background: transparent;
+  color: transparent;
+}
+
+
 /**************************************/
 /*              HEADER                */
 /**************************************/
@@ -129,17 +135,18 @@ th {
   background-color: #E2F0D6;
 }
 
-ul#ancestors {
+ul.ancestors {
+  display: inline;
   list-style-type: none;
   margin-left: 0;
   padding-left: 0;
 }
 
-ul#ancestors li {
+ul.ancestors li {
   display: inline;
 }
 
-ul#ancestors li:before {
+ul.ancestors li:before {
   content: " » ";
 }
 
@@ -148,8 +155,10 @@ ul#ancestors li:before {
 /**************************************/
 
 #content {
-  border: 1px solid #95AB63;
-  padding: 17px 0.5em;
+/* TODO sprengt das grid */
+/*  border: 1px solid #95AB63;*/
+/*  padding: 17px 0.5em;*/
+  padding: 17px 0 0 0;
 }
 
 .lemma .phonetic:hover,
@@ -158,7 +167,7 @@ ul#ancestors li:before {
   color: red;
 }
 
-.example {
+.example-form {
   font-style: italic;
 }
 
@@ -166,10 +175,24 @@ ul#ancestors li:before {
 th.subentries {
   background: #E2F0D6;
 }
+
+.entry-line {
+  background: #BDD684;
+  font-weight: bolder;
+}
+
+.subentry-line {
+  background: #E2F0D6;
+  font-weight: bolder;
+}
+
 /**************************************/
 /*               FOOTER               */
 /**************************************/
 #footer {
+  padding-top: 1.5em;
+  color: #95AB63;
+  text-align: center;
 }
 
 /**************************************/

@@ -1,89 +1,131 @@
-<table>
+<div id="lemma_<%= @lemma.id %>" class="span-24 last">
 
-  <% content_tag_for(:tr, @lemma) do %>
-    <th class="">
+  <div class="prepend-2 span-22 last;">
+    <h1>
+      <span class="quiet"><%= t(:lemma) %></span>
+      <%= h @lemma.short1 %> · <%= h @lemma.short2 %>
+    </h1>
+
+    <% @categories.each do |category| -%>
+      <h2 class="quiet">
+        <%= t(:category) %>
+        <ul class="ancestors">
+          <% category.self_and_ancestors.each do |node| -%>
+            <li>
+              <%= link_to h(node.name), node %>
+            </li>
+          <% end %>
+        </ul>
+      </h2>
+    <% end %>
+  </div>
+
+  <div class="span-2">
+    <% if current_user_is_admin then -%>
+      <% link_to(edit_lemma_path(@lemma)) do %>
+        <%= image_submit_tag 'icons/notebook_pencil.png' %>
+      <% end %>
+      <% link_to(@lemma, {:confirm => t(:confirm_question), :method => :delete}) do -%>
+        <%= image_submit_tag 'icons/notebook_minus.png' %>
+      <% end %>
+    <% else %>
+      &nbsp;
+    <% end %>
+
+  </div>
+
+  <div class="entry-line span-22 last">
+    <div class="span-5">
       <span class="phonetic" title="<%= t(:lemma_phonetic) %>">{<%= h @lemma.phonetic1 %>};</span>
       <span class="word_class" title="<%= t(:lemma_word_class) %>">cl: <%= h @lemma.word_class %>;</span>
       <span class="level" title="<%= t(:lemma_level) %>">l: <%= h @lemma.level %></span>
-    </th>
-    <th class="short"><%= h @lemma.short1 %></th>
-    <th class="short"><%= h @lemma.short2 %></th>
-    <th class="">
+    </div>
+
+    <div class="span-6 short">
+      <%= h @lemma.short1 %>
+    </div>
+    <div class="span-6 short">
+      <%= h @lemma.short2 %>
+    </div>
+
+    <div class="span-5 last">
       <span class="phonetic" title="<%= t(:lemma_phonetic) %>">{<%= h @lemma.phonetic2 %>};</span>
       <span class="word_class" title="<%= t(:lemma_word_class) %>">cl: <%= h @lemma.word_class %>;</span>
       <span class="level" title="<%= t(:lemma_level) %>">l: <%= h @lemma.level %></span>
-    </th>
-  <% end %>
+    </div>
+  </div>
 
-  <tr>
-    <th colspan="4" class="subentries">
-      <%= t(:examples) %>
-      <% if current_user_is_admin then %>
-        <% link_to(new_lemma_example_path(@lemma)) do %>
-          <%= image_tag 'icons/notebook_plus.png' %>
-        <% end %>
+  <hr class="space"/>
+
+  <div class="span-2">
+    <% if current_user_is_admin then %>
+      <% link_to(new_lemma_example_path(@lemma)) do %>
+        <%= image_tag 'icons/notebook_plus.png' %>
       <% end %>
-    </th>
-  </tr>
+    <% else %>
+      &nbsp;
+    <% end %>
+  </div>
+
+  <div class="subentry-line span-22 last">
+    <%= t(:examples) %>
+  </div>
 
   <%= render :partial => "example", :collection => @examples %>
 
-  <tr>
-    <th colspan="4" class="subentries">
-      <%= t(:valencies) %>
-      <% if current_user_is_admin then %>
-        <% link_to(new_lemma_valency_path(@lemma)) do %>
-          <%= image_tag 'icons/notebook_plus.png' %>
-        <% end %>
+  <hr class="space"/>
+
+  <div class="span-2">
+    <% if current_user_is_admin then %>
+      <% link_to(new_lemma_valency_path(@lemma)) do %>
+        <%= image_tag 'icons/notebook_plus.png' %>
       <% end %>
-    </th>
-  </tr>
+    <% else %>
+      &nbsp;
+    <% end %>
+  </div>
+
+  <div class="subentry-line span-22 last">
+    <%= t(:valencies) %>
+  </div>
 
   <%= render :partial => "valency", :collection => @valencies %>
 
-  <tr>
-    <th colspan="4" class="subentries">
-      <%= t(:collocations) %>
-      <% if current_user_is_admin then %>
-        <% link_to(new_lemma_collocation_path(@lemma)) do %>
-          <%= image_tag 'icons/notebook_plus.png' %>
-        <% end %>
+  <hr class="space"/>
+
+  <div class="span-2">
+    <% if current_user_is_admin then %>
+      <% link_to(new_lemma_collocation_path(@lemma)) do %>
+        <%= image_tag 'icons/notebook_plus.png' %>
       <% end %>
-    </th>
-  </tr>
+    <% else %>
+      &nbsp;
+    <% end %>
+  </div>
+
+  <div class="subentry-line span-22 last">
+    <%= t(:collocations) %>
+  </div>
 
   <%= render :partial => "collocation", :collection => @collocations %>
 
-  <tr>
-    <th colspan="4" class="subentries">
-      <%= t(:phraseologisms) %>
-      <% if current_user_is_admin then %>
-        <% link_to(new_lemma_phraseologism_path(@lemma)) do %>
-          <%= image_tag 'icons/notebook_plus.png' %>
-        <% end %>
+  <hr class="space"/>
+
+  <div class="span-2">
+    <% if current_user_is_admin then %>
+      <% link_to(new_lemma_phraseologism_path(@lemma)) do %>
+        <%= image_tag 'icons/notebook_plus.png' %>
       <% end %>
-    </th>
-  </tr>
+    <% else %>
+      &nbsp;
+    <% end %>
+  </div>
+
+  <div class="subentry-line span-22 last">
+    <%= t(:phraseologisms) %>
+  </div>
 
   <%= render :partial => "phraseologism", :collection => @phraseologisms %>
 
-</table>
+</div>
 
-<% if current_user_is_admin then %>
-  <ul>
-    <li>
-      <%= link_to t(:edit), edit_lemma_path(@lemma) %>
-    </li>
-    <li>
-      <%= link_to t(:delete), lemma_path(@lemma), :confirm => t(:confirm_question), :method => :delete %>
-    </li>
-    <% @categories.each do |category| -%>
-      <li>
-        <%= link_to h(category.name), category %>
-      </li>
-    <% end %>
-    <li>
-      <%= link_to t(:add_example), new_lemma_example_path(@lemma) %>
-    </li>
-  </ul>
-<% end %>

@@ -1,13 +1,6 @@
-<% content_tag_for(:tr, example) do %>
-  <td class=""></td>
-  <td class="">
-    <%= h example.form1 %>
-  </td>
-  <td class="">
-    <%= h example.form2 %>
-  </td>
-  <td class="">
+<div id="example_<%= example.id %>" class="example span-24 last">
 
+  <div class="span-2">
     <% if current_user_is_admin then %>
       <% link_to(edit_lemma_example_path(@lemma, example)) do %>
         <%= image_submit_tag 'icons/notebook_pencil.png' %>
@@ -15,7 +8,37 @@
       <% link_to([@lemma, example], {:confirm => t(:confirm_question), :method => :delete}) do -%>
         <%= image_submit_tag 'icons/notebook_minus.png' %>
       <% end %>
+    <% else %>
+      &nbsp;
     <% end %>
-  </td>
-<% end %>
+  </div>
 
+  <div class="span-5">
+    ex
+    <% if example.syntax1 -%>
+      <span class="syntax"><%= h example.syntax1 %></span>
+    <% end %>
+    <% if example.synonym1 -%>
+      <span class="synonym">syn: <%= h example.synonym1 %></span>
+    <% end %>
+  </div>
+
+  <div class="example-form span-6">
+    <%= h example.form1 %>
+  </div>
+
+  <div class="example-form span-6">
+    <%= h example.form2 %>
+  </div>
+
+  <div class="span-5 last">
+    ex
+    <% if example.syntax2 -%>
+      <span class="syntax"><%= h example.syntax2 %></span>
+    <% end %>
+    <% if example.synonym2 -%>
+      <span class="synonym">syn: <%= h example.synonym2 %></span>
+    <% end %>
+  </div>
+
+</div>

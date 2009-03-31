@@ -1,6 +1,6 @@
 <h1><%=h @category.name %></h1>
 
-<ul id="ancestors">
+<ul class="ancestors">
   <li><%= link_to t(:top), categories_path %></li>
   <% for ancestor in @ancestors -%>
     <% content_tag_for(:li, ancestor) do %>

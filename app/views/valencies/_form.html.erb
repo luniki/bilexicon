@@ -12,7 +12,7 @@
 
     <tbody>
       <tr>
-        <th scope="row"><%= t :valency_form %></th>
+        <th scope="row"><%= t :form %></th>
         <td><%= f.text_field :form1 %></td>
         <td><%= f.text_field :form2 %></td>
       </tr>
@@ -35,13 +35,11 @@
   <p>
     <% if @valency.new_record? -%>
       <%= f.submit t(:create) %>
-      <%= t :or %>
-      <%= link_to t(:cancel), lemmata_path %>
     <% else -%>
       <%= f.submit t(:edit) %>
-      <%= t :or %>
-      <%= link_to t(:cancel), [@lemma, @valency] %>
     <% end %>
+    <%= t :or %>
+    <%= link_to t(:cancel), @lemma %>
   </p>
 <% end %>
 
