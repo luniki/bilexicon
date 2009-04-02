@@ -11,7 +11,8 @@ describe "/valencies/edit.html.erb" do
       :synonym1 => "",
       :synonym2 => "",
       :syntax1 => "",
-      :syntax2 => ""
+      :syntax2 => "",
+      :meaning_list => ""
     )
     assigns[:lemma] = @lemma = stub_model(Lemma)
   end
@@ -26,6 +27,7 @@ describe "/valencies/edit.html.erb" do
       with_tag("input#valency_synonym2[name=?]", "valency[synonym2]")
       with_tag("input#valency_syntax1[name=?]", "valency[syntax1]")
       with_tag("input#valency_syntax2[name=?]", "valency[syntax2]")
+      with_tag("input#valency_meaning_list[name=?]", "valency[meaning_list]")
     end
   end
 end

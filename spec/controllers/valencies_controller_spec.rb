@@ -43,15 +43,24 @@ describe ValenciesController do
 
   describe "responding to POST create" do
 
+    before(:each) do
+      @param_valency = {
+        "form1" => "s.o. drives s.o.",
+        "form2" => "j-m fährt jemanden",
+        "syntax1" => "N(P) + V + N(P)",
+        "syntax2" => "N(P) + V + N(P)",
+        "meaning_list" => "fast, car"
+      }
+    end
+
+    it "should save the meanings of the valency" do
+      post :create, :valency => @param_valency, :lemma_id => "37"
+      assigns(:valency).meanings.should_not be_empty
+    end
+
     describe "with valid params" do
 
       before(:each) do
-        @param_valency = {
-          "form1" => "s.o. drives s.o.",
-          "form2" => "j-m fährt jemanden",
-          "syntax1" => "N(P) + V + N(P)",
-          "syntax2" => "N(P) + V + N(P)",
-        }
         @valency = mock_valency(:save => true)
         Valency.should_receive(:new).with(@param_valency).and_return(@valency)
       end
