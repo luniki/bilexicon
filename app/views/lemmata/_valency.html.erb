@@ -16,10 +16,8 @@
 
   <div class="span-5">
     vp:
-    <% if valency.syntax1 -%>
-      <span class="syntax"><%= h valency.syntax1 %></span>
-    <% end %>
-    <% if valency.synonym1 -%>
+    <span class="syntax"><%= h valency.syntax1 %></span>
+    <% if valency.synonym1.present? -%>
       <span class="synonym">syn: <%= h valency.synonym1 %></span>
     <% end %>
   </div>
@@ -34,10 +32,8 @@
 
   <div class="span-5 last">
     vp:
-    <% if valency.syntax2 -%>
-      <span class="syntax"><%= h valency.syntax2 %></span>
-    <% end %>
-    <% if valency.synonym2 -%>
+    <span class="syntax"><%= h valency.syntax2 %></span>
+    <% if valency.synonym2.present? -%>
       <span class="synonym">syn: <%= h valency.synonym2 %></span>
     <% end %>
   </div>

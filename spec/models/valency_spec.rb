@@ -4,7 +4,9 @@ describe Valency do
   before(:each) do
     @valid_attributes = {
       :form1 => "s.o. drives",
-      :form2 => "j-m fährt"
+      :form2 => "j-m fährt",
+      :syntax1 => "N + V",
+      :syntax2 => "N + V"
     }
   end
 
