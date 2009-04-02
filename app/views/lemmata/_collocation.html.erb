@@ -25,6 +25,9 @@
     <% if collocation.synonym1.present? -%>
       <span class="synonym">syn: <%= h collocation.synonym1 %></span>
     <% end %>
+    <% if collocation.meaning_list.present? -%>
+      <span class="meanings">mg: <%= h collocation.meaning_list %></span>
+    <% end %>
   </div>
 
 

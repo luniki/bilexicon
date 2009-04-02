@@ -44,15 +44,24 @@ describe CollocationsController do
 
   describe "responding to POST create" do
 
+    before(:each) do
+      @param_collocation = {
+        "form1" => "s.o./a car drives fast",
+        "form2" => "j-m/ein Wagen fährt schnell",
+        "syntax1" => "V + ADV",
+        "syntax2" => "V + ADV",
+        "meaning_list" => "fast, furious"
+      }
+    end
+
+    it "should save the meanings of the collocation" do
+      post :create, :collocation => @param_collocation, :lemma_id => "37"
+      assigns(:collocation).meanings.should_not be_empty
+    end
+
     describe "with valid params" do
 
       before(:each) do
-        @param_collocation = {
-          "form1" => "s.o./a car drives fast",
-          "form2" => "j-m/ein Wagen fährt schnell",
-          "syntax1" => "V + ADV",
-          "syntax2" => "V + ADV"
-        }
         @collocation = mock_collocation(:save => true)
         Collocation.should_receive(:new).with(@param_collocation).and_return(@collocation)
       end
@@ -71,6 +80,7 @@ describe CollocationsController do
         post :create, :collocation => @param_collocation, :lemma_id => "37"
         response.should redirect_to(lemma_url(@lemma))
       end
+
 
     end
 

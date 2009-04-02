@@ -29,6 +29,14 @@
         <td><%= f.text_field :synonym2 %></td>
       </tr>
 
+      <tr>
+        <th scope="row"><%= t :meanings %></th>
+        <td><%= f.text_field :meaning_list %></td>
+        <td class="quiet">
+          <%= t :comma_separated %>
+        </td>
+      </tr>
+
     </tbody>
   </table>
 

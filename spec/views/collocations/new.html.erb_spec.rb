@@ -11,7 +11,8 @@ describe "/collocations/new.html.erb" do
       :syntax1 => "",
       :syntax2 => "",
       :synonym1 => "",
-      :synonym2 => ""
+      :synonym2 => "",
+      :meaning_list => ""
     )
     assigns[:lemma] = @lemma = stub_model(Lemma)
   end
@@ -26,6 +27,7 @@ describe "/collocations/new.html.erb" do
       with_tag("input#collocation_syntax2[name=?]", "collocation[syntax2]")
       with_tag("input#collocation_synonym1[name=?]", "collocation[synonym1]")
       with_tag("input#collocation_synonym2[name=?]", "collocation[synonym2]")
+      with_tag("input#collocation_meaning_list[name=?]", "collocation[meaning_list]")
     end
   end
 end
