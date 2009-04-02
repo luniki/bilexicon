@@ -11,15 +11,25 @@
     </thead>
 
     <tbody>
+
       <tr>
         <th scope="row"><%= t :form %></th>
         <td><%= f.text_field :form1 %></td>
         <td><%= f.text_field :form2 %></td>
       </tr>
+
       <tr>
         <th scope="row"><%= t :synonym %></th>
         <td><%= f.text_field :synonym1 %></td>
         <td><%= f.text_field :synonym2 %></td>
+      </tr>
+
+      <tr>
+        <th scope="row"><%= t :meanings %></th>
+        <td><%= f.text_field :meaning_list %></td>
+        <td class="quiet">
+          <%= t :comma_separated %>
+        </td>
       </tr>
 
     </tbody>

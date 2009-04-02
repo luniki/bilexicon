@@ -43,13 +43,23 @@ describe PhraseologismsController do
 
   describe "responding to POST create" do
 
+    before(:each) do
+      @param_phraseologism = {
+        "form1" => "a car bound to somewhere",
+        "form2" => "ein Auto, das irgendwo hinfährt",
+        "meaning_list" => "car, direction"
+      }
+    end
+
+    it "should save the meanings of the phraseologism" do
+      post :create, :phraseologism => @param_phraseologism, :lemma_id => "37"
+      assigns(:phraseologism).meanings.should_not be_empty
+    end
+
+
     describe "with valid params" do
 
       before(:each) do
-        @param_phraseologism = {
-          "form1" => "a car bound to somewhere",
-          "form2" => "ein Auto, das irgendwo hinfährt"
-        }
         @phraseologism = mock_phraseologism(:save => true)
         Phraseologism.should_receive(:new).with(@param_phraseologism).and_return(@phraseologism)
       end

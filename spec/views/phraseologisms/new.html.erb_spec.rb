@@ -9,7 +9,8 @@ describe "/phraseologisms/new.html.erb" do
       :form1 => "",
       :form2 => "",
       :synonym1 => "",
-      :synonym2 => ""
+      :synonym2 => "",
+      :meaning_list => ""
     )
     assigns[:lemma] = @lemma = stub_model(Lemma)
   end
@@ -22,6 +23,7 @@ describe "/phraseologisms/new.html.erb" do
       with_tag("input#phraseologism_form2[name=?]", "phraseologism[form2]")
       with_tag("input#phraseologism_synonym1[name=?]", "phraseologism[synonym1]")
       with_tag("input#phraseologism_synonym2[name=?]", "phraseologism[synonym2]")
+      with_tag("input#phraseologism_meaning_list[name=?]", "phraseologism[meaning_list]")
     end
   end
 end

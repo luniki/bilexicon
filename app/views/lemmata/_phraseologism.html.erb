@@ -22,6 +22,9 @@
     <% if phraseologism.synonym1.present? -%>
       <span class="synonym">syn: <%= h phraseologism.synonym1 %></span>
     <% end %>
+    <% if phraseologism.meaning_list.present? -%>
+      <span class="meanings">mg: <%= h phraseologism.meaning_list %></span>
+    <% end %>
   </div>
 
   <div class="span-6">
