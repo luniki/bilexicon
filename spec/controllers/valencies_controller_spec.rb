@@ -16,15 +16,15 @@ describe ValenciesController do
 
   describe "responding to GET new" do
 
-    it "should expose a the valency's lemma as @lemma" do
-      Valency.stub!(:new)
+    it "should set the valency's lemma" do
+      Valency.stub!(:new).and_return(mock_valency)
+      mock_valency.should_receive(:"lemma=")
       get :new, :lemma_id => "37"
       response.should be_success
-      assigns[:lemma].should equal(@lemma)
     end
 
     it "should expose a new valency as @valency" do
-      Valency.should_receive(:new).and_return(mock_valency)
+      Valency.should_receive(:new).and_return(mock_valency(:"lemma=" => nil))
       get :new, :lemma_id => "37"
       response.should be_success
       assigns[:valency].should equal(mock_valency)
@@ -34,7 +34,7 @@ describe ValenciesController do
   describe "responding to GET edit" do
 
     it "should expose the requested valency as @valency" do
-      Valency.should_receive(:find).with("37").and_return(mock_valency)
+      Valency.should_receive(:find).with("37").and_return(mock_valency(:"lemma=" => nil))
       get :edit, :id => "37", :lemma_id => "37"
       assigns[:valency].should equal(mock_valency)
     end
@@ -113,13 +113,13 @@ describe ValenciesController do
       end
 
       it "should expose the requested valency as @valency" do
-        Valency.stub!(:find).and_return(mock_valency(:update_attributes => true))
+        Valency.stub!(:find).and_return(mock_valency(:update_attributes => true, :lemma => @lemma))
         put :update, :id => "1", :lemma_id => "37"
         assigns(:valency).should equal(mock_valency)
       end
 
       it "should redirect to the valency" do
-        Valency.stub!(:find).and_return(mock_valency(:update_attributes => true))
+        Valency.stub!(:find).and_return(mock_valency(:update_attributes => true, :lemma => @lemma))
         put :update, :id => "1", :lemma_id => "37"
         response.should redirect_to(lemma_url(@lemma))
       end
@@ -128,7 +128,7 @@ describe ValenciesController do
     describe "with invalid params" do
 
       it "should update the requested valency" do
-        Valency.should_receive(:find).with("37").and_return(mock_valency)
+        Valency.should_receive(:find).with("37").and_return(mock_valency(:lemma => @lemma))
         mock_valency.should_receive(:update_attributes).with({'these' => 'params'})
         put :update, :id => "37", :valency => {:these => 'params'}, :lemma_id => "37"
       end
@@ -151,13 +151,13 @@ describe ValenciesController do
   describe "responding to DELETE destroy" do
 
     it "should destroy the requested valency" do
-      Valency.should_receive(:find).with("37").and_return(mock_valency)
+      Valency.should_receive(:find).with("37").and_return(mock_valency(:lemma => @lemma))
       mock_valency.should_receive(:destroy)
       delete :destroy, :id => "37", :lemma_id => "37"
     end
 
     it "should redirect to the valencies list" do
-      Valency.stub!(:find).and_return(mock_valency(:destroy => true))
+      Valency.stub!(:find).and_return(mock_valency(:destroy => true, :lemma => @lemma))
       delete :destroy, :id => "1", :lemma_id => "37"
       response.should redirect_to(lemma_url(@lemma))
     end

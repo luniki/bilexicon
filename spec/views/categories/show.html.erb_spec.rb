@@ -32,7 +32,7 @@ describe "/categories/show.html.erb" do
     render "/categories/show.html.erb"
 
     @ancestors.each do |ancestor|
-      response.should have_tag("ul#ancestors li a[href=?]",
+      response.should have_tag("ul.ancestors li a[href=?]",
                                category_path(ancestor),
                                :text => ancestor.name)
     end

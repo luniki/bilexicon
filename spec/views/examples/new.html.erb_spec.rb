@@ -4,6 +4,7 @@ describe "/examples/new.html.erb" do
   include ExamplesHelper
 
   before(:each) do
+    assigns[:exampleable] = @lemma = stub_model(Lemma)
     assigns[:example] = stub_model(Example,
       :new_record? => true,
       :form1 => "",
@@ -12,9 +13,9 @@ describe "/examples/new.html.erb" do
       :syntax2 => "",
       :synonym1 => "",
       :synonym2 => "",
+      :exampleable => @lemma,
       :exampleable_type => "value for exampleable_type"
     )
-    assigns[:exampleable] = @lemma = stub_model(Lemma)
   end
 
   it "should render new form" do

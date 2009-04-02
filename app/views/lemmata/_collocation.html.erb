@@ -2,11 +2,14 @@
 
   <div class="span-2">
     <% if current_user_is_admin then %>
-      <% link_to(edit_lemma_collocation_path(@lemma, collocation)) do %>
-        <%= image_submit_tag 'icons/notebook_pencil.png' %>
+      <% link_to(edit_collocation_path(collocation)) do %>
+        <%= image_submit_tag 'icons/pencil_small.png' %>
       <% end %>
-      <% link_to([@lemma, collocation], {:confirm => t(:confirm_question), :method => :delete}) do -%>
-        <%= image_submit_tag 'icons/notebook_minus.png' %>
+      <% link_to(collocation, {:confirm => t(:confirm_question), :method => :delete}) do -%>
+        <%= image_submit_tag 'icons/minus_small.png' %>
+      <% end %>
+      <% link_to(new_collocation_example_path(collocation)) do -%>
+        <%= image_submit_tag 'icons/sticky_note__plus.png' %>
       <% end %>
     <% else %>
       &nbsp;
@@ -16,10 +19,10 @@
 
   <div class="span-5">
     C:
-    <% if collocation.syntax1 -%>
+    <% if collocation.syntax1.present? -%>
       <span class="syntax"><%= h collocation.syntax1 %></span>
     <% end %>
-    <% if collocation.synonym1 -%>
+    <% if collocation.synonym1.present? -%>
       <span class="synonym">syn: <%= h collocation.synonym1 %></span>
     <% end %>
   </div>
@@ -35,10 +38,10 @@
 
   <div class="span-5 last">
     C:
-    <% if collocation.syntax2 -%>
+    <% if collocation.syntax2.present? -%>
       <span class="syntax"><%= h collocation.syntax2 %></span>
     <% end %>
-    <% if collocation.synonym2 -%>
+    <% if collocation.synonym2.present? -%>
       <span class="synonym">syn: <%= h collocation.synonym2 %></span>
     <% end %>
   </div>

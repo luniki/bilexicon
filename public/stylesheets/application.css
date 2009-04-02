@@ -135,6 +135,17 @@ hr, hr.space {
   background-color: #E2F0D6;
 }
 
+
+#search_term:before {
+  content: open-quote;
+  font-weight: bold;
+}
+
+#search_term:after {
+  content: close-quote;
+  font-weight: bold;
+}
+
 ul.ancestors {
   display: inline;
   list-style-type: none;

@@ -17,15 +17,15 @@ describe CollocationsController do
 
   describe "responding to GET new" do
 
-    it "should expose a the collocation's lemma as @lemma" do
-      Collocation.stub!(:new)
+    it "should set the collocation's lemma" do
+      Collocation.stub!(:new).and_return(mock_collocation)
+      mock_collocation.should_receive(:"lemma=")
       get :new, :lemma_id => "37"
       response.should be_success
-      assigns[:lemma].should equal(@lemma)
     end
 
     it "should expose a new collocation as @collocation" do
-      Collocation.should_receive(:new).and_return(mock_collocation)
+      Collocation.should_receive(:new).and_return(mock_collocation(:"lemma=" => nil))
       get :new, :lemma_id => "37"
       response.should be_success
       assigns[:collocation].should equal(mock_collocation)
@@ -114,13 +114,13 @@ describe CollocationsController do
       end
 
       it "should expose the requested collocation as @collocation" do
-        Collocation.stub!(:find).and_return(mock_collocation(:update_attributes => true))
+        Collocation.stub!(:find).and_return(mock_collocation(:update_attributes => true, :lemma => @lemma))
         put :update, :id => "1", :lemma_id => "37"
         assigns(:collocation).should equal(mock_collocation)
       end
 
       it "should redirect to the collocation" do
-        Collocation.stub!(:find).and_return(mock_collocation(:update_attributes => true))
+        Collocation.stub!(:find).and_return(mock_collocation(:update_attributes => true, :lemma => @lemma))
         put :update, :id => "1", :lemma_id => "37"
         response.should redirect_to(lemma_url(@lemma))
       end
@@ -129,7 +129,7 @@ describe CollocationsController do
     describe "with invalid params" do
 
       it "should update the requested collocation" do
-        Collocation.should_receive(:find).with("37").and_return(mock_collocation)
+        Collocation.should_receive(:find).with("37").and_return(mock_collocation(:lemma => @lemma))
         mock_collocation.should_receive(:update_attributes).with({'these' => 'params'})
         put :update, :id => "37", :collocation => {:these => 'params'}, :lemma_id => "37"
       end
@@ -152,13 +152,13 @@ describe CollocationsController do
   describe "responding to DELETE destroy" do
 
     it "should destroy the requested collocation" do
-      Collocation.should_receive(:find).with("37").and_return(mock_collocation)
+      Collocation.should_receive(:find).with("37").and_return(mock_collocation(:lemma => @lemma))
       mock_collocation.should_receive(:destroy)
       delete :destroy, :id => "37", :lemma_id => "37"
     end
 
     it "should redirect to the collocations list" do
-      Collocation.stub!(:find).and_return(mock_collocation(:destroy => true))
+      Collocation.stub!(:find).and_return(mock_collocation(:destroy => true, :lemma => @lemma))
       delete :destroy, :id => "1", :lemma_id => "37"
       response.should redirect_to(lemma_url(@lemma))
     end

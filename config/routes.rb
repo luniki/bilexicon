@@ -13,18 +13,25 @@ ActionController::Routing::Routes.draw do |map|
 
     lemma.resources :examples, :requirements => { :context_type => 'lemma' }
 
-    lemma.resources :valencies do |valency|
-      valency.resources :examples, :requirements => { :context_type => 'valency' }
-    end
-
-    lemma.resources :collocations do |collocation|
-      collocation.resources :examples, :requirements => { :context_type => 'collocation' }
-    end
-
-    lemma.resources :phraseologisms do |phraseologism|
-      phraseologism.resources :examples, :requirements => { :context_type => 'phraseologism' }
-    end
+    lemma.resources :valencies
+    lemma.resources :collocations
+    lemma.resources :phraseologisms
   end
+
+  map.resources :examples
+
+  map.resources :valencies do |valency|
+    valency.resources :examples, :requirements => { :context_type => 'valency' }
+  end
+
+  map.resources :collocations do |collocation|
+    collocation.resources :examples, :requirements => { :context_type => 'collocation' }
+  end
+
+  map.resources :phraseologisms do |phraseologism|
+    phraseologism.resources :examples, :requirements => { :context_type => 'phraseologism' }
+  end
+
 
   # The priority is based upon order of creation: first created -> highest priority.
 

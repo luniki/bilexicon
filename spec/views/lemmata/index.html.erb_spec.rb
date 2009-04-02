@@ -12,7 +12,8 @@ describe "/lemmata/index.html.erb" do
     it "should render failure message" do
       render "/lemmata/index.html.erb"
 
-      response.should have_tag("h2", "0 #{I18n.translate(:search_results_for)} \"a word that cannot be found\"")
+      response.should have_tag("h2", :content =>
+         /0 #{I18n.translate(:search_results_for)} a word that cannot be found/)
     end
   end
 
@@ -28,7 +29,8 @@ describe "/lemmata/index.html.erb" do
     it "should render the number of matches" do
       render "/lemmata/index.html.erb"
 
-      response.should have_tag("h2", "#{assigns[:lemmata].size} #{I18n.translate(:search_results_for)} \"a result\"")
+      response.should have_tag("h2",
+        :content => /#{assigns[:lemmata].size} #{I18n.translate(:search_results_for)} a result/)
     end
 
     it "should render a list of matching" do

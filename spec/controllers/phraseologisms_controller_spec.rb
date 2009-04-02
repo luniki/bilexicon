@@ -17,14 +17,14 @@ describe PhraseologismsController do
   describe "responding to GET new" do
 
     it "should expose a the phraseologism's lemma as @lemma" do
-      Phraseologism.stub!(:new)
+      Phraseologism.stub!(:new).and_return(mock_phraseologism(:"lemma=" => nil))
       get :new, :lemma_id => "37"
       response.should be_success
       assigns[:lemma].should equal(@lemma)
     end
 
     it "should expose a new phraseologism as @phraseologism" do
-      Phraseologism.should_receive(:new).and_return(mock_phraseologism)
+      Phraseologism.should_receive(:new).and_return(mock_phraseologism(:"lemma=" => nil))
       get :new, :lemma_id => "37"
       response.should be_success
       assigns[:phraseologism].should equal(mock_phraseologism)
@@ -34,7 +34,7 @@ describe PhraseologismsController do
   describe "responding to GET edit" do
 
     it "should expose the requested phraseologism as @phraseologism" do
-      Phraseologism.should_receive(:find).with("37").and_return(mock_phraseologism)
+      Phraseologism.should_receive(:find).with("37").and_return(mock_phraseologism(:lemma => @lemma))
       get :edit, :id => "37", :lemma_id => "37"
       assigns[:phraseologism].should equal(mock_phraseologism)
     end
@@ -109,13 +109,13 @@ describe PhraseologismsController do
       end
 
       it "should expose the requested phraseologism as @phraseologism" do
-        Phraseologism.stub!(:find).and_return(mock_phraseologism(:update_attributes => true))
+        Phraseologism.stub!(:find).and_return(mock_phraseologism(:update_attributes => true, :lemma => @lemma))
         put :update, :id => "1", :lemma_id => "37"
         assigns(:phraseologism).should equal(mock_phraseologism)
       end
 
       it "should redirect to the phraseologism" do
-        Phraseologism.stub!(:find).and_return(mock_phraseologism(:update_attributes => true))
+        Phraseologism.stub!(:find).and_return(mock_phraseologism(:update_attributes => true, :lemma => @lemma))
         put :update, :id => "1", :lemma_id => "37"
         response.should redirect_to(lemma_url(@lemma))
       end
@@ -147,13 +147,13 @@ describe PhraseologismsController do
   describe "responding to DELETE destroy" do
 
     it "should destroy the requested phraseologism" do
-      Phraseologism.should_receive(:find).with("37").and_return(mock_phraseologism)
+      Phraseologism.should_receive(:find).with("37").and_return(mock_phraseologism(:lemma => @lemma))
       mock_phraseologism.should_receive(:destroy)
       delete :destroy, :id => "37", :lemma_id => "37"
     end
 
     it "should redirect to the phraseologisms list" do
-      Phraseologism.stub!(:find).and_return(mock_phraseologism(:destroy => true))
+      Phraseologism.stub!(:find).and_return(mock_phraseologism(:destroy => true, :lemma => @lemma))
       delete :destroy, :id => "1", :lemma_id => "37"
       response.should redirect_to(lemma_url(@lemma))
     end

@@ -9,7 +9,8 @@ describe "/lemmata/show.html.erb" do
       :phonetic1 => "ˈhwēl", :phonetic2 => "'það",
       :word_class => "V",    :level => "B1 R/P"
       )
-    assigns[:categories] = @categories = [stub_model(Category, :name => "a name")]
+    category = stub_model(Category, :name => "a name", :self_and_ancestors => [])
+    assigns[:categories] = @categories = []
     assigns[:examples] = @examples = [stub_model(Example, :form1 => 'a', :form2 => 'b')]
     assigns[:valencies] = @valencies = [stub_model(Valency, :form1 => 'a', :form2 => 'b', :synonym1 => "a", :synonym2 => "b")]
     assigns[:collocations] = @collocations = [stub_model(Collocation, :form1 => 'a', :form2 => 'b', :synonym1 => "a", :synonym2 => "b", :syntax1 => "a", :syntax2 => "b")]
@@ -20,15 +21,15 @@ describe "/lemmata/show.html.erb" do
 
     it "should render both short forms" do
       render "/lemmata/show.html.erb"
-      response.should have_tag("tr#? th", "lemma_#{@lemma.id}") do
-        with_tag("th.short", @lemma.short1)
-        with_tag("th.short", @lemma.short2)
+      response.should have_tag("div#?", "lemma_#{@lemma.id}") do
+        with_tag("div.short", @lemma.short1)
+        with_tag("div.short", @lemma.short2)
       end
     end
 
     it "should render phonetics and word_class" do
       render "/lemmata/show.html.erb"
-      response.should have_tag("tr#? th", "lemma_#{@lemma.id}") do
+      response.should have_tag("div#?", "lemma_#{@lemma.id}") do
         with_tag("span.phonetic", /#{@lemma.phonetic1}/)
         with_tag("span.phonetic", /#{@lemma.phonetic2}/)
         with_tag("span.word_class", /#{@lemma.word_class}/)
@@ -38,7 +39,7 @@ describe "/lemmata/show.html.erb" do
 
     it "should render the level" do
       render "/lemmata/show.html.erb"
-      response.should have_tag("tr#? th", "lemma_#{@lemma.id}") do
+      response.should have_tag("div#?", "lemma_#{@lemma.id}") do
         with_tag("span.level", /#{@lemma.level}/)
       end
     end
@@ -47,7 +48,7 @@ describe "/lemmata/show.html.erb" do
     describe "and its examples" do
       it "should render as a list" do
         render "/lemmata/show.html.erb"
-        response.should have_tag("tr.example")
+        response.should have_tag("div.example")
       end
     end
 
@@ -55,12 +56,12 @@ describe "/lemmata/show.html.erb" do
     describe "and its valencies" do
       it "should render as a list" do
         render "/lemmata/show.html.erb"
-        response.should have_tag("tr.valency")
+        response.should have_tag("div.valency")
       end
 
       it "should show the synonyms" do
         render "/lemmata/show.html.erb"
-        response.should have_tag("tr.valency td span.synonym")
+        response.should have_tag("div.valency span.synonym")
       end
     end
 
@@ -68,17 +69,17 @@ describe "/lemmata/show.html.erb" do
     describe "and its collocations" do
       it "should render as a list" do
         render "/lemmata/show.html.erb"
-        response.should have_tag("tr.collocation")
+        response.should have_tag("div.collocation")
       end
 
       it "should show the syntax" do
         render "/lemmata/show.html.erb"
-        response.should have_tag("tr.collocation td span.syntax")
+        response.should have_tag("div.collocation span.syntax")
       end
 
       it "should show the synonyms" do
         render "/lemmata/show.html.erb"
-        response.should have_tag("tr.collocation td span.synonym")
+        response.should have_tag("div.collocation span.synonym")
       end
     end
 
@@ -86,12 +87,12 @@ describe "/lemmata/show.html.erb" do
     describe "and its phraseologisms" do
       it "should render as a list" do
         render "/lemmata/show.html.erb"
-        response.should have_tag("tr.phraseologism")
+        response.should have_tag("div.phraseologism")
       end
 
       it "should show the synonyms" do
         render "/lemmata/show.html.erb"
-        response.should have_tag("tr.phraseologism td span.synonym")
+        response.should have_tag("div.phraseologism span.synonym")
       end
     end
   end
@@ -111,22 +112,19 @@ describe "/lemmata/show.html.erb" do
     it "should have an edit link" do
       render "/lemmata/show.html.erb"
       response.should have_tag("a[href=?]",
-                                          edit_lemma_path(@lemma),
-                                          :text => I18n.translate(:edit))
+                               edit_lemma_path(@lemma))
     end
 
     it "should have a delete link" do
       render "/lemmata/show.html.erb"
       response.should have_tag("a[href=?][onclick]",
-                                          lemma_path(@lemma),
-                                          :text => I18n.translate(:delete))
+                               lemma_path(@lemma))
     end
 
     it "should have a link to add another example" do
       render "/lemmata/show.html.erb"
       response.should have_tag("a[href=?]",
-                                          new_lemma_example_path(@lemma),
-                                          :text => I18n.translate(:add_example))
+                               new_lemma_example_path(@lemma))
     end
   end
 end

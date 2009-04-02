@@ -1,10 +1,11 @@
 class CollocationsController < ApplicationController
 
-  before_filter :populate_lemma
+  before_filter :populate_lemma, :only => ["new", "create"]
   before_filter :require_admin
 
   def new
     @collocation = Collocation.new
+    @collocation.lemma = @lemma
   end
 
   def edit
@@ -27,7 +28,7 @@ class CollocationsController < ApplicationController
     @collocation = Collocation.find(params[:id])
     if @collocation.update_attributes(params[:collocation])
       flash[:notice] = 'Collocation was successfully updated.'
-      redirect_to(@lemma)
+      redirect_to(@collocation.lemma)
     else
       render :action => "edit"
     end
@@ -35,8 +36,9 @@ class CollocationsController < ApplicationController
 
   def destroy
     @collocation = Collocation.find(params[:id])
+    lemma = @collocation.lemma
     @collocation.destroy
 
-    redirect_to(@lemma)
+    redirect_to(lemma)
   end
 end

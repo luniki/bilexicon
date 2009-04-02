@@ -15,15 +15,15 @@ describe ExamplesController do
 
   describe "responding to GET new" do
 
-    it "should expose a the example's lemma as @exampleable" do
-      Example.stub!(:new)
+    it "should set the example'exampleable to the lemma" do
+      Example.should_receive(:new).and_return(mock_example)
+      mock_example.should_receive(:"exampleable=")
       get :new, :lemma_id => "37", :context_type => "lemma"
       response.should be_success
-      assigns[:exampleable].should equal(@lemma)
     end
 
     it "should expose a new example as @example" do
-      Example.should_receive(:new).and_return(mock_example)
+      Example.should_receive(:new).and_return(mock_example(:'exampleable=' => nil))
       get :new, :lemma_id => "37", :context_type => "lemma"
       response.should be_success
       assigns[:example].should equal(mock_example)
@@ -152,13 +152,13 @@ describe ExamplesController do
   describe "responding to DELETE destroy" do
 
     it "should destroy the requested example" do
-      Example.should_receive(:find).with("37").and_return(mock_example)
+      Example.should_receive(:find).with("37").and_return(mock_example(:exampleable => @lemma))
       mock_example.should_receive(:destroy)
       delete :destroy, :id => "37", :lemma_id => "37", :context_type => "lemma"
     end
 
     it "should redirect to the examples list" do
-      Example.stub!(:find).and_return(mock_example(:destroy => true))
+      Example.stub!(:find).and_return(mock_example(:destroy => true, :exampleable => @lemma))
       delete :destroy, :id => "1", :lemma_id => "37", :context_type => "lemma"
       response.should redirect_to(lemma_url(@lemma))
     end

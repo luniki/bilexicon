@@ -1,10 +1,11 @@
 class PhraseologismsController < ApplicationController
 
-  before_filter :populate_lemma
+  before_filter :populate_lemma, :only => ["new", "create"]
   before_filter :require_admin
 
   def new
     @phraseologism = Phraseologism.new
+    @phraseologism.lemma = @lemma
   end
 
   def edit
@@ -27,7 +28,7 @@ class PhraseologismsController < ApplicationController
     @phraseologism = Phraseologism.find(params[:id])
     if @phraseologism.update_attributes(params[:phraseologism])
       flash[:notice] = 'Phraseologism was successfully updated.'
-      redirect_to(@lemma)
+      redirect_to(@phraseologism.lemma)
     else
       render :action => "edit"
     end
@@ -35,8 +36,9 @@ class PhraseologismsController < ApplicationController
 
   def destroy
     @phraseologism = Phraseologism.find(params[:id])
+    lemma = @phraseologism.lemma
     @phraseologism.destroy
 
-    redirect_to(@lemma)
+    redirect_to(lemma)
   end
 end

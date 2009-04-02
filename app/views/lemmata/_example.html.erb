@@ -2,11 +2,11 @@
 
   <div class="span-2">
     <% if current_user_is_admin then %>
-      <% link_to(edit_lemma_example_path(@lemma, example)) do %>
-        <%= image_submit_tag 'icons/notebook_pencil.png' %>
+      <% link_to(edit_example_path(example)) do %>
+        <%= image_submit_tag 'icons/sticky_note__pencil.png' %>
       <% end %>
-      <% link_to([@lemma, example], {:confirm => t(:confirm_question), :method => :delete}) do -%>
-        <%= image_submit_tag 'icons/notebook_minus.png' %>
+      <% link_to(example, {:confirm => t(:confirm_question), :method => :delete}) do -%>
+        <%= image_submit_tag 'icons/sticky_note__minus.png' %>
       <% end %>
     <% else %>
       &nbsp;
@@ -14,13 +14,13 @@
   </div>
 
   <div class="span-5">
-    ex
-    <% if example.syntax1 -%>
+    <% if example.syntax1.present? -%>
       <span class="syntax"><%= h example.syntax1 %></span>
     <% end %>
-    <% if example.synonym1 -%>
+    <% if example.synonym1.present? -%>
       <span class="synonym">syn: <%= h example.synonym1 %></span>
     <% end %>
+    &nbsp;
   </div>
 
   <div class="example-form span-6">
@@ -32,13 +32,13 @@
   </div>
 
   <div class="span-5 last">
-    ex
-    <% if example.syntax2 -%>
+    <% if example.syntax2.present? -%>
       <span class="syntax"><%= h example.syntax2 %></span>
     <% end %>
-    <% if example.synonym2 -%>
+    <% if example.synonym2.present? -%>
       <span class="synonym">syn: <%= h example.synonym2 %></span>
     <% end %>
+    &nbsp;
   </div>
 
 </div>

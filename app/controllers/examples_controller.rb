@@ -4,24 +4,22 @@ class ExamplesController < ApplicationController
 
 
   def new
-    @exampleable = context_object
     @example = Example.new
+    @example.exampleable = context_object
   end
 
   def edit
-    @exampleable = context_object
     @example = Example.find(params[:id])
   end
 
   def create
 
-    @exampleable = context_object
     @example = Example.new(params[:example])
-    @example.exampleable = @exampleable
+    @example.exampleable = context_object
 
     if @example.save
       flash[:notice] = 'Example was successfully created.'
-      redirect_to(@exampleable)
+      redirect_to_exampleable
     else
       render :action => "new"
     end
@@ -29,22 +27,21 @@ class ExamplesController < ApplicationController
   end
 
   def update
-    @exampleable = context_object
     @example = Example.find(params[:id])
     if @example.update_attributes(params[:example])
       flash[:notice] = 'Example was successfully updated.'
-      redirect_to(@exampleable)
+      redirect_to_exampleable
     else
       render :action => "edit"
     end
   end
 
   def destroy
-    @exampleable = context_object
     @example = Example.find(params[:id])
+    exampleable = @example.exampleable
     @example.destroy
 
-    redirect_to(@exampleable)
+    redirect_to_exampleable exampleable
   end
 
   private
@@ -54,5 +51,10 @@ class ExamplesController < ApplicationController
 
     def context_id
       params["#{params[:context_type]}_id"]
+    end
+
+    def redirect_to_exampleable(exampleable = nil)
+      exampleable ||= context_object
+      redirect_to(exampleable.is_a?(Lemma) ? exampleable : exampleable.lemma)
     end
 end

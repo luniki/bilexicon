@@ -2,11 +2,14 @@
 
   <div class="span-2">
     <% if current_user_is_admin then %>
-      <% link_to(edit_lemma_phraseologism_path(@lemma, phraseologism)) do %>
-        <%= image_submit_tag 'icons/notebook_pencil.png' %>
+      <% link_to(edit_phraseologism_path(phraseologism)) do %>
+        <%= image_submit_tag 'icons/pencil_small.png' %>
       <% end %>
-      <% link_to([@lemma, phraseologism], {:confirm => t(:confirm_question), :method => :delete}) do -%>
-        <%= image_submit_tag 'icons/notebook_minus.png' %>
+      <% link_to(phraseologism, {:confirm => t(:confirm_question), :method => :delete}) do %>
+        <%= image_submit_tag 'icons/minus_small.png' %>
+      <% end %>
+      <% link_to(new_phraseologism_example_path(phraseologism)) do %>
+        <%= image_submit_tag 'icons/sticky_note__plus.png' %>
       <% end %>
     <% else %>
       &nbsp;
@@ -16,7 +19,7 @@
 
   <div class="span-5">
     phr:
-    <% if phraseologism.synonym1 -%>
+    <% if phraseologism.synonym1.present? -%>
       <span class="synonym">syn: <%= h phraseologism.synonym1 %></span>
     <% end %>
   </div>
@@ -31,7 +34,7 @@
 
   <div class="span-5 last">
     phr:
-    <% if phraseologism.synonym2 -%>
+    <% if phraseologism.synonym2.present? -%>
       <span class="synonym">syn: <%= h phraseologism.synonym2 %></span>
     <% end %>
   </div>
