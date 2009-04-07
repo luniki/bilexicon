@@ -1,45 +1,50 @@
 <div id="phraseologism_<%= phraseologism.id %>" class="phraseologism span-24 last">
 
-  <div class="span-2">
-    <% if current_user_is_admin then %>
-      <% link_to(edit_phraseologism_path(phraseologism)) do %>
-        <%= image_submit_tag 'icons/pencil_small.png' %>
+  <div class="subentry span-24 last">
+
+    <div class="span-2">
+      <a class="multi-button" href="#"><span></span></a>
+      <% if current_user_is_admin then %>
+        <% link_to(edit_phraseologism_path(phraseologism)) do %>
+          <%= image_submit_tag 'icons/pencil_small.png' %>
+        <% end %>
+        <% link_to(phraseologism, {:confirm => t(:confirm_question), :method => :delete}) do %>
+          <%= image_submit_tag 'icons/minus_small.png' %>
+        <% end %>
+        <% link_to(new_phraseologism_example_path(phraseologism)) do %>
+          <%= image_submit_tag 'icons/sticky_note__plus.png' %>
+        <% end %>
+      <% else %>
+        &nbsp;
       <% end %>
-      <% link_to(phraseologism, {:confirm => t(:confirm_question), :method => :delete}) do %>
-        <%= image_submit_tag 'icons/minus_small.png' %>
+    </div>
+
+
+    <div class="span-5">
+      phr:
+      <% if phraseologism.synonym1.present? -%>
+        <span class="synonym">syn: <%= h phraseologism.synonym1 %></span>
       <% end %>
-      <% link_to(new_phraseologism_example_path(phraseologism)) do %>
-        <%= image_submit_tag 'icons/sticky_note__plus.png' %>
+      <% if phraseologism.meaning_list.present? -%>
+        <span class="meanings">mg: <%= h phraseologism.meaning_list %></span>
       <% end %>
-    <% else %>
-      &nbsp;
-    <% end %>
-  </div>
+    </div>
 
+    <div class="span-6">
+      <%= h phraseologism.form1 %>
+    </div>
 
-  <div class="span-5">
-    phr:
-    <% if phraseologism.synonym1.present? -%>
-      <span class="synonym">syn: <%= h phraseologism.synonym1 %></span>
-    <% end %>
-    <% if phraseologism.meaning_list.present? -%>
-      <span class="meanings">mg: <%= h phraseologism.meaning_list %></span>
-    <% end %>
-  </div>
+    <div class="span-6">
+      <%= h phraseologism.form2 %>
+    </div>
 
-  <div class="span-6">
-    <%= h phraseologism.form1 %>
-  </div>
+    <div class="span-5 last">
+      phr:
+      <% if phraseologism.synonym2.present? -%>
+        <span class="synonym">syn: <%= h phraseologism.synonym2 %></span>
+      <% end %>
+    </div>
 
-  <div class="span-6">
-    <%= h phraseologism.form2 %>
-  </div>
-
-  <div class="span-5 last">
-    phr:
-    <% if phraseologism.synonym2.present? -%>
-      <span class="synonym">syn: <%= h phraseologism.synonym2 %></span>
-    <% end %>
   </div>
 
   <%= render :partial => "example", :collection => phraseologism.examples, :locals => { :exampleable => phraseologism } %>

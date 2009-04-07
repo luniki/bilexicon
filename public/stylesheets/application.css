@@ -183,10 +183,6 @@ ul.ancestors li:before {
 }
 
 
-th.subentries {
-  background: #E2F0D6;
-}
-
 .entry-line {
   background: #BDD684;
   font-weight: bolder;
@@ -212,3 +208,97 @@ th.subentries {
 th[scope="row"] {
   text-align: right;
 }
+
+
+a.multi-button {
+  background: transparent url(../images/small_multi.png) no-repeat scroll right top;
+  display: inline-block;
+  padding: 0;
+  height: 15px;
+  position: relative;
+  left: -9999px;
+}
+
+a.multi-button:hover {
+  background-position: right bottom;
+}
+
+a.multi-button span {
+  background: transparent none repeat scroll 0 0;
+  display: inline-block;
+  width: 26px;
+  height:15px;
+}
+
+div.subentry:hover {
+  background-color: #FFF;
+/*  background-color: #95AB63;*/
+/*  background-color: #E2F0D6;*/
+}
+
+div.subentry:hover a.multi-button {
+  left: 0;
+}
+
+a.active-multi-button {
+  left: 0;
+  background-position: right bottom !important;
+}
+
+
+
+
+
+
+#multiButtonMenu {
+    position: absolute;
+    margin: 0 0 0 7px;
+    z-index: 50;
+}
+
+#multiButtonMenu li {
+    display: none;
+}
+
+#multiButtonMenu div.mEdit li.mEdit,
+#multiButtonMenu div.mDelete li.mDelete,
+#multiButtonMenu div.mAddExample li.mAddExample {
+    display: block;
+}
+
+.lfmDropDownBody {
+    position: absolute;
+    margin: 0;
+    background: #fff;
+    border: 1px solid #ccc;
+}
+ul.lfmDropDownBody {
+    border-bottom: 0;
+    font-size: 10px;
+}
+
+ul.lfmDropDownBody li {
+    width: auto;
+    border-bottom: 1px solid #ccc;
+    white-space: nowrap;
+}
+ul.lfmDropDownBody li a {
+    display: block;
+    padding: 1px 4px;
+    background: #f2f2f2;
+    color: #6f6f6f;
+    font-weight: normal;
+    font-size: 10px;
+    line-height: 1.6;
+    text-decoration: none;
+}
+ul.lfmDropDownBody li a:hover {
+    background: #6f6f6f;
+    color: #f2f2f2;
+}
+ul.lfmDropDownBody li small {
+    margin-left: 4px;
+    font-size: 9px;
+    font-weight: bold;
+}
+

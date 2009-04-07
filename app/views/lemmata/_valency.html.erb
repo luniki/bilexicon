@@ -1,47 +1,52 @@
 <div id="valency_<%= valency.id %>" class="valency span-24 last">
 
-  <div class="span-2">
-    <% if current_user_is_admin then %>
-      <% link_to(edit_valency_path(valency)) do %>
-        <%= image_submit_tag 'icons/pencil_small.png' %>
+  <div class="subentry span-24 last">
+
+    <div class="span-2">
+      <a class="multi-button cmd-edit cmd-delete cmd-add-example" href="#"><span></span></a>
+      <% if current_user_is_admin then %>
+        <% link_to(edit_valency_path(valency)) do %>
+          <%= image_submit_tag 'icons/pencil_small.png' %>
+        <% end %>
+        <% link_to(valency, {:confirm => t(:confirm_question), :method => :delete}) do -%>
+          <%= image_submit_tag 'icons/minus_small.png' %>
+        <% end %>
+        <% link_to(new_valency_example_path(valency)) do -%>
+          <%= image_submit_tag 'icons/sticky_note__plus.png' %>
+        <% end %>
+      <% else %>
+        &nbsp;
       <% end %>
-      <% link_to(valency, {:confirm => t(:confirm_question), :method => :delete}) do -%>
-        <%= image_submit_tag 'icons/minus_small.png' %>
+    </div>
+
+
+    <div class="span-5">
+      vp:
+      <span class="syntax"><%= h valency.syntax1 %></span>
+      <% if valency.synonym1.present? -%>
+        <span class="synonym">syn: <%= h valency.synonym1 %></span>
       <% end %>
-      <% link_to(new_valency_example_path(valency)) do -%>
-        <%= image_submit_tag 'icons/sticky_note__plus.png' %>
+      <% if valency.meaning_list.present? -%>
+        <span class="meanings">mg: <%= h valency.meaning_list %></span>
       <% end %>
-    <% else %>
-      &nbsp;
-    <% end %>
-  </div>
+    </div>
 
+    <div class="span-6">
+      <%= h valency.form1 %>
+    </div>
 
-  <div class="span-5">
-    vp:
-    <span class="syntax"><%= h valency.syntax1 %></span>
-    <% if valency.synonym1.present? -%>
-      <span class="synonym">syn: <%= h valency.synonym1 %></span>
-    <% end %>
-    <% if valency.meaning_list.present? -%>
-      <span class="meanings">mg: <%= h valency.meaning_list %></span>
-    <% end %>
-  </div>
+    <div class="span-6">
+      <%= h valency.form2 %>
+    </div>
 
-  <div class="span-6">
-    <%= h valency.form1 %>
-  </div>
+    <div class="span-5 last">
+      vp:
+      <span class="syntax"><%= h valency.syntax2 %></span>
+      <% if valency.synonym2.present? -%>
+        <span class="synonym">syn: <%= h valency.synonym2 %></span>
+      <% end %>
+    </div>
 
-  <div class="span-6">
-    <%= h valency.form2 %>
-  </div>
-
-  <div class="span-5 last">
-    vp:
-    <span class="syntax"><%= h valency.syntax2 %></span>
-    <% if valency.synonym2.present? -%>
-      <span class="synonym">syn: <%= h valency.synonym2 %></span>
-    <% end %>
   </div>
 
   <%= render :partial => "example", :collection => valency.examples, :locals => { :exampleable => valency } %>

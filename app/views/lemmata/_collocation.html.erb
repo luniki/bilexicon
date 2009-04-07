@@ -1,52 +1,57 @@
 <div id="collocation_<%= collocation.id %>" class="collocation span-24 last">
 
-  <div class="span-2">
-    <% if current_user_is_admin then %>
-      <% link_to(edit_collocation_path(collocation)) do %>
-        <%= image_submit_tag 'icons/pencil_small.png' %>
+  <div class="subentry span-24 last">
+
+    <div class="span-2">
+      <a class="multi-button" href="#"><span></span></a>
+      <% if current_user_is_admin then %>
+        <% link_to(edit_collocation_path(collocation)) do %>
+          <%= image_submit_tag 'icons/pencil_small.png' %>
+        <% end %>
+        <% link_to(collocation, {:confirm => t(:confirm_question), :method => :delete}) do -%>
+          <%= image_submit_tag 'icons/minus_small.png' %>
+        <% end %>
+        <% link_to(new_collocation_example_path(collocation)) do -%>
+          <%= image_submit_tag 'icons/sticky_note__plus.png' %>
+        <% end %>
+      <% else %>
+        &nbsp;
       <% end %>
-      <% link_to(collocation, {:confirm => t(:confirm_question), :method => :delete}) do -%>
-        <%= image_submit_tag 'icons/minus_small.png' %>
+    </div>
+
+
+    <div class="span-5">
+      C:
+      <% if collocation.syntax1.present? -%>
+        <span class="syntax"><%= h collocation.syntax1 %></span>
       <% end %>
-      <% link_to(new_collocation_example_path(collocation)) do -%>
-        <%= image_submit_tag 'icons/sticky_note__plus.png' %>
+      <% if collocation.synonym1.present? -%>
+        <span class="synonym">syn: <%= h collocation.synonym1 %></span>
       <% end %>
-    <% else %>
-      &nbsp;
-    <% end %>
-  </div>
+      <% if collocation.meaning_list.present? -%>
+        <span class="meanings">mg: <%= h collocation.meaning_list %></span>
+      <% end %>
+    </div>
 
 
-  <div class="span-5">
-    C:
-    <% if collocation.syntax1.present? -%>
-      <span class="syntax"><%= h collocation.syntax1 %></span>
-    <% end %>
-    <% if collocation.synonym1.present? -%>
-      <span class="synonym">syn: <%= h collocation.synonym1 %></span>
-    <% end %>
-    <% if collocation.meaning_list.present? -%>
-      <span class="meanings">mg: <%= h collocation.meaning_list %></span>
-    <% end %>
-  </div>
+    <div class="span-6">
+      <%= h collocation.form1 %>
+    </div>
 
+    <div class="span-6">
+      <%= h collocation.form2 %>
+    </div>
 
-  <div class="span-6">
-    <%= h collocation.form1 %>
-  </div>
+    <div class="span-5 last">
+      C:
+      <% if collocation.syntax2.present? -%>
+        <span class="syntax"><%= h collocation.syntax2 %></span>
+      <% end %>
+      <% if collocation.synonym2.present? -%>
+        <span class="synonym">syn: <%= h collocation.synonym2 %></span>
+      <% end %>
+    </div>
 
-  <div class="span-6">
-    <%= h collocation.form2 %>
-  </div>
-
-  <div class="span-5 last">
-    C:
-    <% if collocation.syntax2.present? -%>
-      <span class="syntax"><%= h collocation.syntax2 %></span>
-    <% end %>
-    <% if collocation.synonym2.present? -%>
-      <span class="synonym">syn: <%= h collocation.synonym2 %></span>
-    <% end %>
   </div>
 
   <%= render :partial => "example", :collection => collocation.examples, :locals => { :exampleable => collocation } %>

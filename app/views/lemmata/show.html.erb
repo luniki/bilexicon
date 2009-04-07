@@ -1,6 +1,6 @@
 <div id="lemma_<%= @lemma.id %>" class="span-24 last">
 
-  <div class="prepend-2 span-22 last;">
+  <div class="prepend-2 span-22 last">
     <h1>
       <span class="quiet"><%= t(:lemma) %></span>
       <%= h @lemma.short1 %> · <%= h @lemma.short2 %>
@@ -55,77 +55,86 @@
     </div>
   </div>
 
-  <hr class="space"/>
 
-  <div class="span-2">
-    <% if current_user_is_admin then %>
-      <% link_to(new_lemma_example_path(@lemma)) do %>
-        <%= image_tag 'icons/sticky_note__plus.png' %>
+  <div class="subentries span-24 last">
+
+    <hr class="space"/>
+
+    <div class="span-2">
+      <% if current_user_is_admin then %>
+        <% link_to(new_lemma_example_path(@lemma)) do %>
+          <%= image_tag 'icons/sticky_note__plus.png' %>
+        <% end %>
+      <% else %>
+        &nbsp;
       <% end %>
-    <% else %>
-      &nbsp;
-    <% end %>
-  </div>
+    </div>
 
-  <div class="subentry-line span-22 last">
-    <%= t(:examples) %>
-  </div>
+    <div class="subentry-line span-22 last">
+      <%= t(:examples) %>
+    </div>
 
-  <%= render :partial => "example", :collection => @examples, :locals => { :exampleable => @lemma } %>
+    <%= render :partial => "example", :collection => @examples, :locals => { :exampleable => @lemma } %>
 
-  <hr class="space"/>
 
-  <div class="span-2">
-    <% if current_user_is_admin then %>
-      <% link_to(new_lemma_valency_path(@lemma)) do %>
-        <%= image_tag 'icons/plus_small.png' %>
+    <hr class="space"/>
+
+
+    <div class="span-2">
+      <% if current_user_is_admin then %>
+        <% link_to(new_lemma_valency_path(@lemma)) do %>
+          <%= image_tag 'icons/plus_small.png' %>
+        <% end %>
+      <% else %>
+        &nbsp;
       <% end %>
-    <% else %>
-      &nbsp;
-    <% end %>
-  </div>
+    </div>
 
-  <div class="subentry-line span-22 last">
-    <%= t(:valencies) %>
-  </div>
+    <div class="subentry-line span-22 last">
+      <%= t(:valencies) %>
+    </div>
 
-  <%= render :partial => "valency", :collection => @valencies %>
+    <%= render :partial => "valency", :collection => @valencies %>
 
-  <hr class="space"/>
+    <hr class="space"/>
 
-  <div class="span-2">
-    <% if current_user_is_admin then %>
-      <% link_to(new_lemma_collocation_path(@lemma)) do %>
-        <%= image_tag 'icons/plus_small.png' %>
+    <div class="span-2">
+      <% if current_user_is_admin then %>
+        <% link_to(new_lemma_collocation_path(@lemma)) do %>
+          <%= image_tag 'icons/plus_small.png' %>
+        <% end %>
+      <% else %>
+        &nbsp;
       <% end %>
-    <% else %>
-      &nbsp;
-    <% end %>
-  </div>
+    </div>
 
-  <div class="subentry-line span-22 last">
-    <%= t(:collocations) %>
-  </div>
+    <div class="subentry-line span-22 last">
+      <%= t(:collocations) %>
+    </div>
 
-  <%= render :partial => "collocation", :collection => @collocations %>
+    <%= render :partial => "collocation", :collection => @collocations %>
 
-  <hr class="space"/>
+    <hr class="space"/>
 
-  <div class="span-2">
-    <% if current_user_is_admin then %>
-      <% link_to(new_lemma_phraseologism_path(@lemma)) do %>
-        <%= image_tag 'icons/plus_small.png' %>
+    <div class="span-2">
+      <% if current_user_is_admin then %>
+        <% link_to(new_lemma_phraseologism_path(@lemma)) do %>
+          <%= image_tag 'icons/plus_small.png' %>
+        <% end %>
+      <% else %>
+        &nbsp;
       <% end %>
-    <% else %>
-      &nbsp;
-    <% end %>
-  </div>
+    </div>
 
-  <div class="subentry-line span-22 last">
-    <%= t(:phraseologisms) %>
-  </div>
+    <div class="subentry-line span-22 last">
+      <%= t(:phraseologisms) %>
+    </div>
 
-  <%= render :partial => "phraseologism", :collection => @phraseologisms %>
+    <%= render :partial => "phraseologism", :collection => @phraseologisms %>
+
+  </div>
 
 </div>
+
+<%= render :partial => "multi_button" %>
 
