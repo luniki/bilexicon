@@ -58,21 +58,18 @@ BILEXICON.SearchPopup = function(event) {
  * ------------------------------------------------------------------------ */
 BILEXICON.MultiButton = function() {
 
-  var cmds = {
-  };
 
   return {
 
     setup: function() {
       this.activeButton = false;
-      this.menu = $("multiButtonMenu");
+      this.menu = $("multi-button-menu");
       this.menu.observe("click", this.observeMenu.bindAsEventListener(this));
       document.observe("click", this.observeDocument.bindAsEventListener(this));
       this.clickOffObserver = this.clickOff.bindAsEventListener(this);
     },
 
     observeDocument: function(event) {
-
       var multibutton = event.findElement(".multi-button");
       if (!multibutton) {
           return false;
@@ -96,12 +93,22 @@ BILEXICON.MultiButton = function() {
     },
 
     observeMenu: function(event) {
+
+      var cmds = {
+        "edit" : function() {
+          console.log(this);
+        },
+        "delete": 2,
+        "add-example": 3,
+      };
+
       event.stop();
       var class_name = event.findElement("li").className;
       if (Prototype.Browser.IE) {
         class_name = class_name.replace(/\b\w*hover_/gi, "").strip();
       }
-      console.log(class_name);
+      var c = class_name.match(/^cmd-([a-z-]+)$/)[1];
+      cmds[c]();
       this.clickOff();
     },
 

@@ -250,39 +250,39 @@ a.active-multi-button {
 
 
 
-#multiButtonMenu {
+#multi-button-menu {
     position: absolute;
     margin: 0 0 0 7px;
     z-index: 50;
 }
 
-#multiButtonMenu li {
+#multi-button-menu li {
     display: none;
 }
 
-#multiButtonMenu div.mEdit li.mEdit,
-#multiButtonMenu div.mDelete li.mDelete,
-#multiButtonMenu div.mAddExample li.mAddExample {
+#multi-button-menu div.cmd-edit li.cmd-edit,
+#multi-button-menu div.cmd-delete li.cmd-delete,
+#multi-button-menu div.cmd-add-example li.cmd-add-example {
     display: block;
 }
 
-.lfmDropDownBody {
+.multi-button-drop-down {
     position: absolute;
     margin: 0;
     background: #fff;
     border: 1px solid #ccc;
 }
-ul.lfmDropDownBody {
+ul.multi-button-drop-down {
     border-bottom: 0;
     font-size: 10px;
 }
 
-ul.lfmDropDownBody li {
+ul.multi-button-drop-down li {
     width: auto;
     border-bottom: 1px solid #ccc;
     white-space: nowrap;
 }
-ul.lfmDropDownBody li a {
+ul.multi-button-drop-down li a {
     display: block;
     padding: 1px 4px;
     background: #f2f2f2;
@@ -292,11 +292,11 @@ ul.lfmDropDownBody li a {
     line-height: 1.6;
     text-decoration: none;
 }
-ul.lfmDropDownBody li a:hover {
+ul.multi-button-drop-down li a:hover {
     background: #6f6f6f;
     color: #f2f2f2;
 }
-ul.lfmDropDownBody li small {
+ul.multi-button-drop-down li small {
     margin-left: 4px;
     font-size: 9px;
     font-weight: bold;

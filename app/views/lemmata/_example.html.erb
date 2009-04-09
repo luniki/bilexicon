@@ -3,7 +3,7 @@
   <div class="subentry span-24 last">
 
     <div class="span-2">
-      <a class="multi-button mEdit mDelete mAddExample" href="#"><span></span></a>
+      <a class="multi-button cmd-edit cmd-delete" href="#"><span></span></a>
       <% if current_user_is_admin then %>
         <% link_to(edit_example_path(example)) do %>
           <%= image_submit_tag 'icons/sticky_note__pencil.png' %>

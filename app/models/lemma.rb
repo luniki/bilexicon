@@ -2,10 +2,10 @@ class Lemma < ActiveRecord::Base
   has_and_belongs_to_many :categories
   has_many :examples, :as => :exampleable, :dependent => :destroy
 
+
+  has_many :subentries, :dependent => :destroy
   has_many :valencies, :dependent => :destroy
-
   has_many :collocations, :dependent => :destroy
-
   has_many :phraseologisms, :dependent => :destroy
 
   validates_presence_of :short1, :short2,
