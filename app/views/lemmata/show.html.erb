@@ -60,22 +60,7 @@
 
     <hr class="space"/>
 
-    <div class="span-2">
-      <% if current_user_is_admin then %>
-        <% link_to(new_lemma_example_path(@lemma)) do %>
-          <%= image_tag 'icons/sticky_note__plus.png' %>
-        <% end %>
-      <% else %>
-        &nbsp;
-      <% end %>
-    </div>
-
-    <div class="subentry-line span-22 last">
-      <%= t(:examples) %>
-    </div>
-
-    <%= render :partial => "example", :collection => @examples, :locals => { :exampleable => @lemma } %>
-
+    <%= render :partial => "examples" %>
 
     <hr class="space"/>
 

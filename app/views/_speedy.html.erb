@@ -1,7 +1,4 @@
 <% form_tag(lemmata_path, :method => :get) do %>
   <%= text_field_tag 'q', t(:search_hint), {:id => "search_input", :class => "input span-11"} %>
-  <script type="text/javascript" charset="utf-8">
-    $('search_input').defaultValueActsAsHint();
-  </script>
   <%= image_submit_tag 'icons/magnifier.png', :class => 'search_button' %>
 <% end %>

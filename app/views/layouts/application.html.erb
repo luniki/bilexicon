@@ -13,7 +13,6 @@
   <![endif]-->
   <%= stylesheet_link_tag "application", :media => "screen, projection" %>
 
-  <%= javascript_include_tag :defaults %>
 </head>
 
 <body>
@@ -77,5 +76,8 @@
   </div>
 
 </div>
+
+<%= javascript_include_tag :defaults %>
+<%= javascript_tag "BILEXICON.token = '#{form_authenticity_token}'" %>
 </body>
 </html>

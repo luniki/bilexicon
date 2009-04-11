@@ -8,6 +8,14 @@ class ExamplesController < ApplicationController
     @example.exampleable = context_object
   end
 
+  def show
+    @example = Example.find(params[:id])
+    respond_to do |format|
+      format.html { redirect_to_exampleable @example.exampleable }
+      format.json { render :json => @example }
+    end
+  end
+
   def edit
     @example = Example.find(params[:id])
   end
@@ -28,12 +36,20 @@ class ExamplesController < ApplicationController
 
   def update
     @example = Example.find(params[:id])
-    if @example.update_attributes(params[:example])
-      flash[:notice] = 'Example was successfully updated.'
-      redirect_to_exampleable
-    else
-      render :action => "edit"
+
+    respond_to do |format|
+      if @example.update_attributes(params[:example])
+        format.html {
+                      flash[:notice] = 'Example was successfully updated.'
+                      redirect_to_exampleable
+                    }
+        format.js   { render :partial => "lemmata/example" }
+      else
+        format.html { render :action => "edit" }
+        format.js   { render :nothing, :status => :unprocessable_entity }
+      end
     end
+
   end
 
   def destroy

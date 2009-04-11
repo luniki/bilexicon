@@ -1,16 +1,10 @@
-<div id="example_<%= example.id %>" class="example span-24 last">
+<div id="<%= example_path(example) %>" class="example span-24 last">
 
   <div class="subentry span-24 last">
 
     <div class="span-2">
-      <a class="multi-button cmd-edit cmd-delete" href="#"><span></span></a>
       <% if current_user_is_admin then %>
-        <% link_to(edit_example_path(example)) do %>
-          <%= image_submit_tag 'icons/sticky_note__pencil.png' %>
-        <% end %>
-        <% link_to(example, {:confirm => t(:confirm_question), :method => :delete}) do -%>
-          <%= image_submit_tag 'icons/sticky_note__minus.png' %>
-        <% end %>
+        <a class="multi-button cmd-edit cmd-delete" href="#"><span></span></a>
       <% else %>
         &nbsp;
       <% end %>
