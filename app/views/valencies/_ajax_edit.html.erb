@@ -1,6 +1,6 @@
-<div id="examples-edit-template">
+<div id="valencies-edit-template">
 <!--
-<div id="/examples/#{example.id}/edit" class="subentry-edit push-2 span-22 last"
+<div id="/valencies/#{valency.id}/edit" class="subentry-edit push-2 span-22 last"
      style="display: none;">
 
   <hr class="space"/>
@@ -11,10 +11,10 @@
       <strong><%= t(:form) %></strong>
     </div>
     <div class="span-7">
-      <%= text_field_tag "example[form1]", '#{example.form1}', :class => "span-7" %>
+      <%= text_field_tag "valency[form1]", '#{valency.form1}', :class => "span-7" %>
     </div>
     <div class="span-7">
-      <%= text_field_tag "example[form2]", '#{example.form2}', :class => "span-7" %>
+      <%= text_field_tag "valency[form2]", '#{valency.form2}', :class => "span-7" %>
     </div>
     <div class="quiet span-4 last">
     </div>
@@ -23,10 +23,10 @@
       <strong><%= t(:syntax) %></strong>
     </div>
     <div class="span-7">
-      <%= text_field_tag "example[syntax1]", '#{example.syntax1}', :class => "span-7" %>
+      <%= text_field_tag "valency[syntax1]", '#{valency.syntax1}', :class => "span-7" %>
     </div>
     <div class="span-7">
-      <%= text_field_tag "example[syntax2]", '#{example.syntax2}', :class => "span-7" %>
+      <%= text_field_tag "valency[syntax2]", '#{valency.syntax2}', :class => "span-7" %>
     </div>
     <div class="quiet span-4 last">
     </div>
@@ -36,14 +36,24 @@
       <strong><%= t(:synonym) %></strong>
     </div>
     <div class="span-7">
-      <%= text_field_tag "example[synonym1]", '#{example.synonym1}', :class => "span-7" %>
+      <%= text_field_tag "valency[synonym1]", '#{valency.synonym1}', :class => "span-7" %>
     </div>
     <div class="span-7">
-      <%= text_field_tag "example[synonym2]", '#{example.synonym2}', :class => "span-7" %>
+      <%= text_field_tag "valency[synonym2]", '#{valency.synonym2}', :class => "span-7" %>
     </div>
     <div class="quiet span-4 last">
     </div>
 
+
+    <div class="span-4 append-bottom clear" style="text-align: right">
+      <strong><%= t(:meanings) %></strong>
+    </div>
+    <div class="span-14">
+      <%= text_field_tag "valency[meaning_list]", '#{valency.meaning_list}', :class => "span-14" %>
+    </div>
+    <div class="quiet span-4 last">
+      <%= t :comma_separated %>
+    </div>
 
     <div class="push-4 span-18 clear last">
       <button class="submit">

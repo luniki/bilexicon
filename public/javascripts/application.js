@@ -96,7 +96,7 @@ BILEXICON.MultiButton = function () {
 
   // initializes the edit templates
   function init_edit_templates() {
-    $w("examples").each(function (type) {
+    $w("examples valencies").each(function (type) {
       var comment =
         $A($(type + "-edit-template").childNodes).find(function (c) {
           return c.nodeType === Node.COMMENT_NODE;

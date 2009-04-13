@@ -8,6 +8,14 @@ class ValenciesController < ApplicationController
     @valency.lemma = @lemma
   end
 
+  def show
+    @valency = Valency.find(params[:id])
+    respond_to do |format|
+      format.html { redirect_to @valency.lemma }
+      format.json { render :json => @valency.to_json(:methods => :meaning_list) }
+    end
+  end
+
   def edit
     @valency = Valency.find(params[:id])
   end
@@ -26,12 +34,20 @@ class ValenciesController < ApplicationController
 
   def update
     @valency = Valency.find(params[:id])
-    if @valency.update_attributes(params[:valency])
-      flash[:notice] = 'Valency was successfully updated.'
-      redirect_to(@valency.lemma)
-    else
-      render :action => "edit"
+
+    respond_to do |format|
+      if @valency.update_attributes(params[:valency])
+        format.html {
+                      flash[:notice] = 'Valency was successfully updated.'
+                      redirect_to @valency.lemma
+                    }
+        format.js   { render :partial => "lemmata/valency" }
+      else
+        format.html { render :action => "edit" }
+        format.js   { render :nothing, :status => :unprocessable_entity }
+      end
     end
+
   end
 
   def destroy

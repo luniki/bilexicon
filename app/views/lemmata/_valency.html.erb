@@ -1,21 +1,18 @@
-<div id="valency_<%= valency.id %>" class="valency span-24 last">
+<div id="<%= valency_path(valency) %>" class="valency span-24 last">
 
   <div class="subentry span-24 last">
 
     <div class="span-2">
-      <a class="multi-button cmd-edit cmd-delete cmd-add-example" href="#"><span></span></a>
       <% if current_user_is_admin then %>
-        <% link_to(edit_valency_path(valency)) do %>
-          <%= image_submit_tag 'icons/pencil_small.png' %>
-        <% end %>
-        <% link_to(valency, {:confirm => t(:confirm_question), :method => :delete}) do -%>
-          <%= image_submit_tag 'icons/minus_small.png' %>
-        <% end %>
+        <a class="multi-button cmd-edit cmd-delete cmd-add-example" href="#"><span></span></a>
+      <% else %>
+        &nbsp;
+      <% end %>
+
+      <% if current_user_is_admin then %>
         <% link_to(new_valency_example_path(valency)) do -%>
           <%= image_submit_tag 'icons/sticky_note__plus.png' %>
         <% end %>
-      <% else %>
-        &nbsp;
       <% end %>
     </div>
 

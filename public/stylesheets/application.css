@@ -210,6 +210,11 @@ th[scope="row"] {
 }
 
 
+/**************************************/
+/*               MULTI BUTTON         */
+/**************************************/
+
+
 a.multi-button {
   background: transparent url(../images/small_multi.png) no-repeat scroll right top;
   display: inline-block;
@@ -244,9 +249,6 @@ a.active-multi-button {
   left: 0;
   background-position: right bottom !important;
 }
-
-
-
 
 
 
@@ -300,5 +302,15 @@ ul.multi-button-drop-down li small {
     margin-left: 4px;
     font-size: 9px;
     font-weight: bold;
+}
+
+/**************************************/
+/*                                    */
+/**************************************/
+
+
+.subentry-edit {
+  background: white;
+  border: 1px solid #95AB63;
 }
 
