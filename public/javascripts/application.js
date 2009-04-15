@@ -189,7 +189,8 @@ BILEXICON.MultiButton = function () {
     },
 
     "add-example":  function (button) {
-      var location = this.activeButton.up("*[id]").id;
+      var location = button.up("*[id]").id;
+      document.location = location + "/examples/new"
     }
   };
 
