@@ -1,19 +1,10 @@
-<div id="collocation_<%= collocation.id %>" class="collocation span-24 last">
+<div id="<%= collocation_path(collocation) %>" class="collocation span-24 last">
 
   <div class="subentry span-24 last">
 
     <div class="span-2">
-      <a class="multi-button" href="#"><span></span></a>
       <% if current_user_is_admin then %>
-        <% link_to(edit_collocation_path(collocation)) do %>
-          <%= image_submit_tag 'icons/pencil_small.png' %>
-        <% end %>
-        <% link_to(collocation, {:confirm => t(:confirm_question), :method => :delete}) do -%>
-          <%= image_submit_tag 'icons/minus_small.png' %>
-        <% end %>
-        <% link_to(new_collocation_example_path(collocation)) do -%>
-          <%= image_submit_tag 'icons/sticky_note__plus.png' %>
-        <% end %>
+        <a class="multi-button cmd-edit cmd-delete cmd-add-example" href="#"><span></span></a>
       <% else %>
         &nbsp;
       <% end %>
@@ -54,6 +45,6 @@
 
   </div>
 
-  <%= render :partial => "example", :collection => collocation.examples, :locals => { :exampleable => collocation } %>
+  <%= render :partial => "lemmata/example", :collection => collocation.examples, :locals => { :exampleable => collocation } %>
 
 </div>

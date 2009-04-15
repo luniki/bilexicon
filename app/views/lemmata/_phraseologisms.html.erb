@@ -1,0 +1,18 @@
+<div class="span-2">
+  <% if current_user_is_admin then %>
+    <% link_to(new_lemma_phraseologism_path(@lemma)) do %>
+      <%= image_tag 'icons/plus_small.png' %>
+    <% end %>
+  <% else %>
+    &nbsp;
+  <% end %>
+</div>
+
+<div class="subentry-line span-22 last">
+  <%= t(:phraseologisms) %>
+</div>
+
+<%= render :partial => "phraseologism", :collection => @phraseologisms %>
+
+<%= render :partial => "phraseologisms/ajax_edit"  if current_user_is_admin %>
+

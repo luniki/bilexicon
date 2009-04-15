@@ -8,6 +8,14 @@ class CollocationsController < ApplicationController
     @collocation.lemma = @lemma
   end
 
+  def show
+    @collocation = Collocation.find(params[:id])
+    respond_to do |format|
+      format.html { redirect_to @collocation.lemma }
+      format.json { render :json => @collocation.to_json(:methods => :meaning_list) }
+    end
+  end
+
   def edit
     @collocation = Collocation.find(params[:id])
   end
@@ -26,11 +34,18 @@ class CollocationsController < ApplicationController
 
   def update
     @collocation = Collocation.find(params[:id])
-    if @collocation.update_attributes(params[:collocation])
-      flash[:notice] = 'Collocation was successfully updated.'
-      redirect_to(@collocation.lemma)
-    else
-      render :action => "edit"
+
+    respond_to do |format|
+      if @collocation.update_attributes(params[:collocation])
+        format.html {
+                      flash[:notice] = 'Collocation was successfully updated.'
+                      redirect_to @collocation.lemma
+                    }
+        format.js   { render :partial => "lemmata/collocation" }
+      else
+        format.html { render :action => "edit" }
+        format.js   { render :nothing, :status => :unprocessable_entity }
+      end
     end
   end
 

@@ -8,12 +8,6 @@
       <% else %>
         &nbsp;
       <% end %>
-
-      <% if current_user_is_admin then %>
-        <% link_to(new_valency_example_path(valency)) do -%>
-          <%= image_submit_tag 'icons/sticky_note__plus.png' %>
-        <% end %>
-      <% end %>
     </div>
 
 
@@ -46,7 +40,7 @@
 
   </div>
 
-  <%= render :partial => "example", :collection => valency.examples, :locals => { :exampleable => valency } %>
+  <%= render :partial => "lemmata/example", :collection => valency.examples, :locals => { :exampleable => valency } %>
 
 </div>
 

@@ -8,6 +8,14 @@ class PhraseologismsController < ApplicationController
     @phraseologism.lemma = @lemma
   end
 
+  def show
+    @phraseologism = Phraseologism.find(params[:id])
+    respond_to do |format|
+      format.html { redirect_to @phraseologism.lemma }
+      format.json { render :json => @phraseologism.to_json(:methods => :meaning_list) }
+    end
+  end
+
   def edit
     @phraseologism = Phraseologism.find(params[:id])
   end
@@ -26,11 +34,18 @@ class PhraseologismsController < ApplicationController
 
   def update
     @phraseologism = Phraseologism.find(params[:id])
-    if @phraseologism.update_attributes(params[:phraseologism])
-      flash[:notice] = 'Phraseologism was successfully updated.'
-      redirect_to(@phraseologism.lemma)
-    else
-      render :action => "edit"
+
+    respond_to do |format|
+      if @phraseologism.update_attributes(params[:phraseologism])
+        format.html {
+                      flash[:notice] = 'Phraseologism was successfully updated.'
+                      redirect_to @phraseologism.lemma
+                    }
+        format.js   { render :partial => "lemmata/phraseologism" }
+      else
+        format.html { render :action => "edit" }
+        format.js   { render :nothing, :status => :unprocessable_entity }
+      end
     end
   end
 
