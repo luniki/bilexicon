@@ -1,23 +1,25 @@
-<div id="lemma_<%= @lemma.id %>" class="span-24 last">
+<div id="lemma_<%= @lemma.id %>" class="lemma span-24 last">
 
   <div class="prepend-2 span-22 last">
+
     <h1>
       <span class="quiet"><%= t(:lemma) %></span>
       <%= h @lemma.short1 %> · <%= h @lemma.short2 %>
     </h1>
 
-    <% @categories.each do |category| -%>
-      <h2 class="quiet">
-        <%= t(:category) %>
-        <ul class="ancestors">
-          <% category.self_and_ancestors.each do |node| -%>
-            <li>
-              <%= link_to h(node.name), node %>
-            </li>
-          <% end %>
-        </ul>
-      </h2>
-    <% end %>
+    <div class="categories">
+      <% @categories.each do |category| -%>
+          <ul class="ancestors">
+            <% category.self_and_ancestors.each do |node| -%>
+              <li>
+                <%= link_to h(node.name), node %>
+              </li>
+            <% end %>
+          </ul>
+        </h2>
+      <% end %>
+    </div>
+
   </div>
 
   <div class="span-2">

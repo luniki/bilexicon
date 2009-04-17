@@ -14,7 +14,7 @@
 /*              GLOBALS               */
 /**************************************/
 body {
-  background: #F6FFE0 url(../images/background.png) repeat-x scroll left top;
+  background: white url(../images/background.png) repeat-x scroll left top;
   color: #10222B;
 }
 
@@ -24,7 +24,7 @@ a:hover {
 }
 
 a {
-  color:#95AB63;
+  color:#5A87F1;
 }
 
 th {
@@ -32,7 +32,6 @@ th {
 }
 
 .container {
-  margin: 0;
 }
 
 .hint {
@@ -113,7 +112,7 @@ hr, hr.space {
 
 #speedy {
   margin-top: 24px;
-  background-color: #95AB63;
+  background-color: #61cde4;
   color: #F6FFE0;
   padding: 1.5em;
 }
@@ -146,20 +145,37 @@ hr, hr.space {
   font-weight: bold;
 }
 
-ul.ancestors {
+
+
+/**************************************/
+/*            LEMMA HEADLINE          */
+/**************************************/
+
+.lemma h1 span.quiet {
+  color: #888;
+}
+
+.lemma div.categories {
+  margin-bottom: 3em;
+}
+
+.lemma ul.ancestors {
   display: inline;
   list-style-type: none;
   margin-left: 0;
   padding-left: 0;
+  margin-right: 3em;
+  background-color: #eef;
 }
 
-ul.ancestors li {
+.lemma ul.ancestors li {
   display: inline;
 }
 
-ul.ancestors li:before {
+.lemma ul.ancestors li:before {
   content: " » ";
 }
+
 
 /**************************************/
 /*            MAIN CONTENT            */
@@ -184,12 +200,11 @@ ul.ancestors li:before {
 
 
 .entry-line {
-  background: #BDD684;
   font-weight: bolder;
 }
 
 .subentry-line {
-  background: #E2F0D6;
+  background: #66D8F1;
   font-weight: bolder;
 }
 
