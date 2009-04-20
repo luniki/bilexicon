@@ -1,6 +1,6 @@
 <div id="lemma_<%= @lemma.id %>" class="lemma span-24 last">
 
-  <div class="prepend-2 span-22 last">
+  <div class="span-24 last">
 
     <h1>
       <span class="quiet"><%= t(:lemma) %></span>
@@ -22,21 +22,7 @@
 
   </div>
 
-  <div class="span-2">
-    <% if current_user_is_admin then -%>
-      <% link_to(edit_lemma_path(@lemma)) do %>
-        <%= image_submit_tag 'icons/pencil_small.png' %>
-      <% end %>
-      <% link_to(@lemma, {:confirm => t(:confirm_question), :method => :delete}) do -%>
-        <%= image_submit_tag 'icons/minus_small.png' %>
-      <% end %>
-    <% else %>
-      &nbsp;
-    <% end %>
-
-  </div>
-
-  <div class="entry-line span-22 last">
+  <div class="entry-line span-22">
     <div class="span-5">
       <span class="phonetic" title="<%= t(:lemma_phonetic) %>">{<%= h @lemma.phonetic1 %>};</span>
       <span class="word_class" title="<%= t(:lemma_word_class) %>">cl: <%= h @lemma.word_class %>;</span>
@@ -55,6 +41,20 @@
       <span class="word_class" title="<%= t(:lemma_word_class) %>">cl: <%= h @lemma.word_class %>;</span>
       <span class="level" title="<%= t(:lemma_level) %>">l: <%= h @lemma.level %></span>
     </div>
+  </div>
+
+  <div class="span-2 last">
+    <% if current_user_is_admin then -%>
+      <% link_to(edit_lemma_path(@lemma)) do %>
+        <%= image_submit_tag 'icons/pencil_small.png' %>
+      <% end %>
+      <% link_to(@lemma, {:confirm => t(:confirm_question), :method => :delete}) do -%>
+        <%= image_submit_tag 'icons/minus_small.png' %>
+      <% end %>
+    <% else %>
+      &nbsp;
+    <% end %>
+
   </div>
 
 

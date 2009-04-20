@@ -2,14 +2,6 @@
 
   <div class="subentry span-24 last">
 
-    <div class="span-2">
-      <% if current_user_is_admin then %>
-        <a class="multi-button cmd-edit cmd-delete" href="#"><span></span></a>
-      <% else %>
-        &nbsp;
-      <% end %>
-    </div>
-
     <div class="span-5">
       <% if example.syntax1.present? -%>
         <span class="syntax"><%= h example.syntax1 %></span>
@@ -28,7 +20,7 @@
       <%= h example.form2 %>
     </div>
 
-    <div class="span-5 last">
+    <div class="span-5">
       <% if example.syntax2.present? -%>
         <span class="syntax"><%= h example.syntax2 %></span>
       <% end %>
@@ -36,6 +28,14 @@
         <span class="synonym">syn: <%= h example.synonym2 %></span>
       <% end %>
       &nbsp;
+    </div>
+
+    <div class="span-2 last">
+      <% if current_user_is_admin then %>
+        <a class="multi-button cmd-edit cmd-delete" href="#"><span></span></a>
+      <% else %>
+        &nbsp;
+      <% end %>
     </div>
 
   </div>

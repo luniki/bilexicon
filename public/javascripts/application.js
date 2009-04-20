@@ -190,7 +190,7 @@ BILEXICON.MultiButton = function () {
 
     "add-example":  function (button) {
       var location = button.up("*[id]").id;
-      document.location = location + "/examples/new"
+      document.location = location + "/examples/new";
     }
   };
 
