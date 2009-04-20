@@ -7,6 +7,13 @@
 |--------------------------------------|
 - black		#000
 - white		#fff
+
+#E7F8FB
+#C9EDF4
+#3CC5DE
+#40A2B7
+
+
 \**************************************/
 
 
@@ -14,33 +21,25 @@
 /*              GLOBALS               */
 /**************************************/
 body {
-  background: white url(../images/background.png) repeat-x scroll left top;
-  color: #10222B;
+  background: #FFFFFF url(../images/background.png) repeat-x scroll left top;
 }
 
 a:focus,
 a:hover {
-  color:#10222B;
+  color: #3CC5DE;
 }
 
 a {
-  color:#5A87F1;
+  color: #40A2B7;
 }
 
-th {
-  background:  #BDD684;
+thead th, th {
+  background:  #C9EDF4;
 }
 
-.container {
-}
-
+/* input field hint */
 .hint {
-  color: #BDD684;
-}
-
-hr, hr.space {
-  background: transparent;
-  color: transparent;
+  color: #C9EDF4;
 }
 
 
@@ -48,8 +47,6 @@ hr, hr.space {
 /*              HEADER                */
 /**************************************/
 #head {
-  font-family: "Futura Medium", "Century Gothic", "AppleGothic", sans-serif;
-  font-size: 12px;
   line-height: 30px;
 }
 
@@ -65,11 +62,18 @@ hr, hr.space {
 }
 
 #head ul li {
-  border-left: 1px solid #10222B;
+  border-left: 1px solid #878984;
 }
 
 #head ul li.last {
-  border-right: 1px solid #10222B;
+  border-right: 1px solid #878984;
+}
+
+#head ul li a {
+  color: #FFFFFF;
+  padding: 0 12px;
+  text-decoration: none;
+  text-transform: lowercase;
 }
 
 #head .active {
@@ -80,8 +84,8 @@ hr, hr.space {
 #head .active a {
   color: #FFFFFF;
   padding: 0 12px;
-  border-left: 1px solid #10222B;
-  border-right: 1px solid #10222B;
+  border-left: 1px solid #878984;
+  border-right: 1px solid #878984;
   text-decoration: none;
   text-transform: lowercase;
 }
@@ -99,28 +103,19 @@ hr, hr.space {
 }
 
 
-#head ul li a {
-  color: #FFFFFF;
-  padding: 0 12px;
-  text-decoration: none;
-  text-transform: lowercase;
-}
-
 /**************************************/
 /*             NAVIGATION             */
 /**************************************/
 
 #speedy {
   margin-top: 24px;
-  background-color: #61cde4;
-  color: #F6FFE0;
+  background-color: #3CC5DE;
   padding: 1.5em;
 }
 
 #speedy .input {
   border: none;
   font-size: 1.5em;
-/*  height: 36px;*/
   padding: 6px 5px 4px 5px;
 }
 
@@ -131,7 +126,6 @@ hr, hr.space {
   /* TODO */
   margin-top: -4px;
   padding: 8px;
-  background-color: #E2F0D6;
 }
 
 
@@ -155,6 +149,7 @@ hr, hr.space {
   color: #888;
 }
 
+
 .lemma div.categories {
   margin-bottom: 3em;
 }
@@ -165,7 +160,7 @@ hr, hr.space {
   margin-left: 0;
   padding-left: 0;
   margin-right: 3em;
-  background-color: #eef;
+  background-color: #E7F8FB;
 }
 
 .lemma ul.ancestors li {
@@ -182,9 +177,6 @@ hr, hr.space {
 /**************************************/
 
 #content {
-/* TODO sprengt das grid */
-/*  border: 1px solid #95AB63;*/
-/*  padding: 17px 0.5em;*/
   padding: 17px 0 0 0;
 }
 
@@ -200,20 +192,30 @@ hr, hr.space {
 
 
 .entry-line {
-  font-weight: bolder;
+  font-weight: bold;
+  font-size: 1.2em;
+  line-height: 1.25;
+  margin-bottom: 1.25em;
 }
 
+
 .subentry-line {
-  background: #66D8F1;
-  font-weight: bolder;
+  background: #E7F8FB;
+  margin-bottom: 1.5em;
+}
+
+
+.subentry-line h6 {
+  color: #40A2B7;
+  padding: 0.75em;
 }
 
 /**************************************/
 /*               FOOTER               */
 /**************************************/
 #footer {
-  padding-top: 1.5em;
-  color: #95AB63;
+  padding-top: 3em;
+  color: #C9EDF4;
   text-align: center;
 }
 
@@ -252,8 +254,6 @@ a.multi-button span {
 
 div.subentry:hover {
   background-color: #FFF;
-/*  background-color: #95AB63;*/
-/*  background-color: #E2F0D6;*/
 }
 
 div.subentry:hover a.multi-button {
@@ -296,22 +296,22 @@ ul.multi-button-drop-down {
 
 ul.multi-button-drop-down li {
     width: auto;
-    border-bottom: 1px solid #ccc;
+    border-bottom: 1px solid #40A2B7;
     white-space: nowrap;
 }
 ul.multi-button-drop-down li a {
     display: block;
     padding: 1px 4px;
-    background: #f2f2f2;
-    color: #6f6f6f;
+    background: #E7F8FB;
+    color: #40A2B7;
     font-weight: normal;
     font-size: 10px;
     line-height: 1.6;
     text-decoration: none;
 }
 ul.multi-button-drop-down li a:hover {
-    background: #6f6f6f;
-    color: #f2f2f2;
+    background: #C9EDF4;
+    color: #3CC5DE;
 }
 ul.multi-button-drop-down li small {
     margin-left: 4px;
