@@ -198,6 +198,9 @@ thead th, th {
   margin-bottom: 1.25em;
 }
 
+.subentry {
+  padding-bottom: 1.5em;
+}
 
 .subentry-line {
   background: #E7F8FB;
