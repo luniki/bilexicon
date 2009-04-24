@@ -11,8 +11,11 @@
       <% if collocation.synonym1.present? -%>
         <span class="synonym">syn: <%= h collocation.synonym1 %></span>
       <% end %>
-      <% if collocation.meaning_list.present? -%>
-        <span class="meanings">mg: <%= h collocation.meaning_list %></span>
+      <% if collocation.meanings.present? -%>
+        mg:
+        <% collocation.meanings.each do |meaning| -%>
+          <a class="meaning tag"><%= h meaning.name %></a>
+        <% end %>
       <% end %>
     </div>
 
