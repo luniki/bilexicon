@@ -186,10 +186,14 @@ thead th, th {
   color: red;
 }
 
-.example-form {
-  font-style: italic;
+.form1, .form2 {
+  font-weight: bold;
 }
 
+.example .form1, .example .form2 {
+  font-style: italic;
+  font-weight: normal;
+}
 
 .entry-line {
   font-weight: bold;
