@@ -4,7 +4,9 @@ ActionController::Routing::Routes.draw do |map|
 #  map.root :controller => "user_sessions", :action => "new"
 
   map.resource :account, :controller => "users"
-  map.resources :users
+  map.resources :users do |user|
+    user.resource :admin, :controller => "admin_status"
+  end
 
 
   map.resources :categories
