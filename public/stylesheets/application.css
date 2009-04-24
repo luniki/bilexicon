@@ -167,10 +167,6 @@ thead th, th {
   display: inline;
 }
 
-.lemma ul.ancestors li:before {
-  content: " » ";
-}
-
 
 /**************************************/
 /*            MAIN CONTENT            */

@@ -10,8 +10,9 @@
     <div class="categories">
       <% @categories.each do |category| -%>
           <ul class="ancestors">
-            <% category.self_and_ancestors.each do |node| -%>
+            <% category.self_and_ancestors.each_with_index do |node, index| -%>
               <li>
+                <%= ">"  if index > 0 %>
                 <%= link_to h(node.name), node %>
               </li>
             <% end %>
