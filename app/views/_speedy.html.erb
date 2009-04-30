@@ -1,4 +1,16 @@
-<% form_tag(lemmata_path, :method => :get) do %>
-  <%= text_field_tag 'q', t(:search_hint), {:id => "search_input", :class => "input span-11"} %>
-  <%= image_submit_tag 'icons/magnifier.png', :class => 'search_button' %>
-<% end %>
+<div class="span-13">
+  <% form_tag(lemmata_path, :method => :get) do %>
+    <%= text_field_tag 'q', t(:search_hint), {:id => "search_input", :class => "input span-11"} %>
+    <%= image_submit_tag 'icons/magnifier.png', :class => 'search_button' %>
+  <% end %>
+</div>
+<div class="span-2">
+  <strong class="large">oder</strong>
+</div>
+<div class="span-7 last">
+  <a href="<%= categories_path %>" class="button">
+    <%= image_tag 'icons/cards.png' %>
+    <%= t(:browse_categories) %>
+  </a>
+</div>
+<div class="clearfix"/>
