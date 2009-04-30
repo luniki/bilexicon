@@ -111,21 +111,26 @@ thead th, th {
   margin-top: 24px;
   background-color: #3CC5DE;
   padding: 1.5em;
+  color: white;
 }
 
 #speedy .input {
   border: none;
   font-size: 1.5em;
-  padding: 6px 5px 4px 5px;
+  padding: 5px 10px 5px 7px;
+  vertical-align: top;
 }
 
 .search_button {
-  vertical-align: middle;
-  border: none;
-  margin: 0;
-  /* TODO */
-  margin-top: -4px;
-  padding: 8px;
+  vertical-align: top;
+  margin: 0 0.583em 0.667em 0;
+  padding: 7px;
+
+  border:1px solid #dedede;
+  border-top:1px solid #eee;
+  border-left:1px solid #eee;
+
+  background-color:#f5f5f5;
 }
 
 
