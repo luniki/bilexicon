@@ -32,7 +32,22 @@
 <% if current_user_is_admin then %>
   <ul>
     <li>
-      <%= link_to t(:add_lemma), new_lemma_path() %>
+      <a href="<%= new_lemma_path %>" class="button">
+        <%= image_tag 'icons/plus.png' %>
+        <%= t(:add_lemma) %>
+      </a>
+    </li>
+    <li>
+      <a href="<%= new_category_path %>" class="button">
+        <%= image_tag 'icons/plus.png' %>
+        <%= t(:add_category) %>
+      </a>
+    </li>
+    <li>
+      <a href="<%= users_path %>" class="button">
+        <%= image_tag 'icons/user.png' %>
+        <%= t(:user_administration) %>
+      </a>
     </li>
   </ul>
 <% end %>
