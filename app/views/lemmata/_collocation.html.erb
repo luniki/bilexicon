@@ -6,10 +6,10 @@
     <div class="span-5">
       C:
       <% if collocation.syntax1.present? -%>
-        <span class="syntax"><%= h collocation.syntax1 %></span>
+        <span class="syntax"><%= h collocation.syntax1 %>;</span>
       <% end %>
       <% if collocation.synonym1.present? -%>
-        <span class="synonym">syn: <%= h collocation.synonym1 %></span>
+        <span class="synonym">syn: <%= h collocation.synonym1 %>;</span>
       <% end %>
       <% if collocation.meanings.present? -%>
         mg:
@@ -31,10 +31,10 @@
     <div class="span-5">
       C:
       <% if collocation.syntax2.present? -%>
-        <span class="syntax"><%= h collocation.syntax2 %></span>
+        <span class="syntax"><%= h collocation.syntax2 %>;</span>
       <% end %>
       <% if collocation.synonym2.present? -%>
-        <span class="synonym">syn: <%= h collocation.synonym2 %></span>
+        <span class="synonym">syn: <%= h collocation.synonym2 %>;</span>
       <% end %>
     </div>
 
