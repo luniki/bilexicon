@@ -1,17 +1,3 @@
-<div class="subentry-line span-22">
-  <h6><%= t(:valencies) %></h6>
-</div>
-
-<div class="span-2 last">
-  <% if current_user_is_admin then %>
-    <% link_to(new_lemma_valency_path(@lemma)) do %>
-      <%= image_tag 'icons/plus_small.png' %>
-    <% end %>
-  <% else %>
-    &nbsp;
-  <% end %>
-</div>
-
 <%= render :partial => "valency", :collection => @valencies %>
 
 <%= render :partial => "valencies/ajax_edit"  if current_user_is_admin %>

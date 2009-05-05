@@ -13,6 +13,11 @@ class LemmataController < ApplicationController
     @valencies = @lemma.valencies
     @collocations = @lemma.collocations
     @phraseologisms = @lemma.phraseologisms
+
+    respond_to do |format|
+      format.html
+      format.js { render :partial => "ajax_edit" }
+    end
   end
 
   def new
@@ -41,11 +46,17 @@ class LemmataController < ApplicationController
   def update
     @lemma = Lemma.find(params[:id])
 
-    if @lemma.update_attributes(params[:lemma])
-      flash[:notice] = 'Lemma was successfully updated.'
-      redirect_to(@lemma)
-    else
-      render :action => "edit"
+    respond_to do |format|
+      if @lemma.update_attributes(params[:lemma])
+        format.html {
+                      flash[:notice] = 'Lemma was successfully updated.'
+                      redirect_to @lemma
+                    }
+        format.js   { render :partial => "lemma" }
+      else
+        format.html { render :action => "edit" }
+        format.js   { render :nothing, :status => :unprocessable_entity }
+      end
     end
   end
 

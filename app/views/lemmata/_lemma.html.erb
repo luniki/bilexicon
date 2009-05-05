@@ -1,0 +1,53 @@
+<div class="entry span-24">
+
+  <h1>
+    <span class="quiet"><%= t(:lemma) %></span>
+    <%= h @lemma.short1 %> · <%= h @lemma.short2 %>
+  </h1>
+
+  <div class="categories">
+    <% @lemma.categories.each do |category| -%>
+        <ul class="ancestors">
+          <% category.self_and_ancestors.each_with_index do |node, index| -%>
+            <li>
+              <%= ">"  if index > 0 %>
+              <%= link_to h(node.name), node %>
+            </li>
+          <% end %>
+        </ul>
+      </h2>
+    <% end %>
+  </div>
+
+  <div class="entry-line span-24">
+
+    <div class="span-5">
+      <span class="phonetic" title="<%= t(:lemma_phonetic) %>">{<%= h @lemma.phonetic1 %>};</span>
+      <span class="word_class" title="<%= t(:lemma_word_class) %>">cl: <%= h @lemma.word_class %>;</span>
+      <span class="level" title="<%= t(:lemma_level) %>">l: <%= h @lemma.level %></span>
+    </div>
+
+    <div class="span-6 form1">
+      <%= h @lemma.short1 %>
+    </div>
+    <div class="span-6 form2">
+      <%= h @lemma.short2 %>
+    </div>
+
+    <div class="span-5">
+      <span class="phonetic" title="<%= t(:lemma_phonetic) %>">{<%= h @lemma.phonetic2 %>};</span>
+      <span class="word_class" title="<%= t(:lemma_word_class) %>">cl: <%= h @lemma.word_class %>;</span>
+      <span class="level" title="<%= t(:lemma_level) %>">l: <%= h @lemma.level %></span>
+    </div>
+
+    <div class="span-2 last">
+      <% if current_user_is_admin then %>
+        <a class="multi-button cmd-edit-lemma cmd-delete cmd-add-example cmd-add-valency" href="#"><span></span></a>
+      <% else %>
+        &nbsp;
+      <% end %>
+    </div>
+
+  </div>
+</div>
+

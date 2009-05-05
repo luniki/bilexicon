@@ -109,6 +109,61 @@ BILEXICON.MultiButton = function () {
 
   var cmds = {
 
+    "edit-lemma" : function (button) {
+
+      var entry = button.up(".entry");
+      var resource = entry.up("*[id]");
+      var route = resource.id.gsub(":", "/");
+
+      // show faded entry, fade edit form and remove it
+      var cancel_edit_form = function (event) {
+        var edit = event.element().up(".entry-edit");
+        Effect.SelfHealingFade(edit, {
+          afterFinish: Element.remove.curry(edit)
+        });
+        Effect.SelfHealingAppear(entry);
+        event.stop();
+      };
+
+      // submit entry and dismiss fade edit form and remove it
+      var submit_edit_form = function (event) {
+        var edit = event.element().up(".entry-edit");
+        var r = new Ajax.Request(route, {
+          method: "put",
+          parameters: edit.down("form").serialize(true),
+          onSuccess: function (transport) {
+            edit.remove();
+            resource.down(".entry").replace(transport.responseText);
+            resource.down(".entry-line").highlight();
+          },
+          onFailure: function (transport) {
+            // TODO
+          }
+        });
+        event.stop();
+      };
+
+
+      Effect.SelfHealingFade(entry);
+
+      var r = new Ajax.Request(route, {
+        method: "get",
+
+        onFailure: function (transport) {
+          // TODO
+        },
+
+        onSuccess: function (transport) {
+          entry.insert({ after:  transport.responseText });
+          var edit = entry.next();
+          edit.down(".cancel").observe("click", cancel_edit_form);
+          edit.down(".submit").observe("click", submit_edit_form);
+          Effect.SelfHealingAppear(edit);
+        }
+      });
+    },
+
+
     "edit" : function (button) {
 
       var subentry = button.up(".subentry");
@@ -189,8 +244,13 @@ BILEXICON.MultiButton = function () {
     },
 
     "add-example":  function (button) {
-      var location = button.up("*[id]").id;
+      var location = button.up("*[id]").id.gsub(":", "/");
       document.location = location + "/examples/new";
+    },
+
+    "add-valency":  function (button) {
+      var location = button.up("*[id]").id.gsub(":", "/");
+      document.location = location + "/valencies/new";
     }
   };
 

@@ -42,6 +42,10 @@ thead th, th {
   color: #C9EDF4;
 }
 
+.box {
+  background:#E7F8FB;
+}
+
 
 /**************************************/
 /*              HEADER                */
@@ -196,8 +200,7 @@ thead th, th {
   font-weight: normal;
 }
 
-.entry-line {
-  font-weight: bold;
+.entry .form1, .entry .form2 {
   font-size: 1.2em;
   line-height: 1.25;
   margin-bottom: 1.25em;
@@ -264,7 +267,7 @@ div.subentry:hover {
   background-color: #FFF;
 }
 
-div.subentry:hover a.multi-button {
+div.entry-line:hover a.multi-button, div.subentry:hover a.multi-button {
   left: 0;
 }
 
@@ -286,8 +289,10 @@ a.active-multi-button {
 }
 
 #multi-button-menu div.cmd-edit li.cmd-edit,
+#multi-button-menu div.cmd-edit-lemma li.cmd-edit-lemma,
 #multi-button-menu div.cmd-delete li.cmd-delete,
-#multi-button-menu div.cmd-add-example li.cmd-add-example {
+#multi-button-menu div.cmd-add-example li.cmd-add-example,
+#multi-button-menu div.cmd-add-valency li.cmd-add-valency {
     display: block;
 }
 
@@ -332,9 +337,9 @@ ul.multi-button-drop-down li small {
 /**************************************/
 
 
-.subentry-edit {
+.entry-edit, .subentry-edit {
   background: white;
-  border: 1px solid #95AB63;
+  border: 1px solid #E7F8FB;
 }
 
 .tag {

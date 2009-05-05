@@ -1,0 +1,82 @@
+<div id="lemma_edit" class="entry-edit span-24 last"
+     style="display: none;">
+
+  <h3 class="box">
+    <span class="quiet"><%= t(:lemma) %></span>
+    <%= h @lemma.short1 %> · <%= h @lemma.short2 %>
+  </h3>
+
+  <% form_for(@lemma) do |f| -%>
+
+    <div class="span-4 append-bottom" style="text-align: right">
+      <strong><%= t(:lemma_short) %></strong>
+    </div>
+    <div class="span-7">
+      <%= f.text_field :short1, :class => "span-7" %>
+    </div>
+    <div class="span-7">
+      <%= f.text_field :short2, :class => "span-7" %>
+    </div>
+    <div class="quiet span-4 last">
+    </div>
+
+    <div class="span-4 append-bottom clear" style="text-align: right">
+      <strong><%= t(:lemma_long) %></strong>
+    </div>
+    <div class="span-7">
+      <%= f.text_field :long1, :class => "span-7" %>
+    </div>
+    <div class="span-7">
+      <%= f.text_field :long2, :class => "span-7" %>
+    </div>
+    <div class="quiet span-4 last">
+    </div>
+
+    <div class="span-4 append-bottom clear" style="text-align: right">
+      <strong><%= t(:lemma_phonetic) %></strong>
+    </div>
+    <div class="span-7">
+      <%= f.text_field :phonetic1, :class => "span-7" %>
+    </div>
+    <div class="span-7">
+      <%= f.text_field :phonetic2, :class => "span-7" %>
+    </div>
+    <div class="quiet span-4 last">
+    </div>
+
+    <div class="span-4 append-bottom clear" style="text-align: right">
+      <strong><%= t(:lemma_word_class) %></strong>
+    </div>
+    <div class="span-14">
+      <%= f.select :word_class, Lemma::WORD_CLASSES %>
+    </div>
+    <div class="quiet span-4 last">
+    </div>
+
+    <div class="span-4 append-bottom clear" style="text-align: right">
+      <strong><%= t(:lemma_categories) %></strong>
+    </div>
+    <div class="span-14">
+      <%= select_tag "lemma_categories",
+                    options_for_select(nested_set_options(Category) {|i| "#{'-' * i.level} #{i.name}" },
+                                        @lemma.categories.collect{|i| i.id}),
+                    {:multiple => :multiple, :size => 5, :name => "lemma[category_ids][]"} %>
+    </div>
+    <div class="quiet span-4 last">
+    </div>
+
+
+    <div class="push-4 span-18 clear last">
+      <button class="submit">
+        <%= image_tag 'icons/tick.png' %>
+        <%= t(:save) %>
+      </button>
+      <button class="cancel">
+        <%= image_tag 'icons/cross.png' %>
+        <%= t(:cancel) %>
+      </button>
+    </div>
+
+
+  <% end %>
+</div>
