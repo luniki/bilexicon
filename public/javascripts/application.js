@@ -221,23 +221,29 @@ BILEXICON.MultiButton = function () {
     },
 
     "delete": function (button) {
-      var subentry = button.up(".subentry");
-      var resource = subentry.up("*[id]");
-      var type = resource.id.match(/(\w+)\/\d+$/)[1];
+      var element = button.up(".subentry, .entry") ;
+      var resource = element.up("*[id]");
+      var route = resource.id.gsub(":", "/");
 
 
       if (confirm('Sind Sie sicher?')) {
-        var r = new Ajax.Request(resource.id, {
+        var r = new Ajax.Request(route, {
           method: "delete",
           parameters: {authenticity_token: BILEXICON.token},
           onFailure: function (transport) {
-            subentry.shake();
+            // TODO
+            element.shake();
           },
           onSuccess: function (transport) {
-            Effect.SelfHealingFade(subentry, {
-              duration: 0.25,
-              afterFinish: Element.remove.curry(subentry)
-            });
+            if (element.hasClassName("subentry")) {
+              Effect.SelfHealingFade(element, {
+                duration: 0.25,
+                afterFinish: Element.remove.curry(element)
+              });
+            }
+            else {
+              document.location = "/lemmata";
+            }
           }
         });
       }
