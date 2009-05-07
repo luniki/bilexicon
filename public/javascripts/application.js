@@ -138,6 +138,7 @@ BILEXICON.MultiButton = function () {
           },
           onFailure: function (transport) {
             // TODO
+            edit.shake();
           }
         });
         event.stop();
@@ -151,6 +152,7 @@ BILEXICON.MultiButton = function () {
 
         onFailure: function (transport) {
           // TODO
+          entry.shake();
         },
 
         onSuccess: function (transport) {
@@ -193,6 +195,7 @@ BILEXICON.MultiButton = function () {
           },
           onFailure: function (transport) {
             // TODO
+            edit.shake();
           }
         });
         event.stop();
@@ -206,6 +209,7 @@ BILEXICON.MultiButton = function () {
 
         onFailure: function (transport) {
           // TODO
+          subentry.shake();
         },
 
         onSuccess: function (transport) {
@@ -221,7 +225,7 @@ BILEXICON.MultiButton = function () {
     },
 
     "delete": function (button) {
-      var element = button.up(".subentry, .entry") ;
+      var element = button.up(".subentry, .entry");
       var resource = element.up("*[id]");
       var route = resource.id.gsub(":", "/");
 
@@ -257,6 +261,58 @@ BILEXICON.MultiButton = function () {
     "add-valency":  function (button) {
       var location = button.up("*[id]").id.gsub(":", "/");
       document.location = location + "/valencies/new";
+    },
+
+    "sort": function (button) {
+      var resource = button.up(".entry-line"),
+          done = $("done");
+
+      var buttons = $$(".valency .multi-button");
+
+      var finalize = function (event) {
+        event.stop();
+
+        // remove done link and show the sort triggering multi button
+        done.hide();
+        button.show();
+
+        // show multi buttons of the subentries
+        buttons.invoke("show");
+
+        // remove drag handles
+        $$(".drag_handle").invoke("remove");
+
+        // destroy sortable and unmark accepting area
+        Sortable.destroy("valencies");
+        $("valencies").setStyle({ border: "none" });
+
+        // send new order of valencies
+      };
+
+      // show done link and hide the sort triggering multi button
+      button.hide().insert({ after: done.appear().observe("click", finalize) });
+
+      // hide multi buttons of the subentries
+      buttons.invoke("hide");
+
+      // show drag handles
+      $$(".valency > .subentry .multi-button").each(function (mb) {
+        var handle = $("drag_handle")
+                       .cloneNode(true)
+                       .writeAttribute({id: null})
+                       .addClassName("drag_handle");
+        mb.hide().insert({ after: handle.show() });
+      });
+
+      // create sortable and mark accepting area
+      Sortable.create("valencies", {
+        elements: $$("#valencies div.valency"),
+        ghosting: true,
+        tag: "div",
+        format: /^(?:.*)\/(.*)$/,
+        handle: "drag_handle"
+      });
+      $("valencies").setStyle({ border: "1px dashed #eee" });
     }
   };
 
@@ -271,9 +327,10 @@ BILEXICON.MultiButton = function () {
       this.activeButton = false;
       init_edit_templates();
 
-      this.menu.observe("click", this.observeMenu.bindAsEventListener(this));
-      document.observe("click", this.observeDocument.bindAsEventListener(this));
-      this.clickOffObserver = this.clickOff.bindAsEventListener(this);
+      this.menu.observe("click", this.observeMenu.bind(this));
+      document.observe("click", this.observeDocument.bind(this));
+
+      this.clickOffObserver = this.clickOff.bind(this);
     },
 
     observeDocument: function (event) {

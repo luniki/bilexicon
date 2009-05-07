@@ -1,4 +1,6 @@
-<%= render :partial => "example", :collection => @examples, :locals => { :exampleable => @lemma } %>
+<div id="examples_lemma">
+  <%= render :partial => "example", :collection => @examples, :locals => { :exampleable => @lemma } %>
+</div>
 
 <%= render :partial => "examples/ajax_edit" if current_user_is_admin %>
 

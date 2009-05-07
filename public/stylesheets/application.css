@@ -221,6 +221,18 @@ thead th, th {
   padding: 0.75em;
 }
 
+
+.dropmarker {
+  border-bottom: 1px dashed black;
+  height: 1px;
+  width: 100%;
+}
+
+#valencies {
+  float: left;
+  padding: 1.5em 0;
+}
+
 /**************************************/
 /*               FOOTER               */
 /**************************************/
@@ -290,10 +302,11 @@ a.active-multi-button {
     display: none;
 }
 
-#multi-button-menu div.cmd-edit li.cmd-edit,
-#multi-button-menu div.cmd-edit-lemma li.cmd-edit-lemma,
-#multi-button-menu div.cmd-delete li.cmd-delete,
+#multi-button-menu div.cmd-edit        li.cmd-edit,
+#multi-button-menu div.cmd-edit-lemma  li.cmd-edit-lemma,
+#multi-button-menu div.cmd-delete      li.cmd-delete,
 #multi-button-menu div.cmd-add-example li.cmd-add-example,
+#multi-button-menu div.cmd-sort        li.cmd-sort,
 #multi-button-menu div.cmd-add-valency li.cmd-add-valency {
     display: block;
 }
@@ -332,6 +345,13 @@ ul.multi-button-drop-down li small {
     margin-left: 4px;
     font-size: 9px;
     font-weight: bold;
+}
+
+#done {
+/*  background-color: #C9EDF4;*/
+/*  clear: both;*/
+/*  padding: 0.75em 0;*/
+/*  text-align:right;*/
 }
 
 /**************************************/
