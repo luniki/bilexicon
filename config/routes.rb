@@ -13,25 +13,29 @@ ActionController::Routing::Routes.draw do |map|
 
   map.resources :lemmata do |lemma|
 
-    lemma.resources :examples, :requirements => { :context_type => 'lemma' }
+    lemma.resources :examples, :requirements => { :context_type => 'lemma' },
+                               :collection => { :sort => :post }
 
-    lemma.resources :valencies
-    lemma.resources :collocations
-    lemma.resources :phraseologisms
+    lemma.resources :valencies, :collection => { :sort => :post }
+    lemma.resources :collocations, :collection => { :sort => :post }
+    lemma.resources :phraseologisms, :collection => { :sort => :post }
   end
 
   map.resources :examples
 
   map.resources :valencies do |valency|
-    valency.resources :examples, :requirements => { :context_type => 'valency' }
+    valency.resources :examples, :requirements => { :context_type => 'valency' },
+                                 :collection => { :sort => :post }
   end
 
   map.resources :collocations do |collocation|
-    collocation.resources :examples, :requirements => { :context_type => 'collocation' }
+    collocation.resources :examples, :requirements => { :context_type => 'collocation' },
+                                     :collection => { :sort => :post }
   end
 
   map.resources :phraseologisms do |phraseologism|
-    phraseologism.resources :examples, :requirements => { :context_type => 'phraseologism' }
+    phraseologism.resources :examples, :requirements => { :context_type => 'phraseologism' },
+                                       :collection => { :sort => :post }
   end
 
 
