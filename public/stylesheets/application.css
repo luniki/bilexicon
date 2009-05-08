@@ -221,6 +221,9 @@ thead th, th {
   padding: 0.75em;
 }
 
+.drag-handle {
+  cursor: move;
+}
 
 .dropmarker {
   border-bottom: 1px dashed black;

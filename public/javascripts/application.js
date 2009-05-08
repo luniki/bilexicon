@@ -280,7 +280,7 @@ BILEXICON.MultiButton = function () {
         buttons.invoke("show");
 
         // remove drag handles
-        $$(".drag_handle").invoke("remove");
+        $$(".drag-handle").invoke("remove");
 
         // send new order of valencies
         var request = new Ajax.Request('/lemmata/1/valencies/sort', {
@@ -306,10 +306,10 @@ BILEXICON.MultiButton = function () {
 
       // show drag handles
       $$(".valency > .subentry .multi-button").each(function (mb) {
-        var handle = $("drag_handle")
+        var handle = $("drag-handle")
                        .cloneNode(true)
                        .writeAttribute({id: null})
-                       .addClassName("drag_handle");
+                       .addClassName("drag-handle");
         mb.hide().insert({ after: handle.show() });
       });
 
