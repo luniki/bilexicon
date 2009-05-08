@@ -282,11 +282,20 @@ BILEXICON.MultiButton = function () {
         // remove drag handles
         $$(".drag_handle").invoke("remove");
 
+        // send new order of valencies
+        var request = new Ajax.Request('/lemmata/1/valencies/sort', {
+          parameters: Sortable.serialize("valencies") +
+                      '&authenticity_token=' + BILEXICON.token,
+          onFailure: function () {
+            // TODO
+            $("valencies").shake();
+          }
+        });
+
         // destroy sortable and unmark accepting area
         Sortable.destroy("valencies");
         $("valencies").setStyle({ border: "none" });
 
-        // send new order of valencies
       };
 
       // show done link and hide the sort triggering multi button
