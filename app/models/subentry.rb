@@ -3,6 +3,7 @@ class Subentry < ActiveRecord::Base
   has_many :examples, :as => :exampleable, :dependent => :destroy
 
   acts_as_taggable_on :meanings
+  acts_as_list :scope => :lemma
 
   validates_presence_of :form1, :form2
 end
