@@ -60,6 +60,14 @@ class ExamplesController < ApplicationController
     redirect_to_exampleable exampleable
   end
 
+  def sort
+    params[:examples].each_with_index do |id, index|
+      Example.update_all(['position=?', index + 1],
+                         ['id=? AND exampleable_id=?', id, context_id])
+    end
+    render :nothing => true
+  end
+
   private
     def context_object(*finder_options)
       params[:context_type].classify.constantize.find(context_id, *finder_options)

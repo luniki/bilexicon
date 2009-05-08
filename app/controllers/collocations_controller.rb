@@ -1,6 +1,6 @@
 class CollocationsController < ApplicationController
 
-  before_filter :populate_lemma, :only => ["new", "create"]
+  before_filter :populate_lemma, :only => ["new", "create", "sort"]
   before_filter :require_admin
 
   def new
@@ -55,5 +55,13 @@ class CollocationsController < ApplicationController
     @collocation.destroy
 
     redirect_to(lemma)
+  end
+
+  def sort
+    params[:collocations].each_with_index do |id, index|
+      Collocation.update_all(['position=?', index + 1],
+                             ['id=? AND lemma_id=?', id, @lemma.id])
+    end
+    render :nothing => true
   end
 end
