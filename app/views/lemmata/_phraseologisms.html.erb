@@ -12,7 +12,9 @@
   <% end %>
 </div>
 
-<%= render :partial => "phraseologism", :collection => @phraseologisms %>
+<div id="phraseologisms">
+  <%= render :partial => "phraseologism", :collection => @phraseologisms %>
+</div>
 
 <%= render :partial => "phraseologisms/ajax_edit"  if current_user_is_admin %>
 

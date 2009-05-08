@@ -228,7 +228,7 @@ thead th, th {
   width: 100%;
 }
 
-#valencies {
+#collocations, #phraseologisms, #valencies {
   float: left;
   padding: 1.5em 0;
 }

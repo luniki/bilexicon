@@ -12,7 +12,9 @@
   <% end %>
 </div>
 
-<%= render :partial => "collocation", :collection => @collocations %>
+<div id="collocations">
+  <%= render :partial => "collocation", :collection => @collocations %>
+</div>
 
 <%= render :partial => "collocations/ajax_edit"  if current_user_is_admin %>
 
