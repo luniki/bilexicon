@@ -1,12 +1,16 @@
 class Lemma < ActiveRecord::Base
+
   has_and_belongs_to_many :categories
-  has_many :examples, :as => :exampleable, :dependent => :destroy
+
+  has_many :examples, :as => :exampleable,
+                      :dependent => :destroy,
+                      :order => "position"
 
 
-  has_many :subentries, :dependent => :destroy
-  has_many :valencies, :dependent => :destroy
-  has_many :collocations, :dependent => :destroy
-  has_many :phraseologisms, :dependent => :destroy
+  has_many :subentries,     :dependent => :destroy, :order => "position"
+  has_many :valencies,      :dependent => :destroy, :order => "position"
+  has_many :collocations,   :dependent => :destroy, :order => "position"
+  has_many :phraseologisms, :dependent => :destroy, :order => "position"
 
   validates_presence_of :short1, :short2,
                         :word_class, :level_rezeptiv, :level_produktiv
