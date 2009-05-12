@@ -120,8 +120,10 @@ de:
       models:
 
   add_category: "Themengebiet hinzufügen"
+  add_collocation: "Kollokation hinzufügen"
   add_example: "Beispiel hinzufügen"
   add_lemma: "Lemma hinzufügen"
+  add_phraseologism: "Phrasem hinzufügen"
   add_valency: "Valenz hinzufügen"
   back: "zurück"
   browse_categories: "durchblättern"

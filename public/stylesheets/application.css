@@ -284,8 +284,14 @@ div.entry-line:hover, div.subentry:hover {
   background-repeat: repeat-y;
 }
 
-div.entry-line:hover a.multi-button, div.subentry:hover a.multi-button {
+div.entry-line:hover a.multi-button,
+div.subentry-line:hover a.multi-button,
+div.subentry:hover a.multi-button {
   left: 0;
+}
+
+div.subentry-line a.multi-button {
+  margin: 0.75em 0;
 }
 
 a.active-multi-button {
@@ -305,12 +311,14 @@ a.active-multi-button {
     display: none;
 }
 
-#multi-button-menu div.cmd-edit        li.cmd-edit,
-#multi-button-menu div.cmd-edit-lemma  li.cmd-edit-lemma,
-#multi-button-menu div.cmd-delete      li.cmd-delete,
-#multi-button-menu div.cmd-add-example li.cmd-add-example,
-#multi-button-menu div.cmd-sort        li.cmd-sort,
-#multi-button-menu div.cmd-add-valency li.cmd-add-valency {
+#multi-button-menu div.cmd-edit              li.cmd-edit,
+#multi-button-menu div.cmd-edit-lemma        li.cmd-edit-lemma,
+#multi-button-menu div.cmd-delete            li.cmd-delete,
+#multi-button-menu div.cmd-add-example       li.cmd-add-example,
+#multi-button-menu div.cmd-sort              li.cmd-sort,
+#multi-button-menu div.cmd-add-collocation   li.cmd-add-collocation,
+#multi-button-menu div.cmd-add-phraseologism li.cmd-add-phraseologism,
+#multi-button-menu div.cmd-add-valency       li.cmd-add-valency {
     display: block;
 }
 

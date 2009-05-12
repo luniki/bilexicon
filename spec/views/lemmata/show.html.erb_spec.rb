@@ -4,13 +4,14 @@ describe "/lemmata/show.html.erb" do
   include LemmataHelper
 
   before(:each) do
+    assigns[:categories] = @categories = []
     assigns[:lemma] = @lemma = stub_model(Lemma,
       :short1 => "wheel",    :short2 => "Rad",
       :phonetic1 => "ˈhwēl", :phonetic2 => "'það",
-      :word_class => "V",    :level => "B1 R/P"
+      :word_class => "V",    :level => "B1 R/P",
+      :categories => @categories
       )
     category = stub_model(Category, :name => "a name", :self_and_ancestors => [])
-    assigns[:categories] = @categories = []
     assigns[:examples] = @examples = [stub_model(Example, :form1 => 'a', :form2 => 'b')]
     assigns[:valencies] = @valencies = [stub_model(Valency, :form1 => 'a', :form2 => 'b', :synonym1 => "a", :synonym2 => "b")]
     assigns[:collocations] = @collocations = [stub_model(Collocation, :form1 => 'a', :form2 => 'b', :synonym1 => "a", :synonym2 => "b", :syntax1 => "a", :syntax2 => "b")]
