@@ -8,7 +8,7 @@
         <span class="synonym">syn: <%= h phraseologism.synonym1 %>;</span>
       <% end %>
       <% if phraseologism.meaning_list.present? -%>
-        <span class="meanings">mg: <%= h phraseologism.meaning_list %>;</span>
+        <%= render :partial => "meanings", :object => phraseologism.meanings %>
       <% end %>
     </div>
 
