@@ -1,7 +1,6 @@
-<div id="<%= collocation_path(collocation) %>" class="collocation span-24 last">
+<li id="<%= collocation_path(collocation) %>" class="collocation span-24 last">
 
   <div class="subentry span-24 last">
-
 
     <div class="span-5">
       C:
@@ -49,6 +48,9 @@
 
   </div>
 
-  <%= render :partial => "lemmata/example", :collection => collocation.examples, :locals => { :exampleable => collocation } %>
-
-</div>
+  <ol class="examples">
+    <%= render :partial => "lemmata/example",
+               :collection => collocation.examples,
+               :locals => { :exampleable => collocation } %>
+  </ol
+</li>

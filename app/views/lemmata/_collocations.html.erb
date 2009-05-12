@@ -15,9 +15,9 @@
 </div>
 
 
-<div id="collocations">
+<ol id="collocations">
   <%= render :partial => "collocation", :collection => @collocations %>
-</div>
+</ol>
 
 <%= render :partial => "collocations/ajax_edit"  if current_user_is_admin %>
 

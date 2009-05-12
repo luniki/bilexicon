@@ -1,4 +1,4 @@
-<div id="<%= phraseologism_path(phraseologism) %>" class="phraseologism span-24 last">
+<li id="<%= phraseologism_path(phraseologism) %>" class="phraseologism span-24 last">
 
   <div class="subentry span-24 last">
 
@@ -37,7 +37,11 @@
 
   </div>
 
-  <%= render :partial => "lemmata/example", :collection => phraseologism.examples, :locals => { :exampleable => phraseologism } %>
+  <ol class="examples">
+    <%= render :partial => "lemmata/example",
+               :collection => phraseologism.examples,
+               :locals => { :exampleable => phraseologism } %>
+  </ol>
 
-</div>
+</li>
 

@@ -1,6 +1,6 @@
-<div id="valencies">
+<ol id="valencies">
   <%= render :partial => "valency", :collection => @valencies %>
-</div>
+</ol>
 
 <%= render :partial => "valencies/ajax_edit"  if current_user_is_admin %>
 

@@ -1,7 +1,6 @@
-<div id="<%= valency_path(valency) %>" class="valency span-24 last">
+<li id="<%= valency_path(valency) %>" class="valency span-24 last">
 
   <div class="subentry span-24 last">
-
 
     <div class="span-5">
       vp:
@@ -40,7 +39,11 @@
 
   </div>
 
-  <%= render :partial => "lemmata/example", :collection => valency.examples, :locals => { :exampleable => valency } %>
+  <ol class="examples">
+    <%= render :partial => "lemmata/example",
+               :collection => valency.examples,
+               :locals => { :exampleable => valency } %>
+  </ol>
 
-</div>
+</li>
 
