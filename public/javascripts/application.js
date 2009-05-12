@@ -274,8 +274,11 @@ BILEXICON.MultiButton = function () {
     },
 
     "sort": function (button) {
+
       var resource = button.up(".entry-line"),
-          done = $("done");
+          done = $("done").cloneNode(true)
+                          .writeAttribute({id: null})
+                          .addClassName("done");
 
       var buttons = $$(".valency .multi-button");
 
@@ -283,7 +286,7 @@ BILEXICON.MultiButton = function () {
         event.stop();
 
         // remove done link and show the sort triggering multi button
-        done.hide();
+        done.remove();
         button.show();
 
         // show multi buttons of the subentries
@@ -305,11 +308,10 @@ BILEXICON.MultiButton = function () {
         // destroy sortable and unmark accepting area
         Sortable.destroy("valencies");
         $("valencies").setStyle({ border: "none" });
-
       };
 
       // show done link and hide the sort triggering multi button
-      button.hide().insert({ after: done.appear().observe("click", finalize) });
+      $("valencies").insert({ before: done.appear().observe("click", finalize) });
 
       // hide multi buttons of the subentries
       buttons.invoke("hide");
@@ -325,11 +327,11 @@ BILEXICON.MultiButton = function () {
 
       // create sortable and mark accepting area
       Sortable.create("valencies", {
-        elements: $$("#valencies div.valency"),
+        elements: $$("#valencies li.valency"),
         ghosting: true,
-        tag: "div",
+        tag: "li",
         format: /^(?:.*)\/(.*)$/,
-        handle: "drag_handle"
+        handle: "drag-handle"
       });
       $("valencies").setStyle({ border: "1px dashed #eee" });
     }
