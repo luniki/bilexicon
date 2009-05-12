@@ -9,7 +9,7 @@
         <span class="synonym">syn: <%= h valency.synonym1 %>;</span>
       <% end %>
       <% if valency.meaning_list.present? -%>
-        <%= render :partial => "meanings", :object => valency.meanings %>
+        <%= render :partial => "lemmata/meanings", :object => valency.meanings %>
       <% end %>
     </div>
 

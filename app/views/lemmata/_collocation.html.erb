@@ -11,7 +11,7 @@
         <span class="synonym">syn: <%= h collocation.synonym1 %>;</span>
       <% end %>
       <% if collocation.meanings.present? -%>
-        <%= render :partial => "meanings", :object => collocation.meanings %>
+        <%= render :partial => "lemmata/meanings", :object => collocation.meanings %>
       <% end %>
     </div>
 
