@@ -22,15 +22,15 @@ describe "/lemmata/show.html.erb" do
 
     it "should render both short forms" do
       render "/lemmata/show.html.erb"
-      response.should have_tag("div#?", "lemma_#{@lemma.id}") do
-        with_tag("div.short", @lemma.short1)
-        with_tag("div.short", @lemma.short2)
+      response.should have_tag("div#?", ":lemmata:#{@lemma.id}") do
+        with_tag("div.form1", @lemma.short1)
+        with_tag("div.form2", @lemma.short2)
       end
     end
 
     it "should render phonetics and word_class" do
       render "/lemmata/show.html.erb"
-      response.should have_tag("div#?", "lemma_#{@lemma.id}") do
+      response.should have_tag("div#?", ":lemmata:#{@lemma.id}") do
         with_tag("span.phonetic", /#{@lemma.phonetic1}/)
         with_tag("span.phonetic", /#{@lemma.phonetic2}/)
         with_tag("span.word_class", /#{@lemma.word_class}/)
@@ -40,7 +40,7 @@ describe "/lemmata/show.html.erb" do
 
     it "should render the level" do
       render "/lemmata/show.html.erb"
-      response.should have_tag("div#?", "lemma_#{@lemma.id}") do
+      response.should have_tag("div#?", ":lemmata:#{@lemma.id}") do
         with_tag("span.level", /#{@lemma.level}/)
       end
     end
@@ -112,20 +112,17 @@ describe "/lemmata/show.html.erb" do
 
     it "should have an edit link" do
       render "/lemmata/show.html.erb"
-      response.should have_tag("a[href=?]",
-                               edit_lemma_path(@lemma))
+      response.should have_tag("div.entry-line a.cmd-edit-lemma")
     end
 
     it "should have a delete link" do
       render "/lemmata/show.html.erb"
-      response.should have_tag("a[href=?][onclick]",
-                               lemma_path(@lemma))
+      response.should have_tag("div.entry-line a.cmd-delete")
     end
 
     it "should have a link to add another example" do
       render "/lemmata/show.html.erb"
-      response.should have_tag("a[href=?]",
-                               new_lemma_example_path(@lemma))
+      response.should have_tag("div.entry-line a.cmd-add-example")
     end
   end
 end
