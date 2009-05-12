@@ -242,7 +242,7 @@ BILEXICON.MultiButton = function () {
             if (element.hasClassName("subentry")) {
               Effect.SelfHealingFade(element, {
                 duration: 0.25,
-                afterFinish: Element.remove.curry(element)
+                afterFinish: Element.remove.curry(resource)
               });
             }
             else {
