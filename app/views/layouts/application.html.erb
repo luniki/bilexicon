@@ -80,6 +80,6 @@
 </div>
 
 <%= javascript_include_tag :defaults %>
-<%= javascript_tag "BILEXICON.token = encodeURIComponent('#{form_authenticity_token}')" %>
+<%= javascript_tag "BILEXICON.token = '#{form_authenticity_token}'" %>
 </body>
 </html>
