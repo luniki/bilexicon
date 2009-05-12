@@ -258,6 +258,16 @@ BILEXICON.MultiButton = function () {
       document.location = location + "/examples/new";
     },
 
+    "add-collocation":  function (button) {
+      var location = button.up("*[id]").id.gsub(":", "/");
+      document.location = location + "/collocations/new";
+    },
+
+    "add-phraseologism":  function (button) {
+      var location = button.up("*[id]").id.gsub(":", "/");
+      document.location = location + "/phraseologisms/new";
+    },
+
     "add-valency":  function (button) {
       var location = button.up("*[id]").id.gsub(":", "/");
       document.location = location + "/valencies/new";
