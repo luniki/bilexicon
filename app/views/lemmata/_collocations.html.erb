@@ -14,7 +14,8 @@
 </div>
 
 
-<ol id="collocations">
+<ol id="<%= path_to_id(lemma_collocations_path(@lemma)) %>"
+    class="collocations">
   <%= render :partial => "collocation", :collection => @collocations %>
 </ol>
 

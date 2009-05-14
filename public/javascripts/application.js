@@ -87,6 +87,7 @@ BILEXICON.SearchPopup = function (event) {
   popup();
 };
 
+
 /* ------------------------------------------------------------------------
  * multi button
  * ------------------------------------------------------------------------ */
@@ -106,6 +107,10 @@ BILEXICON.MultiButton = function () {
       }
     });
   }
+
+  var id_to_path = function (id) {
+    return "/" + id.gsub("-", "/");
+  };
 
   var cmds = {
 
@@ -275,12 +280,13 @@ BILEXICON.MultiButton = function () {
 
     "sort": function (button) {
 
-      var resource = button.up(".entry-line"),
+      var collection = button.up("ol"),
+          url = id_to_path(collection.id) + "/sort",
+          children = collection.childElements(),
+          buttons = collection.select(".multi-button"),
           done = $("done").cloneNode(true)
                           .writeAttribute({id: null})
                           .addClassName("done");
-
-      var buttons = $$(".valency .multi-button");
 
       var finalize = function (event) {
         event.stop();
@@ -296,44 +302,45 @@ BILEXICON.MultiButton = function () {
         $$(".drag-handle").invoke("remove");
 
         // send new order of valencies
-        var request = new Ajax.Request('/lemmata/1/valencies/sort', {
-          parameters: Sortable.serialize("valencies") +
+        var request = new Ajax.Request(url, {
+          parameters: Sortable.serialize(collection.id, {"name": "sequence"}) +
                       '&authenticity_token=' + BILEXICON.token,
           onFailure: function () {
             // TODO
-            $("valencies").shake();
+            collection.shake();
           }
         });
 
         // destroy sortable and unmark accepting area
-        Sortable.destroy("valencies");
-        $("valencies").setStyle({ border: "none" });
+        Sortable.destroy(collection.id);
+        collection.setStyle({ border: "none" });
       };
 
       // show done link and hide the sort triggering multi button
-      $("valencies").insert({ before: done.appear().observe("click", finalize) });
+      collection.insert({ before: done.appear().observe("click", finalize) });
 
       // hide multi buttons of the subentries
       buttons.invoke("hide");
 
       // show drag handles
-      $$(".valency > .subentry .multi-button").each(function (mb) {
-        var handle = $("drag-handle")
-                       .cloneNode(true)
-                       .writeAttribute({id: null})
-                       .addClassName("drag-handle");
-        mb.hide().insert({ after: handle.show() });
+      children.invoke("down", ".multi-button").each(function (mb) {
+        mb.hide().insert({
+          after: $("drag-handle").cloneNode(true)
+                                 .writeAttribute({id: null})
+                                 .addClassName("drag-handle")
+                                 .show()
+        });
       });
 
       // create sortable and mark accepting area
-      Sortable.create("valencies", {
-        elements: $$("#valencies li.valency"),
+      Sortable.create(collection.id, {
+        elements: children,
         ghosting: true,
         tag: "li",
         format: /^(?:.*)\/(.*)$/,
         handle: "drag-handle"
       });
-      $("valencies").setStyle({ border: "1px dashed #eee" });
+      collection.setStyle({ border: "1px dashed #eee" });
     }
   };
 

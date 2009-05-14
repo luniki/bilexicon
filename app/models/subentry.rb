@@ -1,6 +1,8 @@
 class Subentry < ActiveRecord::Base
   belongs_to :lemma
-  has_many :examples, :as => :exampleable, :dependent => :destroy
+  has_many :examples, :as => :exampleable,
+                      :dependent => :destroy,
+                      :order => "position"
 
   acts_as_taggable_on :meanings
   acts_as_list :scope => :lemma

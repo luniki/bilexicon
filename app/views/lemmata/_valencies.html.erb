@@ -1,4 +1,5 @@
-<ol id="valencies">
+<ol id="<%= path_to_id(lemma_valencies_path(@lemma)) %>"
+    class="valencies column">
   <%= render :partial => "valency", :collection => @valencies %>
 </ol>
 

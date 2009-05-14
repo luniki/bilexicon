@@ -236,14 +236,14 @@ thead th, th {
   padding: 1.5em 0;
 }
 
-ol#collocations, ol#phraseologisms, ol#valencies, ol.examples {
+ol.collocations, ol.phraseologisms, ol.valencies, ol.examples {
   list-style-type: none;
   margin: 0;
 }
 
-ol#collocations li,
-ol#phraseologisms li,
-ol#valencies li,
+ol.collocations li,
+ol.phraseologisms li,
+ol.valencies li,
 ol.examples li {
   padding: 0;
 }

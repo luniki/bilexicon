@@ -37,7 +37,7 @@
 
   </div>
 
-  <ol class="examples">
+  <ol id="<%= path_to_id(phraseologism_examples_path(phraseologism)) %>" class="examples">
     <%= render :partial => "lemmata/example",
                :collection => phraseologism.examples,
                :locals => { :exampleable => phraseologism } %>

@@ -13,7 +13,8 @@
   </div>
 </div>
 
-<ol id="phraseologisms">
+<ol id="<%= path_to_id(lemma_phraseologisms_path(@lemma)) %>"
+    class="phraseologisms">
   <%= render :partial => "phraseologism", :collection => @phraseologisms %>
 </ol>
 

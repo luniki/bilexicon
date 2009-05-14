@@ -58,7 +58,7 @@ class CollocationsController < ApplicationController
   end
 
   def sort
-    params[:collocations].each_with_index do |id, index|
+    params[:sequence].each_with_index do |id, index|
       Collocation.update_all(['position=?', index + 1],
                              ['id=? AND lemma_id=?', id, @lemma.id])
     end

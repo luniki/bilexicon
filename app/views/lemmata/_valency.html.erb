@@ -39,7 +39,8 @@
 
   </div>
 
-  <ol class="examples">
+  <ol id="<%= path_to_id(valency_examples_path(valency)) %>"
+      class="examples column">
     <%= render :partial => "lemmata/example",
                :collection => valency.examples,
                :locals => { :exampleable => valency } %>

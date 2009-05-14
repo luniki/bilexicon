@@ -45,7 +45,7 @@
 
   </div>
 
-  <ol class="examples">
+  <ol id="<%= path_to_id(collocation_examples_path(collocation)) %>" class="examples">
     <%= render :partial => "lemmata/example",
                :collection => collocation.examples,
                :locals => { :exampleable => collocation } %>

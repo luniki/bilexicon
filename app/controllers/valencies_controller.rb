@@ -47,7 +47,6 @@ class ValenciesController < ApplicationController
         format.js   { render :nothing, :status => :unprocessable_entity }
       end
     end
-
   end
 
   def destroy
@@ -59,7 +58,7 @@ class ValenciesController < ApplicationController
   end
 
   def sort
-    params[:valencies].each_with_index do |id, index|
+    params[:sequence].each_with_index do |id, index|
       Valency.update_all(['position=?', index + 1],
                          ['id=? AND lemma_id=?', id, @lemma.id])
     end
