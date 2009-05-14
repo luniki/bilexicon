@@ -49,7 +49,7 @@ describe "/lemmata/show.html.erb" do
     describe "and its examples" do
       it "should render as a list" do
         render "/lemmata/show.html.erb"
-        response.should have_tag("div.example")
+        response.should have_tag("li.example")
       end
     end
 
@@ -57,12 +57,12 @@ describe "/lemmata/show.html.erb" do
     describe "and its valencies" do
       it "should render as a list" do
         render "/lemmata/show.html.erb"
-        response.should have_tag("div.valency")
+        response.should have_tag("li.valency")
       end
 
       it "should show the synonyms" do
         render "/lemmata/show.html.erb"
-        response.should have_tag("div.valency span.synonym")
+        response.should have_tag("li.valency span.synonym")
       end
     end
 
@@ -70,17 +70,17 @@ describe "/lemmata/show.html.erb" do
     describe "and its collocations" do
       it "should render as a list" do
         render "/lemmata/show.html.erb"
-        response.should have_tag("div.collocation")
+        response.should have_tag("li.collocation")
       end
 
       it "should show the syntax" do
         render "/lemmata/show.html.erb"
-        response.should have_tag("div.collocation span.syntax")
+        response.should have_tag("li.collocation span.syntax")
       end
 
       it "should show the synonyms" do
         render "/lemmata/show.html.erb"
-        response.should have_tag("div.collocation span.synonym")
+        response.should have_tag("li.collocation span.synonym")
       end
     end
 
@@ -88,12 +88,12 @@ describe "/lemmata/show.html.erb" do
     describe "and its phraseologisms" do
       it "should render as a list" do
         render "/lemmata/show.html.erb"
-        response.should have_tag("div.phraseologism")
+        response.should have_tag("li.phraseologism")
       end
 
       it "should show the synonyms" do
         render "/lemmata/show.html.erb"
-        response.should have_tag("div.phraseologism span.synonym")
+        response.should have_tag("li.phraseologism span.synonym")
       end
     end
   end
