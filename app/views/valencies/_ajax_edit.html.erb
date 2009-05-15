@@ -23,7 +23,8 @@
       <strong><%= t(:syntax) %></strong>
     </div>
     <div class="span-7">
-      <%= text_field_tag "valency[syntax1]", '#{valency.syntax1}', :class => "span-7" %>
+      <%= text_field_tag "valency[syntax1]", '#{valency.syntax1}',
+            :class => "span-7 mirror-input to-valency_syntax2" %>
     </div>
     <div class="span-7">
       <%= text_field_tag "valency[syntax2]", '#{valency.syntax2}', :class => "span-7" %>

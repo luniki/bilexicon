@@ -37,6 +37,29 @@ var BILEXICON = {};
 
 
 /* ------------------------------------------------------------------------
+ * form helpers
+ * ------------------------------------------------------------------------ */
+BILEXICON.mirror_input = function (from, to) {
+  from = $(from);
+  to = $(to);
+  from.observe("blur", function (event) {
+    if (to.value === '') {
+      to.value = from.value;
+    }
+  });
+};
+
+BILEXICON.init_mirror_input = function (root) {
+  root = root || document.body;
+  root.select("input[class~='mirror-input']").each(function (from) {
+    from.classNames().grep(/^to-/).each(function (to) {
+      BILEXICON.mirror_input(from, to.substr(3));
+    });
+  });
+};
+
+
+/* ------------------------------------------------------------------------
  * Special FX
  * ------------------------------------------------------------------------ */
 Effect.SelfHealingFade = function (element) {
@@ -224,6 +247,7 @@ BILEXICON.MultiButton = function () {
           var edit = subentry.next();
           edit.down(".cancel").observe("click", cancel_edit_form);
           edit.down(".submit").observe("click", submit_edit_form);
+          BILEXICON.init_mirror_input(edit);
           Effect.SelfHealingAppear(edit);
         }
       });
@@ -460,6 +484,8 @@ document.observe("dom:loaded", function () {
   if ($("popup-search")) {
     $("popup-search").observe("click", BILEXICON.SearchPopup);
   }
+
+  BILEXICON.init_mirror_input();
 
   BILEXICON.MultiButton.setup();
 });
