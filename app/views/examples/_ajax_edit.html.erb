@@ -8,7 +8,7 @@
   <% form_tag('500.html', :method => :put) do -%>
 
     <div class="span-4 append-bottom" style="text-align: right">
-      <strong><%= t(:form) %></strong>
+      <strong><%= t(:form) %></strong><span class="required">*</span>
     </div>
     <div class="span-7">
       <%= text_field_tag "example[form1]", '#{example.form1}', :class => "span-7" %>

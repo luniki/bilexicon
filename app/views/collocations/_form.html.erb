@@ -12,13 +12,13 @@
 
     <tbody>
       <tr>
-        <th scope="row"><%= t :form %></th>
+        <th scope="row"><%= t :form %><span class="required">*</span></th>
         <td><%= f.text_field :form1 %></td>
         <td><%= f.text_field :form2 %></td>
       </tr>
 
       <tr>
-        <th scope="row"><%= t :collocation_syntax %></th>
+        <th scope="row"><%= t :collocation_syntax %><span class="required">*</span></th>
         <td><%= f.text_field :syntax1, :class => "mirror-input to-collocation_syntax2" %></td>
         <td><%= f.text_field :syntax2 %></td>
       </tr>

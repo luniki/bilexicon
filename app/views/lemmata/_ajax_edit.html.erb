@@ -9,13 +9,15 @@
   <% form_for(@lemma) do |f| -%>
 
     <div class="span-4 append-bottom" style="text-align: right">
-      <strong><%= t(:lemma_short) %></strong>
+      <strong><%= t(:lemma_short) %></strong><span class="required">*</span>
     </div>
     <div class="span-7">
       <%= f.text_field :short1, :class => "span-7" %>
+      <%= error_message_on @lemma, :short1, :css_class => "input-error" %>
     </div>
     <div class="span-7">
       <%= f.text_field :short2, :class => "span-7" %>
+      <%= error_message_on @lemma, :short2, :css_class => "input-error" %>
     </div>
     <div class="quiet span-4 last">
     </div>

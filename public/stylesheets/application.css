@@ -46,6 +46,16 @@ thead th, th {
   background:#E7F8FB;
 }
 
+.fieldWithErrors {
+  display: table;
+  padding: 2px;
+  -moz-border-radius: 2px;
+  background-color: #FF2299;
+}
+
+.input-error {
+  color: #FF2299;
+}
 
 /**************************************/
 /*              HEADER                */
