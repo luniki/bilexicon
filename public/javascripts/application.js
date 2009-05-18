@@ -237,7 +237,6 @@ BILEXICON.MultiButton = function () {
               }
               element.parentNode.next(".input-error").update(error[1]);
             });
-            edit.shake();
           }
         });
         event.stop();
