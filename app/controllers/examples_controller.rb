@@ -46,7 +46,10 @@ class ExamplesController < ApplicationController
         format.js   { render :partial => "lemmata/example" }
       else
         format.html { render :action => "edit" }
-        format.js   { render :nothing, :status => :unprocessable_entity }
+        format.js   {
+                      render :json => @example.errors,
+                             :status => :unprocessable_entity
+                    }
       end
     end
 

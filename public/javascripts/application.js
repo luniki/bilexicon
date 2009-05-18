@@ -155,7 +155,8 @@ BILEXICON.MultiButton = function () {
 
       // submit entry and dismiss fade edit form and remove it
       var submit_edit_form = function (event) {
-        var edit = event.element().up(".entry-edit");
+        var lemma = event.element().up(".lemma");
+        var edit = lemma.down(".entry-edit");
         var r = new Ajax.Request(route, {
           method: "put",
           parameters: edit.down("form").serialize(true),
@@ -165,8 +166,11 @@ BILEXICON.MultiButton = function () {
             resource.down(".entry-line").highlight();
           },
           onFailure: function (transport) {
-            // TODO
-            edit.shake();
+            edit.replace(transport.responseText);
+            edit = lemma.down(".entry-edit");
+            edit.down(".cancel").observe("click", cancel_edit_form);
+            edit.down(".submit").observe("click", submit_edit_form);
+            edit.show();
           }
         });
         event.stop();
@@ -222,7 +226,17 @@ BILEXICON.MultiButton = function () {
             $(id).down(".subentry").highlight();
           },
           onFailure: function (transport) {
-            // TODO
+            var errors = transport.responseText.evalJSON();
+            errors.each(function (error) {
+              var element = edit.down("input[name*='[" + error[0]  + "]']");
+              if (!element.parentNode.hasClassName("fieldWithErrors")) {
+                element.wrap("span", {"class": "fieldWithErrors"}).insert({
+                  after: new Element("span", {"class": "input-error"})
+                         .update(error[1])
+                });
+              }
+              element.parentNode.next(".input-error").update(error[1]);
+            });
             edit.shake();
           }
         });

@@ -44,7 +44,10 @@ class ValenciesController < ApplicationController
         format.js   { render :partial => "lemmata/valency" }
       else
         format.html { render :action => "edit" }
-        format.js   { render :nothing, :status => :unprocessable_entity }
+        format.js   {
+                      render :json => @valency.errors,
+                             :status => :unprocessable_entity
+                    }
       end
     end
   end

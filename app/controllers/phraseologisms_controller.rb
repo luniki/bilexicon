@@ -44,7 +44,10 @@ class PhraseologismsController < ApplicationController
         format.js   { render :partial => "lemmata/phraseologism" }
       else
         format.html { render :action => "edit" }
-        format.js   { render :nothing, :status => :unprocessable_entity }
+        format.js   {
+                      render :json => @phraseologism.errors,
+                             :status => :unprocessable_entity
+                    }
       end
     end
   end

@@ -55,7 +55,9 @@ class LemmataController < ApplicationController
         format.js   { render :partial => "lemma" }
       else
         format.html { render :action => "edit" }
-        format.js   { render :nothing, :status => :unprocessable_entity }
+        # TODO
+        format.js   { render :partial => "ajax_edit",
+                             :status => :unprocessable_entity }
       end
     end
   end
