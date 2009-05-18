@@ -175,7 +175,7 @@ BILEXICON.MultiButton = function () {
 
       Effect.SelfHealingFade(entry);
 
-      var r = new Ajax.Request(route, {
+      var r = new Ajax.Request(route + "/edit", {
         method: "get",
 
         onFailure: function (transport) {

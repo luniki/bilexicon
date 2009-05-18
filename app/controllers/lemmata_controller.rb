@@ -13,11 +13,6 @@ class LemmataController < ApplicationController
     @valencies = @lemma.valencies
     @collocations = @lemma.collocations
     @phraseologisms = @lemma.phraseologisms
-
-    respond_to do |format|
-      format.html
-      format.js { render :partial => "ajax_edit" }
-    end
   end
 
   def new
@@ -31,6 +26,11 @@ class LemmataController < ApplicationController
     @lemma = Lemma.find(params[:id])
     @categories = Category.find(:all)
     @lemma_categories = @lemma.categories
+
+    respond_to do |format|
+      format.html
+      format.js { render :partial => "ajax_edit" }
+    end
   end
 
   def create
