@@ -1,4 +1,5 @@
-<li id="<%= example_path(example) %>" class="example column span-24 last">
+<li id="<%= path_to_id(example_path(example)) %>"
+    class="example column span-24 last">
 
   <div class="subentry span-24 last">
 
@@ -32,7 +33,8 @@
 
     <div class="span-2 last">
       <% if current_user_is_admin then %>
-        <a class="multi-button cmd-edit cmd-delete cmd-sort" href="#"><span></span></a>
+        <a class="multi-button cmd-edit cmd-delete cmd-sort"
+           href="#"><span></span></a>
       <% else %>
         &nbsp;
       <% end %>

@@ -1,4 +1,5 @@
-<li id="<%= phraseologism_path(phraseologism) %>" class="phraseologism column span-24 last">
+<li id="<%= path_to_id(phraseologism_path(phraseologism)) %>"
+    class="phraseologism column span-24 last">
 
   <div class="subentry span-24 last">
 
@@ -8,7 +9,8 @@
         <span class="synonym">syn: <%= h phraseologism.synonym1 %>;</span>
       <% end %>
       <% if phraseologism.meaning_list.present? -%>
-        <%= render :partial => "lemmata/meanings", :object => phraseologism.meanings %>
+        <%= render :partial => "lemmata/meanings",
+                   :object => phraseologism.meanings %>
       <% end %>
     </div>
 
@@ -29,7 +31,8 @@
 
     <div class="span-2 last">
       <% if current_user_is_admin then %>
-        <a class="multi-button cmd-edit cmd-delete cmd-add-example cmd-sort" href="#"><span></span></a>
+        <a class="multi-button cmd-edit cmd-delete cmd-add-example cmd-sort"
+           href="#"><span></span></a>
       <% else %>
         &nbsp;
       <% end %>
@@ -37,7 +40,8 @@
 
   </div>
 
-  <ol id="<%= path_to_id(phraseologism_examples_path(phraseologism)) %>" class="examples">
+  <ol id="<%= path_to_id(phraseologism_examples_path(phraseologism)) %>"
+      class="examples">
     <%= render :partial => "lemmata/example",
                :collection => phraseologism.examples,
                :locals => { :exampleable => phraseologism } %>

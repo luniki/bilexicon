@@ -22,7 +22,7 @@ describe "/lemmata/show.html.erb" do
 
     it "should render both short forms" do
       render "/lemmata/show.html.erb"
-      response.should have_tag("div#?", ":lemmata:#{@lemma.id}") do
+      response.should have_tag("div#?", "lemmata-#{@lemma.id}") do
         with_tag("div.form1", @lemma.short1)
         with_tag("div.form2", @lemma.short2)
       end
@@ -30,7 +30,7 @@ describe "/lemmata/show.html.erb" do
 
     it "should render phonetics and word_class" do
       render "/lemmata/show.html.erb"
-      response.should have_tag("div#?", ":lemmata:#{@lemma.id}") do
+      response.should have_tag("div#?", "lemmata-#{@lemma.id}") do
         with_tag("span.phonetic", /#{@lemma.phonetic1}/)
         with_tag("span.phonetic", /#{@lemma.phonetic2}/)
         with_tag("span.word_class", /#{@lemma.word_class}/)
@@ -40,7 +40,7 @@ describe "/lemmata/show.html.erb" do
 
     it "should render the level" do
       render "/lemmata/show.html.erb"
-      response.should have_tag("div#?", ":lemmata:#{@lemma.id}") do
+      response.should have_tag("div#?", "lemmata-#{@lemma.id}") do
         with_tag("span.level", /#{@lemma.level}/)
       end
     end
