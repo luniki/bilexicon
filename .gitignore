@@ -1,3 +1,4 @@
+config/database.yml
 coverage/
 doc/spec/
 log/
