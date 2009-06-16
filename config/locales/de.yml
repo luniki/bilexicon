@@ -137,7 +137,6 @@ de:
   category_invalid: "Das Themengebiet ist nicht valid" #TODO
   category_name_missing: "Bitte geben Sie einen Namen für das Themengebiet an."
   category_name: "Name"
-  collocation_syntax: "Syntax"
   collocations: "Kollokationen"
   comma_separated: "Trennen Sie mehrere Schlagworte durch Kommas."
   confirm_question: "Sind Sie sicher?"
