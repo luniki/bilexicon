@@ -21,7 +21,7 @@
 
     <div class="span-4">
       <% link_to('/') do %>
-        <%= image_tag("logo.png", :class => "logo") %>
+        <%= image_tag("logo.png", :alt => "logo") %>
       <% end %>
     </div>
 
@@ -32,7 +32,11 @@
     <div id="session" class="span-16 last">
       <ul>
         <li>
-          <a href="#help">Hilfe</a>
+          <% link_to(new_issue_path) do %>
+            <%= image_tag("bug.png", :id => "issues",
+                                     :alt => "issues",
+                                     :title => "issues") %>
+          <% end %>
         </li>
 
         <% if !current_user %>

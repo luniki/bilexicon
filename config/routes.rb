@@ -8,6 +8,7 @@ ActionController::Routing::Routes.draw do |map|
     user.resource :admin, :controller => "admin_status"
   end
 
+  map.resources :issues
 
   map.resources :categories
 

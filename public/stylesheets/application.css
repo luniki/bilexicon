@@ -64,11 +64,6 @@ thead th, th {
   line-height: 30px;
 }
 
-#head img.logo {
-  position: relative;
-  top: 4px;
-}
-
 #head ul {
   list-style-image: none;
   list-style-position: outside;
@@ -88,6 +83,11 @@ thead th, th {
   padding: 0 12px;
   text-decoration: none;
   text-transform: lowercase;
+}
+
+#head img {
+  position: relative;
+  top: 4px;
 }
 
 #head .active {
@@ -410,3 +410,4 @@ ul.multi-button-drop-down li small {
 
   text-decoration:none;
 }
+
