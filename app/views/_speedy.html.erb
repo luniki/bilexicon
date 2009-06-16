@@ -1,6 +1,6 @@
 <div class="span-13">
   <% form_tag(lemmata_path, :method => :get) do %>
-    <%= text_field_tag 'q', t(:search_hint), {:id => "search_input", :class => "input span-11"} %>
+    <%= text_field_tag 'q', t(:search_hint), {:id => "search_input", :class => "input span-11 default-as-hint"} %>
     <%= image_submit_tag 'icons/magnifier.png', :class => 'search_button' %>
   <% end %>
 </div>

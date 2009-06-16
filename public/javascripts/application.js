@@ -493,9 +493,9 @@ BILEXICON.MultiButton = function () {
  * ------------------------------------------------------------------------ */
 document.observe("dom:loaded", function () {
 
-  if ($("search_input")) {
-    $('search_input').defaultValueActsAsHint();
-  }
+  $$(".default-as-hint").each(function (input) {
+    input.defaultValueActsAsHint();
+  });
 
   if ($("popup-search")) {
     $("popup-search").observe("click", BILEXICON.SearchPopup);
