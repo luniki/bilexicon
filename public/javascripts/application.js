@@ -377,7 +377,7 @@ BILEXICON.MultiButton = function () {
         elements: children,
         ghosting: true,
         tag: "li",
-        format: /^(?:.*)\/(.*)$/,
+        format: /^(?:.*)-(.*)$/,
         handle: "drag-handle"
       });
       collection.setStyle({ border: "1px dashed #eee" });
