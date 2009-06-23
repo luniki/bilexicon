@@ -4,6 +4,12 @@ class IssuesController < ApplicationController
   end
 
   def create
-    render :text => params["issue"].to_json
+    HoptoadNotifier.notify(
+      :error_class   => "IssueReport",
+      :error_message => params["issue"]["title"],
+      :request => { :params => params }
+    )
+    flash[:notice] = 'Issue was successfully sent.'
+    redirect_to lemmata_path
   end
 end

@@ -37,6 +37,10 @@ thead th, th {
   background:  #C9EDF4;
 }
 
+label {
+  display: block;
+}
+
 /* input field hint */
 .hint {
   color: #C9EDF4;

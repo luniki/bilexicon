@@ -31,14 +31,6 @@
 
     <div id="session" class="span-16 last">
       <ul>
-        <li>
-          <% link_to(new_issue_path) do %>
-            <%= image_tag("bug.png", :id => "issues",
-                                     :alt => "issues",
-                                     :title => "issues") %>
-          <% end %>
-        </li>
-
         <% if !current_user %>
           <li>
             <%= link_to "Sign Up", new_account_path %>
@@ -47,6 +39,13 @@
             <%= link_to "Sign In", new_user_session_path %>
           </li>
         <% else %>
+          <li>
+            <% link_to(new_issue_path) do %>
+              <%= image_tag("bug.png", :id => "issues",
+                                       :alt => "issues",
+                                       :title => "issues") %>
+            <% end %>
+          </li>
           <li>
           <%= link_to "My Account", account_path %>
           </li>

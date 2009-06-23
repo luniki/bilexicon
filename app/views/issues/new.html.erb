@@ -12,6 +12,12 @@
 
   <hr class="space"/>
 
-  <%= submit_tag t(:report) %> <%= t :or %> <%= link_to(t(:cancel), "#", :class => "quiet cancel") %>
+  <%= submit_tag t(:report) %>
+
+  <span class="or-close">
+    <%= t :or %>
+    <%= link_to t(:cancel), "/", :class => "cancel" %>
+  </span>
+
 
 <% end %>
