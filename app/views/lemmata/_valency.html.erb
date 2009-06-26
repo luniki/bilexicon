@@ -3,17 +3,11 @@
 
   <div class="subentry span-24 last">
 
-    <div class="span-5">
-      vp:
-      <span class="syntax"><%= h valency.syntax1 %>;</span>
-      <% if valency.synonym1.present? -%>
-        <span class="synonym">syn: <%= h valency.synonym1 %>;</span>
-      <% end %>
-      <% if valency.meaning_list.present? -%>
-        <%= render :partial => "lemmata/meanings",
-                   :object => valency.meanings %>
-      <% end %>
-    </div>
+    <%= render :partial => "subentries/margin",
+               :locals => {
+                 :subentry => valency,
+                 :side => 1
+               } %>
 
     <div class="span-6 form1">
       <%= h valency.form1 %>
@@ -23,13 +17,11 @@
       <%= h valency.form2 %>
     </div>
 
-    <div class="span-5">
-      vp:
-      <span class="syntax"><%= h valency.syntax2 %>;</span>
-      <% if valency.synonym2.present? -%>
-        <span class="synonym">syn: <%= h valency.synonym2 %>;</span>
-      <% end %>
-    </div>
+    <%= render :partial => "subentries/margin",
+               :locals => {
+                 :subentry => valency,
+                 :side => 2
+               } %>
 
     <div class="span-2 last">
       <% if current_user_is_admin then %>

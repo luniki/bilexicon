@@ -1,0 +1,26 @@
+<div class="span-5">
+
+  <%= case subentry
+      when Collocation:   "C:"
+      when Phraseologism: "phr:"
+      when Valency:       "vp:"
+      end %>
+
+  <% attributes = [] %>
+
+  <% if subentry["syntax#{side}"].present? -%>
+    <% attributes << capture do -%><span class="syntax"><%= h subentry["syntax#{side}"] %></span><% end %>
+  <% end %>
+
+  <% if subentry["synonym#{side}"].present? -%>
+    <% attributes << capture do -%><span class="synonym">syn: <%= h subentry["synonym#{side}"] %></span><% end %>
+  <% end %>
+
+  <% if side ==1 && subentry.meaning_list.present? -%>
+    <% attributes << capture do -%><%= render :partial => "subentries/meanings", :object => subentry.meanings %><% end %>
+  <% end %>
+
+  <%= attributes.join("; ") %>
+
+</div>
+

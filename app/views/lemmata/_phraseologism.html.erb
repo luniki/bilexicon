@@ -3,16 +3,11 @@
 
   <div class="subentry span-24 last">
 
-    <div class="span-5">
-      phr:
-      <% if phraseologism.synonym1.present? -%>
-        <span class="synonym">syn: <%= h phraseologism.synonym1 %>;</span>
-      <% end %>
-      <% if phraseologism.meaning_list.present? -%>
-        <%= render :partial => "lemmata/meanings",
-                   :object => phraseologism.meanings %>
-      <% end %>
-    </div>
+    <%= render :partial => "subentries/margin",
+               :locals => {
+                 :subentry => phraseologism,
+                 :side => 1
+               } %>
 
     <div class="span-6 form1">
       <%= h phraseologism.form1 %>
@@ -22,12 +17,11 @@
       <%= h phraseologism.form2 %>
     </div>
 
-    <div class="span-5">
-      phr:
-      <% if phraseologism.synonym2.present? -%>
-        <span class="synonym">syn: <%= h phraseologism.synonym2 %>;</span>
-      <% end %>
-    </div>
+    <%= render :partial => "subentries/margin",
+               :locals => {
+                 :subentry => phraseologism,
+                 :side => 2
+               } %>
 
     <div class="span-2 last">
       <% if current_user_is_admin then %>
