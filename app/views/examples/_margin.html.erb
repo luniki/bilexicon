@@ -1,0 +1,17 @@
+<div class="span-5">
+
+  <% attributes = [] %>
+
+
+  <% if example["syntax#{side}"].present? -%>
+    <% attributes << capture do -%><span class="syntax"><%= h example["syntax#{side}"] %></span><% end %>
+  <% end %>
+
+  <% if example["synonym#{side}"].present? -%>
+    <% attributes << capture do -%><span class="synonym"><%= h example["synonym#{side}"] %></span><% end %>
+  <% end %>
+
+  <%= attributes.join("; ") %>
+
+  &nbsp;
+</div>

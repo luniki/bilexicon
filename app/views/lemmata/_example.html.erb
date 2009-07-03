@@ -3,15 +3,11 @@
 
   <div class="subentry span-24 last">
 
-    <div class="span-5">
-      <% if example.syntax1.present? -%>
-        <span class="syntax"><%= h example.syntax1 %>;</span>
-      <% end %>
-      <% if example.synonym1.present? -%>
-        <span class="synonym">syn: <%= h example.synonym1 %>;</span>
-      <% end %>
-      &nbsp;
-    </div>
+    <%= render :partial => "examples/margin",
+               :locals => {
+                 :example => example,
+                 :side => 1
+               } %>
 
     <div class="span-6 form1">
       <%= underline example.form1 %>
@@ -21,15 +17,11 @@
       <%= underline example.form2 %>
     </div>
 
-    <div class="span-5">
-      <% if example.syntax2.present? -%>
-        <span class="syntax"><%= h example.syntax2 %>;</span>
-      <% end %>
-      <% if example.synonym2.present? -%>
-        <span class="synonym">syn: <%= h example.synonym2 %>;</span>
-      <% end %>
-      &nbsp;
-    </div>
+    <%= render :partial => "examples/margin",
+               :locals => {
+                 :example => example,
+                 :side => 2
+               } %>
 
     <div class="span-2 last">
       <% if current_user_is_admin then %>
