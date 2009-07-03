@@ -1,0 +1,12 @@
+<li class="invitation column span-24 last">
+  <div>
+    <%= link_to t(:create_another_collocation), @lemmata, :class => "accept" %>
+    <span class="or-close">
+      <%= t :or %>
+      <%= link_to t(:cancel), @lemmata, :class => "cancel" %>
+    </span>
+  </div>
+</li>
+
+
+<%= render :partial => "lemmata/collocation" %>

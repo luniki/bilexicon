@@ -6,6 +6,10 @@ class CollocationsController < ApplicationController
   def new
     @collocation = Collocation.new
     @collocation.lemma = @lemma
+    respond_to do |format|
+      format.html
+      format.js { render :partial => "ajax_new" }
+    end
   end
 
   def show
@@ -24,11 +28,20 @@ class CollocationsController < ApplicationController
     @collocation = Collocation.new(params[:collocation])
     @lemma.collocations << @collocation
 
-    if @collocation.save
-      flash[:notice] = 'Collocation was successfully created.'
-      redirect_to(@lemma)
-    else
-      render :action => "new"
+    respond_to do |format|
+      if @collocation.save
+        format.html {
+                      flash[:notice] = 'Collocation was successfully created.'
+                      redirect_to(@lemma)
+                    }
+        format.js   { render :partial => "ajax_create" }
+      else
+        format.html { render :action => "new" }
+        format.js   {
+                      render :json => @collocation.errors,
+                             :status => :unprocessable_entity
+                    }
+      end
     end
   end
 

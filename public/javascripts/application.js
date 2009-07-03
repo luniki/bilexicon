@@ -57,6 +57,10 @@ BILEXICON.init_mirror_input = function (root) {
   });
 };
 
+BILEXICON.id_to_path = function (id) {
+  return "/" + id.gsub("-", "/");
+};
+
 
 /* ------------------------------------------------------------------------
  * Special FX
@@ -109,6 +113,352 @@ BILEXICON.SearchPopup = function (event) {
   popup();
 };
 
+/* ------------------------------------------------------------------------
+ * menu commands
+ * ------------------------------------------------------------------------ */
+BILEXICON.Commands = {};
+
+/* ------------------------------------------------------------------------
+ * add another collocation
+ * ------------------------------------------------------------------------ */
+BILEXICON.Commands.addCollocation = function (button) {
+
+  var collocations = $$("ol.collocations").first(),
+      location = BILEXICON.id_to_path(collocations.id);
+
+  var r = new Ajax.Request(location + "/new", {
+
+    method: "get",
+
+    onFailure: function (transport) {
+      // TODO
+      element.shake();
+    },
+
+    onSuccess: function (transport) {
+      collocations.insert(transport.responseText);
+      var form = collocations.childElements().last();
+      form.down(".submit").observe("click", function (event) {
+        event.stop();
+
+        var r = new Ajax.Request(location, {
+          method: "post",
+          parameters: form.down("form").serialize(true),
+
+          // replace resource with response and highlight it
+          onSuccess: function (transport) {
+            form.replace(transport.responseText);
+            var created = collocations.childElements().last();
+            created.highlight();
+            var invitation = created.previous(".invitation");
+            invitation.down("a.accept").observe("click", function (event) {
+              event.stop();
+              console.log(event);
+            });
+            invitation.down("a.cancel").observe("click", function (event) {
+              event.stop();
+              invitation.remove();
+            });
+          },
+
+          // get errors from response and show them on the invalid fields
+          onFailure: function (transport) {
+            var errors = transport.responseText.evalJSON();
+            errors.each(function (error) {
+              var element = form.down("input[name*='[" + error[0]  + "]']");
+              if (!element.parentNode.hasClassName("fieldWithErrors")) {
+                element.wrap("span", {"class": "fieldWithErrors"}).insert({
+                  after: new Element("span", {"class": "input-error"})
+                          .update(error[1])
+                });
+              }
+              element.parentNode.next(".input-error").update(error[1]);
+            });
+          }
+        });
+      });
+      form.down(".cancel").observe("click", function (event) {
+        event.stop();
+        Effect.SelfHealingFade(form, {
+          afterFinish: Element.remove.curry(form)
+        });
+      });
+      form.appear({afterSetup: Element.scrollTo.curry(form)});
+    }
+  });
+};
+
+
+/* ------------------------------------------------------------------------
+ * edit the current lemma
+ * ------------------------------------------------------------------------ */
+BILEXICON.Commands.editLemma = function (button) {
+
+  var entry = button.up(".entry"),
+      resource = entry.up("*[id]"),
+      route = BILEXICON.id_to_path(resource.id);
+
+  // show faded entry, fade edit form and remove it
+  var cancel_edit_form = function (event) {
+    var edit = event.element().up(".entry-edit");
+    Effect.SelfHealingFade(edit, {
+      afterFinish: Element.remove.curry(edit)
+    });
+    Effect.SelfHealingAppear(entry);
+    event.stop();
+  };
+
+  // submit entry and dismiss fade edit form and remove it
+  var submit_edit_form = function (event) {
+    var lemma = event.element().up(".lemma");
+    var edit = lemma.down(".entry-edit");
+    var r = new Ajax.Request(route, {
+      method: "put",
+      parameters: edit.down("form").serialize(true),
+      onSuccess: function (transport) {
+        edit.remove();
+        resource.down(".entry").replace(transport.responseText);
+        resource.down(".entry-line").highlight();
+      },
+      onFailure: function (transport) {
+        edit.replace(transport.responseText);
+        edit = lemma.down(".entry-edit");
+        edit.down(".cancel").observe("click", cancel_edit_form);
+        edit.down(".submit").observe("click", submit_edit_form);
+        edit.show();
+      }
+    });
+    event.stop();
+  };
+
+
+  Effect.SelfHealingFade(entry);
+
+  var r = new Ajax.Request(route + "/edit", {
+    method: "get",
+
+    onFailure: function (transport) {
+      // TODO
+      entry.shake();
+    },
+
+    onSuccess: function (transport) {
+      entry.insert({ after:  transport.responseText });
+      var edit = entry.next();
+      edit.down(".cancel").observe("click", cancel_edit_form);
+      edit.down(".submit").observe("click", submit_edit_form);
+      Effect.SelfHealingAppear(edit);
+    }
+  });
+};
+
+
+/* ------------------------------------------------------------------------
+ * edit a lemma's subentries
+ * ------------------------------------------------------------------------ */
+BILEXICON.Commands.edit = function (button) {
+
+  var subentry = button.up(".subentry"),
+      resource = subentry.up("*[id]"),
+      route = BILEXICON.id_to_path(resource.id),
+      type = resource.id.match(/(\w+)-\d+$/)[1];
+
+  // show faded subentry, fade edit form and remove it
+  var cancel_edit_form = function (event) {
+    var edit = event.element().up(".subentry-edit");
+    Effect.SelfHealingFade(edit, {
+      afterFinish: Element.remove.curry(edit)
+    });
+    Effect.SelfHealingAppear(subentry);
+    event.stop();
+  };
+
+  // submit subentry and remove edit form
+  var submit_edit_form = function (event) {
+    var edit = event.element().up(".subentry-edit");
+    var r = new Ajax.Request(route, {
+      method: "put",
+      parameters: edit.down("form").serialize(true),
+
+      // replace resource with response and highlight it
+      onSuccess: function (transport) {
+        var id = resource.id;
+        resource.replace(transport.responseText);
+        $(id).down(".subentry").highlight();
+      },
+
+      // get errors from response and show them on the invalid fields
+      onFailure: function (transport) {
+        var errors = transport.responseText.evalJSON();
+        errors.each(function (error) {
+          var element = edit.down("input[name*='[" + error[0]  + "]']");
+          if (!element.parentNode.hasClassName("fieldWithErrors")) {
+            element.wrap("span", {"class": "fieldWithErrors"}).insert({
+              after: new Element("span", {"class": "input-error"})
+                      .update(error[1])
+            });
+          }
+          element.parentNode.next(".input-error").update(error[1]);
+        });
+      }
+    });
+    event.stop();
+  };
+
+
+  Effect.SelfHealingFade(subentry);
+
+  var r = new Ajax.Request(route + ".json", {
+    method: "get",
+
+    onFailure: function (transport) {
+      // TODO
+      subentry.shake();
+    },
+
+    onSuccess: function (transport) {
+      subentry.insert({
+        after:  edit_templates[type].evaluate(transport.responseJSON)
+      });
+      var edit = subentry.next();
+      edit.down(".cancel").observe("click", cancel_edit_form);
+      edit.down(".submit").observe("click", submit_edit_form);
+      BILEXICON.init_mirror_input(edit);
+      Effect.SelfHealingAppear(edit);
+    }
+  });
+};
+
+/* ------------------------------------------------------------------------
+ * delete a lemma or subentry
+ * ------------------------------------------------------------------------ */
+BILEXICON.Commands.deleteEntry = function (button) {
+
+  var element = button.up(".subentry, .entry");
+  var resource = element.up("*[id]");
+  var route = BILEXICON.id_to_path(resource.id);
+
+  if (confirm('Sind Sie sicher?')) {
+    var r = new Ajax.Request(route, {
+      method: "delete",
+      parameters: {authenticity_token: BILEXICON.token},
+      onFailure: function (transport) {
+        // TODO
+        element.shake();
+      },
+      onSuccess: function (transport) {
+        if (element.hasClassName("subentry")) {
+          Effect.SelfHealingFade(element, {
+            duration: 0.25,
+            afterFinish: Element.remove.curry(resource)
+          });
+        }
+        else {
+          document.location = "/lemmata";
+        }
+      }
+    });
+  }
+};
+
+
+/* ------------------------------------------------------------------------
+ * add an example to a lemma or subentry
+ * ------------------------------------------------------------------------ */
+BILEXICON.Commands.addExample = function (button) {
+  var location = BILEXICON.id_to_path(button.up("*[id]").id);
+  document.location = location + "/examples/new";
+};
+
+
+
+/* ------------------------------------------------------------------------
+ * add a phraseologism to a lemma
+ * ------------------------------------------------------------------------ */
+BILEXICON.Commands.addPhraseologism = function (button) {
+  var location = BILEXICON.id_to_path(button.up("*[id]").id);
+  document.location = location + "/phraseologisms/new";
+};
+
+
+/* ------------------------------------------------------------------------
+ * add a valency to a lemma
+ * ------------------------------------------------------------------------ */
+BILEXICON.Commands.addValency = function (button) {
+  var location = BILEXICON.id_to_path(button.up("*[id]").id);
+  document.location = location + "/valencies/new";
+};
+
+
+/* ------------------------------------------------------------------------
+ * sort subentries
+ * ------------------------------------------------------------------------ */
+BILEXICON.Commands.sortEntries = function (button) {
+
+  var collection = button.up("ol"),
+      url = BILEXICON.id_to_path(collection.id) + "/sort",
+      children = collection.childElements(),
+      buttons = collection.select(".multi-button"),
+      done = $("done").cloneNode(true)
+                      .writeAttribute({id: null})
+                      .addClassName("done");
+
+  var finalize = function (event) {
+    event.stop();
+
+    // remove done link and show the sort triggering multi button
+    done.remove();
+    button.show();
+
+    // show multi buttons of the subentries
+    buttons.invoke("show");
+
+    // remove drag handles
+    $$(".drag-handle").invoke("remove");
+
+    // send new order of valencies
+    var request = new Ajax.Request(url, {
+      parameters: Sortable.serialize(collection.id, {"name": "sequence"}) +
+                  '&authenticity_token=' + BILEXICON.token,
+      onFailure: function () {
+        // TODO
+        collection.shake();
+      }
+    });
+
+    // destroy sortable and unmark accepting area
+    Sortable.destroy(collection.id);
+    collection.setStyle({ border: "none" });
+  };
+
+  // show done link and hide the sort triggering multi button
+  collection.insert({ before: done.appear().observe("click", finalize) });
+
+  // hide multi buttons of the subentries
+  buttons.invoke("hide");
+
+  // show drag handles
+  children.invoke("down", ".multi-button").each(function (mb) {
+    mb.hide().insert({
+      after: $("drag-handle").cloneNode(true)
+                              .writeAttribute({id: null})
+                              .addClassName("drag-handle")
+                              .show()
+    });
+  });
+
+  // create sortable and mark accepting area
+  Sortable.create(collection.id, {
+    elements: children,
+    ghosting: true,
+    tag: "li",
+    format: /^(?:.*)-(.*)$/,
+    handle: "drag-handle"
+  });
+  collection.setStyle({ border: "1px dashed #eee" });
+};
+
+
 
 /* ------------------------------------------------------------------------
  * multi button
@@ -118,7 +468,7 @@ BILEXICON.MultiButton = function () {
   var edit_templates = {};
 
   // initializes the edit templates
-  function init_edit_templates() {
+  var init_edit_templates = function () {
     $w("examples valencies collocations phraseologisms").each(function (type) {
       var comment =
         $A($(type + "-edit-template").childNodes).find(function (c) {
@@ -128,262 +478,7 @@ BILEXICON.MultiButton = function () {
         edit_templates[type] = new Template(comment.nodeValue);
       }
     });
-  }
-
-  var id_to_path = function (id) {
-    return "/" + id.gsub("-", "/");
   };
-
-  var cmds = {
-
-    "edit-lemma" : function (button) {
-
-      var entry = button.up(".entry"),
-          resource = entry.up("*[id]"),
-          route = id_to_path(resource.id);
-
-      // show faded entry, fade edit form and remove it
-      var cancel_edit_form = function (event) {
-        var edit = event.element().up(".entry-edit");
-        Effect.SelfHealingFade(edit, {
-          afterFinish: Element.remove.curry(edit)
-        });
-        Effect.SelfHealingAppear(entry);
-        event.stop();
-      };
-
-      // submit entry and dismiss fade edit form and remove it
-      var submit_edit_form = function (event) {
-        var lemma = event.element().up(".lemma");
-        var edit = lemma.down(".entry-edit");
-        var r = new Ajax.Request(route, {
-          method: "put",
-          parameters: edit.down("form").serialize(true),
-          onSuccess: function (transport) {
-            edit.remove();
-            resource.down(".entry").replace(transport.responseText);
-            resource.down(".entry-line").highlight();
-          },
-          onFailure: function (transport) {
-            edit.replace(transport.responseText);
-            edit = lemma.down(".entry-edit");
-            edit.down(".cancel").observe("click", cancel_edit_form);
-            edit.down(".submit").observe("click", submit_edit_form);
-            edit.show();
-          }
-        });
-        event.stop();
-      };
-
-
-      Effect.SelfHealingFade(entry);
-
-      var r = new Ajax.Request(route + "/edit", {
-        method: "get",
-
-        onFailure: function (transport) {
-          // TODO
-          entry.shake();
-        },
-
-        onSuccess: function (transport) {
-          entry.insert({ after:  transport.responseText });
-          var edit = entry.next();
-          edit.down(".cancel").observe("click", cancel_edit_form);
-          edit.down(".submit").observe("click", submit_edit_form);
-          Effect.SelfHealingAppear(edit);
-        }
-      });
-    },
-
-
-    "edit" : function (button) {
-
-      var subentry = button.up(".subentry"),
-          resource = subentry.up("*[id]"),
-          route = id_to_path(resource.id),
-          type = resource.id.match(/(\w+)-\d+$/)[1];
-
-      // show faded subentry, fade edit form and remove it
-      var cancel_edit_form = function (event) {
-        var edit = event.element().up(".subentry-edit");
-        Effect.SelfHealingFade(edit, {
-          afterFinish: Element.remove.curry(edit)
-        });
-        Effect.SelfHealingAppear(subentry);
-        event.stop();
-      };
-
-      // submit subentry and remove edit form
-      var submit_edit_form = function (event) {
-        var edit = event.element().up(".subentry-edit");
-        var r = new Ajax.Request(route, {
-          method: "put",
-          parameters: edit.down("form").serialize(true),
-
-          // replace resource with response and highlight it
-          onSuccess: function (transport) {
-            var id = resource.id;
-            resource.replace(transport.responseText);
-            $(id).down(".subentry").highlight();
-          },
-
-          // get errors from response and show them on the invalid fields
-          onFailure: function (transport) {
-            var errors = transport.responseText.evalJSON();
-            errors.each(function (error) {
-              var element = edit.down("input[name*='[" + error[0]  + "]']");
-              if (!element.parentNode.hasClassName("fieldWithErrors")) {
-                element.wrap("span", {"class": "fieldWithErrors"}).insert({
-                  after: new Element("span", {"class": "input-error"})
-                         .update(error[1])
-                });
-              }
-              element.parentNode.next(".input-error").update(error[1]);
-            });
-          }
-        });
-        event.stop();
-      };
-
-
-      Effect.SelfHealingFade(subentry);
-
-      var r = new Ajax.Request(route + ".json", {
-        method: "get",
-
-        onFailure: function (transport) {
-          // TODO
-          subentry.shake();
-        },
-
-        onSuccess: function (transport) {
-          subentry.insert({
-            after:  edit_templates[type].evaluate(transport.responseJSON)
-          });
-          var edit = subentry.next();
-          edit.down(".cancel").observe("click", cancel_edit_form);
-          edit.down(".submit").observe("click", submit_edit_form);
-          BILEXICON.init_mirror_input(edit);
-          Effect.SelfHealingAppear(edit);
-        }
-      });
-    },
-
-    "delete": function (button) {
-      var element = button.up(".subentry, .entry");
-      var resource = element.up("*[id]");
-      var route = id_to_path(resource.id);
-
-      if (confirm('Sind Sie sicher?')) {
-        var r = new Ajax.Request(route, {
-          method: "delete",
-          parameters: {authenticity_token: BILEXICON.token},
-          onFailure: function (transport) {
-            // TODO
-            element.shake();
-          },
-          onSuccess: function (transport) {
-            if (element.hasClassName("subentry")) {
-              Effect.SelfHealingFade(element, {
-                duration: 0.25,
-                afterFinish: Element.remove.curry(resource)
-              });
-            }
-            else {
-              document.location = "/lemmata";
-            }
-          }
-        });
-      }
-    },
-
-    "add-example":  function (button) {
-      var location = id_to_path(button.up("*[id]").id);
-      document.location = location + "/examples/new";
-    },
-
-    "add-collocation":  function (button) {
-      var location = id_to_path(button.up("*[id]").id);
-      document.location = location + "/collocations/new";
-    },
-
-    "add-phraseologism":  function (button) {
-      var location = id_to_path(button.up("*[id]").id);
-      document.location = location + "/phraseologisms/new";
-    },
-
-    "add-valency":  function (button) {
-      var location = id_to_path(button.up("*[id]").id);
-      document.location = location + "/valencies/new";
-    },
-
-    "sort": function (button) {
-
-      var collection = button.up("ol"),
-          url = id_to_path(collection.id) + "/sort",
-          children = collection.childElements(),
-          buttons = collection.select(".multi-button"),
-          done = $("done").cloneNode(true)
-                          .writeAttribute({id: null})
-                          .addClassName("done");
-
-      var finalize = function (event) {
-        event.stop();
-
-        // remove done link and show the sort triggering multi button
-        done.remove();
-        button.show();
-
-        // show multi buttons of the subentries
-        buttons.invoke("show");
-
-        // remove drag handles
-        $$(".drag-handle").invoke("remove");
-
-        // send new order of valencies
-        var request = new Ajax.Request(url, {
-          parameters: Sortable.serialize(collection.id, {"name": "sequence"}) +
-                      '&authenticity_token=' + BILEXICON.token,
-          onFailure: function () {
-            // TODO
-            collection.shake();
-          }
-        });
-
-        // destroy sortable and unmark accepting area
-        Sortable.destroy(collection.id);
-        collection.setStyle({ border: "none" });
-      };
-
-      // show done link and hide the sort triggering multi button
-      collection.insert({ before: done.appear().observe("click", finalize) });
-
-      // hide multi buttons of the subentries
-      buttons.invoke("hide");
-
-      // show drag handles
-      children.invoke("down", ".multi-button").each(function (mb) {
-        mb.hide().insert({
-          after: $("drag-handle").cloneNode(true)
-                                 .writeAttribute({id: null})
-                                 .addClassName("drag-handle")
-                                 .show()
-        });
-      });
-
-      // create sortable and mark accepting area
-      Sortable.create(collection.id, {
-        elements: children,
-        ghosting: true,
-        tag: "li",
-        format: /^(?:.*)-(.*)$/,
-        handle: "drag-handle"
-      });
-      collection.setStyle({ border: "1px dashed #eee" });
-    }
-  };
-
 
   return {
 
@@ -431,8 +526,8 @@ BILEXICON.MultiButton = function () {
       if (Prototype.Browser.IE) {
         class_name = class_name.replace(/\b\w*hover_/gi, "").strip();
       }
-      var c = class_name.match(/^cmd\-([a-z\-]+)$/)[1];
-      cmds[c](this.activeButton);
+      var c = class_name.match(/^cmd\-([a-zA-Z]+)$/)[1];
+      BILEXICON.Commands[c](this.activeButton);
       this.clickOff();
     },
 

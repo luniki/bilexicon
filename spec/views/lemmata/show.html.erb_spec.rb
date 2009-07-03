@@ -112,17 +112,17 @@ describe "/lemmata/show.html.erb" do
 
     it "should have an edit link" do
       render "/lemmata/show.html.erb"
-      response.should have_tag("div.entry-line a.cmd-edit-lemma")
+      response.should have_tag("div.entry-line a.cmd-editLemma")
     end
 
     it "should have a delete link" do
       render "/lemmata/show.html.erb"
-      response.should have_tag("div.entry-line a.cmd-delete")
+      response.should have_tag("div.entry-line a.cmd-deleteEntry")
     end
 
     it "should have a link to add another example" do
       render "/lemmata/show.html.erb"
-      response.should have_tag("div.entry-line a.cmd-add-example")
+      response.should have_tag("div.entry-line a.cmd-addExample")
     end
   end
 end

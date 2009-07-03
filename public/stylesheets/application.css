@@ -337,14 +337,14 @@ a.active-multi-button {
     display: none;
 }
 
-#multi-button-menu div.cmd-edit              li.cmd-edit,
-#multi-button-menu div.cmd-edit-lemma        li.cmd-edit-lemma,
-#multi-button-menu div.cmd-delete            li.cmd-delete,
-#multi-button-menu div.cmd-add-example       li.cmd-add-example,
-#multi-button-menu div.cmd-sort              li.cmd-sort,
-#multi-button-menu div.cmd-add-collocation   li.cmd-add-collocation,
-#multi-button-menu div.cmd-add-phraseologism li.cmd-add-phraseologism,
-#multi-button-menu div.cmd-add-valency       li.cmd-add-valency {
+#multi-button-menu div.cmd-edit             li.cmd-edit,
+#multi-button-menu div.cmd-editLemma        li.cmd-editLemma,
+#multi-button-menu div.cmd-deleteEntry      li.cmd-deleteEntry,
+#multi-button-menu div.cmd-addExample       li.cmd-addExample,
+#multi-button-menu div.cmd-sortEntries      li.cmd-sortEntries,
+#multi-button-menu div.cmd-addCollocation   li.cmd-addCollocation,
+#multi-button-menu div.cmd-addPhraseologism li.cmd-addPhraseologism,
+#multi-button-menu div.cmd-addValency       li.cmd-addValency {
     display: block;
 }
 
@@ -415,3 +415,18 @@ ul.multi-button-drop-down li small {
   text-decoration:none;
 }
 
+.invitation {
+  background: #e7f8fb;
+}
+
+.invitation div {
+  border: 1px solid #93dce9;
+  padding: 0.7em;
+}
+
+.or-close {
+  font-size:.8em;margin-bottom:1.875em;line-height:1.875em;
+}
+.or-close, .or-close a {
+  color: #666;
+}
