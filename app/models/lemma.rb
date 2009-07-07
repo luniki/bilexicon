@@ -15,6 +15,13 @@ class Lemma < ActiveRecord::Base
   validates_presence_of :short1, :short2, :long1, :long2,
                         :word_class, :level_rezeptiv, :level_produktiv
 
+
+  # define indices for the sphinx search engine
+  define_index do
+    indexes short1, short2, long1, long2, phonetic1, phonetic2
+  end
+
+
   LEVELS = %w(A1 A2 B1 B2 C1 C2)
 
   WORD_CLASSES = %w(N V ADJ CL wh-clause CL-Rel ADV ADVtime ADVplace Prep PrepN P PRON ReflPRON)
