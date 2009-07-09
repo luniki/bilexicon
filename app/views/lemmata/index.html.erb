@@ -18,6 +18,8 @@
     <%= @lemmata.size %> <%= t(:search_results_for) %>
     <span id="search_term"><%= h(params[:q]) %></span>
   </h2>
+
+  <%= will_paginate @lemmata %>
   <ul id="lemmata">
     <% for lemma in @lemmata -%>
       <% content_tag_for(:li, lemma) do %>

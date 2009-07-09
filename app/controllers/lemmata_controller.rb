@@ -3,7 +3,10 @@ class LemmataController < ApplicationController
   before_filter :require_admin, :except => [:index, :show]
 
   def index
-    @lemmata = Lemma.search(params[:q]) unless params[:q].blank?
+    if params[:q].present?
+      @lemmata = Lemma.search params[:q], :page => (params[:page] || 1),
+                                          :star => true
+    end
   end
 
   def show

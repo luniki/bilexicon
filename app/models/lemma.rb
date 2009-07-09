@@ -19,20 +19,22 @@ class Lemma < ActiveRecord::Base
   # define indices for the sphinx search engine
   define_index do
     indexes short1, short2, long1, long2, phonetic1, phonetic2
+    indexes examples.form1, :as => :examples_form1
+    indexes examples.form2, :as => :examples_form2
+
+    indexes subentries.form1, :as => :subentries_form1
+    indexes subentries.form2, :as => :subentries_form2
+    indexes subentries.synonym1, :as => :subentries_synonym1
+    indexes subentries.synonym2, :as => :subentries_synonym2
+    indexes subentries.examples.form1, :as => :subentries_examples_form1
+    indexes subentries.examples.form2, :as => :subentries_examples_form2
+
   end
 
 
   LEVELS = %w(A1 A2 B1 B2 C1 C2)
 
   WORD_CLASSES = %w(N V ADJ CL wh-clause CL-Rel ADV ADVtime ADVplace Prep PrepN P PRON ReflPRON)
-
-  def self.search(search)
-    find(:all,
-         :conditions => ['short1 LIKE :q OR short2 LIKE :q OR ' +
-                         'long1 LIKE :q OR long2 LIKE :q',
-                         {:q => "%#{search}%"}],
-         :order => 'short1 ASC, short2 ASC')
-  end
 
   def level
     "#{level_rezeptiv}/#{level_produktiv}"
