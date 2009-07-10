@@ -1,0 +1,6 @@
+development:
+  allow_star: true
+
+production:
+  allow_star: true
+
