@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090508070809) do
+ActiveRecord::Schema.define(:version => 20090710091141) do
 
   create_table "categories", :force => true do |t|
     t.string   "name"
@@ -25,6 +25,8 @@ ActiveRecord::Schema.define(:version => 20090508070809) do
     t.integer "lemma_id",    :null => false
   end
 
+  add_index "categories_lemmata", ["category_id", "lemma_id"], :name => "index_categories_lemmata_on_category_id_and_lemma_id"
+
   create_table "examples", :force => true do |t|
     t.string   "form1"
     t.string   "form2"
@@ -38,6 +40,8 @@ ActiveRecord::Schema.define(:version => 20090508070809) do
     t.datetime "updated_at"
     t.integer  "position"
   end
+
+  add_index "examples", ["exampleable_id", "exampleable_type"], :name => "index_examples_on_exampleable_id_and_exampleable_type"
 
   create_table "lemmata", :force => true do |t|
     t.string   "short1"
@@ -76,6 +80,8 @@ ActiveRecord::Schema.define(:version => 20090508070809) do
     t.datetime "updated_at"
     t.integer  "position"
   end
+
+  add_index "subentries", ["lemma_id", "type"], :name => "index_subentries_on_lemma_id_and_type"
 
   create_table "taggings", :force => true do |t|
     t.integer  "tag_id"
