@@ -31,6 +31,12 @@
       </tr>
 
       <tr>
+        <th scope="row"><%= t :synonym %></th>
+        <td><%= f.text_field :synonym1 %></td>
+        <td><%= f.text_field :synonym2 %></td>
+      </tr>
+
+      <tr>
         <th scope="row"><%= t :lemma_word_class %></th>
         <td colspan="2">
           <%= f.select :word_class, Lemma::WORD_CLASSES %>

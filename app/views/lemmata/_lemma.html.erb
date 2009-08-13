@@ -21,13 +21,8 @@
 
   <div class="entry-line span-24">
 
-    <div class="span-5">
-      <% if @lemma.phonetic1.present? -%>
-        <span class="phonetic" title="<%= t(:lemma_phonetic) %>">{<%= h @lemma.phonetic1 %>};</span>
-      <% end %>
-      <span class="word_class" title="<%= t(:lemma_word_class) %>">cl: <%= h @lemma.word_class %>;</span>
-      <span class="level" title="<%= t(:lemma_level) %>">l: <%= h @lemma.level %></span>
-    </div>
+    <%= render :partial => "lemmata/margin",
+               :locals => { :lemma => @lemma, :side => 1 } %>
 
     <div class="span-6 form1">
       <%= h @lemma.long1 %>
@@ -36,13 +31,8 @@
       <%= h @lemma.long2 %>
     </div>
 
-    <div class="span-5">
-      <% if @lemma.phonetic2.present? -%>
-        <span class="phonetic" title="<%= t(:lemma_phonetic) %>">{<%= h @lemma.phonetic2 %>};</span>
-      <% end %>
-      <span class="word_class" title="<%= t(:lemma_word_class) %>">cl: <%= h @lemma.word_class %>;</span>
-      <span class="level" title="<%= t(:lemma_level) %>">l: <%= h @lemma.level %></span>
-    </div>
+    <%= render :partial => "lemmata/margin",
+               :locals => { :lemma => @lemma, :side => 2 } %>
 
     <div class="span-2 last">
       <% if current_user_is_admin then %>

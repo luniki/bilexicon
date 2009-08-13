@@ -18,7 +18,8 @@ class Lemma < ActiveRecord::Base
 
   # define indices for the sphinx search engine
   define_index do
-    indexes short1, short2, long1, long2, phonetic1, phonetic2
+    indexes short1, short2, long1, long2, phonetic1, phonetic2,
+            synonym1, synonym2
     indexes examples.form1, :as => :examples_form1
     indexes examples.form2, :as => :examples_form2
 

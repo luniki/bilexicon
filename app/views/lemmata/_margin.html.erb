@@ -1,0 +1,20 @@
+<div class="span-5">
+
+  <% attributes = [] %>
+
+  <% if lemma["phonetic#{side}"].present? -%>
+    <% attributes << capture do -%><span class="phonetic" title="<%= t(:lemma_phonetic) %>">{<%= h lemma["phonetic#{side}"] %>}</span><% end %>
+  <% end %>
+
+  <% attributes << capture do -%><span class="word_class" title="<%= t(:lemma_word_class) %>">cl: <%= h lemma.word_class %></span><% end %>
+
+  <% attributes << capture do -%><span class="level" title="<%= t(:lemma_level) %>">l: <%= h lemma.level %></span><% end %>
+
+  <% if lemma["synonym#{side}"].present? -%>
+    <% attributes << capture do -%><span class="synonym">syn: <%= h lemma["synonym#{side}"] %></span><% end %>
+  <% end %>
+
+  <%= attributes.join("; ") %>
+
+</div>
+
