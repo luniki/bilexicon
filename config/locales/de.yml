@@ -129,6 +129,7 @@ de:
   browse_categories: "durchblättern"
   cancel: "abbrechen"
   categories: "Themengebiete"
+  categories_missing: "Es sind derzeit noch keine Themengebiete vorhanden."
   category_children: "Untergeordnete Themengebiete"
   category: "Themengebiet"
   category_created: "Das Themengebiet wurde erfolgreich angelegt."

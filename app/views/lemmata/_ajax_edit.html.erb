@@ -71,10 +71,14 @@
       <strong><%= t(:lemma_categories) %></strong>
     </div>
     <div class="span-14">
-      <%= select_tag "lemma_categories",
-                    options_for_select(nested_set_options(Category) {|i| "#{'-' * i.level} #{i.name}" },
-                                        @lemma.categories.collect{|i| i.id}),
-                    {:multiple => :multiple, :size => 5, :name => "lemma[category_ids][]"} %>
+      <% if @lemma_categories.present? -%>
+        <%= select_tag "lemma_categories",
+                      options_for_select(nested_set_options(Category) {|i| "#{'-' * i.level} #{i.name}" },
+                                          @lemma.categories.collect{|i| i.id}),
+                      {:multiple => :multiple, :size => 5, :name => "lemma[category_ids][]"} %>
+      <% else -%>
+        <span class="quiet"><%= t :categories_missing %></span>
+      <% end %>
     </div>
     <div class="quiet span-4 last">
     </div>
