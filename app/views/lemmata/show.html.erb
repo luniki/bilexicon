@@ -5,8 +5,8 @@
   <div class="subentries span-24 last">
     <%= render :partial => "examples" %>
     <%= render :partial => "valencies" %>
-    <%= render :partial => "collocations" %>
-    <%= render :partial => "phraseologisms" %>
+    <%= render :partial => "collocations" unless !current_user_is_admin && @collocations.empty? %>
+    <%= render :partial => "phraseologisms" unless !current_user_is_admin && @phraseologisms.empty? %>
   </div>
 
 </div>
