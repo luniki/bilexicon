@@ -22,9 +22,14 @@ describe "/lemmata/show.html.erb" do
 
     it "should render both short forms" do
       render "/lemmata/show.html.erb"
+      response.should have_tag "h1", /#{@lemma.short1}.+#{@lemma.short2}/
+    end
+
+    it "should render both long forms" do
+      render "/lemmata/show.html.erb"
       response.should have_tag("div#?", "lemmata-#{@lemma.id}") do
-        with_tag("div.form1", @lemma.short1)
-        with_tag("div.form2", @lemma.short2)
+        with_tag("div.form1", @lemma.long1)
+        with_tag("div.form2", @lemma.long2)
       end
     end
 

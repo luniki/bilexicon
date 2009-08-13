@@ -9,7 +9,7 @@ describe LemmataController do
   describe "responding to GET index" do
 
     it "should expose @lemmata after searching" do
-      Lemma.should_receive(:search).with("a search word").and_return([mock_lemma])
+      Lemma.should_receive(:search).with("a search word", anything()).and_return([mock_lemma])
       get :index, :q => "a search word"
       assigns[:lemmata].should == [mock_lemma]
     end

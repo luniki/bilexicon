@@ -6,6 +6,7 @@ describe "/lemmata/index.html.erb" do
   describe "after searching without success" do
     before(:each) do
       assigns[:lemmata] = []
+      assigns[:lemmata].stub!(:total_pages).and_return(0)
       params[:q] = "a word that cannot be found"
     end
 
@@ -23,6 +24,7 @@ describe "/lemmata/index.html.erb" do
         stub_model(Lemma, :short1 => "to be", :short2 => "sein"),
         stub_model(Lemma, :short1 => "or",    :short2 => "oder"),
       ]
+      assigns[:lemmata].stub!(:total_pages).and_return(0)
       params[:q] = "a result"
     end
 
