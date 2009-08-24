@@ -1,3 +1,6 @@
+/*global $$,$,$w,Ajax,Effect,Element,Prototype,Sortable,BILEXICON */
+/*jslint browser: true, white: true, undef: true, nomen: true, eqeqeq: true, plusplus: true, bitwise: true, newcap: true, immed: true */
+
 /* ------------------------------------------------------------------------
  * sort subentries
  * ------------------------------------------------------------------------ */
@@ -11,8 +14,7 @@ BILEXICON.Commands.sortEntries = function (button) {
                       .writeAttribute({id: null})
                       .addClassName("done");
 
-  var finalize = function (event) {
-    event.stop();
+  var stop = function () {
 
     // remove done link and show the sort triggering multi button
     done.remove();
@@ -36,11 +38,15 @@ BILEXICON.Commands.sortEntries = function (button) {
 
     // destroy sortable and unmark accepting area
     Sortable.destroy(collection.id);
-    collection.setStyle({ border: "none" });
+    collection.removeClassName("sort-context");
+
+    document.stopObserving("close:forms", stop);
   };
 
+  document.observe("close:forms", stop);
+
   // show done link and hide the sort triggering multi button
-  collection.insert({ before: done.appear().observe("click", finalize) });
+  collection.insert({ before: done.appear({afterSetup: Element.scrollTo.curry(done)}).observe("click", BILEXICON.closeForms) });
 
   // hide multi buttons of the subentries
   buttons.invoke("hide");
@@ -63,6 +69,8 @@ BILEXICON.Commands.sortEntries = function (button) {
     format: /^(?:.*)-(.*)$/,
     handle: "drag-handle"
   });
-  collection.setStyle({ border: "1px dashed #eee" });
+  collection.addClassName("sort-context");
 };
+
+BILEXICON.Commands.cancelSorting = Prototype.emptyFunction;
 

@@ -33,7 +33,7 @@ Effect.SelfHealingFade = function (element) {
       new Effect.Fade(element,  { sync: true }),
       new Effect.BlindUp(element, { sync: true })
     ],
-    arguments[1] || { duration: 0.25 }
+    arguments[1] || { duration: 0.1 }
   );
 };
 

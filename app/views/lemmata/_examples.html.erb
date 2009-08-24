@@ -1,4 +1,4 @@
-<ol id="<%= path_to_id(lemma_examples_path(@lemma)) %>" class="examples">
+<ol id="<%= path_to_id(lemma_examples_path(@lemma)) %>" class="examples column last">
   <%= render :partial => "example", :collection => @examples, :locals => { :exampleable => @lemma } %>
 </ol>
 

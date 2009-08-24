@@ -1,22 +1,10 @@
+/*global $$,$,$w,Ajax,Effect,Element,Prototype,BILEXICON */
+/*jslint browser: true, white: true, undef: true, nomen: true, eqeqeq: true, plusplus: true, bitwise: true, newcap: true, immed: true */
+
 /* ------------------------------------------------------------------------
  * multi button
  * ------------------------------------------------------------------------ */
-BILEXICON.MultiButton = function () {
-
-  var edit_templates = {};
-
-  // initializes the edit templates
-  var init_edit_templates = function () {
-    $w("examples valencies collocations phraseologisms").each(function (type) {
-      var comment =
-        $A($(type + "-edit-template").childNodes).find(function (c) {
-          return c.nodeType === Node.COMMENT_NODE;
-        });
-      if (comment) {
-        edit_templates[type] = new Template(comment.nodeValue);
-      }
-    });
-  };
+BILEXICON.MultiButton = (function () {
 
   return {
 
@@ -26,7 +14,6 @@ BILEXICON.MultiButton = function () {
         return;
       }
       this.activeButton = false;
-      init_edit_templates();
 
       this.menu.observe("click", this.observeMenu.bind(this));
       document.observe("click", this.observeDocument.bind(this));
@@ -41,9 +28,9 @@ BILEXICON.MultiButton = function () {
       }
       event.stop();
 
-      if (this.activeButton && this.activeButton != multibutton) {
+      if (this.activeButton && this.activeButton !== multibutton) {
         this.clickOff();
-      } else if (this.activeButton && this.activeButton == multibutton) {
+      } else if (this.activeButton && this.activeButton === multibutton) {
         this.clickOff();
         return;
       }
@@ -60,6 +47,8 @@ BILEXICON.MultiButton = function () {
     observeMenu: function (event) {
 
       event.stop();
+      BILEXICON.closeForms();
+
       var class_name = event.findElement("li").className;
       if (Prototype.Browser.IE) {
         class_name = class_name.replace(/\b\w*hover_/gi, "").strip();
@@ -113,11 +102,11 @@ BILEXICON.MultiButton = function () {
                      parse(ul.getStyle("padding-right"));
       ul.setStyle({ minWidth: button_width + "px" });
 
-      var _60 = button.className;
-      this.menu.down("div").className = _60;
+      var button_class = button.className;
+      this.menu.down("div").className = button_class;
 
       this.menu.show();
     }
   };
-}();
+}());
 

@@ -1,3 +1,5 @@
+/*global $$,$,$w,Ajax,Effect,Element,Prototype,BILEXICON */
+/*jslint browser: true, white: true, undef: true, nomen: true, eqeqeq: true, plusplus: true, bitwise: true, newcap: true, immed: true */
 /* ------------------------------------------------------------------------
  * edit the current lemma
  * ------------------------------------------------------------------------ */
@@ -7,18 +9,9 @@ BILEXICON.Commands.editLemma = function () {
       entry = lemma.down(".entry"),
       route = BILEXICON.id_to_path(lemma.id);
 
-  // show faded entry, fade edit form and remove it
-  var cancel_edit_form = function (event) {
-    var edit = event.element().up(".entry-edit");
-    Effect.SelfHealingFade(edit, {
-      afterFinish: Element.remove.curry(edit)
-    });
-    Effect.SelfHealingAppear(entry);
-    event.stop();
-  };
-
   // submit entry and dismiss fade edit form and remove it
   var submit_edit_form = function (event) {
+    event.stop();
     var lemma = event.element().up(".lemma");
     var edit = lemma.down(".entry-edit");
     var r = new Ajax.Request(route, {
@@ -32,14 +25,20 @@ BILEXICON.Commands.editLemma = function () {
       onFailure: function (transport) {
         edit.replace(transport.responseText);
         edit = lemma.down(".entry-edit");
-        edit.down(".cancel").observe("click", cancel_edit_form);
+        edit.down(".cancel").observe("click", BILEXICON.closeForms);
         edit.down(".submit").observe("click", submit_edit_form);
         edit.show();
       }
     });
-    event.stop();
   };
 
+  // show faded entry, fade edit form and remove it
+  var stop = function (event) {
+    var edit = $("lemma-edit"), entry = $$(".entry").first();
+    edit.remove();
+    Effect.SelfHealingAppear(entry);
+    document.stopObserving("close:forms", stop);
+  };
 
   Effect.SelfHealingFade(entry);
 
@@ -53,11 +52,13 @@ BILEXICON.Commands.editLemma = function () {
 
     onSuccess: function (transport) {
       entry.insert({ after:  transport.responseText });
+
+      document.observe("close:forms", stop);
+
       var edit = entry.next();
-      edit.down(".cancel").observe("click", cancel_edit_form);
+      edit.down(".cancel").observe("click", BILEXICON.closeForms);
       edit.down(".submit").observe("click", submit_edit_form);
       Effect.SelfHealingAppear(edit);
     }
   });
 };
-

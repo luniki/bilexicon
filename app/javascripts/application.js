@@ -1,11 +1,11 @@
+/*global $$,$,$w,Ajax,Effect,Element,Prototype,BILEXICON */
+/*jslint browser: true, white: true, undef: true, nomen: true, eqeqeq: true, plusplus: true, bitwise: true, newcap: true, immed: true */
+
 //= require <prototype>
 //= require <effects>
 //= require <controls>
 //= require <dragdrop>
 //= require "extensions"
-
-/*global $,$w,Element */
-/*jslint white: true */
 
 
 /* ------------------------------------------------------------------------
@@ -15,8 +15,17 @@ var BILEXICON = {};
 
 //= require "bilexicon/helpers"
 //= require "bilexicon/search"
+//= require "bilexicon/invitation"
 //= require "bilexicon/commands"
 //= require "bilexicon/multibutton"
+
+
+BILEXICON.closeForms = function (event) {
+  if (event) {
+    event.stop();
+  }
+  document.fire("close:forms");
+};
 
 /* ------------------------------------------------------------------------
  * dom:loaded events

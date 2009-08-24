@@ -11,8 +11,8 @@
 #E7F8FB
 #C9EDF4
 #3CC5DE
-#40A2B7
 
+#40A2B7
 
 \**************************************/
 
@@ -415,18 +415,35 @@ ul.multi-button-drop-down li small {
   text-decoration:none;
 }
 
-.invitation {
-  background: #e7f8fb;
+.invitation div {
+  background: #3CC5DE;
+  border: 1px solid #40A2B7;
+  padding: 0.7em;
+  -moz-border-radius-bottomleft: 1em;
+  -moz-border-radius-bottomright: 1em;
+  -webkit-border-radius-bottomleft: 1em;
+  -webkit-border-radius-bottomright: 1em;
 }
 
-.invitation div {
-  border: 1px solid #93dce9;
-  padding: 0.7em;
+.invitation, .invitation a {
+  color: white;
 }
+
+.invitation .or-close, .invitation .or-close a {
+  color: #eee;
+}
+
 
 .or-close {
-  font-size:.8em;margin-bottom:1.875em;line-height:1.875em;
+  font-size:.8em;
+  margin-bottom:1.875em;
+  line-height:1.875em;
 }
+
 .or-close, .or-close a {
   color: #666;
+}
+
+.sort-context {
+  border: 1px dashed #E7F8FB;
 }
