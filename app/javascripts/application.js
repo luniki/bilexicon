@@ -19,6 +19,7 @@ var BILEXICON = {};
 //= require "bilexicon/commands"
 //= require "bilexicon/multibutton"
 
+//= require "bilexicon/wordclass"
 
 BILEXICON.closeForms = function (event) {
   if (event) {
@@ -26,6 +27,7 @@ BILEXICON.closeForms = function (event) {
   }
   document.fire("close:forms");
 };
+
 
 /* ------------------------------------------------------------------------
  * dom:loaded events

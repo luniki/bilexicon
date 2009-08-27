@@ -59,15 +59,6 @@
     </div>
 
     <div class="span-4 append-bottom clear" style="text-align: right">
-      <strong><%= t(:lemma_word_class) %></strong>
-    </div>
-    <div class="span-14">
-      <%= f.select :word_class, Lemma::WORD_CLASSES %>
-    </div>
-    <div class="quiet span-4 last">
-    </div>
-
-    <div class="span-4 append-bottom clear" style="text-align: right">
       <strong><%= t(:lemma_categories) %></strong>
     </div>
     <div class="span-14">
@@ -83,6 +74,17 @@
     <div class="quiet span-4 last">
     </div>
 
+    <div class="span-4 append-bottom clear" style="text-align: right">
+      <strong><%= t(:lemma_word_class) %></strong>
+    </div>
+    <div class="span-7">
+      <%= f.select :word_class1, Lemma::WORD_CLASSES %>
+    </div>
+    <div class="span-7">
+      <%= f.select :word_class2, Lemma::WORD_CLASSES %>
+    </div>
+    <div class="quiet span-4 last">
+    </div>
 
     <div class="push-4 span-18 clear last">
       <button class="submit">

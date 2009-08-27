@@ -1,3 +1,9 @@
+/*global $$,$,$w,Ajax,Effect,Element,Prototype,BILEXICON */
+/*jslint browser: true, white: true, undef: true, plusplus: true, bitwise: true, newcap: true */
+
+/* ------------------------------------------------------------------------
+ * default value as hint
+ * ------------------------------------------------------------------------ */
 (function () {
   var methods = {
     defaultValueActsAsHint: function (element) {
@@ -20,6 +26,20 @@
 
   $w('input textarea').each(function (tag) {
     Element.addMethods(tag, methods);
+  });
+})();
+
+/* ------------------------------------------------------------------------
+ * visibility methods
+ * ------------------------------------------------------------------------ */
+(function () {
+  Element.addMethods({
+    setVisibility: function (element) {
+      element.setStyle({ visibility: "visible"});
+    },
+    removeVisibility: function (element) {
+      element.setStyle({ visibility: "hidden"});
+    }
   });
 })();
 

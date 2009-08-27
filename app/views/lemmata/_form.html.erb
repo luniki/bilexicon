@@ -1,80 +1,190 @@
 <% form_for(@lemma) do |f| %>
-  <%= f.error_messages %>
 
-  <table>
+  <div class="span-24 last">
 
-    <thead>
-      <tr>
-        <td></td>
-        <th>Englisch</th>
-        <th>Deutsch</th>
-      </tr>
-    </thead>
+    <!-- TODO -->
+    <%= f.error_messages %>
 
-    <tbody>
-      <tr>
-        <th scope="row"><%= t :lemma_short %><span class="required">*</span></th>
-        <td><%= f.text_field :short1 %></td>
-        <td><%= f.text_field :short2 %></td>
-      </tr>
+    <div class="span-6">&nbsp;</div>
+    <div class="span-9 language"><%= t :english %></div>
+    <div class="span-9 language last"><%= t :german %></div>
 
-      <tr>
-        <th scope="row"><%= t :lemma_long %><span class="required">*</span></th>
-        <td><%= f.text_field :long1 %></td>
-        <td><%= f.text_field :long2 %></td>
-      </tr>
+    <div class="span-6 attribute"><%= t :lemma_short %><span class="required">*</span></div>
+    <div class="span-9"><%= f.text_field :short1 %></div>
+    <div class="span-9 last"><%= f.text_field :short2 %></div>
 
-      <tr>
-        <th scope="row"><%= t :lemma_phonetic %></th>
-        <td><%= f.text_field :phonetic1 %></td>
-        <td><%= f.text_field :phonetic2 %></td>
-      </tr>
+    <div class="span-6 attribute"><%= t :lemma_long %><span class="required">*</span></div>
+    <div class="span-9"><%= f.text_field :long1 %></div>
+    <div class="span-9 last"><%= f.text_field :long2 %></div>
 
-      <tr>
-        <th scope="row"><%= t :synonym %></th>
-        <td><%= f.text_field :synonym1 %></td>
-        <td><%= f.text_field :synonym2 %></td>
-      </tr>
+    <div class="span-6 attribute"><%= t :lemma_phonetic %><span class="required">*</span></div>
+    <div class="span-9"><%= f.text_field :phonetic1 %></div>
+    <div class="span-9 last"><%= f.text_field :phonetic2 %></div>
 
-      <tr>
-        <th scope="row"><%= t :lemma_word_class %></th>
-        <td colspan="2">
-          <%= f.select :word_class, Lemma::WORD_CLASSES %>
-        </td>
-      </tr>
+    <div class="span-6 attribute"><%= t :synonym %></div>
+    <div class="span-9"><%= f.text_field :synonym1 %></div>
+    <div class="span-9 last"><%= f.text_field :synonym2 %></div>
 
-      <tr>
-        <th scope="row"><%= t :lemma_level %></th>
-        <td><%= t :lemma_level_rezeptiv %>:  <%= f.select :level_rezeptiv,   Lemma::LEVELS %></td>
-        <td><%= t :lemma_level_produktiv %>: <%= f.select :level_produktiv,  Lemma::LEVELS %></td>
-      </tr>
+    <div class="span-6 attribute"><%= t :lemma_level %></div>
+    <div class="span-9">
+      <%= t :lemma_level_rezeptiv %>:  <%= f.select :level_rezeptiv,   Lemma::LEVELS %>
+    </div>
+    <div class="span-9 last">
+      <%= t :lemma_level_produktiv %>: <%= f.select :level_produktiv,  Lemma::LEVELS %>
+    </div>
 
-      <tr>
-        <th scope="row"><%= t :lemma_categories %></th>
-        <td colspan="2">
-          <% if @lemma_categories.present? -%>
-            <%= select_tag "lemma_categories",
-                           options_for_select(nested_set_options(Category) {|i| "#{'-' * i.level} #{i.name}" },
-                                              @lemma_categories.collect{|i| i.id}),
-                           {:multiple => :multiple, :size => 5, :name => "lemma[category_ids][]"} %>
-          <% else -%>
-            <span class="quiet"><%= t :categories_missing %></span>
-          <% end %>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+    <div class="span-6 attribute"><%= t :lemma_categories %></div>
+    <div class="span-18 last">
+      <% if @lemma_categories.present? -%>
+        <%= select_tag "lemma_categories",
+                        options_for_select(nested_set_options(Category) {|i| "#{'-' * i.level} #{i.name}" },
+                                          @lemma_categories.collect{|i| i.id}),
+                        {:multiple => :multiple, :size => 5, :name => "lemma[category_ids][]"} %>
+      <% else -%>
+        <span class="quiet"><%= t :categories_missing %></span>
+      <% end %>
+    </div>
 
-  <p>
-    <% if @lemma.new_record? -%>
-      <%= f.submit t(:create) %>
-      <%= t :or %>
-      <%= link_to t(:cancel), lemmata_path %>
-    <% else -%>
-      <%= f.submit t(:edit) %>
-      <%= t :or %>
-      <%= link_to t(:cancel), @lemma %>
-    <% end %>
-  </p>
+    <div class="span-6 attribute"><%= t :lemma_word_class %></div>
+    <div class="span-9"><%= f.select :word_class1, Lemma::WORD_CLASSES %></div>
+    <div class="span-9 last"><%= f.select :word_class2, Lemma::WORD_CLASSES %></div>
+
+    <div id="additional-n" style="display: none;">
+      <div class="span-6 attribute">Genus</div>
+      <div class="form1 span-9"><%= text_field_tag :genus1 %></div>
+      <div class="form2 span-9 last"><%= text_field_tag :genus2 %></div>
+
+      <div class="span-6 attribute">GenSing</div>
+      <div class="form1 span-9"><%= text_field_tag :genus1 %></div>
+      <div class="form2 span-9 last"><%= text_field_tag :genus2 %></div>
+
+      <div class="span-6 attribute">Pl</div>
+      <div class="form1 span-9"><%= text_field_tag :genus1 %></div>
+      <div class="form2 span-9 last"><%= text_field_tag :genus2 %></div>
+
+      <div class="span-6 attribute">kein Pl</div>
+      <div class="form1 span-9"><%= check_box_tag :genus1 %></div>
+      <div class="form2 span-9 last"><%= check_box_tag :genus2 %></div>
+
+      <div class="span-6 attribute">Kollektivum</div>
+      <div class="form1 span-9"><%= text_field_tag :genus1 %></div>
+      <div class="form2 span-9 last"><%= text_field_tag :genus2 %></div>
+
+      <div class="span-6 attribute">Kompositum</div>
+      <div class="form1 span-9"><%= text_field_tag :genus1 %></div>
+      <div class="form2 span-9 last"><%= text_field_tag :genus2 %></div>
+
+      <div class="span-6 attribute">weibliche Form</div>
+      <div class="form1 span-9"><%= text_field_tag :genus1 %></div>
+      <div class="form2 span-9 last"><%= text_field_tag :genus2 %></div>
+    </div>
+
+    <div id="additional-v" style="display: none;">
+      <div class="span-6 attribute">Hilfsverb</div>
+      <div class="form1 span-9"><%= check_box_tag :genus1 %></div>
+      <div class="form2 span-9 last"><%= check_box_tag :genus2 %></div>
+
+      <div class="span-6 attribute">Partizip</div>
+      <div class="form1 span-9"><%= text_field_tag :genus1 %></div>
+      <div class="form2 span-9 last"><%= text_field_tag :genus2 %></div>
+
+      <div class="span-6 attribute">Perfekt</div>
+      <div class="form1 span-9"><%= text_field_tag :genus1 %></div>
+      <div class="form2 span-9 last"><%= text_field_tag :genus2 %></div>
+
+      <div class="span-6 attribute">Präsens</div>
+      <div class="form1 span-9"><%= text_field_tag :genus1 %></div>
+      <div class="form2 span-9 last"><%= text_field_tag :genus2 %></div>
+
+      <div class="span-6 attribute">reflexiv</div>
+      <div class="form1 span-9"><%= check_box_tag :genus1 %></div>
+      <div class="form2 span-9 last"><%= check_box_tag :genus2 %></div>
+
+      <div class="span-6 attribute">regelmäßig</div>
+      <div class="form1 span-9"><%= select("post", "category", ["regelmäßig", "unregelmäßig"]) %></div>
+      <div class="form2 span-9 last"><%= select("post", "category", ["regelmäßig", "unregelmäßig"]) %></div>
+
+      <div class="span-6 attribute">trennbar</div>
+      <div class="form1 span-9"><%= check_box_tag :genus1 %></div>
+      <div class="form2 span-9 last"><%= check_box_tag :genus2 %></div>
+
+      <div class="span-6 attribute">hat -ge-/kein -ge-</div>
+      <div class="form1 span-9">
+        <%= radio_button_tag "gender", "hat -ge-" %>hat -ge-
+        <%= radio_button_tag "gender", "hat -kein-" %>kein -ge-
+      </div>
+      <div class="form2 span-9 last">
+        <%= radio_button_tag "gender", "hat -ge-" %>hat -ge-
+        <%= radio_button_tag "gender", "hat -kein-" %>kein -ge-
+      </div>
+
+      <div class="span-6 attribute">Transitivität</div>
+      <div class="form1 span-9">
+        <%= radio_button_tag "gender", "1" %>transitiv
+        <%= radio_button_tag "gender", "0" %>intransitiv
+      </div>
+      <div class="form2 span-9 last">
+        <%= radio_button_tag "gender", "1" %>transitiv
+        <%= radio_button_tag "gender", "0" %>intransitiv
+      </div>
+
+    </div>
+
+    <div id="additional-adj" style="display: none;">
+      <div class="span-6 attribute">Kompositum</div>
+      <div class="form1 span-9"><%= text_field_tag :genus1 %></div>
+      <div class="form2 span-9 last"><%= text_field_tag :genus2 %></div>
+
+      <div class="span-6 attribute">Sup</div>
+      <div class="form1 span-9"><%= text_field_tag :genus1 %></div>
+      <div class="form2 span-9 last"><%= text_field_tag :genus2 %></div>
+
+      <div class="span-6 attribute">präd</div>
+      <div class="form1 span-9"><%= text_field_tag :genus1 %></div>
+      <div class="form2 span-9 last"><%= text_field_tag :genus2 %></div>
+
+      <div class="span-6 attribute">attr</div>
+      <div class="form1 span-9"><%= text_field_tag :genus1 %></div>
+      <div class="form2 span-9 last"><%= text_field_tag :genus2 %></div>
+    </div>
+
+
+    <div class="span-18 prepend-6 last">
+      <% if @lemma.new_record? -%>
+        <%= f.submit t(:create) %>
+        <%= t :or %>
+        <%= link_to t(:cancel), lemmata_path %>
+      <% else -%>
+        <%= f.submit t(:edit) %>
+        <%= t :or %>
+        <%= link_to t(:cancel), @lemma %>
+      <% end %>
+    </div>
+
+
+  </div>
+
 <% end %>
+
+<style>
+.span-9 {
+  vertical-align: middle;
+}
+
+/* TODO */
+.attribute {
+  font-weight: bold;
+  background-color: #C9EDF4;
+  clear: left;
+  height: 3em;
+}
+
+.language {
+  font-weight: bold;
+  background-color: #C9EDF4;
+  height: 3em;
+  vertical-align: middle;
+  margin-bottom: 1.5em;
+}
+</style>
 

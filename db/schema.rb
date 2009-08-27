@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090813074510) do
+ActiveRecord::Schema.define(:version => 20090825083540) do
 
   create_table "categories", :force => true do |t|
     t.string   "name"
@@ -50,13 +50,14 @@ ActiveRecord::Schema.define(:version => 20090813074510) do
     t.string   "long2"
     t.string   "phonetic1"
     t.string   "phonetic2"
-    t.string   "word_class"
     t.string   "level_rezeptiv"
     t.string   "level_produktiv"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "synonym1"
     t.string   "synonym2"
+    t.string   "word_class1"
+    t.string   "word_class2"
   end
 
   create_table "sessions", :force => true do |t|

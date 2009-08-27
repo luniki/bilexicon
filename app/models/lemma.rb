@@ -13,7 +13,8 @@ class Lemma < ActiveRecord::Base
   has_many :phraseologisms, :dependent => :destroy, :order => "position", :include => :examples
 
   validates_presence_of :short1, :short2, :long1, :long2,
-                        :word_class, :level_rezeptiv, :level_produktiv
+                        :word_class1, :word_class1,
+                        :level_rezeptiv, :level_produktiv
 
 
   # define indices for the sphinx search engine
