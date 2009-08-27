@@ -38,10 +38,6 @@ document.observe("dom:loaded", function () {
     input.defaultValueActsAsHint();
   });
 
-  if ($("popup-search")) {
-    $("popup-search").observe("click", BILEXICON.SearchPopup);
-  }
-
   BILEXICON.init_mirror_input();
 
   BILEXICON.MultiButton.setup();

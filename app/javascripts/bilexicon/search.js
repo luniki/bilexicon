@@ -19,3 +19,18 @@ BILEXICON.SearchPopup = function (event) {
   );
 };
 
+document.observe("dom:loaded", function () {
+  if ($("popup-search")) {
+    $("popup-search").observe("click", BILEXICON.SearchPopup);
+  }
+
+  if ($("search_input")) {
+    var search = $("search_input"),
+        form = search.up("form").observe("submit", function (event) {
+          if (search.hasClassName("hint") || search.value === "") {
+            event.stop();
+            search.shake();
+          }
+    });
+  }
+});
