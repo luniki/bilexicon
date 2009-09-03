@@ -286,7 +286,7 @@ th[scope="row"] {
 
 a.multi-button {
   background: transparent url(../images/small_multi.png) no-repeat scroll right top;
-  display: inline-block;
+  display: block;
   padding: 0;
   height: 15px;
   position: relative;
@@ -299,7 +299,7 @@ a.multi-button:hover {
 
 a.multi-button span {
   background: transparent none repeat scroll 0 0;
-  display: inline-block;
+  display: block;
   width: 26px;
   height:15px;
 }
@@ -404,8 +404,7 @@ ul.multi-button-drop-down li small {
 .tag {
   background: transparent url(../images/tag.png) no-repeat scroll left center;
   border-right: 1px solid #C1D0D2;
-  display: inline-block;
-  display: -moz-inline-block;
+  display: block;
 
   height: 16px;
   line-height: 16px;
