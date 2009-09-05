@@ -21,11 +21,11 @@ describe IssuesController do
     include EmailSpec::Matchers
 
     it "should deliver the signup email" do
-      issue = {:title => "title", :body  => "body"}
+      issue = {"title" => "title", "body"  => "body"}
       # expect
       IssueMailer.should_receive(:deliver_issue).with(issue)
       # when
-      post :signup, :issue => issue
+      post :create, :issue => issue
     end
   end
 end
