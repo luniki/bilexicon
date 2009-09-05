@@ -17,9 +17,6 @@ describe IssuesController do
 
   describe "responding to POST create" do
 
-    include EmailSpec::Helpers
-    include EmailSpec::Matchers
-
     it "should deliver the signup email" do
       issue = {"title" => "title", "body"  => "body"}
       # expect
