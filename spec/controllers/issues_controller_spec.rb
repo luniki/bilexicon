@@ -14,4 +14,18 @@ describe IssuesController do
       response.should be_success
     end
   end
+
+  describe "responding to POST create" do
+
+    include EmailSpec::Helpers
+    include EmailSpec::Matchers
+
+    it "should deliver the signup email" do
+      issue = {:title => "title", :body  => "body"}
+      # expect
+      IssueMailer.should_receive(:deliver_issue).with(issue)
+      # when
+      post :signup, :issue => issue
+    end
+  end
 end
