@@ -1,0 +1,13 @@
+defaults: &defaults
+  site_owner:
+    email: siteowner@example.com
+
+development:
+  <<: *defaults
+
+test:
+  <<: *defaults
+
+production:
+  <<: *defaults
+

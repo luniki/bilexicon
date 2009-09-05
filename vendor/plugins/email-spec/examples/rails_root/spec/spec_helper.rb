@@ -5,16 +5,17 @@ require File.expand_path(File.dirname(__FILE__) + "/../config/environment")
 require 'spec'
 require 'spec/rails'
 
-require 'email_spec/helpers'
-require 'email_spec/matchers'
+require File.expand_path(File.dirname(__FILE__) + "/model_factory.rb")
+require (RAILS_ROOT + '/../../lib/email_spec.rb')
 
 Spec::Runner.configure do |config|
+  config.include(Fixjour)
   # If you're not using ActiveRecord you should remove these
   # lines, delete config/database.yml and disable :active_record
   # in your config/boot.rb
-  config.use_transactional_fixtures = true
-  config.use_instantiated_fixtures  = false
-  config.fixture_path = RAILS_ROOT + '/spec/fixtures/'
+  #config.use_transactional_fixtures = true
+  #config.use_instantiated_fixtures  = false
+  #config.fixture_path = RAILS_ROOT + '/spec/fixtures/'
 
   # == Fixtures
   #
@@ -45,35 +46,6 @@ Spec::Runner.configure do |config|
   # config.mock_with :rr
   #
   # == Notes
-  #
-  # For more information take a look at Spec::Example::Configuration and Spec::Runner
-
-  Spec::Runner.configure do |config|
-    config.before(:each, :type => :view) do
-      template.stub!(:current_user).and_return(nil)
-      template.stub!(:current_user_is_admin).and_return(nil)
-    end
-  end
-
-  describe "an authenticated controller", :shared => true do
-
-    before (:each) do
-      controller.should_receive(:require_user).and_return(:true)
-    end
-  end
-
-  describe "an admin-authorized controller", :shared => true do
-
-    before (:each) do
-      controller.should_receive(:require_admin).and_return(:true)
-    end
-  end
-
-  describe "an admin-authorized view", :shared => true do
-
-    before (:each) do
-      template.stub!(:current_user).and_return(mock("user", :"admin?" => true))
-      template.stub!(:current_user_is_admin).and_return(true)
-    end
-  end
+  # 
+  # For more information take a look at Spec::Runner::Configuration and Spec::Runner
 end
