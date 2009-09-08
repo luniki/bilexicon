@@ -69,7 +69,7 @@ BILEXICON.WordClass = (function () {
 }());
 
 document.observe("dom:loaded", function () {
-  if ($("new_lemma")) {
+  if ($$("form.new_lemma, form.edit_lemma").size() > 0) {
     BILEXICON.WordClass.show_additional_fields();
     [1, 2].each(function (side) {
       $("lemma_word_class" + side).observe("change", BILEXICON.WordClass.show_additional_fields);
