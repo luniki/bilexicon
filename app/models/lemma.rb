@@ -21,6 +21,12 @@ class Lemma < ActiveRecord::Base
   define_index do
     indexes short1, short2, long1, long2, phonetic1, phonetic2,
             synonym1, synonym2
+
+    # additional fields dependend on word class
+    indexes [singular_genitive, plural, female_form,
+            present_tense, past_tense, past_participle,
+            comparative, superlative], :as => :additional_fields
+
     indexes examples.form1, :as => :examples_form1
     indexes examples.form2, :as => :examples_form2
 
