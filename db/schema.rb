@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090825083540) do
+ActiveRecord::Schema.define(:version => 20090908090651) do
 
   create_table "categories", :force => true do |t|
     t.string   "name"
@@ -58,6 +58,30 @@ ActiveRecord::Schema.define(:version => 20090825083540) do
     t.string   "synonym2"
     t.string   "word_class1"
     t.string   "word_class2"
+    t.string   "gender"
+    t.string   "singular_genitive"
+    t.string   "plural"
+    t.boolean  "singular_only"
+    t.boolean  "collective_noun"
+    t.boolean  "compound"
+    t.string   "female_form"
+    t.boolean  "aux_verb"
+    t.string   "present_tense"
+    t.string   "past_tense"
+    t.string   "past_participle"
+    t.boolean  "perfekt_haben"
+    t.boolean  "perfekt_sein"
+    t.boolean  "reflexive_verb"
+    t.boolean  "regular_verb"
+    t.boolean  "irregular_verb"
+    t.boolean  "partikel_trennbar"
+    t.boolean  "hat_ge"
+    t.boolean  "transitive_verb"
+    t.boolean  "intransitive_verb"
+    t.string   "comparative"
+    t.string   "superlative"
+    t.boolean  "predicative"
+    t.boolean  "attributive"
   end
 
   create_table "sessions", :force => true do |t|
