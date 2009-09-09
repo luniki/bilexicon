@@ -6,19 +6,19 @@ class AddAdditionalFieldsToLemma < ActiveRecord::Migration
       add_column :lemmata, "singular_genitive#{side}", :string
       add_column :lemmata, "plural#{side}",            :string
       add_column :lemmata, "singular_only#{side}",     :boolean
-      add_column :lemmata, "collective_noun#{side}",   :boolean
+      add_column :lemmata, "collective#{side}",        :boolean
       add_column :lemmata, "compound#{side}",          :boolean
       add_column :lemmata, "female_form#{side}",       :string
 
-      add_column :lemmata, "aux_verb#{side}",          :boolean
+      add_column :lemmata, "auxiliary#{side}",          :boolean
       add_column :lemmata, "present_tense#{side}",     :string
       add_column :lemmata, "past_tense#{side}",        :string
       add_column :lemmata, "past_participle#{side}",   :string
-      add_column :lemmata, "reflexive_verb#{side}",    :boolean
-      add_column :lemmata, "regular_verb#{side}",      :boolean
-      add_column :lemmata, "irregular_verb#{side}",    :boolean
-      add_column :lemmata, "transitive_verb#{side}",   :boolean
-      add_column :lemmata, "intransitive_verb#{side}", :boolean
+      add_column :lemmata, "reflexive#{side}",    :boolean
+      add_column :lemmata, "regular#{side}",      :boolean
+      add_column :lemmata, "irregular#{side}",    :boolean
+      add_column :lemmata, "transitive#{side}",   :boolean
+      add_column :lemmata, "intransitive#{side}", :boolean
 
       add_column :lemmata, "comparative#{side}",       :string
       add_column :lemmata, "superlative#{side}",       :string
@@ -38,15 +38,15 @@ class AddAdditionalFieldsToLemma < ActiveRecord::Migration
     [1, 2].each do |side|
       remove_columns :lemmata, "gender#{side}", "singular_genitive#{side}",
                                "plural#{side}", "singular_only#{side}",
-                               "collective_noun#{side}", "compound#{side}",
+                               "collective#{side}", "compound#{side}",
                                "female_form#{side}",
 
-                               "aux_verb#{side}", "present_tense#{side}",
+                               "auxiliary#{side}", "present_tense#{side}",
                                "past_tense#{side}", "past_participle#{side}",
-                               "reflexive_verb#{side}", "regular_verb#{side}",
-                               "irregular_verb#{side}",
-                               "transitive_verb#{side}",
-                               "intransitive_verb#{side}",
+                               "reflexive#{side}", "regular#{side}",
+                               "irregular#{side}",
+                               "transitive#{side}",
+                               "intransitive#{side}",
 
                                "comparative#{side}", "superlative#{side}",
                                "predicative#{side}", "attributive#{side}"
