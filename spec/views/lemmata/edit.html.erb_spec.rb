@@ -18,10 +18,12 @@ describe "/lemmata/edit.html.erb" do
     end
   end
 
-  it "should render edit form with a select for the world_klass" do
+  it "should render edit form with a select for the word classes" do
     render "/lemmata/edit.html.erb"
 
-    response.should have_tag("select#lemma_word_class")
+    [1, 2].each do |side|
+      response.should have_tag("select#lemma_word_class#{side}")
+    end
   end
 
   it "should render edit form with a select for the level" do
@@ -32,9 +34,18 @@ describe "/lemmata/edit.html.erb" do
   end
 
   it "should show the available categories" do
-    render "/lemmata/new.html.erb"
+
+    assigns[:lemma_categories] = [stub_model(Category, :name => "automobiles"),
+                                  stub_model(Category, :name => "vans")]
+    render "/lemmata/edit.html.erb"
 
     response.should have_tag("select[name=?]", "lemma[category_ids][]")
+  end
+
+  it "should show a message if no categories exist" do
+    render "/lemmata/edit.html.erb"
+
+    response.should have_tag "span.lemma_categories", I18n.translate(:categories_missing)
   end
 
   it "should show a cancel link" do

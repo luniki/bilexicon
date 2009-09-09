@@ -36,9 +36,10 @@ describe "/lemmata/show.html.erb" do
     it "should render phonetics and word_class" do
       render "/lemmata/show.html.erb"
       response.should have_tag("div#?", "lemmata-#{@lemma.id}") do
-        with_tag("span.phonetic", /#{@lemma.phonetic1}/)
-        with_tag("span.phonetic", /#{@lemma.phonetic2}/)
-        with_tag("span.word_class", /#{@lemma.word_class}/)
+        [1, 2].each do |side|
+          with_tag("span.phonetic", /#{@lemma["phonetic#{side}"]}/)
+          with_tag("span.word_class", /#{@lemma["word_class#{side}"]}/)
+        end
         with_tag("span.level", /#{@lemma.level}/)
       end
     end

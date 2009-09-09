@@ -26,7 +26,9 @@ describe "/lemmata/new.html.erb" do
   it "should render form with word class" do
     render "/lemmata/new.html.erb"
 
-    response.should have_tag("form select#lemma_word_class")
+    [1, 2].each do |side|
+      response.should have_tag("form select#lemma_word_class#{side}")
+    end
   end
 
 

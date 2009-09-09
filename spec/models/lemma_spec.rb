@@ -6,7 +6,8 @@ describe Lemma do
       :short1 => "to be", :short2 => "sein",
       :long1 => "to be", :long2 => "sein",
       :level_rezeptiv => "A1", :level_produktiv => "A1",
-      :word_class => "V"
+      :word_class1 => "V",
+      :word_class2 => "V"
     }
   end
 
