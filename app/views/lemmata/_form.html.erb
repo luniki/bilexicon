@@ -62,7 +62,11 @@
         <% end %>
       </div>
 
-      <div class="span-6 attribute"><% t :singular_genitive %></div>
+      <div class="span-6 attribute"><%= t :female_form %></div>
+      <div class="form1 span-9"><%= f.text_field :female_form1 %></div>
+      <div class="form2 span-9 last"><%= f.text_field :female_form2 %></div>
+
+      <div class="span-6 attribute"><%= t :singular_genitive %></div>
       <div class="form1 span-9"><%= f.text_field :singular_genitive1 %></div>
       <div class="form2 span-9 last"><%= f.text_field :singular_genitive2 %></div>
 
@@ -81,10 +85,6 @@
       <div class="span-6 attribute"><%= t :compound %></div>
       <div class="form1 span-9"><%= f.check_box :compound1 %></div>
       <div class="form2 span-9 last"><%= f.check_box :compound2 %></div>
-
-      <div class="span-6 attribute"><%= t :female_form %></div>
-      <div class="form1 span-9"><%= f.text_field :female_form1 %></div>
-      <div class="form2 span-9 last"><%= f.text_field :female_form2 %></div>
     </div>
 
 
