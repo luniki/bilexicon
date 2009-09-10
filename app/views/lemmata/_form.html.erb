@@ -50,102 +50,113 @@
     <div class="span-9 last"><%= f.select :word_class2, Lemma::WORD_CLASSES %></div>
 
     <div id="additional-n" style="display: none;">
-      <div class="span-6 attribute">Genus</div>
-      <div class="form1 span-9"><%= text_field_tag :genus1 %></div>
-      <div class="form2 span-9 last"><%= text_field_tag :genus2 %></div>
+      <div class="span-6 attribute"><%= t :gender %></div>
+      <div class="form1 span-9">
+        <% Lemma::GENDERS.each do |gender| -%>
+          <%= f.radio_button :gender1, gender %><%= f.label(:gender1, gender) %>
+        <% end %>
+      </div>
+      <div class="form1 span-9 last">
+        <% Lemma::GENDERS.each do |gender| -%>
+          <%= f.radio_button :gender2, gender %><%= f.label(:gender2, gender) %>
+        <% end %>
+      </div>
 
-      <div class="span-6 attribute">GenSing</div>
-      <div class="form1 span-9"><%= text_field_tag :genus1 %></div>
-      <div class="form2 span-9 last"><%= text_field_tag :genus2 %></div>
+      <div class="span-6 attribute"><% t :singular_genitive %></div>
+      <div class="form1 span-9"><%= f.text_field :singular_genitive1 %></div>
+      <div class="form2 span-9 last"><%= f.text_field :singular_genitive2 %></div>
 
-      <div class="span-6 attribute">Pl</div>
-      <div class="form1 span-9"><%= text_field_tag :genus1 %></div>
-      <div class="form2 span-9 last"><%= text_field_tag :genus2 %></div>
+      <div class="span-6 attribute"><%= t :plural %></div>
+      <div class="form1 span-9"><%= f.text_field :plural1 %></div>
+      <div class="form1 span-9 last"><%= f.text_field :plural2 %></div>
 
-      <div class="span-6 attribute">kein Pl</div>
-      <div class="form1 span-9"><%= check_box_tag :genus1 %></div>
-      <div class="form2 span-9 last"><%= check_box_tag :genus2 %></div>
+      <div class="span-6 attribute"><%= t :singular_only %></div>
+      <div class="form1 span-9"><%= f.check_box :singular_only1 %></div>
+      <div class="form1 span-9 last"><%= f.check_box :singular_only2 %></div>
 
-      <div class="span-6 attribute">Kollektivum</div>
-      <div class="form1 span-9"><%= text_field_tag :genus1 %></div>
-      <div class="form2 span-9 last"><%= text_field_tag :genus2 %></div>
+      <div class="span-6 attribute"><%= t :collective %></div>
+      <div class="form1 span-9"><%= f.check_box :collective1 %></div>
+      <div class="form1 span-9 last"><%= f.check_box :collective2 %></div>
 
-      <div class="span-6 attribute">Kompositum</div>
-      <div class="form1 span-9"><%= text_field_tag :genus1 %></div>
-      <div class="form2 span-9 last"><%= text_field_tag :genus2 %></div>
+      <div class="span-6 attribute"><%= t :compound %></div>
+      <div class="form1 span-9"><%= f.check_box :compound1 %></div>
+      <div class="form1 span-9 last"><%= f.check_box :compound2 %></div>
 
-      <div class="span-6 attribute">weibliche Form</div>
-      <div class="form1 span-9"><%= text_field_tag :genus1 %></div>
-      <div class="form2 span-9 last"><%= text_field_tag :genus2 %></div>
+      <div class="span-6 attribute"><%= t :female_form %></div>
+      <div class="form1 span-9"><%= f.text_field :female_form1 %></div>
+      <div class="form2 span-9 last"><%= f.text_field :female_form2 %></div>
     </div>
 
+
     <div id="additional-v" style="display: none;">
-      <div class="span-6 attribute">Hilfsverb</div>
-      <div class="form1 span-9"><%= check_box_tag :genus1 %></div>
-      <div class="form2 span-9 last"><%= check_box_tag :genus2 %></div>
+      <div class="span-6 attribute"><%= t :auxiliary %></div>
+      <div class="form1 span-9"><%= f.check_box :auxiliary1 %></div>
+      <div class="form1 span-9 last"><%= f.check_box :auxiliary2 %></div>
 
-      <div class="span-6 attribute">Partizip</div>
-      <div class="form1 span-9"><%= text_field_tag :genus1 %></div>
-      <div class="form2 span-9 last"><%= text_field_tag :genus2 %></div>
+      <div class="span-6 attribute"><%= t :present_tense %></div>
+      <div class="form1 span-9"><%= f.text_field :present_tense1 %></div>
+      <div class="form1 span-9 last"><%= f.text_field :present_tense2 %></div>
 
-      <div class="span-6 attribute">Perfekt</div>
-      <div class="form1 span-9"><%= text_field_tag :genus1 %></div>
-      <div class="form2 span-9 last"><%= text_field_tag :genus2 %></div>
+      <div class="span-6 attribute"><%= t :past_tense %></div>
+      <div class="form1 span-9"><%= f.text_field :past_tense1 %></div>
+      <div class="form1 span-9 last"><%= f.text_field :past_tense2 %></div>
 
-      <div class="span-6 attribute">Präsens</div>
-      <div class="form1 span-9"><%= text_field_tag :genus1 %></div>
-      <div class="form2 span-9 last"><%= text_field_tag :genus2 %></div>
+      <div class="span-6 attribute"><%= t :past_participle %></div>
+      <div class="form1 span-9"><%= f.text_field :past_participle1 %></div>
+      <div class="form1 span-9 last"><%= f.text_field :past_participle2 %></div>
 
-      <div class="span-6 attribute">reflexiv</div>
-      <div class="form1 span-9"><%= check_box_tag :genus1 %></div>
-      <div class="form2 span-9 last"><%= check_box_tag :genus2 %></div>
+      <div class="span-6 attribute"><%= t :reflexive %></div>
+      <div class="form1 span-9"><%= f.check_box :reflexive1 %></div>
+      <div class="form1 span-9 last"><%= f.check_box :reflexive2 %></div>
 
-      <div class="span-6 attribute">regelmäßig</div>
-      <div class="form1 span-9"><%= select("post", "category", ["regelmäßig", "unregelmäßig"]) %></div>
-      <div class="form2 span-9 last"><%= select("post", "category", ["regelmäßig", "unregelmäßig"]) %></div>
+      <div class="span-6 attribute"><%= t :regular %></div>
+      <div class="form1 span-9"><%= f.check_box :regular1 %></div>
+      <div class="form1 span-9 last"><%= f.check_box :regular2 %></div>
 
-      <div class="span-6 attribute">trennbar</div>
-      <div class="form1 span-9"><%= check_box_tag :genus1 %></div>
-      <div class="form2 span-9 last"><%= check_box_tag :genus2 %></div>
+      <div class="span-6 attribute"><%= t :irregular %></div>
+      <div class="form1 span-9"><%= f.check_box :irregular1 %></div>
+      <div class="form1 span-9 last"><%= f.check_box :irregular2 %></div>
 
-      <div class="span-6 attribute">hat -ge-/kein -ge-</div>
-      <div class="form1 span-9">
-        <%= radio_button_tag "gender", "hat -ge-" %>hat -ge-
-        <%= radio_button_tag "gender", "hat -kein-" %>kein -ge-
-      </div>
-      <div class="form2 span-9 last">
-        <%= radio_button_tag "gender", "hat -ge-" %>hat -ge-
-        <%= radio_button_tag "gender", "hat -kein-" %>kein -ge-
-      </div>
+      <div class="span-6 attribute"><%= t :transitive %></div>
+      <div class="form1 span-9"><%= f.check_box :transitive1 %></div>
+      <div class="form1 span-9 last"><%= f.check_box :transitive2 %></div>
 
-      <div class="span-6 attribute">Transitivität</div>
-      <div class="form1 span-9">
-        <%= radio_button_tag "gender", "1" %>transitiv
-        <%= radio_button_tag "gender", "0" %>intransitiv
-      </div>
-      <div class="form2 span-9 last">
-        <%= radio_button_tag "gender", "1" %>transitiv
-        <%= radio_button_tag "gender", "0" %>intransitiv
-      </div>
+      <div class="span-6 attribute"><%= t :intransitive %></div>
+      <div class="form1 span-9"><%= f.check_box :intransitive1 %></div>
+      <div class="form1 span-9 last"><%= f.check_box :intransitive2 %></div>
+
+      <div class="span-6 attribute"><%= t :perfekt_haben %></div>
+      <div class="form1 prepend-9 span-9 last"><%= f.check_box :perfekt_haben %></div>
+
+      <div class="span-6 attribute"><%= t :perfekt_sein %></div>
+      <div class="form1 prepend-9 span-9 last"><%= f.check_box :perfekt_sein %></div>
+
+      <div class="span-6 attribute"><%= t :partikel_trennbar %></div>
+      <div class="form1 prepend-9 span-9 last"><%= f.check_box :partikel_trennbar %></div>
+
+      <div class="span-6 attribute"><%= t :hat_ge %></div>
+      <div class="form1 prepend-9 span-9 last"><%= f.check_box :hat_ge %></div>
 
     </div>
 
     <div id="additional-adj" style="display: none;">
-      <div class="span-6 attribute">Kompositum</div>
-      <div class="form1 span-9"><%= text_field_tag :genus1 %></div>
-      <div class="form2 span-9 last"><%= text_field_tag :genus2 %></div>
 
-      <div class="span-6 attribute">Sup</div>
-      <div class="form1 span-9"><%= text_field_tag :genus1 %></div>
-      <div class="form2 span-9 last"><%= text_field_tag :genus2 %></div>
+      <div class="span-6 attribute"><%= t :comparative %></div>
+      <div class="form1 span-9"><%= f.text_field :comparative1 %></div>
+      <div class="form1 span-9 last"><%= f.text_field :comparative2 %></div>
 
-      <div class="span-6 attribute">präd</div>
-      <div class="form1 span-9"><%= text_field_tag :genus1 %></div>
-      <div class="form2 span-9 last"><%= text_field_tag :genus2 %></div>
+      <div class="span-6 attribute"><%= t :superlative %></div>
+      <div class="form1 span-9"><%= f.text_field :superlative1 %></div>
+      <div class="form1 span-9 last"><%= f.text_field :superlative2 %></div>
 
-      <div class="span-6 attribute">attr</div>
-      <div class="form1 span-9"><%= text_field_tag :genus1 %></div>
-      <div class="form2 span-9 last"><%= text_field_tag :genus2 %></div>
+      <div class="span-6 attribute"><%= t :predicative %></div>
+      <div class="form1 span-9"><%= f.check_box :predicative1 %></div>
+      <div class="form1 span-9 last"><%= f.check_box :predicative2 %></div>
+
+      <div class="span-6 attribute"><%= t :attributive %></div>
+      <div class="form1 span-9"><%= f.check_box :attributive1 %></div>
+      <div class="form1 span-9 last"><%= f.check_box :attributive2 %></div>
+
     </div>
 
 

@@ -2,12 +2,12 @@
 
 <% form_tag(issues_path, :method => :post) do %>
 
-  <%= label_tag :issue_title, t(:issue_title) %>
+  <%= label_tag :issue_title, t(:issue_title), :class => "heading" %>
   <%= text_field_tag 'issue[title]' %>
 
   <hr class="space"/>
 
-  <%= label_tag :issue_body, t(:issue_body) %>
+  <%= label_tag :issue_body, t(:issue_body), :class => "heading" %>
   <%= text_area_tag 'issue[body]' %>
 
   <hr class="space"/>

@@ -37,7 +37,7 @@ thead th, th {
   background:  #C9EDF4;
 }
 
-label {
+label.heading {
   display: block;
 }
 
