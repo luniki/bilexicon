@@ -1,8 +1,7 @@
 module Authlogic
   module ControllerAdapters # :nodoc:
-    # = Abstract Adapter
-    #
-    # Allows you to use Authlogic in any framework you want, not just rails. See the RailsAdapter or MerbAdapter for an example of how to adapt Authlogic to work with your framework.
+    # Allows you to use Authlogic in any framework you want, not just rails. See the RailsAdapter or MerbAdapter
+    # for an example of how to adapt Authlogic to work with your framework.
     class AbstractAdapter
       attr_accessor :controller
 
@@ -43,8 +42,20 @@ module Authlogic
         controller.session
       end
       
+      def responds_to_single_access_allowed?
+        controller.respond_to?(:single_access_allowed?, true)
+      end
+      
       def single_access_allowed?
-        controller.respond_to?(:single_access_allowed?, true) && controller.send(:single_access_allowed?)
+        controller.send(:single_access_allowed?)
+      end
+      
+      def responds_to_last_request_update_allowed?
+        controller.respond_to?(:last_request_update_allowed?, true)
+      end
+      
+      def last_request_update_allowed?
+        controller.send(:last_request_update_allowed?)
       end
       
       private
