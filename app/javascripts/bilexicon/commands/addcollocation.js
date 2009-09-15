@@ -11,6 +11,7 @@ BILEXICON.Commands.addCollocation = function () {
   var retrieveForm = function (transport) {
     collocations.insert(transport.responseText);
     var li = collocations.childElements().last();
+    BILEXICON.init_mirror_input(li);
 
     var createCollocation = function (event) {
       event.stop();
