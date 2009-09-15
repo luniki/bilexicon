@@ -37,7 +37,11 @@ thead th, th {
   background:  #C9EDF4;
 }
 
+label {
+  font-weight: normal;
+}
 label.heading {
+  font-weight: bold;
   display: block;
 }
 
