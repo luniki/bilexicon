@@ -45,6 +45,12 @@ label.heading {
   display: block;
 }
 
+/* buttons */
+a.button {
+  display: inline;
+  float: none;
+}
+
 /* input field hint */
 .hint {
   color: #C9EDF4;
@@ -130,29 +136,28 @@ label.heading {
 /**************************************/
 
 #speedy {
-  margin-top: 24px;
   background-color: #3CC5DE;
-  padding: 1.5em;
   color: white;
+  padding-top: 1.5em;
+  padding-bottom: 1.5em;
 }
 
 #speedy .input {
   border: none;
   font-size: 1.5em;
-  padding: 5px 10px 5px 7px;
-  vertical-align: top;
+  padding: 0.25em;
 }
 
 .search_button {
-  vertical-align: top;
-  margin: 0 0.583em 0.667em 0;
-  padding: 7px;
+  padding-left: 7px;
+}
 
-  border:1px solid #dedede;
-  border-top:1px solid #eee;
-  border-left:1px solid #eee;
+#speedy-browse {
+  padding: 0.5em 0;
+}
 
-  background-color:#f5f5f5;
+#speedy-browse a.button {
+  margin-left: 1em;
 }
 
 

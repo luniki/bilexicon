@@ -1,19 +1,17 @@
-<div class="span-13">
+<div id="speedy-search">
   <% form_tag(lemmata_path, :method => :get) do %>
     <%= text_field_tag 'q', params[:q].blank? ? t(:search_hint) : params[:q], {
       :id => "search_input",
-      :class => "input span-11" + (params[:q].blank? ? " default-as-hint" : "")
+      :class => "input span-10" + (params[:q].blank? ? " default-as-hint" : "")
     } %>
     <%= image_submit_tag 'icons/magnifier.png', :class => 'search_button' %>
   <% end %>
 </div>
-<div class="span-2">
+<div id="speedy-browse">
   <strong class="large">oder</strong>
-</div>
-<div class="span-7 last">
   <a href="<%= categories_path %>" class="button">
     <%= image_tag 'icons/cards.png' %>
     <%= t(:browse_categories) %>
   </a>
 </div>
-<div class="clearfix"/>
+<div class="clearfix"></div>
