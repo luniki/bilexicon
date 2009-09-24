@@ -17,7 +17,7 @@
     <div class="span-9"><%= f.text_field :long1 %></div>
     <div class="span-9 last"><%= f.text_field :long2 %></div>
 
-    <div class="span-6 attribute"><%= t :lemma_phonetic %><span class="required">*</span></div>
+    <div class="span-6 attribute"><%= t :lemma_phonetic %></div>
     <div class="span-9"><%= f.text_field :phonetic1 %></div>
     <div class="span-9 last"><%= f.text_field :phonetic2 %></div>
 
@@ -75,23 +75,47 @@
       <div class="form2 span-9 last"><%= f.text_field :plural2 %></div>
 
       <div class="span-6 attribute"><%= t :singular_only %></div>
-      <div class="form1 span-9"><%= f.check_box :singular_only1 %></div>
-      <div class="form2 span-9 last"><%= f.check_box :singular_only2 %></div>
+      <div class="form1 span-9">
+        <%= f.check_box :singular_only1 %>
+        <%= f.label(:singular_only1, t(:singular_only)) %>
+      </div>
+      <div class="form2 span-9 last">
+        <%= f.check_box :singular_only2 %>
+        <%= f.label(:singular_only2, t(:singular_only)) %>
+      </div>
 
       <div class="span-6 attribute"><%= t :collective %></div>
-      <div class="form1 span-9"><%= f.check_box :collective1 %></div>
-      <div class="form2 span-9 last"><%= f.check_box :collective2 %></div>
+      <div class="form1 span-9">
+        <%= f.check_box :collective1 %>
+        <%= f.label(:collective1, t(:collective)) %>
+      </div>
+      <div class="form2 span-9 last">
+        <%= f.check_box :collective2 %>
+        <%= f.label(:collective2, t(:collective)) %>
+      </div>
 
       <div class="span-6 attribute"><%= t :compound %></div>
-      <div class="form1 span-9"><%= f.check_box :compound1 %></div>
-      <div class="form2 span-9 last"><%= f.check_box :compound2 %></div>
+      <div class="form1 span-9">
+        <%= f.check_box :compound1 %>
+        <%= f.label(:compound1, t(:compound)) %>
+      </div>
+      <div class="form2 span-9 last">
+        <%= f.check_box :compound2 %>
+        <%= f.label(:compound1, t(:compound)) %>
+      </div>
     </div>
 
 
     <div id="additional-v" style="display: none;">
       <div class="span-6 attribute"><%= t :auxiliary %></div>
-      <div class="form1 span-9"><%= f.check_box :auxiliary1 %></div>
-      <div class="form2 span-9 last"><%= f.check_box :auxiliary2 %></div>
+      <div class="form1 span-9">
+        <%= f.check_box :auxiliary1 %>
+        <%= f.label(:auxiliary1, t(:auxiliary)) %>
+      </div>
+      <div class="form2 span-9 last">
+        <%= f.check_box :auxiliary2 %>
+        <%= f.label(:auxiliary2, t(:auxiliary)) %>
+      </div>
 
       <div class="span-6 attribute"><%= t :present_tense %></div>
       <div class="form1 span-9"><%= f.text_field :present_tense1 %></div>
@@ -106,36 +130,66 @@
       <div class="form2 span-9 last"><%= f.text_field :past_participle2 %></div>
 
       <div class="span-6 attribute"><%= t :reflexive %></div>
-      <div class="form1 span-9"><%= f.check_box :reflexive1 %></div>
-      <div class="form2 span-9 last"><%= f.check_box :reflexive2 %></div>
+      <div class="form1 span-9">
+        <%= f.check_box :reflexive1 %>
+        <%= f.label(:reflexive1, t(:reflexive)) %>
+      </div>
+      <div class="form2 span-9 last">
+        <%= f.check_box :reflexive2 %>
+        <%= f.label(:reflexive2, t(:reflexive)) %>
+      </div>
 
-      <div class="span-6 attribute"><%= t :regular %></div>
-      <div class="form1 span-9"><%= f.check_box :regular1 %></div>
-      <div class="form2 span-9 last"><%= f.check_box :regular2 %></div>
+      <div class="span-6 attribute"><%= t :regularity %></div>
+      <div class="form1 span-9">
+        <%= f.check_box :regular1 %>
+        <%= f.label(:regular1, t(:regular)) %>
+        <%= f.check_box :irregular1 %>
+        <%= f.label(:irregular1, t(:irregular)) %>
+      </div>
+      <div class="form2 span-9 last">
+        <%= f.check_box :regular2 %>
+        <%= f.label(:regular2, t(:regular)) %>
+        <%= f.check_box :irregular2 %>
+        <%= f.label(:irregular2, t(:irregular)) %>
+      </div>
 
-      <div class="span-6 attribute"><%= t :irregular %></div>
-      <div class="form1 span-9"><%= f.check_box :irregular1 %></div>
-      <div class="form2 span-9 last"><%= f.check_box :irregular2 %></div>
-
-      <div class="span-6 attribute"><%= t :transitive %></div>
-      <div class="form1 span-9"><%= f.check_box :transitive1 %></div>
-      <div class="form2 span-9 last"><%= f.check_box :transitive2 %></div>
-
-      <div class="span-6 attribute"><%= t :intransitive %></div>
-      <div class="form1 span-9"><%= f.check_box :intransitive1 %></div>
-      <div class="form2 span-9 last"><%= f.check_box :intransitive2 %></div>
+      <div class="span-6 attribute"><%= t :transitivity %></div>
+      <div class="form1 span-9">
+        <%= f.check_box :transitive1 %>
+        <%= f.label(:transitive1, t(:transitive)) %>
+        <%= f.check_box :intransitive1 %>
+        <%= f.label(:intransitive1, t(:intransitive)) %>
+      </div>
+      <div class="form2 span-9 last">
+        <%= f.check_box :transitive2 %>
+        <%= f.label(:transitive2, t(:transitive)) %>
+        <%= f.check_box :intransitive2 %>
+        <%= f.label(:intransitive2, t(:intransitive)) %>
+      </div>
 
       <div class="span-6 attribute"><%= t :perfekt_haben %></div>
-      <div class="form2 prepend-9 span-9 last"><%= f.check_box :perfekt_haben %></div>
+      <div class="form2 prepend-9 span-9 last">
+        <%= f.check_box :perfekt_haben %>
+        <%= f.label(:perfekt_haben, t(:perfekt_haben)) %>
+      </div>
 
       <div class="span-6 attribute"><%= t :perfekt_sein %></div>
-      <div class="form2 prepend-9 span-9 last"><%= f.check_box :perfekt_sein %></div>
+      <div class="form2 prepend-9 span-9 last">
+        <%= f.check_box :perfekt_sein %>
+        <%= f.label(:perfekt_sein, t(:perfekt_sein)) %>
+      </div>
 
       <div class="span-6 attribute"><%= t :partikel_trennbar %></div>
-      <div class="form2 prepend-9 span-9 last"><%= f.check_box :partikel_trennbar %></div>
+      <div class="form2 prepend-9 span-9 last">
+        <%= f.check_box :partikel_trennbar %>
+        <%= f.label(:partikel_trennbar, t(:partikel_trennbar)) %>
+      </div>
 
       <div class="span-6 attribute"><%= t :hat_ge %></div>
-      <div class="form2 prepend-9 span-9 last"><%= f.check_box :hat_ge %></div>
+      <div class="form2 prepend-9 span-9 last">
+        <%= f.check_box :hat_ge %>
+        <%= f.label(:hat_ge, t(:hat_ge)) %>
+      </div>
 
     </div>
 
@@ -150,12 +204,24 @@
       <div class="form2 span-9 last"><%= f.text_field :superlative2 %></div>
 
       <div class="span-6 attribute"><%= t :predicative %></div>
-      <div class="form1 span-9"><%= f.check_box :predicative1 %></div>
-      <div class="form2 span-9 last"><%= f.check_box :predicative2 %></div>
+      <div class="form1 span-9">
+        <%= f.check_box :predicative1 %>
+        <%= f.label(:predicative1, t(:predicative)) %>
+      </div>
+      <div class="form2 span-9 last">
+        <%= f.check_box :predicative2 %>
+        <%= f.label(:predicative2, t(:predicative)) %>
+      </div>
 
       <div class="span-6 attribute"><%= t :attributive %></div>
-      <div class="form1 span-9"><%= f.check_box :attributive1 %></div>
-      <div class="form2 span-9 last"><%= f.check_box :attributive2 %></div>
+      <div class="form1 span-9">
+        <%= f.check_box :attributive1 %>
+        <%= f.label(:attributive1, t(:attributive)) %>
+      </div>
+      <div class="form2 span-9 last">
+        <%= f.check_box :attributive2 %>
+        <%= f.label(:attributive2, t(:attributive)) %>
+      </div>
 
     </div>
 
@@ -176,26 +242,3 @@
   </div>
 
 <% end %>
-
-<style>
-.span-9 {
-  vertical-align: middle;
-}
-
-/* TODO */
-.attribute {
-  font-weight: bold;
-  background-color: #C9EDF4;
-  clear: left;
-  height: 3em;
-}
-
-.language {
-  font-weight: bold;
-  background-color: #C9EDF4;
-  height: 3em;
-  vertical-align: middle;
-  margin-bottom: 1.5em;
-}
-</style>
-

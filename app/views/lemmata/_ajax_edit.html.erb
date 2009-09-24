@@ -8,58 +8,54 @@
 
   <% form_for(@lemma) do |f| -%>
 
-    <div class="span-4 append-bottom" style="text-align: right">
-      <strong><%= t(:lemma_short) %></strong><span class="required">*</span>
+    <div class="inline-edit-header">
+      <%= t(:lemma_short) %><span class="required">*</span>
     </div>
-    <div class="span-7">
+    <div class="inline-edit-control">
       <%= f.text_field :short1, :class => "span-7" %>
       <%= error_message_on @lemma, :short1, :css_class => "input-error" %>
     </div>
-    <div class="span-7">
+    <div class="inline-edit-control">
       <%= f.text_field :short2, :class => "span-7" %>
       <%= error_message_on @lemma, :short2, :css_class => "input-error" %>
     </div>
-    <div class="quiet span-4 last">
-    </div>
+    <div class="inline-edit-help"></div>
 
-    <div class="span-4 append-bottom clear" style="text-align: right">
-      <strong><%= t(:lemma_long) %></strong><span class="required">*</span>
+    <div class="inline-edit-header">
+      <%= t(:lemma_long) %><span class="required">*</span>
     </div>
-    <div class="span-7">
+    <div class="inline-edit-control">
       <%= f.text_field :long1, :class => "span-7" %>
     </div>
-    <div class="span-7">
+    <div class="inline-edit-control">
       <%= f.text_field :long2, :class => "span-7" %>
     </div>
-    <div class="quiet span-4 last">
-    </div>
+    <div class="inline-edit-help"></div>
 
-    <div class="span-4 append-bottom clear" style="text-align: right">
-      <strong><%= t(:lemma_phonetic) %></strong>
+    <div class="inline-edit-header">
+      <%= t(:lemma_phonetic) %>
     </div>
-    <div class="span-7">
+    <div class="inline-edit-control">
       <%= f.text_field :phonetic1, :class => "span-7" %>
     </div>
-    <div class="span-7">
+    <div class="inline-edit-control">
       <%= f.text_field :phonetic2, :class => "span-7" %>
     </div>
-    <div class="quiet span-4 last">
-    </div>
+    <div class="inline-edit-help"></div>
 
-    <div class="span-4 append-bottom clear" style="text-align: right">
-      <strong><%= t(:synonym) %></strong>
+    <div class="inline-edit-header">
+      <%= t(:synonym) %>
     </div>
-    <div class="span-7">
+    <div class="inline-edit-control">
       <%= f.text_field :synonym1, :class => "span-7" %>
     </div>
-    <div class="span-7">
+    <div class="inline-edit-control">
       <%= f.text_field :synonym2, :class => "span-7" %>
     </div>
-    <div class="quiet span-4 last">
-    </div>
+    <div class="inline-edit-help"></div>
 
-    <div class="span-4 append-bottom clear" style="text-align: right">
-      <strong><%= t(:lemma_categories) %></strong>
+    <div class="inline-edit-header">
+      <%= t(:lemma_categories) %>
     </div>
     <div class="span-14">
       <% if @lemma_categories.present? -%>
@@ -71,20 +67,220 @@
         <span class="quiet"><%= t :categories_missing %></span>
       <% end %>
     </div>
-    <div class="quiet span-4 last">
-    </div>
+    <div class="inline-edit-help"></div>
 
-    <div class="span-4 append-bottom clear" style="text-align: right">
-      <strong><%= t(:lemma_word_class) %></strong>
+    <div class="inline-edit-header">
+      <%= t(:lemma_word_class) %>
     </div>
-    <div class="span-7">
+    <div class="inline-edit-control">
       <%= f.select :word_class1, Lemma::WORD_CLASSES %>
     </div>
-    <div class="span-7">
+    <div class="inline-edit-control">
       <%= f.select :word_class2, Lemma::WORD_CLASSES %>
     </div>
-    <div class="quiet span-4 last">
+    <div class="inline-edit-help"></div>
+
+
+
+    <div id="additional-n" style="display: none;">
+      <div class="inline-edit-header"><%= t :gender %></div>
+      <div class="form1 inline-edit-control">
+        <% Lemma::GENDERS.each do |gender| -%>
+          <%= f.radio_button :gender1, gender %><%= f.label(:gender1, gender) %>
+        <% end %>
+      </div>
+      <div class="form2 inline-edit-control">
+        <% Lemma::GENDERS.each do |gender| -%>
+          <%= f.radio_button :gender2, gender %><%= f.label(:gender2, gender) %>
+        <% end %>
+      </div>
+      <div class="inline-edit-help"></div>
+
+      <div class="inline-edit-header"><%= t :female_form %></div>
+      <div class="form1 inline-edit-control"><%= f.text_field :female_form1 %></div>
+      <div class="form2 inline-edit-control"><%= f.text_field :female_form2 %></div>
+      <div class="inline-edit-help"></div>
+
+      <div class="inline-edit-header"><%= t :singular_genitive %></div>
+      <div class="form1 inline-edit-control"><%= f.text_field :singular_genitive1 %></div>
+      <div class="form2 inline-edit-control"><%= f.text_field :singular_genitive2 %></div>
+      <div class="inline-edit-help"></div>
+
+      <div class="inline-edit-header"><%= t :plural %></div>
+      <div class="form1 inline-edit-control"><%= f.text_field :plural1 %></div>
+      <div class="form2 inline-edit-control"><%= f.text_field :plural2 %></div>
+      <div class="inline-edit-help"></div>
+
+      <div class="inline-edit-header"><%= t :singular_only %></div>
+      <div class="form1 inline-edit-control">
+        <%= f.check_box :singular_only1 %>
+        <%= f.label(:singular_only1, t(:singular_only)) %>
+      </div>
+      <div class="form2 inline-edit-control">
+        <%= f.check_box :singular_only2 %>
+        <%= f.label(:singular_only2, t(:singular_only)) %>
+      </div>
+      <div class="inline-edit-help"></div>
+
+      <div class="inline-edit-header"><%= t :collective %></div>
+      <div class="form1 inline-edit-control">
+        <%= f.check_box :collective1 %>
+        <%= f.label(:collective1, t(:collective)) %>
+      </div>
+      <div class="form2 inline-edit-control">
+        <%= f.check_box :collective2 %>
+        <%= f.label(:collective2, t(:collective)) %>
+      </div>
+      <div class="inline-edit-help"></div>
+
+      <div class="inline-edit-header"><%= t :compound %></div>
+      <div class="form1 inline-edit-control">
+        <%= f.check_box :compound1 %>
+        <%= f.label(:compound1, t(:compound)) %>
+      </div>
+      <div class="form2 inline-edit-control">
+        <%= f.check_box :compound2 %>
+        <%= f.label(:compound1, t(:compound)) %>
+      </div>
+      <div class="inline-edit-help"></div>
     </div>
+
+
+    <div id="additional-v" style="display: none;">
+      <div class="inline-edit-header"><%= t :auxiliary %></div>
+      <div class="form1 inline-edit-control">
+        <%= f.check_box :auxiliary1 %>
+        <%= f.label(:auxiliary1, t(:auxiliary)) %>
+      </div>
+      <div class="form2 inline-edit-control">
+        <%= f.check_box :auxiliary2 %>
+        <%= f.label(:auxiliary2, t(:auxiliary)) %>
+      </div>
+      <div class="inline-edit-help"></div>
+
+      <div class="inline-edit-header"><%= t :present_tense %></div>
+      <div class="form1 inline-edit-control"><%= f.text_field :present_tense1 %></div>
+      <div class="form2 inline-edit-control"><%= f.text_field :present_tense2 %></div>
+      <div class="inline-edit-help"></div>
+
+      <div class="inline-edit-header"><%= t :past_tense %></div>
+      <div class="form1 inline-edit-control"><%= f.text_field :past_tense1 %></div>
+      <div class="form2 inline-edit-control"><%= f.text_field :past_tense2 %></div>
+      <div class="inline-edit-help"></div>
+
+      <div class="inline-edit-header"><%= t :past_participle %></div>
+      <div class="form1 inline-edit-control"><%= f.text_field :past_participle1 %></div>
+      <div class="form2 inline-edit-control"><%= f.text_field :past_participle2 %></div>
+      <div class="inline-edit-help"></div>
+
+      <div class="inline-edit-header"><%= t :reflexive %></div>
+      <div class="form1 inline-edit-control">
+        <%= f.check_box :reflexive1 %>
+        <%= f.label(:reflexive1, t(:reflexive)) %>
+      </div>
+      <div class="form2 inline-edit-control">
+        <%= f.check_box :reflexive2 %>
+        <%= f.label(:reflexive2, t(:reflexive)) %>
+      </div>
+      <div class="inline-edit-help"></div>
+
+      <div class="inline-edit-header"><%= t :regularity %></div>
+      <div class="form1 inline-edit-control">
+        <%= f.check_box :regular1 %>
+        <%= f.label(:regular1, t(:regular)) %>
+        <%= f.check_box :irregular1 %>
+        <%= f.label(:irregular1, t(:irregular)) %>
+      </div>
+      <div class="form2 inline-edit-control">
+        <%= f.check_box :regular2 %>
+        <%= f.label(:regular2, t(:regular)) %>
+        <%= f.check_box :irregular2 %>
+        <%= f.label(:irregular2, t(:irregular)) %>
+      </div>
+      <div class="inline-edit-help"></div>
+
+      <div class="inline-edit-header"><%= t :transitivity %></div>
+      <div class="form1 inline-edit-control">
+        <%= f.check_box :transitive1 %>
+        <%= f.label(:transitive1, t(:transitive)) %>
+        <%= f.check_box :intransitive1 %>
+        <%= f.label(:intransitive1, t(:intransitive)) %>
+      </div>
+      <div class="form2 inline-edit-control">
+        <%= f.check_box :transitive2 %>
+        <%= f.label(:transitive2, t(:transitive)) %>
+        <%= f.check_box :intransitive2 %>
+        <%= f.label(:intransitive2, t(:intransitive)) %>
+      </div>
+      <div class="inline-edit-help"></div>
+
+      <div class="inline-edit-header"><%= t :perfekt_haben %></div>
+      <div class="form2 inline-edit-control2">
+        <%= f.check_box :perfekt_haben %>
+        <%= f.label(:perfekt_haben, t(:perfekt_haben)) %>
+      </div>
+      <div class="inline-edit-help"></div>
+
+      <div class="inline-edit-header"><%= t :perfekt_sein %></div>
+      <div class="form2 inline-edit-control2">
+        <%= f.check_box :perfekt_sein %>
+        <%= f.label(:perfekt_sein, t(:perfekt_sein)) %>
+      </div>
+      <div class="inline-edit-help"></div>
+
+      <div class="inline-edit-header"><%= t :partikel_trennbar %></div>
+      <div class="form2 inline-edit-control2">
+        <%= f.check_box :partikel_trennbar %>
+        <%= f.label(:partikel_trennbar, t(:partikel_trennbar)) %>
+      </div>
+      <div class="inline-edit-help"></div>
+
+      <div class="inline-edit-header"><%= t :hat_ge %></div>
+      <div class="form2 inline-edit-control2">
+        <%= f.check_box :hat_ge %>
+        <%= f.label(:hat_ge, t(:hat_ge)) %>
+      </div>
+      <div class="inline-edit-help"></div>
+
+    </div>
+
+    <div id="additional-adj" style="display: none;">
+
+      <div class="inline-edit-header"><%= t :comparative %></div>
+      <div class="form1 inline-edit-control"><%= f.text_field :comparative1 %></div>
+      <div class="form2 inline-edit-control"><%= f.text_field :comparative2 %></div>
+      <div class="inline-edit-help"></div>
+
+      <div class="inline-edit-header"><%= t :superlative %></div>
+      <div class="form1 inline-edit-control"><%= f.text_field :superlative1 %></div>
+      <div class="form2 inline-edit-control"><%= f.text_field :superlative2 %></div>
+      <div class="inline-edit-help"></div>
+
+      <div class="inline-edit-header"><%= t :predicative %></div>
+      <div class="form1 inline-edit-control">
+        <%= f.check_box :predicative1 %>
+        <%= f.label(:predicative1, t(:predicative)) %>
+      </div>
+      <div class="form2 inline-edit-control">
+        <%= f.check_box :predicative2 %>
+        <%= f.label(:predicative2, t(:predicative)) %>
+      </div>
+      <div class="inline-edit-help"></div>
+
+      <div class="inline-edit-header"><%= t :attributive %></div>
+      <div class="form1 inline-edit-control">
+        <%= f.check_box :attributive1 %>
+        <%= f.label(:attributive1, t(:attributive)) %>
+      </div>
+      <div class="form2 inline-edit-control">
+        <%= f.check_box :attributive2 %>
+        <%= f.label(:attributive2, t(:attributive)) %>
+      </div>
+      <div class="inline-edit-help"></div>
+
+    </div>
+
+
 
     <div class="push-4 span-18 clear last">
       <button class="submit">

@@ -457,3 +457,24 @@ ul.multi-button-drop-down li small {
 .sort-context {
   border: 1px dashed #E7F8FB;
 }
+
+/* TODO */
+.attribute {
+  font-weight: bold;
+  background-color: #C9EDF4;
+  height: 3em;
+  clear: left;
+}
+
+.language {
+  font-weight: bold;
+  background-color: #C9EDF4;
+  height: 3em;
+  vertical-align: middle;
+  margin-bottom: 1.5em;
+}
+
+.inline-edit-header {
+  text-align: right;
+  font-weight: bold;
+}

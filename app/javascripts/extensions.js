@@ -36,9 +36,19 @@
   Element.addMethods({
     setVisibility: function (element) {
       element.setStyle({ visibility: "visible"});
+      return element;
     },
     removeVisibility: function (element) {
       element.setStyle({ visibility: "hidden"});
+      return element;
+    },
+    enableChildren: function (element) {
+      element.select("input, textarea, select").flatten().invoke("enable");
+      return element;
+    },
+    disableChildren: function (element) {
+      element.select("input, textarea, select").flatten().invoke("disable");
+      return element;
     }
   });
 })();

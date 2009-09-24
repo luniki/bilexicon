@@ -27,12 +27,12 @@ BILEXICON.WordClass = (function () {
 
         // segment should still be shown, but remove the previous fields
         if (last === new_word_classes[other]) {
-          segment.select(".form" + (index + 1)).invoke("removeVisibility");
+          segment.select(".form" + (index + 1)).invoke("removeVisibility").invoke("disableChildren");
         }
 
         // segment should vanish and the other side's fields should be shown
         else {
-          segment.hide();
+          segment.hide().disableChildren();
           segment.select(".form" + (other + 1)).invoke("setVisibility");
         }
       }
@@ -49,10 +49,11 @@ BILEXICON.WordClass = (function () {
         segment.show();
 
         if (new_word_classes[index] !== new_word_classes[other]) {
-          segment.select(".form" + (other + 1)).invoke("removeVisibility");
+          segment.select(".form" + (index + 1)).invoke("enableChildren");
+          segment.select(".form" + (other + 1)).invoke("removeVisibility").invoke("disableChildren");
         }
         else {
-          segment.select(".form" + (index + 1)).invoke("setVisibility");
+          segment.select(".form" + (index + 1)).invoke("setVisibility").invoke("enableChildren");
         }
       }
 

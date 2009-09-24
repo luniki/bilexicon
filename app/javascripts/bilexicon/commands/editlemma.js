@@ -53,6 +53,12 @@ BILEXICON.Commands.editLemma = function () {
     onSuccess: function (transport) {
       entry.insert({ after:  transport.responseText });
 
+      BILEXICON.WordClass.show_additional_fields();
+      [1, 2].each(function (side) {
+        $("lemma_word_class" + side).observe("change", BILEXICON.WordClass.show_additional_fields);
+      });
+
+
       document.observe("close:forms", stop);
 
       var edit = entry.next();
