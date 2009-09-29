@@ -3,3 +3,30 @@
 
 en:
   hello: "Hello world"
+
+
+  word_classes:
+    N:           "N"
+    Npl:         "Npl"
+    N_and_N:     "N and N"
+    Nquant:      "Nquant"
+    V:           "V"
+    ADJ:         "ADJ"
+    N_pattern:   "N-pattern"
+    ADJ_pattern: "ADJ-pattern"
+    NUM:         "NUM"
+    ORD:         "ORD"
+    wh_CL:       "wh-CL"
+    that_CL:     "that-CL"
+    wh_to_INF:   "wh to-INF"
+    REL_CL:      "REL-CL"
+    ADV:         "ADV"
+    ADVtime:     "ADVtime"
+    ADVplace:    "ADVplace"
+    PREP:        "PREP"
+    PrepN:       "PrepN"
+    PART:        "PART"
+    PRON:        "PRON"
+    ReflPRON:    "ReflPRON"
+    SENTENCE:    "SENTENCE"
+
