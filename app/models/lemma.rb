@@ -23,14 +23,15 @@ class Lemma < ActiveRecord::Base
             synonym1, synonym2
 
     # additional fields dependend on word class
-    indexes [singular_genitive1, singular_genitive2,
-             plural1,            plural2,
-             female_form1,       female_form2,
-             present_tense1,     present_tense2,
-             past_tense1,        past_tense2,
-             past_participle1,   past_participle2,
-             comparative1,       comparative2,
-             superlative1,       superlative2], :as => :additional_fields
+    indexes [singular_genitive1,  singular_genitive2,
+             plural1,             plural2,
+             female_form1,        female_form2,
+             present_tense1,      present_tense2,
+             past_tense1,         past_tense2,
+             present_participle1, present_participle2,
+             past_participle1,    past_participle2,
+             comparative1,        comparative2,
+             superlative1,        superlative2], :as => :additional_fields
 
     indexes examples.form1, :as => :examples_form1
     indexes examples.form2, :as => :examples_form2

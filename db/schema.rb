@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090908090651) do
+ActiveRecord::Schema.define(:version => 20090929092130) do
 
   create_table "categories", :force => true do |t|
     t.string   "name"
@@ -102,6 +102,8 @@ ActiveRecord::Schema.define(:version => 20090908090651) do
     t.boolean  "perfekt_sein"
     t.boolean  "partikel_trennbar"
     t.boolean  "hat_ge"
+    t.string   "present_participle1"
+    t.string   "present_participle2"
   end
 
   create_table "sessions", :force => true do |t|

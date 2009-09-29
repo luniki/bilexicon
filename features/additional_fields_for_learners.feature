@@ -58,10 +58,11 @@ Feature: word class dependent fields of lemmata
     Then the page should show the irregular <field>
 
   Examples:
-    | field           |
-    | present tense   |
-    | past tense      |
-    | past participle |
+    | field              |
+    | present tense      |
+    | past tense         |
+    | present participle |
+    | past participle    |
 
   Scenario: show type of perfect on german verbs
     Given there is a verb

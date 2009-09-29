@@ -15,7 +15,7 @@
   <% end %>
 
   <% %w(gender singular_genitive plural singular_only collective compound female_form
-        auxiliary reflexive regular irregular transitive intransitive present_tense past_tense past_participle
+        auxiliary reflexive regular irregular transitive intransitive present_tense past_tense present_participle past_participle
         comparative superlative predicative attributive).each do |field| -%>
     <% if lemma["#{field}#{side}"].present? -%>
       <% attributes << capture do -%><span class="<%= field %>"><%= h lemma["#{field}#{side}"] %></span><% end %>

@@ -10,27 +10,28 @@ Feature: word class dependent fields of lemmata
     Then I should see <type> for <field>
 
   Examples:
-    | word_class | type          | field             |
-    | noun       | radio buttons | gender            |
-    | noun       | text fields   | singular genitive |
-    | noun       | text fields   | plural            |
-    | noun       | check boxes   | singular only     |
-    | noun       | check boxes   | collective        |
-    | noun       | check boxes   | compound          |
-    | noun       | text fields   | female form       |
-    | verb       | check boxes   | auxiliary         |
-    | verb       | text fields   | present tense     |
-    | verb       | text fields   | past tense        |
-    | verb       | text fields   | past participle   |
-    | verb       | check boxes   | reflexive         |
-    | verb       | check boxes   | regular           |
-    | verb       | check boxes   | irregular         |
-    | verb       | check boxes   | transitive        |
-    | verb       | check boxes   | intransitive      |
-    | adjective  | text fields   | comparative       |
-    | adjective  | text fields   | superlative       |
-    | adjective  | check boxes   | predicative       |
-    | adjective  | check boxes   | attributive       |
+    | word_class | type          | field              |
+    | noun       | radio buttons | gender             |
+    | noun       | text fields   | singular genitive  |
+    | noun       | text fields   | plural             |
+    | noun       | check boxes   | singular only      |
+    | noun       | check boxes   | collective         |
+    | noun       | check boxes   | compound           |
+    | noun       | text fields   | female form        |
+    | verb       | check boxes   | auxiliary          |
+    | verb       | text fields   | present tense      |
+    | verb       | text fields   | past tense         |
+    | verb       | text fields   | present participle |
+    | verb       | text fields   | past participle    |
+    | verb       | check boxes   | reflexive          |
+    | verb       | check boxes   | regular            |
+    | verb       | check boxes   | irregular          |
+    | verb       | check boxes   | transitive         |
+    | verb       | check boxes   | intransitive       |
+    | adjective  | text fields   | comparative        |
+    | adjective  | text fields   | superlative        |
+    | adjective  | check boxes   | predicative        |
+    | adjective  | check boxes   | attributive        |
 
   Scenario Outline: TODO
     Given I am an editor
