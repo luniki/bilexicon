@@ -73,10 +73,10 @@
       <%= t(:lemma_word_class) %>
     </div>
     <div class="inline-edit-control">
-      <%= f.select :word_class1, Lemma::WORD_CLASSES %>
+      <%= f.select :word_class1, Lemma.word_classes(:en) %>
     </div>
     <div class="inline-edit-control">
-      <%= f.select :word_class2, Lemma::WORD_CLASSES %>
+      <%= f.select :word_class2, Lemma.word_classes(:de) %>
     </div>
     <div class="inline-edit-help"></div>
 

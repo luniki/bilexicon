@@ -53,6 +53,12 @@ class Lemma < ActiveRecord::Base
                   :REL_CL, :ADV, :ADVtime, :ADVplace, :PREP, :PrepN, :PART,
                   :PRON, :ReflPRON, :SENTENCE]
 
+  def self.word_classes(locale)
+    Lemma::WORD_CLASSES.collect do |wc|
+      [I18n.translate("word_classes.#{wc}", :locale => locale), wc.to_s]
+    end
+  end
+
   def level
     "#{level_rezeptiv}/#{level_produktiv}"
   end

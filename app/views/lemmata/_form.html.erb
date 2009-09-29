@@ -46,8 +46,8 @@
     </div>
 
     <div class="span-6 attribute"><%= t :lemma_word_class %></div>
-    <div class="span-9"><%= f.select :word_class1, Lemma::WORD_CLASSES %></div>
-    <div class="span-9 last"><%= f.select :word_class2, Lemma::WORD_CLASSES %></div>
+    <div class="span-9"><%= f.select :word_class1, Lemma.word_classes(:en) %></div>
+    <div class="span-9 last"><%= f.select :word_class2, Lemma.word_classes(:de) %></div>
 
     <div id="additional-n" style="display: none;">
       <div class="span-6 attribute"><%= t :gender %></div>

@@ -14,4 +14,11 @@ describe Lemma do
   it "should create a new instance given valid attributes" do
     Lemma.create!(@valid_attributes)
   end
+
+  it "should have a list of translated word classes" do
+    de = Lemma.word_classes(:de)
+    en = Lemma.word_classes(:de)
+    de.size.should == en.size
+    de.collect{|e| e[1]}.should == en.collect{|e| e[1]}
+  end
 end
