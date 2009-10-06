@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090929092130) do
+ActiveRecord::Schema.define(:version => 20091006074700) do
 
   create_table "categories", :force => true do |t|
     t.string   "name"
@@ -104,7 +104,10 @@ ActiveRecord::Schema.define(:version => 20090929092130) do
     t.boolean  "hat_ge"
     t.string   "present_participle1"
     t.string   "present_participle2"
+    t.boolean  "delta",               :default => false
   end
+
+  add_index "lemmata", ["delta"], :name => "index_lemmata_on_delta"
 
   create_table "sessions", :force => true do |t|
     t.string   "session_id", :null => false

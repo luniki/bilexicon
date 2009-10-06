@@ -8,4 +8,14 @@ class Subentry < ActiveRecord::Base
   acts_as_list :scope => :lemma
 
   validates_presence_of :form1, :form2
+
+  after_save :set_lemma_delta_flag
+
+
+  protected
+
+  def set_lemma_delta_flag
+    lemma.delta = true
+    lemma.save
+  end
 end

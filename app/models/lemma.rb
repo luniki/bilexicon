@@ -43,6 +43,8 @@ class Lemma < ActiveRecord::Base
     indexes subentries.examples.form1, :as => :subentries_examples_form1
     indexes subentries.examples.form2, :as => :subentries_examples_form2
 
+    set_property :delta => true
+
   end
 
   GENDERS = %w(m f n)
