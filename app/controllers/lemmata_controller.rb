@@ -4,8 +4,7 @@ class LemmataController < ApplicationController
 
   def index
     if params[:q].present?
-      @lemmata = Lemma.search params[:q], :page => (params[:page] || 1),
-                                          :star => true
+      @lemmata = Lemma.search params[:q], :page => (params[:page] || 1)
     end
   end
 

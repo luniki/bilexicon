@@ -1,6 +1,8 @@
 development:
   allow_star: true
+  morphology: stem_en
 
 production:
   allow_star: true
+  morphology: stem_en
 
