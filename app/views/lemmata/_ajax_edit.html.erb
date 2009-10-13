@@ -242,8 +242,8 @@
 
       <div class="inline-edit-header"><%= t :hat_ge %></div>
       <div class="form2 inline-edit-control2">
-        <%= f.check_box :hat_ge %>
-        <%= f.label(:hat_ge, t(:hat_ge)) %>
+        <%= f.radio_button :hat_ge, "true" %><%= f.label(:hat_ge, t(:hat_ge)) %>
+        <%= f.radio_button :hat_ge, "false" %><%= f.label(:hat_ge, t(:kein_ge)) %>
       </div>
       <div class="inline-edit-help"></div>
 

@@ -191,8 +191,8 @@
 
       <div class="span-6 attribute"><%= t :hat_ge %></div>
       <div class="form2 prepend-9 span-9 last">
-        <%= f.check_box :hat_ge %>
-        <%= f.label(:hat_ge, t(:hat_ge)) %>
+        <%= f.radio_button :hat_ge, "true" %><%= f.label(:hat_ge, t(:hat_ge)) %>
+        <%= f.radio_button :hat_ge, "false" %><%= f.label(:hat_ge, t(:kein_ge)) %>
       </div>
 
     </div>
