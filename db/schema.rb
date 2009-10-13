@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20091006074700) do
+ActiveRecord::Schema.define(:version => 20091013090416) do
 
   create_table "categories", :force => true do |t|
     t.string   "name"
@@ -76,8 +76,8 @@ ActiveRecord::Schema.define(:version => 20091006074700) do
     t.boolean  "intransitive1"
     t.string   "comparative1"
     t.string   "superlative1"
-    t.boolean  "predicative1"
-    t.boolean  "attributive1"
+    t.boolean  "predicative1",        :default => true
+    t.boolean  "attributive1",        :default => true
     t.string   "gender2"
     t.string   "singular_genitive2"
     t.string   "plural2"
@@ -96,8 +96,8 @@ ActiveRecord::Schema.define(:version => 20091006074700) do
     t.boolean  "intransitive2"
     t.string   "comparative2"
     t.string   "superlative2"
-    t.boolean  "predicative2"
-    t.boolean  "attributive2"
+    t.boolean  "predicative2",        :default => true
+    t.boolean  "attributive2",        :default => true
     t.boolean  "perfekt_haben"
     t.boolean  "perfekt_sein"
     t.boolean  "partikel_trennbar"
