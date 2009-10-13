@@ -1,5 +1,5 @@
 class Subentry < ActiveRecord::Base
-  belongs_to :lemma
+  belongs_to :lemma, :validate => true
   has_many :examples, :as => :exampleable,
                       :dependent => :destroy,
                       :order => "position"
@@ -11,11 +11,12 @@ class Subentry < ActiveRecord::Base
 
   after_save :set_lemma_delta_flag
 
-
   protected
 
   def set_lemma_delta_flag
-    lemma.delta = true
-    lemma.save
+    if lemma
+      lemma.delta = true
+      lemma.save
+    end
   end
 end

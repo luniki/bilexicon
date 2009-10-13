@@ -6,7 +6,7 @@ describe Example do
       :form1 => "a",
       :form2 => "b",
       :exampleable_id => "",
-      :exampleable_type => "value for exampleable_type"
+      :exampleable_type => "Lemma"
     }
   end
 

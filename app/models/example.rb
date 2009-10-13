@@ -11,11 +11,13 @@ class Example < ActiveRecord::Base
   private
 
   def set_lemma_delta_flag
-    if exampleable.is_a?(Lemma)
-      exampleable.delta = true
-      exampleable.save
-    else
-      exampleable.set_lemma_delta_flag
+    if exampleable
+      if exampleable.is_a?(Lemma)
+        exampleable.delta = true
+        exampleable.save
+      else
+        exampleable.set_lemma_delta_flag
+      end
     end
   end
 end
