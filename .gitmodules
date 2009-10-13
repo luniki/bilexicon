@@ -10,3 +10,6 @@
 [submodule "vendor/plugins/acts-as-taggable-on"]
 	path = vendor/plugins/acts-as-taggable-on
 	url = git://github.com/mbleigh/acts-as-taggable-on.git
+[submodule "vendor/plugins/acts_as_list"]
+	path = vendor/plugins/acts_as_list
+	url = git://github.com/rails/acts_as_list.git
