@@ -1,8 +1,9 @@
 development:
   allow_star: true
   morphology: stem_en
+  bin_path: '/usr/local/bin'
 
 production:
   allow_star: true
   morphology: stem_en
-
+  bin_path: '/usr/local/bin'
