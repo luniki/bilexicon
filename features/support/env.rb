@@ -7,7 +7,7 @@ require 'cucumber/rails/world'
 #
 # If you leave this to true, you can turn off traqnsactions on a
 # per-scenario basis, simply tagging it with @no-txn
-Cucumber::Rails::World.use_transactional_fixtures = true
+# Cucumber::Rails::World.use_transactional_fixtures = true
 
 # Whether or not to allow Rails to rescue errors and render them on
 # an error page. Default is false, which will cause an error to be

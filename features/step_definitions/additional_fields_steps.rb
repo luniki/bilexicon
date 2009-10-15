@@ -1,7 +1,7 @@
 # step definitions for learners
 
 Given /^there is a (noun|verb|adjective)$/ do |word_class|
-  @lemma = Factory(word_class)
+  @lemma = Factory.create(word_class)
 end
 
 Given /^the (?:noun|verb|adjective) has an irregular (.*)$/ do |field|
@@ -23,9 +23,9 @@ end
 Then /^the page should show the irregular (.*)$/ do |field|
   field.gsub! " ", "_"
   [1, 2].each do |side|
-    response.should have_tag ".entry-line" do
+    response_body.should have_tag ".entry-line" do
       with_tag ".margin#{side}" do
-        response.should have_tag "span.#{field}", "irregular field"
+        response_body.should have_tag "span.#{field}", "irregular field"
       end
     end
   end
@@ -33,9 +33,9 @@ end
 
 Then /^the page should show the that the (?:noun|verb|adjective) is a (.*) (?:noun|verb|adjective)$/ do |field|
   [1, 2].each do |side|
-    response.should have_tag ".entry-line" do
+    response_body.should have_tag ".entry-line" do
       with_tag ".margin#{side}" do
-        response.should have_tag "span.#{field.gsub " ", "_"}", 1
+        response_body.should have_tag "span.#{field.gsub " ", "_"}"
       end
     end
   end
@@ -44,14 +44,14 @@ end
 # irregular fields for nouns
 
 Given /^a female noun$/ do
-  @lemma = Factory(:noun, :gender1 => "f", :gender2 => "f")
+  @lemma = Factory.create(:noun, :gender1 => "f", :gender2 => "f")
 end
 
 Then /^the page should say that the lemma is female$/ do
   [1, 2].each do |side|
-    response.should have_tag ".entry-line" do
+    response_body.should have_tag ".entry-line" do
       with_tag ".margin#{side}" do
-        response.should have_tag "span.gender", "f"
+        response_body.should have_tag "span.gender", "f"
       end
     end
   end
@@ -65,7 +65,7 @@ Given /^the verb has a perfect with "(haben|sein)"$/ do |aux|
 end
 
 Then /^the page should say that the lemma has perfect with "(haben|sein)"$/ do |aux|
-  response.should have_tag "span.perfekt_#{aux}"
+  response_body.should have_tag "span.perfekt_#{aux}"
 end
 
 Given /^the verb's Partikel is trennbar$/ do
@@ -74,7 +74,7 @@ Given /^the verb's Partikel is trennbar$/ do
 end
 
 Then /^the page should say that the lemma's Partikel is trennbar$/ do
-  response.should have_tag "span.partikel_trennbar"
+  response_body.should have_tag "span.partikel_trennbar"
 end
 
 Given /^the verb has \-ge\-$/ do
@@ -83,13 +83,17 @@ Given /^the verb has \-ge\-$/ do
 end
 
 Then /^the page should say that the lemma has \-ge\-$/ do
-  response.should have_tag "span.hat_ge"
+  response_body.should have_tag "span.hat_ge"
 end
 
 # editor step definitions
 
+def user
+  @user ||= Factory.create(:editor)
+end
+
 Given /^I am an editor$/ do
-  @user = Factory(:editor)
+  user
   visit new_user_session_path
   response.should contain("Login")
   fill_in "Login", :with => @user.login
@@ -123,12 +127,12 @@ Then /^I should see (radio buttons|text fields|check boxes) for (.+)$/ do |type,
   end
 
   [1, 2].each do |side|
-    response.should have_tag selector, /^lemma_#{field}#{side}/
+    response_body.should have_tag selector, /^lemma_#{field}#{side}/
   end
 end
 
 Then /^I should see a checkbox for (.+) on the German half$/ do |field|
   field.gsub! " ", "_"
-  response.should have_tag "input[type=checkbox]#?", /^lemma_#{field}/
+  response_body.should have_tag "input[type=checkbox]#?", /^lemma_#{field}/
 end
 
