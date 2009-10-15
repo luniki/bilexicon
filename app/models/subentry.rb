@@ -1,5 +1,5 @@
 class Subentry < ActiveRecord::Base
-  belongs_to :lemma, :validate => true
+  belongs_to :lemma
   has_many :examples, :as => :exampleable,
                       :dependent => :destroy,
                       :order => "position"
