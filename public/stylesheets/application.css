@@ -45,12 +45,6 @@ label.heading {
   display: block;
 }
 
-/* buttons */
-a.button {
-  display: inline;
-  float: none;
-}
-
 /* input field hint */
 .hint {
   color: #C9EDF4;
@@ -142,6 +136,12 @@ a.button {
   padding-bottom: 1.5em;
 }
 
+/* buttons */
+#speedy a.button {
+  display: inline;
+  float: none;
+}
+
 #speedy .input {
   border: none;
   font-size: 1.5em;
@@ -171,6 +171,22 @@ a.button {
   font-weight: bold;
 }
 
+/**************************************/
+/*            LEMMA SEARCH            */
+/**************************************/
+ul#lemmata {
+  padding-bottom: 1.5em;
+}
+
+
+/**************************************/
+/*            ADMIN BUTTONS           */
+/**************************************/
+#admin-buttons {
+  margin-top: 3em;
+  padding-top: 1.5em;
+  border-top: 1px solid #ccc;
+}
 
 
 /**************************************/
