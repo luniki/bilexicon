@@ -3,47 +3,58 @@ Feature: word class dependent fields of lemmata
   As an editor
   I want to add additional fields to lemmata
 
-  @no-txn
-  Scenario Outline: show word class dependent tags
+  Scenario: the additional fields of nouns are shown
     Given I am an editor
     And I am creating a new lemma
-    When I set the word class to <word_class>
-    Then I should see <type> for <field>
+    When I set the word class to noun
+    Then I should see fields with type:
+      | type          | field              |
+      | radio buttons | gender             |
+      | text fields   | singular genitive  |
+      | text fields   | plural             |
+      | check boxes   | singular only      |
+      | check boxes   | collective         |
+      | check boxes   | compound           |
+      | text fields   | female form        |
 
-  Examples:
-    | word_class | type          | field              |
-    | noun       | radio buttons | gender             |
-    | noun       | text fields   | singular genitive  |
-    | noun       | text fields   | plural             |
-    | noun       | check boxes   | singular only      |
-    | noun       | check boxes   | collective         |
-    | noun       | check boxes   | compound           |
-    | noun       | text fields   | female form        |
-    | verb       | check boxes   | auxiliary          |
-    | verb       | text fields   | present tense      |
-    | verb       | text fields   | past tense         |
-    | verb       | text fields   | present participle |
-    | verb       | text fields   | past participle    |
-    | verb       | check boxes   | reflexive          |
-    | verb       | check boxes   | regular            |
-    | verb       | check boxes   | irregular          |
-    | verb       | check boxes   | transitive         |
-    | verb       | check boxes   | intransitive       |
-    | adjective  | text fields   | comparative        |
-    | adjective  | text fields   | superlative        |
-    | adjective  | check boxes   | predicative        |
-    | adjective  | check boxes   | attributive        |
-
-  @no-txn
-  Scenario Outline: TODO
+  Scenario: the additional fields of verbs are shown
     Given I am an editor
     And I am creating a new lemma
     When I set the word class to verb
-    Then I should see a checkbox for <field> on the German half
+    Then I should see fields with type:
+      | type          | field              |
+      | check boxes   | auxiliary          |
+      | text fields   | present tense      |
+      | text fields   | past tense         |
+      | text fields   | present participle |
+      | text fields   | past participle    |
+      | check boxes   | reflexive          |
+      | check boxes   | regular            |
+      | check boxes   | irregular          |
+      | check boxes   | transitive         |
+      | check boxes   | intransitive       |
 
-  Examples:
-    | field             |
-    | perfekt haben     |
-    | perfekt sein      |
-    | partikel trennbar |
-    | hat ge            |
+  Scenario: the additional fields of adjectives are shown
+    Given I am an editor
+    And I am creating a new lemma
+    When I set the word class to adjective
+    Then I should see fields with type:
+      | type          | field              |
+      | text fields   | comparative        |
+      | text fields   | superlative        |
+      | check boxes   | predicative        |
+      | check boxes   | attributive        |
+
+  Scenario: the additional fields of verbs on the German half are shown
+    Given I am an editor
+    And I am creating a new lemma
+    When I set the word class to verb
+    Then I should see check boxes on the German half for:
+      | field             |
+      | perfekt haben     |
+      | perfekt sein      |
+      | partikel trennbar |
+    And I should see radio buttons on the German half for:
+      | field             |
+      | hat ge            |
+

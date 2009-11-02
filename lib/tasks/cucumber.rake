@@ -8,19 +8,16 @@ begin
     Cucumber::Rake::Task.new({:ok => 'db:test:prepare'}, 'Run features that should pass') do |t|
       t.fork = true # You may get faster startup if you set this to false
       t.cucumber_opts = "--color --tags ~@wip --strict --format #{ENV['CUCUMBER_FORMAT'] || 'pretty'}"
-      t.feature_list = []
     end
 
     Cucumber::Rake::Task.new({:wip => 'db:test:prepare'}, 'Run features that are being worked on') do |t|
       t.fork = true # You may get faster startup if you set this to false
       t.cucumber_opts = "--color --tags @wip:2 --wip --format #{ENV['CUCUMBER_FORMAT'] || 'pretty'}"
-      t.feature_list = []
     end
 
     Cucumber::Rake::Task.new({:selenium => 'db:test:prepare'}, 'Run enhanced features with selenium') do |t|
       t.fork = true # You may get faster startup if you set this to false
-      t.cucumber_opts = "--color --tags ~@wip --strict --format #{ENV['CUCUMBER_FORMAT'] || 'pretty'}"
-      t.feature_list = []
+      t.cucumber_opts = "--color --tags #{ENV['CUCUMBER_TAGS'] || '~@wip'} --strict --format #{ENV['CUCUMBER_FORMAT'] || 'pretty'}"
       t.profile = "selenium"
     end
 
