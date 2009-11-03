@@ -33,13 +33,23 @@
       <%= f.select :level_produktiv,   Lemma::LEVELS %>
     </div>
 
-    <div class="span-6 attribute"><%= t :lemma_categories %></div>
+    <div class="span-6 attribute">
+      <%= t :lemma_categories %><span class="required">*</span>
+    </div>
     <div class="span-18 last">
-      <% if @lemma_categories.present? -%>
-        <%= select_tag "lemma_categories",
-                        options_for_select(nested_set_options(Category) {|i| "#{'-' * i.level} #{i.name}" },
-                                          @lemma_categories.collect{|i| i.id}),
-                        {:multiple => :multiple, :size => 5, :name => "lemma[category_ids][]"} %>
+      <% if @categories.present? -%>
+        <%
+        options = options_for_select(nested_set_options(Category) {|i| "#{'-' * i.level} #{i.name}" },
+                                     @lemma.categories.collect{|i| i.id})
+        select = select_tag "lemma_categories", options, {:multiple => :multiple, :size => 5, :name => "lemma[category_ids][]", :class => "span-9"}
+
+        if @lemma.errors.on(:categories)
+          select = ActionView::Base.field_error_proc.call(select)
+        end
+        %>
+
+        <%= select %>
+
       <% else -%>
         <span class="quiet lemma_categories"><%= t :categories_missing %></span>
       <% end %>

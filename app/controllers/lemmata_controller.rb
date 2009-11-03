@@ -21,13 +21,11 @@ class LemmataController < ApplicationController
     @lemma = Lemma.new
     @lemma.categories << Category.find(params[:category_id]) if params[:category_id]
     @categories = Category.find(:all)
-    @lemma_categories = @lemma.categories
   end
 
   def edit
     @lemma = Lemma.find(params[:id])
     @categories = Category.find(:all)
-    @lemma_categories = @lemma.categories
 
     respond_to do |format|
       format.html
@@ -38,6 +36,7 @@ class LemmataController < ApplicationController
 
   def create
     @lemma = Lemma.new(params[:lemma])
+    @categories = Category.find(:all)
     if @lemma.save
       flash[:notice] = 'Lemma was successfully created.'
       redirect_to(@lemma)

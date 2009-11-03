@@ -65,4 +65,9 @@ class Lemma < ActiveRecord::Base
   def level
     "#{level_rezeptiv}/#{level_produktiv}"
   end
+
+  protected
+    def validate
+      errors.add_on_empty(:categories)
+    end
 end

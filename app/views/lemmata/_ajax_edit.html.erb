@@ -66,10 +66,10 @@
     <div class="inline-edit-help"></div>
 
     <div class="inline-edit-header">
-      <%= t(:lemma_categories) %>
+      <%= t(:lemma_categories) %><span class="required">*</span>
     </div>
     <div class="span-14">
-      <% if @lemma_categories.present? -%>
+      <% if @categories.present? -%>
         <%= select_tag "lemma_categories",
                       options_for_select(nested_set_options(Category) {|i| "#{'-' * i.level} #{i.name}" },
                                           @lemma.categories.collect{|i| i.id}),
@@ -77,6 +77,7 @@
       <% else -%>
         <span class="quiet"><%= t :categories_missing %></span>
       <% end %>
+      <%= error_message_on @lemma, :categories, :css_class => "input-error" %>
     </div>
     <div class="inline-edit-help"></div>
 
