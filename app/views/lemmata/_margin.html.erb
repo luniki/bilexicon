@@ -14,24 +14,9 @@
     <% attributes << capture do -%><span class="synonym">syn: <%= h lemma["synonym#{side}"] %></span><% end %>
   <% end %>
 
-  <% %w(gender singular_genitive plural singular_only collective compound female_form
-        auxiliary reflexive regular irregular transitive intransitive present_tense past_tense present_participle past_participle
-        comparative superlative predicative attributive).each do |field| -%>
-    <% if lemma["#{field}#{side}"].present? -%>
-      <% attributes << capture do -%><span class="<%= field %>"><%= h lemma["#{field}#{side}"] %></span><% end %>
-    <% end %>
-  <% end %>
-
-  <% if side == 2 -%>
-    <% %w(perfekt_haben perfekt_sein partikel_trennbar hat_ge).each do |field| -%>
-      <% if lemma[field].present? -%>
-        <% attributes << capture do -%><span class="<%= field %>"><%= h lemma[field] %></span><% end %>
-      <% end %>
-    <% end %>
-  <% end %>
-
+  <%= render :partial => "lemmata/additional_fields",
+             :locals => { :side => side, :attributes => attributes } %>
 
   <%= attributes.join("; ") %>
-
 </div>
 

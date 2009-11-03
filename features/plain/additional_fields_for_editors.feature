@@ -3,13 +3,11 @@ Feature: word class dependent fields of lemmata
   As an editor
   I want to add additional fields to lemmata
 
-  Scenario Outline: show word class dependent tags
+  Scenario: show word class dependent tags of nouns
     Given I am an editor
     And I am creating a new lemma
-    When I set the word class to <word_class>
-    Then I should see <type> for <field>
-
-  Examples:
+    When I set the word class to noun
+    Then I should see fields with type:
     | word_class | type          | field              |
     | noun       | radio buttons | gender             |
     | noun       | text fields   | singular genitive  |
@@ -18,6 +16,13 @@ Feature: word class dependent fields of lemmata
     | noun       | check boxes   | collective         |
     | noun       | check boxes   | compound           |
     | noun       | text fields   | female form        |
+
+  Scenario: show word class dependent tags of verbs
+    Given I am an editor
+    And I am creating a new lemma
+    When I set the word class to verb
+    Then I should see fields with type:
+    | word_class | type          | field              |
     | verb       | check boxes   | auxiliary          |
     | verb       | text fields   | present tense      |
     | verb       | text fields   | past tense         |
@@ -28,20 +33,25 @@ Feature: word class dependent fields of lemmata
     | verb       | check boxes   | irregular          |
     | verb       | check boxes   | transitive         |
     | verb       | check boxes   | intransitive       |
+
+  Scenario: show word class dependent tags of adjectives
+    Given I am an editor
+    And I am creating a new lemma
+    When I set the word class to adjective
+    Then I should see fields with type:
+    | word_class | type          | field              |
     | adjective  | text fields   | comparative        |
     | adjective  | text fields   | superlative        |
     | adjective  | check boxes   | predicative        |
     | adjective  | check boxes   | attributive        |
 
-  Scenario Outline: TODO
+  Scenario: German only, additional fields are shown
     Given I am an editor
     And I am creating a new lemma
     When I set the word class to verb
-    Then I should see a checkbox for <field> on the German half
-
-  Examples:
-    | field             |
-    | perfekt haben     |
-    | perfekt sein      |
-    | partikel trennbar |
-    | hat ge            |
+    Then I should see check boxes on the German half for:
+      | field             |
+      | perfekt haben     |
+      | perfekt sein      |
+      | partikel trennbar |
+#      | hat ge            |

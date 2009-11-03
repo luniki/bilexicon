@@ -30,3 +30,16 @@ en:
     ReflPRON:    "ReflPRON"
     SENTENCE:    "SENTENCE"
 
+  attributive:      "attributive"
+  auxiliary:        "auxiliary"
+  compound:         "compound noun"
+  collective:       "collective noun"
+  female_form_abbr: "fem."
+  intransitive:     "intransitive"
+  irregular:        "irregular"
+  predicative:      "predicative"
+  reflexive:        "reflexive"
+  regular:          "regular"
+  singular_only:    "no plural"
+  transitive:       "transitive"
+

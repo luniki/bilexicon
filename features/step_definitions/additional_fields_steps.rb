@@ -67,7 +67,7 @@ Then /^the page should show the irregular (.*)$/ do |field|
   [1, 2].each do |side|
     response_body.should have_tag ".entry-line" do
       with_tag ".margin#{side}" do
-        response_body.should have_tag "span.#{field}", "irregular field"
+        response_body.should have_tag "span.#{field}"
       end
     end
   end
@@ -115,7 +115,11 @@ Then /^I should see fields with type:$/ do |table|
     end
 
     [1, 2].each do |side|
-      selenium.should be_visible("css=input[type=#{type}][name^='lemma[#{field}#{side}']")
+      if Webrat.configuration.mode == :selenium
+        selenium.should be_visible("css=input[type=#{type}][name^='lemma[#{field}#{side}']")
+      else
+        response_body.should have_tag "input[type=#{type}][name^='lemma[#{field}#{side}']"
+      end
     end
   end
 end
@@ -127,7 +131,12 @@ Then /^I should see (check boxes|radio buttons) on the German half for:$/ do |ty
       when "check boxes":   "checkbox"
       when "radio buttons": "radio"
     end
-    selenium.should be_visible("css=input[type=#{input_type}][name^='lemma[#{field}']")
+
+    if Webrat.configuration.mode == :selenium
+      selenium.should be_visible("css=input[type=#{input_type}][name^='lemma[#{field}']")
+    else
+      response_body.should have_tag "input[type=#{input_type}][name^='lemma[#{field}']"
+    end
   end
 end
 

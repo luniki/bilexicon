@@ -82,19 +82,19 @@ Feature: word class dependent fields of lemmata
     When I visit the lemma's page
     Then the page should say that the lemma's Partikel is trennbar
 
-  Scenario: show additional fields in a readable form
-    Given there is a lemma with additional fields
-    When I visit the lemma's page
-    Then the page should show me the additional fields in a readable form
   Scenario: show -ge- on german verbs
     Given there is a verb
     And the verb has -ge-
     When I visit the lemma's page
     Then the page should say that the lemma has -ge-
 
+  @wip
+  Scenario: show additional fields in a readable form
+    Given there is a lemma with additional fields
+    When I visit the lemma's page
+    Then the page should show me the additional fields in a readable form
+
 # ADJECTIVES
-
-
 
   Scenario Outline: show bilingual attributes for adjectives
     Given there is a adjective
