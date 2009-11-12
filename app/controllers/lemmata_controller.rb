@@ -1,6 +1,7 @@
 class LemmataController < ApplicationController
 
   before_filter :require_admin, :except => [:index, :show]
+  before_filter :require_user, :only => [:index, :show]
 
   def index
     if params[:q].present?
