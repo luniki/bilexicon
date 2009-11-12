@@ -161,6 +161,44 @@ label.heading {
 }
 
 
+/**************************************/
+/*            LEMMA SEARCH            */
+/**************************************/
+
+#lemmata {
+  padding-top: 1.5em;
+  padding-bottom: 1.5em;
+}
+
+#lemmata li {
+  list-style: none;
+}
+
+#lemmata .odd {
+  background-color: #eee;
+}
+
+#lemmata li:hover {
+  background: #FFF url(../images/hover_gradient.gif) repeat-y right top;
+}
+
+#lemmata .search-result1, #lemmata .search-result2 {
+  line-height: 2em;
+}
+
+#lemmata .search-result1 {
+  padding-left: 0.5em;
+}
+
+#search_count {
+  font-weight: bold;
+  color: #FF0084;
+  font-size: 1.5em;
+  line-height: 1;
+  margin-bottom: 1em;
+  margin-left:  100px;
+}
+
 #search_term:before {
   content: open-quote;
   font-weight: bold;
@@ -171,11 +209,53 @@ label.heading {
   font-weight: bold;
 }
 
-/**************************************/
-/*            LEMMA SEARCH            */
-/**************************************/
-ul#lemmata {
-  padding-bottom: 1.5em;
+.pagination {
+  clear: both;
+  text-align: right;
+  padding: .3em;
+  padding-right: 220px;
+}
+
+.pagination a, .pagination span {
+  padding: .2em .5em;
+}
+
+.pagination span.disabled {
+  color: #AAA;
+}
+
+.pagination span.current {
+  font-weight: bold;
+  color: #FF0084;
+}
+
+.pagination a {
+  border: 1px solid #DDDDDD;
+  color: #0063DC;
+  text-decoration: none;
+}
+
+.pagination a:hover, .pagination a:focus {
+  border-color: #003366;
+  background: #0063DC;
+  color: white;
+}
+
+.pagination .page_info {
+  color: #aaa;
+  padding-top: .8em;
+}
+
+.pagination .prev_page, .pagination .next_page {
+  border-width: 2px;
+}
+
+.pagination .prev_page {
+  margin-right: 1em;
+}
+
+.pagination .next_page {
+  margin-left: 1em;
 }
 
 

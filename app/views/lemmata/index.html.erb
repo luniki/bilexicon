@@ -15,18 +15,29 @@
 
 <% if not params[:q].blank? -%>
   <h2>
-    <%= @lemmata.size %> <%= t(:search_results_for) %>
+    <span id="search_count"><%= @lemmata.total_entries %></span>
+    <%= t(:search_results_for) %>
     <span id="search_term"><%= h(params[:q]) %></span>
   </h2>
 
   <%= will_paginate @lemmata %>
-  <ul id="lemmata">
+  <ul id="lemmata" class="column prepend-2 span-16 last">
     <% for lemma in @lemmata -%>
-      <% content_tag_for(:li, lemma) do %>
-        <%= link_to h("#{lemma.short1} · #{lemma.short2}"), lemma_path(lemma) %>
-      <% end %>
+      <li class="<%= cycle('odd', 'even') %> column span-16 last">
+        <a href="<%= lemma_path(lemma) %>" class="column span-8">
+          <span class="search-result1">
+            <%= h lemma.short1 %>
+          </span>
+        </a>
+        <a href="<%= lemma_path(lemma) %>" class="column span-8 last">
+          <span class="search-result2">
+            <%= h lemma.short2 %>
+          </span>
+        </a>
+      </li>
     <% end %>
   </ul>
+  <%= will_paginate @lemmata %>
 
   <%= render :partial => "other_dictionaries" %>
 <% end %>
