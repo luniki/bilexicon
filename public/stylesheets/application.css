@@ -165,11 +165,6 @@ label.heading {
 /*            LEMMA SEARCH            */
 /**************************************/
 
-#lemmata {
-  padding-top: 1.5em;
-  padding-bottom: 1.5em;
-}
-
 #lemmata li {
   list-style: none;
 }
@@ -196,24 +191,16 @@ label.heading {
   font-size: 1.5em;
   line-height: 1;
   margin-bottom: 1em;
-  margin-left:  100px;
 }
 
-#search_term:before {
-  content: open-quote;
-  font-weight: bold;
-}
-
-#search_term:after {
-  content: close-quote;
-  font-weight: bold;
+#popup-search {
+  margin-top: 1.5em;
 }
 
 .pagination {
   clear: both;
   text-align: right;
-  padding: .3em;
-  padding-right: 220px;
+  padding: 1.5em .3em;
 }
 
 .pagination a, .pagination span {

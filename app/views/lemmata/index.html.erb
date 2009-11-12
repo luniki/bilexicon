@@ -14,37 +14,39 @@
 </p>
 
 <% if not params[:q].blank? -%>
-  <h2>
-    <span id="search_count"><%= @lemmata.total_entries %></span>
-    <%= t(:search_results_for) %>
-    <span id="search_term"><%= h(params[:q]) %></span>
-  </h2>
+  <div id="search_results" class="column prepend-3 span-16 last">
+    <h2>
+      <span id="search_count"><%= @lemmata.total_entries %></span>
+      <%= t(:search_results_for) %>
+      "<span id="search_term"><%= h(params[:q]) %></span>"
+    </h2>
 
-  <%= will_paginate @lemmata %>
-  <ul id="lemmata" class="column prepend-2 span-16 last">
-    <% for lemma in @lemmata -%>
-      <li class="<%= cycle('odd', 'even') %> column span-16 last">
-        <a href="<%= lemma_path(lemma) %>" class="column span-8">
-          <span class="search-result1">
-            <%= h lemma.short1 %>
-          </span>
-        </a>
-        <a href="<%= lemma_path(lemma) %>" class="column span-8 last">
-          <span class="search-result2">
-            <%= h lemma.short2 %>
-          </span>
-        </a>
-      </li>
-    <% end %>
-  </ul>
-  <%= will_paginate @lemmata %>
+    <%= will_paginate @lemmata %>
+    <ul id="lemmata">
+      <% for lemma in @lemmata -%>
+        <li class="<%= cycle('odd', 'even') %> column span-16 last">
+          <a href="<%= lemma_path(lemma) %>" class="column span-8">
+            <span class="search-result1">
+              <%= h lemma.short1 %>
+            </span>
+          </a>
+          <a href="<%= lemma_path(lemma) %>" class="column span-8 last">
+            <span class="search-result2">
+              <%= h lemma.short2 %>
+            </span>
+          </a>
+        </li>
+      <% end %>
+    </ul>
+    <%= will_paginate @lemmata %>
 
-  <%= render :partial => "other_dictionaries" %>
+    <%= render :partial => "other_dictionaries" %>
+  </div>
 <% end %>
 
 <% if current_user_is_admin then %>
 
-  <div id="admin-buttons">
+  <div id="admin-buttons" class="column span-24 last">
     <a href="<%= new_lemma_path %>" class="button">
       <%= image_tag 'icons/plus.png' %>
       <%= t(:add_lemma) %>
