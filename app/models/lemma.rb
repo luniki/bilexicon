@@ -51,6 +51,7 @@ class Lemma < ActiveRecord::Base
 
   LEVELS = %w(A1 A2 B1 B2 C1 C2)
 
+
   WORD_CLASSES = [:N, :Npl, :N_and_N, :Nquant, :V, :ADJ, :N_pattern,
                   :ADJ_pattern, :NUM, :ORD, :wh_CL, :that_CL, :wh_to_INF,
                   :REL_CL, :ADV, :ADVtime, :ADVplace, :PREP, :PrepN, :PART,
@@ -61,6 +62,22 @@ class Lemma < ActiveRecord::Base
       [I18n.translate("word_classes.#{wc}", :locale => locale), wc.to_s]
     end
   end
+
+  include HasAdditionalAttributes
+
+  additional_attributes :N, :gender, :singular_genitive, :plural,
+                            :singular_only, :collective, :compound2,
+                            :female_form
+
+  additional_attributes :V, :auxiliary, :reflexive, :regular, :irregular,
+                            :transitive, :intransitive, :present_tense,
+                            :past_tense, :present_participle, :past_participle
+
+  additional_attributes_on_side 2, :V, :perfekt_haben, :perfekt_sein,
+                                       :partikel_trennbar, :hat_ge
+
+  additional_attributes :ADJ, :comparative, :superlative,
+                              :predicative, :attributive
 
   def level
     "#{level_rezeptiv}/#{level_produktiv}"
