@@ -7,7 +7,8 @@ describe Lemma do
       :long1 => "to be", :long2 => "sein",
       :level_rezeptiv => "A1", :level_produktiv => "A1",
       :word_class1 => "V",
-      :word_class2 => "V"
+      :word_class2 => "V",
+      :categories => [Factory.create(:category)]
     }
   end
 
@@ -21,4 +22,12 @@ describe Lemma do
     de.size.should == en.size
     de.collect{|e| e[1]}.should == en.collect{|e| e[1]}
   end
+
+
+  describe "of word class noun" do
+    it "should have additional fields" do
+      lemma = Factory.create(:noun)
+    end
+  end
+
 end
