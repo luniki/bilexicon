@@ -4,17 +4,12 @@ module LemmataHelper
     text.gsub(/\b_([^_]+)_\b/) { |m| "<u>" + h($1) + "</u>" }
   end
 
-  def formatted_singular_genitive(side)
-    h "GenSing: #{@lemma["singular_genitive#{side}"]}"
-  end
-
-  def formatted_plural(side)
-    h "Pl: #{@lemma["plural#{side}"]}"
-  end
-
-  def formatted_female_form(side)
-    locale = side == 1 ? :en : :de
-    "%s: %s" % [I18n.translate("female_form_abbr", :locale => locale), @lemma["female_form#{side}"]]
+  # not so simple text attributes
+  %w(singular_genitive plural female_form).each do |attribute|
+    define_method("formatted_#{attribute}") do |side|
+      locale = side == 1 ? :en : :de
+      "%s: %s" % [I18n.translate("#{attribute}_abbr", :locale => locale), @lemma["#{attribute}#{side}"]]
+    end
   end
 
   # simple boolean attributes
