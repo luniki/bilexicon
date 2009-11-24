@@ -2,7 +2,7 @@
 
   <h1>
     <span class="quiet"><%= t(:lemma) %></span>
-    <%= h @lemma.short1 %> · <%= h @lemma.short2 %>
+    <%= underline @lemma.short1 %> · <%= underline @lemma.short2 %>
   </h1>
 
   <div class="categories">
@@ -25,10 +25,10 @@
                :locals => { :lemma => @lemma, :side => 1 } %>
 
     <div class="span-6 form1">
-      <%= h @lemma.long1 %>
+      <%= underline @lemma.long1 %>
     </div>
     <div class="span-6 form2">
-      <%= h @lemma.long2 %>
+      <%= underline @lemma.long2 %>
     </div>
 
     <%= render :partial => "lemmata/margin",
