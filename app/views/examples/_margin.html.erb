@@ -8,7 +8,7 @@
   <% end %>
 
   <% if example["synonym#{side}"].present? -%>
-    <% attributes << capture do -%><span class="synonym"><%= h example["synonym#{side}"] %></span><% end %>
+    <% attributes << capture do -%><span class="synonym"><%= underline example["synonym#{side}"] %></span><% end %>
   <% end %>
 
   <%= attributes.join("; ") %>
