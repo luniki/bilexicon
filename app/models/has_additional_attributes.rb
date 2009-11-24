@@ -16,6 +16,10 @@ module HasAdditionalAttributes
       remove = Lemma.additional1.reject{|key,value| key == self.word_class1.to_sym}.values.flatten.uniq
       remove = Lemma.additional2.reject{|key,value| key == self.word_class2.to_sym}.values.flatten.uniq
     end
+
+    def additional_attributes(side)
+      Lemma.send("additional#{side}")[self["word_class#{side}"].to_sym]
+    end
   end
 
   module ClassMethods
