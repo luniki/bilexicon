@@ -78,8 +78,6 @@ class Lemma < ActiveRecord::Base
   additional_attributes :ADJ, :comparative, :superlative,
                               :predicative, :attributive
 
-  before_save :filter_additional_attributes
-
   def level
     "#{level_rezeptiv}/#{level_produktiv}"
   end
@@ -89,9 +87,4 @@ class Lemma < ActiveRecord::Base
       errors.add_on_empty(:categories)
     end
 
-  private
-    def filter_additional_attributes
-      remove = Lemma.additional1.reject{|key,value| key == self.word_class1.to_sym}.values.flatten.uniq
-      remove = Lemma.additional2.reject{|key,value| key == self.word_class2.to_sym}.values.flatten.uniq
-    end
 end

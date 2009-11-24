@@ -1,8 +1,7 @@
 module HasAdditionalAttributes
 
   def self.included(base)
-#    base.validates_presence_of :cellphone
-#    base.before_save :parse_cellphone
+    base.before_save :filter_additional_attributes
 
     base.class_eval do
       class_inheritable_reader(:additional1, :additional2)
@@ -13,6 +12,10 @@ module HasAdditionalAttributes
   end
 
   module InstanceMethods
+    def filter_additional_attributes
+      remove = Lemma.additional1.reject{|key,value| key == self.word_class1.to_sym}.values.flatten.uniq
+      remove = Lemma.additional2.reject{|key,value| key == self.word_class2.to_sym}.values.flatten.uniq
+    end
   end
 
   module ClassMethods
