@@ -6,7 +6,6 @@ class Lemma < ActiveRecord::Base
                       :dependent => :destroy,
                       :order => "position"
 
-
   has_many :subentries,     :dependent => :destroy, :order => "position", :include => :examples
   has_many :valencies,      :dependent => :destroy, :order => "position", :include => :examples
   has_many :collocations,   :dependent => :destroy, :order => "position", :include => :examples
@@ -66,7 +65,7 @@ class Lemma < ActiveRecord::Base
   include HasAdditionalAttributes
 
   additional_attributes :N, :gender, :singular_genitive, :plural,
-                            :singular_only, :collective, :compound2,
+                            :singular_only, :collective, :compound,
                             :female_form
 
   additional_attributes :V, :auxiliary, :reflexive, :regular, :irregular,
@@ -79,6 +78,8 @@ class Lemma < ActiveRecord::Base
   additional_attributes :ADJ, :comparative, :superlative,
                               :predicative, :attributive
 
+  before_save :filter_additional_attributes
+
   def level
     "#{level_rezeptiv}/#{level_produktiv}"
   end
@@ -86,5 +87,11 @@ class Lemma < ActiveRecord::Base
   protected
     def validate
       errors.add_on_empty(:categories)
+    end
+
+  private
+    def filter_additional_attributes
+      remove = Lemma.additional1.reject{|key,value| key == self.word_class1.to_sym}.values.flatten.uniq
+      remove = Lemma.additional2.reject{|key,value| key == self.word_class2.to_sym}.values.flatten.uniq
     end
 end
