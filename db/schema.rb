@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20091013090416) do
+ActiveRecord::Schema.define(:version => 20091124082136) do
 
   create_table "categories", :force => true do |t|
     t.string   "name"
@@ -26,6 +26,8 @@ ActiveRecord::Schema.define(:version => 20091013090416) do
   end
 
   add_index "categories_lemmata", ["category_id", "lemma_id"], :name => "index_categories_lemmata_on_category_id_and_lemma_id"
+  add_index "categories_lemmata", ["category_id"], :name => "category_id"
+  add_index "categories_lemmata", ["lemma_id"], :name => "lemma_id"
 
   create_table "examples", :force => true do |t|
     t.string   "form1"
@@ -41,6 +43,7 @@ ActiveRecord::Schema.define(:version => 20091013090416) do
     t.integer  "position"
   end
 
+  add_index "examples", ["exampleable_id", "exampleable_type"], :name => "exampleable_id"
   add_index "examples", ["exampleable_id", "exampleable_type"], :name => "index_examples_on_exampleable_id_and_exampleable_type"
 
   create_table "lemmata", :force => true do |t|
@@ -63,7 +66,6 @@ ActiveRecord::Schema.define(:version => 20091013090416) do
     t.string   "plural1"
     t.boolean  "singular_only1"
     t.boolean  "collective1"
-    t.boolean  "compound1"
     t.string   "female_form1"
     t.boolean  "auxiliary1"
     t.string   "present_tense1"
@@ -83,7 +85,6 @@ ActiveRecord::Schema.define(:version => 20091013090416) do
     t.string   "plural2"
     t.boolean  "singular_only2"
     t.boolean  "collective2"
-    t.boolean  "compound2"
     t.string   "female_form2"
     t.boolean  "auxiliary2"
     t.string   "present_tense2"

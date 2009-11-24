@@ -25,7 +25,6 @@ Feature: word class dependent fields of lemmata
     | attribute     |
     | singular only |
     | collective    |
-    | compound      |
 
   Scenario: show gender for nouns
     Given a female noun

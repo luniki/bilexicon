@@ -14,7 +14,6 @@ Feature: word class dependent fields of lemmata
       | text fields   | plural             |
       | check boxes   | singular only      |
       | check boxes   | collective         |
-      | check boxes   | compound           |
       | text fields   | female form        |
 
   Scenario: the additional fields of verbs are shown

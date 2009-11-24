@@ -18,7 +18,7 @@ module LemmataHelper
   end
 
   # simple boolean attributes
-  %w(singular_only collective compound
+  %w(singular_only collective
      auxiliary reflexive regular irregular transitive intransitive
      predicative attributive).each do |attribute|
     define_method("formatted_#{attribute}") do |side|
