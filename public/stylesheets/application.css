@@ -269,7 +269,7 @@ label.heading {
   margin-bottom: 3em;
 }
 
-.lemma ul.ancestors {
+.lemma ul.ancestors, .category ul.ancestors {
   display: inline;
   list-style-type: none;
   margin-left: 0;
@@ -278,7 +278,7 @@ label.heading {
   background-color: #E7F8FB;
 }
 
-.lemma ul.ancestors li {
+.lemma ul.ancestors li, .category ul.ancestors li {
   display: inline;
 }
 

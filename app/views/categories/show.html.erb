@@ -1,53 +1,48 @@
-<h1><%=h @category.name %></h1>
-
-<ul class="ancestors">
-  <li><%= link_to t(:top), categories_path %></li>
-  <% for ancestor in @ancestors -%>
-    <% content_tag_for(:li, ancestor) do %>
-      <%= link_to h(ancestor.name), ancestor %>
-    <% end %>
+<div class="category">
+  <% if current_user_is_admin then %>
+    <%= link_to t(:edit), edit_category_path(@category), :class => "button" %>
+    <%= link_to t(:delete), @category, :confirm => t(:confirm_question), :method => :delete, :class => "button"  %>
+    <%= link_to t(:add_category), new_category_path(:category_id => @category), :class => "button"   %>
+    <%=link_to t(:add_lemma), new_lemma_path(:category_id => @category), :class => "button"  %>
+    <hr />
   <% end %>
-</ul>
 
-<h2><%= t :category_children %></h2>
+  <div class="categories">
+    <ul class="ancestors">
+      <li><%= link_to t(:top), categories_path %> &gt;</li>
+      <% @category.self_and_ancestors.each do |node| -%>
+        <li><%= link_to h(node.name), node %> &gt;</li>
+      <% end %>
+    </ul>
+  </div>
 
-<ul id="children">
-  <% for child in @children -%>
-    <% content_tag_for(:li, child) do %>
-      <%= link_to h(child.name), child %>
+  <h1><%=h @category.name %></h1>
+
+
+  <h2><%= t :category_children %></h2>
+
+  <ul id="children">
+    <% for child in @children -%>
+      <% content_tag_for(:li, child) do %>
+        <%= link_to h(child.name), child %>
+      <% end %>
     <% end %>
-  <% end %>
-</ul>
-
-<hr class="space" />
-
-<h2><%= t :lemmata %></h2>
-
-<% if @lemmata.empty? then -%>
-  <p><%= t :category_has_no_lemmata_yet %></p>
-<% end %>
-
-<ul id="lemmata">
-  <% for lemma in @lemmata -%>
-    <% content_tag_for(:li, lemma) do %>
-      <%= link_to h("#{lemma.short1} · #{lemma.short2}"), lemma_path(lemma) %>
-    <% end %>
-  <% end %>
-</ul>
-
-<% if current_user_is_admin then %>
-  <ul>
-    <li>
-      <%= link_to t(:edit), edit_category_path(@category) %>
-    </li>
-    <li>
-      <%= link_to t(:delete), @category, :confirm => t(:confirm_question), :method => :delete %>
-    </li>
-    <li>
-      <%= link_to t(:add_category), new_category_path(:category_id => @category)  %>
-    </li>
-    <li>
-      <%=link_to t(:add_lemma), new_lemma_path(:category_id => @category) %>
-    </li>
   </ul>
-<% end %>
+
+
+  <hr class="space" />
+
+  <h2><%= t :lemmata %></h2>
+
+  <% if @lemmata.empty? then -%>
+    <p><%= t :category_has_no_lemmata_yet %></p>
+  <% end %>
+
+  <ul id="lemmata">
+    <% for lemma in @lemmata -%>
+      <% content_tag_for(:li, lemma) do %>
+        <%= link_to h("#{lemma.short1} · #{lemma.short2}"), lemma_path(lemma) %>
+      <% end %>
+    <% end %>
+  </ul>
+</div>
