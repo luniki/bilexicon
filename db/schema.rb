@@ -27,6 +27,8 @@ ActiveRecord::Schema.define(:version => 20091203115846) do
   end
 
   add_index "categorizations", ["category_id", "lemma_id"], :name => "index_categories_lemmata_on_category_id_and_lemma_id"
+  add_index "categorizations", ["category_id"], :name => "category_id"
+  add_index "categorizations", ["lemma_id"], :name => "lemma_id"
 
   create_table "examples", :force => true do |t|
     t.string   "form1"
@@ -42,6 +44,7 @@ ActiveRecord::Schema.define(:version => 20091203115846) do
     t.integer  "position"
   end
 
+  add_index "examples", ["exampleable_id", "exampleable_type"], :name => "exampleable_id"
   add_index "examples", ["exampleable_id", "exampleable_type"], :name => "index_examples_on_exampleable_id_and_exampleable_type"
 
   create_table "lemmata", :force => true do |t|
