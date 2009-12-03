@@ -1,6 +1,7 @@
 class Lemma < ActiveRecord::Base
 
-  has_and_belongs_to_many :categories
+  has_many :categorizations
+  has_many :categories, :through => :categorizations
 
   has_many :examples, :as => :exampleable,
                       :dependent => :destroy,
