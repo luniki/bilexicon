@@ -4,3 +4,6 @@ doc/spec/
 log/
 Capfile
 config/deploy.rb
+db/sphinx/
+config/development.sphinx.conf
+db/development_structure.sql
