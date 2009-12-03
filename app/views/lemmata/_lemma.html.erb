@@ -5,8 +5,9 @@
     <%= underline @lemma.short1 %> · <%= underline @lemma.short2 %>
   </h1>
 
-  <div class="categories">
+  <ul class="categories">
     <% @lemma.categories.each do |category| -%>
+    <li>
         <ul class="ancestors">
           <% category.self_and_ancestors.each_with_index do |node, index| -%>
             <li>
@@ -17,7 +18,8 @@
         </ul>
       </h2>
     <% end %>
-  </div>
+    </li>
+  </ul>
 
   <div class="entry-line span-24">
 
