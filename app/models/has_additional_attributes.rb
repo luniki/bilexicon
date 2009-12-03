@@ -18,7 +18,8 @@ module HasAdditionalAttributes
     end
 
     def additional_attributes(side)
-      Lemma.send("additional#{side}")[self["word_class#{side}"].to_sym]
+      Lemma.send("additional#{side}")[self["word_class#{side}"].to_sym] || []
+
     end
   end
 
