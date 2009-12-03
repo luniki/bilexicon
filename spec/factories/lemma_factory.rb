@@ -12,7 +12,7 @@ Factory.define :lemma do |lemma|
   lemma.level_rezeptiv "A1"
   lemma.level_produktiv "A1"
 
-  lemma.categories [Factory.create(:category)]
+  lemma.categories {|category| category.association(:category)}
 end
 
 Factory.define :noun, :parent => :lemma do |noun|
