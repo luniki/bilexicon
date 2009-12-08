@@ -66,7 +66,8 @@ class Lemma < ActiveRecord::Base
   include HasAdditionalAttributes
 
   additional_attributes :N, :gender, :singular_genitive, :plural,
-                            :singular_only, :collective, :female_form
+                            :singular_only, :collective, :female_form,
+                            :countable, :uncountable
 
   additional_attributes :V, :auxiliary, :reflexive, :regular, :irregular,
                             :transitive, :intransitive, :present_tense,

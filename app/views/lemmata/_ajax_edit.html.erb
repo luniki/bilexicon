@@ -145,6 +145,20 @@
       </div>
       <div class="inline-edit-help"></div>
 
+      <div class="inline-edit-header"><%= t :countability %></div>
+      <div class="form1 inline-edit-control">
+        <%= f.check_box :countable1 %>
+        <%= f.label(:countable1, t(:countable)) %>
+        <%= f.check_box :uncountable1 %>
+        <%= f.label(:uncountable1, t(:uncountable)) %>
+      </div>
+      <div class="form2 inline-edit-control">
+        <%= f.check_box :countable2 %>
+        <%= f.label(:countable2, t(:countable)) %>
+        <%= f.check_box :uncountable2 %>
+        <%= f.label(:uncountable2, t(:uncountable)) %>
+      </div>
+      <div class="inline-edit-help"></div>
     </div>
 
 

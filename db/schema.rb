@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20091208083953) do
+ActiveRecord::Schema.define(:version => 20091208090716) do
 
   create_table "categories", :force => true do |t|
     t.string   "name"
@@ -20,7 +20,7 @@ ActiveRecord::Schema.define(:version => 20091208083953) do
     t.datetime "updated_at"
   end
 
-  add_index "categories", ["parent_id"], :name => "index_categories_on_parent_id"
+  add_index "categories", ["parent_id"], :name => "parent_id"
 
   create_table "categorizations", :force => true do |t|
     t.integer "category_id", :null => false
@@ -109,6 +109,10 @@ ActiveRecord::Schema.define(:version => 20091208083953) do
     t.string   "present_participle1"
     t.string   "present_participle2"
     t.boolean  "delta",               :default => false
+    t.boolean  "countable1",          :default => true
+    t.boolean  "countable2",          :default => true
+    t.boolean  "uncountable1"
+    t.boolean  "uncountable2"
   end
 
   add_index "lemmata", ["delta"], :name => "index_lemmata_on_delta"

@@ -14,6 +14,8 @@ Feature: word class dependent fields of lemmata
     | singular genitive |
     | plural            |
     | female form       |
+    | countable         |
+    | uncountable       |
 
   Scenario Outline: show bilingual attributes for nouns
     Given there is a noun

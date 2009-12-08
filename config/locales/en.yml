@@ -33,6 +33,7 @@ en:
   attributive:            "attributive"
   auxiliary:              "auxiliary"
   collective:             "collective noun"
+  countable:              "countable"
   female_form_abbr:       "fem"
   intransitive:           "intransitive"
   irregular:              "irregular"
@@ -43,4 +44,5 @@ en:
   singular_genitive_abbr: "gen.sing."
   singular_only:          "no plural"
   transitive:             "transitive"
+  uncountable:            "uncountable"
 

@@ -15,6 +15,8 @@ Feature: word class dependent fields of lemmata
     | noun       | check boxes   | singular only      |
     | noun       | check boxes   | collective         |
     | noun       | text fields   | female form        |
+    | noun       | check boxes   | countable          |
+    | noun       | check boxes   | uncountable        |
 
   Scenario: show word class dependent tags of verbs
     Given I am an editor
