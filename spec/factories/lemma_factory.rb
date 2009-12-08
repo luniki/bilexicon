@@ -6,13 +6,16 @@ Factory.define :lemma do |lemma|
   lemma.long1 "to drive"
   lemma.long2 "fahren"
 
+  lemma.phonetic1 "ħüſĸær ðũ"
+  lemma.phonetic2 "ĸjẽŧıł"
+
   lemma.word_class1 "V"
   lemma.word_class2 "V"
 
   lemma.level_rezeptiv "A1"
   lemma.level_produktiv "A1"
 
-  lemma.categories {|category| category.association(:category)}
+  lemma.categories {|category| [category.association(:category)]}
 end
 
 Factory.define :noun, :parent => :lemma do |noun|

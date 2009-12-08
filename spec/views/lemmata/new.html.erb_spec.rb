@@ -4,13 +4,10 @@ describe "/lemmata/new.html.erb" do
   include LemmataHelper
 
   before(:each) do
-    @categories =
-      [stub_model(Category, :name => "a category name"),
-       stub_model(Category, :name => "another category name")]
-
+    @categories = [Factory(:category, :name => "a category name"),
+                   Factory(:category, :name => "another category name")]
     assigns[:categories] = @categories
-    assigns[:lemma] = @lemma = stub_model(Lemma, :new_record? => true)
-    assigns[:lemma_categories] = @lemma_categories = [@categories[0]]
+    assigns[:lemma] = @lemma = Factory.build(:lemma, :categories => @categories)
   end
 
   it "should render form with short & long form, phonetics and classes" do
@@ -45,7 +42,7 @@ describe "/lemmata/new.html.erb" do
 
     response.should have_tag("form select#lemma_categories") do
       @categories.each do |c|
-        if @lemma_categories.include?(c) then
+        if @lemma.categories.include?(c) then
           with_tag("option[selected][value=?]", c.id, :text => c.name)
         else
           with_tag("option[value=?]:not([selected])", c.id, :text => c.name)

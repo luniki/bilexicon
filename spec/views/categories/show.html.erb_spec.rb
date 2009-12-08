@@ -7,7 +7,7 @@ describe "/categories/show.html.erb" do
     assigns[:ancestors] = @ancestors =
       [stub_model(Category, :name => "automobiles"),
        stub_model(Category, :name => "vans")]
-    assigns[:category] = @category = stub_model(Category, :name => "microvans")
+    assigns[:category] = @category = stub_model(Category, :name => "microvans", :self_and_ancestors => @ancestors)
     assigns[:children] = @children =
       [stub_model(Category, :name => "Toyota Yaris"),
        stub_model(Category, :name => "Audi A2")]

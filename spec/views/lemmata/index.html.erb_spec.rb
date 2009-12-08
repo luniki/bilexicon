@@ -7,6 +7,7 @@ describe "/lemmata/index.html.erb" do
     before(:each) do
       assigns[:lemmata] = []
       assigns[:lemmata].stub!(:total_pages).and_return(0)
+      assigns[:lemmata].stub!(:total_entries).and_return(0)
       params[:q] = "a word that cannot be found"
     end
 
@@ -25,6 +26,7 @@ describe "/lemmata/index.html.erb" do
         stub_model(Lemma, :short1 => "or",    :short2 => "oder"),
       ]
       assigns[:lemmata].stub!(:total_pages).and_return(0)
+      assigns[:lemmata].stub!(:total_entries).and_return(0)
       params[:q] = "a result"
     end
 
@@ -39,9 +41,10 @@ describe "/lemmata/index.html.erb" do
       render "/lemmata/index.html.erb"
 
       response.should have_tag("ul#lemmata") do
-        with_tag("li.lemma", :count => assigns[:lemmata].size) do
+        with_tag("li", :count => assigns[:lemmata].size) do
           assigns[:lemmata].each do |lemma|
-            with_tag("a[href=?]", lemma_path(lemma), :text => "#{lemma.short1} · #{lemma.short2}")
+            with_tag("a[href=?]", lemma_path(lemma), :text => lemma.short1)
+            with_tag("a[href=?]", lemma_path(lemma), :text => lemma.short2)
           end
         end
       end

@@ -8,6 +8,8 @@ describe LemmataController do
 
   describe "responding to GET index" do
 
+    it_should_behave_like "an authenticated controller"
+
     it "should expose @lemmata after searching" do
       Lemma.should_receive(:search).with("a search word", anything()).and_return([mock_lemma])
       get :index, :q => "a search word"
@@ -16,6 +18,8 @@ describe LemmataController do
   end
 
   describe "responding to GET show" do
+
+    it_should_behave_like "an authenticated controller"
 
     before (:each) do
       @categories = [mock_model(Category)]

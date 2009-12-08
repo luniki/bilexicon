@@ -35,8 +35,8 @@ describe "/lemmata/edit.html.erb" do
 
   it "should show the available categories" do
 
-    assigns[:lemma_categories] = [stub_model(Category, :name => "automobiles"),
-                                  stub_model(Category, :name => "vans")]
+    assigns[:lemma] = Factory(:lemma)
+    assigns[:categories] = [Factory(:category), Factory(:category)]
     render "/lemmata/edit.html.erb"
 
     response.should have_tag("select[name=?]", "lemma[category_ids][]")
