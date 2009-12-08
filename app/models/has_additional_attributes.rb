@@ -13,13 +13,13 @@ module HasAdditionalAttributes
 
   module InstanceMethods
     def filter_additional_attributes
-      remove = Lemma.additional1.reject{|key,value| key == self.word_class1.to_sym}.values.flatten.uniq
-      remove = Lemma.additional2.reject{|key,value| key == self.word_class2.to_sym}.values.flatten.uniq
+      remove1 = Lemma.additional1.reject{|key,value| key == self.word_class1.to_sym}.values.flatten.uniq
+      remove2 = Lemma.additional2.reject{|key,value| key == self.word_class2.to_sym}.values.flatten.uniq
+      (remove1 + remove2).each {|attribute| self[attribute] = nil}
     end
 
     def additional_attributes(side)
       Lemma.send("additional#{side}")[self["word_class#{side}"].to_sym] || []
-
     end
   end
 

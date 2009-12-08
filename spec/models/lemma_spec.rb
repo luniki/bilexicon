@@ -23,11 +23,11 @@ describe Lemma do
     de.collect{|e| e[1]}.should == en.collect{|e| e[1]}
   end
 
-
-  describe "of word class noun" do
-    it "should have additional fields" do
-      lemma = Factory.create(:noun)
-    end
+  it "should remove inappropriate additional attributes" do
+    @valid_attributes[:gender1] = @valid_attributes[:gender2] = "m"
+    lemma = Lemma.create(@valid_attributes)
+    lemma.save.should be_true
+    lemma.gender1.should be_nil
+    lemma.gender2.should be_nil
   end
-
 end
