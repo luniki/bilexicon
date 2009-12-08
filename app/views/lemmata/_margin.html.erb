@@ -2,16 +2,16 @@
 
   <% attributes = [] %>
 
-  <% if lemma["phonetic#{side}"].present? -%>
-    <% attributes << capture do -%><span class="phonetic" title="<%= t(:lemma_phonetic) %>">{<%= h lemma["phonetic#{side}"] %>}</span><% end %>
+  <% if @lemma["phonetic#{side}"].present? -%>
+    <% attributes << capture do -%><span class="phonetic" title="<%= t(:lemma_phonetic) %>">{<%= h @lemma["phonetic#{side}"] %>}</span><% end %>
   <% end %>
 
-  <% attributes << capture do -%><span class="word_class" title="<%= t(:lemma_word_class) %>">cl: <%= h lemma["word_class#{side}"] %></span><% end %>
+  <% attributes << capture do -%><span class="word_class" title="<%= t(:lemma_word_class) %>"><%= formatted_word_class side %></span><% end %>
 
-  <% attributes << capture do -%><span class="level" title="<%= t(:lemma_level) %>">l: <%= h lemma.level %></span><% end %>
+  <% attributes << capture do -%><span class="level" title="<%= t(:lemma_level) %>">l: <%= h @lemma.level %></span><% end %>
 
-  <% if lemma["synonym#{side}"].present? -%>
-    <% attributes << capture do -%><span class="synonym">syn: <%= h lemma["synonym#{side}"] %></span><% end %>
+  <% if @lemma["synonym#{side}"].present? -%>
+    <% attributes << capture do -%><span class="synonym">syn: <%= h @lemma["synonym#{side}"] %></span><% end %>
   <% end %>
 
   <%= render :partial => "lemmata/additional_fields",
