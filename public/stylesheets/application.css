@@ -312,6 +312,10 @@ label.heading {
   margin-bottom: 1.25em;
 }
 
+.margin1, .margin2 {
+  color: #aab;
+}
+
 .subentry {
   padding-bottom: 1.5em;
 }
