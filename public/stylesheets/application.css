@@ -40,10 +40,24 @@ thead th, th {
 label {
   font-weight: normal;
 }
+
 label.heading {
   font-weight: bold;
   display: block;
 }
+
+input[type=submit], label, select, .pointer {
+  cursor:pointer;
+}
+
+
+
+a.button, button {
+  border:1px solid #78806b;
+  background: transparent url(../images/button_bg.png)repeat-x;
+  color: #ffffff;
+}
+
 
 /* input field hint */
 .hint {
