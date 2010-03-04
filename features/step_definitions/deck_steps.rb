@@ -4,6 +4,6 @@ Given /^a category named "([^\"]*)"$/ do |name|
 end
 
 Then /^I should see a button to create a new deck$/ do
-  response_body.should have_tag "form[action=?]", deck_path
+  response_body.should have_tag "form[action=?]", new_user_deck_path
 end
 

@@ -1,13 +1,12 @@
 ActionController::Routing::Routes.draw do |map|
-  map.resources :decks
-
 
   map.resource :user_session
 #  map.root :controller => "user_sessions", :action => "new"
 
   map.resource :account, :controller => "users"
-  map.resources :users do |user|
+  map.resources :users, :shallow => true do |user|
     user.resource :admin, :controller => "admin_status"
+    user.resources :decks
   end
 
   map.resources :issues
