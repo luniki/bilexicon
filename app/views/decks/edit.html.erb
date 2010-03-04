@@ -4,10 +4,6 @@
   <%= f.error_messages %>
 
   <p>
-    <%= f.label :user_id %><br />
-    <%= f.text_field :user_id %>
-  </p>
-  <p>
     <%= f.label :name %><br />
     <%= f.text_field :name %>
   </p>
@@ -17,4 +13,4 @@
 <% end %>
 
 <%= link_to 'Show', @deck %> |
-<%= link_to 'Back', decks_path %>
+<%= link_to 'Back', user_decks_path(current_user) %>

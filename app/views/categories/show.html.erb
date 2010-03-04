@@ -1,11 +1,17 @@
 <div class="category">
-  <% if current_user_is_admin then %>
-    <%= link_to t(:edit), edit_category_path(@category), :class => "button" %>
-    <%= link_to t(:delete), @category, :confirm => t(:confirm_question), :method => :delete, :class => "button"  %>
-    <%= link_to t(:add_category), new_category_path(:category_id => @category), :class => "button"   %>
-    <%=link_to t(:add_lemma), new_lemma_path(:category_id => @category), :class => "button"  %>
+
+  <% if current_user then %>
+    <%=link_to t(:create_deck), new_user_deck_path(current_user, :category_id => @category), :class => "button"  %>
+    <% if current_user_is_admin then %>
+      <%= link_to t(:edit), edit_category_path(@category), :class => "button" %>
+      <%= link_to t(:delete), @category, :confirm => t(:confirm_question), :method => :delete, :class => "button"  %>
+      <%= link_to t(:add_category), new_category_path(:category_id => @category), :class => "button"   %>
+      <%=link_to t(:add_lemma), new_lemma_path(:category_id => @category), :class => "button"  %>
+    <% end %>
     <hr />
   <% end %>
+
+
 
   <div class="categories">
     <ul class="ancestors">
