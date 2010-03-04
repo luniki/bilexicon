@@ -14,6 +14,10 @@ module NavigationHelpers
     when /the lemma page/
       lemma_path(1)
 
+    when /the category "(.*)"/
+      puts $1
+      category_path(Category.find_by_name($1))
+
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:
     #
