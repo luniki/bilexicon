@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20091208090716) do
+ActiveRecord::Schema.define(:version => 20100304093130) do
 
   create_table "categories", :force => true do |t|
     t.string   "name"
@@ -31,6 +31,13 @@ ActiveRecord::Schema.define(:version => 20091208090716) do
   add_index "categorizations", ["category_id", "lemma_id"], :name => "category_and_lemma"
   add_index "categorizations", ["category_id"], :name => "category_id"
   add_index "categorizations", ["lemma_id"], :name => "lemma_id"
+
+  create_table "decks", :force => true do |t|
+    t.integer  "user_id"
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "examples", :force => true do |t|
     t.string   "form1"
