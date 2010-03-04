@@ -97,11 +97,11 @@ Feature: word class dependent fields of lemmata
     When I visit the lemma's page
     Then the page should say that the lemma has -ge-
 
-  @authenticated @wip
-  Scenario: show additional fields in a readable form
-    Given there is a lemma with additional fields
-    When I visit the lemma's page
-    Then the page should show me the additional fields in a readable form
+#  @authenticated @wip
+#  Scenario: show additional fields in a readable form
+#    Given there is a lemma with additional fields
+#    When I visit the lemma's page
+#    Then the page should show me the additional fields in a readable form
 
 # ADJECTIVES
 
