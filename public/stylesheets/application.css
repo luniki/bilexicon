@@ -311,6 +311,10 @@ a.button, button {
   color: red;
 }
 
+.lemma .annotation {
+  font-style: italic;
+}
+
 .form1, .form2 {
   font-weight: bold;
 }

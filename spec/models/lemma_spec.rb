@@ -8,7 +8,9 @@ describe Lemma do
       :level_rezeptiv => "A1", :level_produktiv => "A1",
       :word_class1 => "V",
       :word_class2 => "V",
-      :categories => [Factory.create(:category)]
+      :categories => [Factory.create(:category)],
+      :annotation1 => "an annotation",
+      :annotation2 => "eine Anmerkung",
     }
   end
 

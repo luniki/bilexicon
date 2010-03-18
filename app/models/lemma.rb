@@ -20,7 +20,7 @@ class Lemma < ActiveRecord::Base
   # define indices for the sphinx search engine
   define_index do
     indexes short1, short2, long1, long2, phonetic1, phonetic2,
-            synonym1, synonym2
+            synonym1, synonym2, annotation1, annotation2
 
     # additional fields dependend on word class
     indexes [singular_genitive1,  singular_genitive2,

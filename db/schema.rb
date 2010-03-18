@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100304093130) do
+ActiveRecord::Schema.define(:version => 20100318083407) do
 
   create_table "categories", :force => true do |t|
     t.string   "name"
@@ -20,7 +20,9 @@ ActiveRecord::Schema.define(:version => 20100304093130) do
     t.datetime "updated_at"
   end
 
+  add_index "categories", ["lft"], :name => "index_categories_on_lft"
   add_index "categories", ["parent_id"], :name => "parent_id"
+  add_index "categories", ["rgt"], :name => "index_categories_on_rgt"
 
   create_table "categorizations", :force => true do |t|
     t.integer "category_id", :null => false
@@ -120,6 +122,8 @@ ActiveRecord::Schema.define(:version => 20100304093130) do
     t.boolean  "countable2",          :default => true
     t.boolean  "uncountable1"
     t.boolean  "uncountable2"
+    t.string   "annotation1"
+    t.string   "annotation2"
   end
 
   add_index "lemmata", ["delta"], :name => "index_lemmata_on_delta"

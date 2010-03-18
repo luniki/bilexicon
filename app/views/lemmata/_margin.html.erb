@@ -17,6 +17,10 @@
   <%= render :partial => "lemmata/additional_fields",
              :locals => { :side => side, :attributes => attributes } %>
 
+  <% if @lemma["annotation#{side}"].present? -%>
+    <% attributes << capture do -%><span class="annotation"><%= h @lemma["annotation#{side}"] %></span><% end %>
+  <% end %>
+
   <%= attributes.join("; ") %>
 </div>
 

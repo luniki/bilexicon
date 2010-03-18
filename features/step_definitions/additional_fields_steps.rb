@@ -99,9 +99,10 @@ Then /^I should see fields with type:$/ do |table|
   table.hashes.each do |hash|
     field = hash['field'].gsub " ", "_"
     type = case hash['type']
-          when "radio buttons": "radio"
-          when "text fields":   "text"
-          when "check boxes":   "checkbox"
+          when /radio buttons?/: "radio"
+          when /text fields?/:   "text"
+          when /check box(es)?/:   "checkbox"
+          else raise Exception.new "Unknown type: #{hash['type']}"
     end
 
     [1, 2].each do |side|
