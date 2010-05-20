@@ -1,6 +1,17 @@
 <ol id="<%= path_to_id(lemma_valencies_path(@lemma)) %>"
     class="valencies column last">
-  <%= render :partial => "valency", :collection => @valencies %>
+
+  <% if current_user_is_admin then %>
+    <%= render :partial => "valency", :collection => @valencies %>
+  <% else %>
+    <% @lemma.valencies.group_by_meaning.each do |meaning, valencies| %>
+      <li class="meaning-group">
+        <h3><%= t(:meaning) %>: <%= meaning.blank? ? t(:Misc) : meaning %></h3>
+      </li>
+      <%= render :partial => "valency", :collection => valencies %>
+   <% end %>
+  <% end %>
+
 </ol>
 
 <%= render :partial => "valencies/ajax_edit"  if current_user_is_admin %>

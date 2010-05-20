@@ -15,7 +15,18 @@
 
 <ol id="<%= path_to_id(lemma_phraseologisms_path(@lemma)) %>"
     class="phraseologisms column last">
-  <%= render :partial => "phraseologism", :collection => @phraseologisms %>
+
+  <% if current_user_is_admin then %>
+    <%= render :partial => "phraseologism", :collection => @phraseologisms %>
+  <% else %>
+    <% @lemma.phraseologisms.group_by_meaning.each do |meaning, phraseologisms| %>
+      <li class="meaning-group">
+        <h3><%= t(:meaning) %>: <%= meaning.blank? ? t(:Misc) : meaning %></h3>
+      </li>
+      <%= render :partial => "phraseologism", :collection => phraseologisms %>
+   <% end %>
+  <% end %>
+
 </ol>
 
 <%= render :partial => "phraseologisms/ajax_edit"  if current_user_is_admin %>

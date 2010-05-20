@@ -8,9 +8,9 @@ class Lemma < ActiveRecord::Base
                       :order => "position"
 
   has_many :subentries,     :dependent => :destroy, :order => "position", :include => :examples
-  has_many :valencies,      :dependent => :destroy, :order => "position", :include => :examples
-  has_many :collocations,   :dependent => :destroy, :order => "position", :include => :examples
-  has_many :phraseologisms, :dependent => :destroy, :order => "position", :include => :examples
+  has_many :valencies,      :dependent => :destroy, :order => "position", :include => :examples, :extend => GroupedSubentriesExtension
+  has_many :collocations,   :dependent => :destroy, :order => "position", :include => :examples, :extend => GroupedSubentriesExtension
+  has_many :phraseologisms, :dependent => :destroy, :order => "position", :include => :examples, :extend => GroupedSubentriesExtension
 
   validates_presence_of :short1, :short2, :long1, :long2,
                         :word_class1, :word_class1,
@@ -79,6 +79,7 @@ class Lemma < ActiveRecord::Base
   additional_attributes :ADJ, :comparative, :superlative,
                               :predicative, :attributive
 
+
   def level
     "#{level_rezeptiv}/#{level_produktiv}"
   end
@@ -101,3 +102,4 @@ class Lemma < ActiveRecord::Base
     end
 
 end
+
