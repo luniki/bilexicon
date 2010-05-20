@@ -83,6 +83,18 @@ class Lemma < ActiveRecord::Base
     "#{level_rezeptiv}/#{level_produktiv}"
   end
 
+
+  def collocations_grouped_by_meaning
+    collocations.inject(Hash.new {|hash, key| hash[key] = []}) do |hash, coll|
+      hash[""] << coll if coll.meanings.length == 0;
+      coll.meaning_list.each do |m|
+        hash[m] << coll
+      end
+      hash
+    end.sort_by {|a, b| -b.length}
+  end
+
+
   protected
     def validate
       errors.add_on_empty(:categories)

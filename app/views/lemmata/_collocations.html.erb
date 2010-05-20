@@ -13,10 +13,18 @@
   </div>
 </div>
 
-
 <ol id="<%= path_to_id(lemma_collocations_path(@lemma)) %>"
     class="collocations column last">
-  <%= render :partial => "collocation", :collection => @collocations %>
+
+  <% if current_user_is_admin then %>
+    <%= render :partial => "collocation", :collection => @collocations %>
+  <% else %>
+    <% @lemma.collocations_grouped_by_meaning.each do |meaning, collocations| %>
+      <li><h3><%= t(:meaning) %>: <%= meaning.blank? ? t(:Misc) : meaning %></h3>
+     <%= render :partial => "collocation", :collection => collocations %>
+   <% end %>
+  <% end %>
+
 </ol>
 
 <%= render :partial => "collocations/ajax_edit"  if current_user_is_admin %>
