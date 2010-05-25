@@ -9,5 +9,19 @@
 </ul>
 
 <% if current_user_is_admin then %>
-  <p><%= link_to t(:add_category), new_category_path  %></p>
+
+  <div id="admin-buttons" class="column span-24 last">
+    <a href="<%= new_lemma_path %>" class="button">
+      <%= image_tag 'icons/plus.png' %>
+      <%= t(:add_lemma) %>
+    </a>
+    <a href="<%= new_category_path %>" class="button">
+      <%= image_tag 'icons/plus.png' %>
+      <%= t(:add_category) %>
+    </a>
+    <a href="<%= users_path %>" class="button">
+      <%= image_tag 'icons/user.png' %>
+      <%= t(:user_administration) %>
+    </a>
+  </div>
 <% end %>
