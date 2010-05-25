@@ -11,55 +11,64 @@
     <%= stylesheet_link_tag "blueprint/ie", :media => "screen, projection" %>
   <![endif]-->
   <%= stylesheet_link_tag "application", :media => "screen, projection" %>
-
 </head>
 
 <body>
 <div class="container">
   <div id="head">
 
-    <div class="span-4">
+    <div class="column span-3">
       <% link_to('/') do %>
         <%= image_tag("logo.png", :alt => "logo") %>
       <% end %>
     </div>
 
-    <div class="span-2 active">
-      <a href="#search">Suche</a>
-    </div>
 
-    <div id="session">
-      <ul>
-        <% if !current_user %>
-          <li>
-            <%= link_to "Sign Up", new_account_path %>
-          </li>
-          <li>
-            <%= link_to "Sign In", new_user_session_path %>
-          </li>
-        <% else %>
-          <li>
-            <% link_to(new_issue_path) do %>
-              <%= image_tag("bug.png", :id => "issues",
-                                       :alt => "issues",
-                                       :title => "issues") %>
-            <% end %>
-          </li>
-          <li>
-          <%= link_to "My Account", account_path %>
-          </li>
-          <li>
-          <%= link_to "Sign Out", user_session_path, :method => :delete %>
-          </li>
-        <% end %>
-      </ul>
+    <div class="column span-21 last" style="text-align: right;">
+      <a href="<%= categories_path %>" class="button" style="display: inline; float: none; margin-right: 1.5em;">
+        <%= image_tag 'icons/cards.png' %>
+        <%= t(:browse_categories) %>
+      </a>
+
+      <% form_tag(lemmata_path, :method => :get, :class => "searchform") do %>
+        <%= text_field_tag 'q', params[:q].blank? ? t(:search_hint) : params[:q], {
+            :id => "search_input",
+            :class => "searchfield" + (params[:q].blank? ? " default-as-hint" : "")
+        } %>
+        <input class="searchbutton" type="button" value="Go" />
+      <% end %>
     </div>
 
   </div>
 
-  <div id="speedy">
-    <%= render :partial => "/speedy" %>
+
+  <div id="session" class="column span-24 last">
+    <ul>
+      <% if !current_user %>
+        <li>
+          <%= link_to "Sign Up", new_account_path %>
+        </li>
+        <li>
+          <%= link_to "Sign In", new_user_session_path %>
+        </li>
+      <% else %>
+        <li>
+          <% link_to(new_issue_path) do %>
+            <%= image_tag("bug.png", :id => "issues",
+                                     :alt => "issues",
+                                     :title => "issues") %>
+          <% end %>
+        </li>
+        <li>
+        <%= link_to "My Account", account_path %>
+        </li>
+        <li>
+        <%= link_to "Sign Out", user_session_path, :method => :delete %>
+        </li>
+      <% end %>
+    </ul>
   </div>
+
 
   <div id="content">
     <% if flash[:notice] then %>

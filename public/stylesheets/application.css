@@ -61,7 +61,7 @@ a.button, button {
 
 /* input field hint */
 .hint {
-  color: #C9EDF4;
+  color: #40A2B7;
 }
 
 .box {
@@ -83,97 +83,83 @@ a.button, button {
 /*              HEADER                */
 /**************************************/
 #head {
-  line-height: 30px;
+  line-height: 45px;
 }
 
-#head ul {
+#session ul {
   list-style-image: none;
   list-style-position: outside;
   list-style-type: none;
+  display: inline;
+  margin: 0;
 }
 
-#head ul li {
-  border-left: 1px solid #878984;
+#session li {
+  border-left: 1px solid #E7F8FB;
+  display: inline;
 }
 
-#head ul li.last {
-  border-right: 1px solid #878984;
+#session li:first-child {
+  border-left: none;
 }
 
-#head ul li a {
-  color: #FFFFFF;
+#session li a {
   padding: 0 12px;
   text-decoration: none;
   text-transform: lowercase;
 }
 
-#head img {
+#session img {
   position: relative;
   top: 4px;
 }
 
-#head .active {
-  text-align: center;
-  background: transparent url(../images/active_section.png) no-repeat scroll center bottom;
-}
-
-#head .active a {
-  color: #FFFFFF;
-  padding: 0 12px;
-  border-left: 1px solid #878984;
-  border-right: 1px solid #878984;
-  text-decoration: none;
-  text-transform: lowercase;
-}
-
-#head #session {
+#session {
   text-align: right;
 }
 
-#head #session ul {
+
+.searchform {
   display: inline;
 }
 
-#head #session li {
-  display: inline;
+.searchform input {
+  font-size: 75%;
 }
 
+.searchform .searchfield {
+  padding: 6px 6px 6px 8px;
+  width: 15em;
+  border: 1px solid rgba(0,0,0,.2);
+  background-color: #fff;
+  outline: none;
 
-/**************************************/
-/*             NAVIGATION             */
-/**************************************/
+  -webkit-border-radius: 2em;
+  -moz-border-radius: 2em;
+  border-radius: 2em;
 
-#speedy {
-  background-color: #3CC5DE;
-  color: white;
-  padding-top: 1.5em;
-  padding-bottom: 1.5em;
+  -moz-box-shadow: inset 1px 1px 4px #ccc;
+  -webkit-box-shadow: inset 1px 1px 4px #ccc;
+  box-shadow: inset 1px 1px 4px #ccc;
 }
 
-/* buttons */
-#speedy a.button {
-  display: inline;
-  float: none;
-}
+.searchform .searchbutton {
+  color: #fff;
+  border: solid 1px #494949;
+  height: 27px;
+  width: 27px;
+  text-shadow: 0 1px 1px #444;
 
-#speedy .input {
-  border: none;
-  font-size: 1.5em;
-  padding: 0.25em;
-}
+  -webkit-border-radius: 2em;
+  -moz-border-radius: 2em;
+  border-radius: 2em;
 
-.search_button {
-  padding-left: 7px;
+  background: #5f5f5f;
+  background: -webkit-gradient(linear, left top, left bottom, from(#9e9e9e), to(#454545));
+  background: -moz-linear-gradient(top,  #9e9e9e,  #454545);
+  filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#9e9e9e', endColorstr='#454545'); /* ie7 */
+  -ms-filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#9e9e9e', endColorstr='#454545'); /* ie8 */
 }
-
-#speedy-browse {
-  padding: 0.5em 0;
-}
-
-#speedy-browse a.button {
-  margin-left: 1em;
-}
-
 
 /**************************************/
 /*            LEMMA SEARCH            */
@@ -300,10 +286,6 @@ a.button, button {
 /**************************************/
 /*            MAIN CONTENT            */
 /**************************************/
-
-#content {
-  padding: 17px 0 0 0;
-}
 
 .lemma .phonetic:hover,
 .lemma .class:hover,
