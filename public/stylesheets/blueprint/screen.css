@@ -286,6 +286,7 @@ a.negative:active {background-color:#d12f19;border:1px solid #d12f19;color:#fff;
 .inline-edit-header {float:left;margin-right:10px;width:150px;margin-bottom:1.5em;clear:both;}
 .lemma {margin-right:0;padding-right:0;float:left;margin-right:10px;margin-right:0;width:950px;margin-right:0;}
 #head {margin-right:0;padding-right:0;float:left;margin-right:10px;margin-right:0;width:950px;margin-right:0;}
+.meaning-group {margin-right:0;padding-right:0;float:left;margin-right:10px;margin-right:0;width:950px;margin-right:0;}
 .inline-edit-control2 {float:left;margin-right:10px;width:270px;padding-left:280px;}
 .subentries {margin-right:0;padding-right:0;float:left;margin-right:10px;margin-right:0;width:950px;margin-right:0;}
 .inline-edit-help {color:#666;margin-right:0;padding-right:0;float:left;margin-right:10px;margin-right:0;width:150px;}
