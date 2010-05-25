@@ -35,7 +35,7 @@
             :id => "search_input",
             :class => "searchfield" + (params[:q].blank? ? " default-as-hint" : "")
         } %>
-        <input class="searchbutton" type="button" value="Go" />
+        <input class="searchbutton" type="submit" name="go" value="Go" />
       <% end %>
     </div>
 
