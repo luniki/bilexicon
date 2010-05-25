@@ -86,6 +86,10 @@ a.button, button {
   line-height: 45px;
 }
 
+#head img {
+  vertical-align: middle;
+}
+
 #session ul {
   list-style-image: none;
   list-style-position: outside;
