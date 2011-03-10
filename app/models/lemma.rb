@@ -95,6 +95,13 @@ class Lemma < ActiveRecord::Base
     end.sort_by {|a, b| -b.length}
   end
 
+  def self.find_without_categorizations
+    find(:all, :readonly => false,
+         :select => "lemmata.*",
+         :joins => "LEFT OUTER JOIN categorizations c ON lemmata.id = c.lemma_id",
+         :conditions => "c.id IS NULL")
+  end
+
 
   protected
     def validate

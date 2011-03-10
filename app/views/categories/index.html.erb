@@ -8,6 +8,18 @@
   <% end %>
 </ul>
 
+<% if @orphans then %>
+<h2><%= t :orphaned_lemmata %></h2>
+<ul id="orphans">
+  <% for orphan in @orphans %>
+    <% content_tag_for(:li, orphan) do %>
+      <%=link_to h(orphan.short1), orphan %>
+    <% end %>
+  <% end %>
+</ul>
+<% end %>
+
+
 <% if current_user_is_admin then %>
 
   <div id="admin-buttons" class="column span-24 last">

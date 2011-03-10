@@ -4,6 +4,7 @@ class CategoriesController < ApplicationController
 
   def index
     @categories = Category.roots
+    @orphans = Lemma.find_without_categorizations
   end
 
   def show

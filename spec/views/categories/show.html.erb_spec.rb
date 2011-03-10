@@ -7,10 +7,20 @@ describe "/categories/show.html.erb" do
     assigns[:ancestors] = @ancestors =
       [stub_model(Category, :name => "automobiles"),
        stub_model(Category, :name => "vans")]
-    assigns[:category] = @category = stub_model(Category, :name => "microvans", :self_and_ancestors => @ancestors)
+
+    @ancestors.stub(:scoped).and_return([])
+
+    @siblings = []
+
+    assigns[:category] = @category = stub_model(Category,
+                                                :name => "microvans",
+                                                :self_and_ancestors => @ancestors,
+                                                :self_and_siblings => @siblings)
+
     assigns[:children] = @children =
       [stub_model(Category, :name => "Toyota Yaris"),
        stub_model(Category, :name => "Audi A2")]
+
     assigns[:lemmata] = @lemmata =
       [stub_model(Lemma, :short1 => "wheel", :short2 => "Rad"),
        stub_model(Lemma, :short1 => "light", :short2 => "Licht")]
