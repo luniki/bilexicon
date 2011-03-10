@@ -53,7 +53,7 @@ BILEXICON.MultiButton = (function () {
       if (Prototype.Browser.IE) {
         class_name = class_name.replace(/\b\w*hover_/gi, "").strip();
       }
-      var c = class_name.match(/^cmd\-([a-zA-Z]+)$/)[1];
+      var c = class_name.match(/^cmd\-([a-zA-Z]+)/)[1];
       BILEXICON.Commands[c](this.activeButton);
       this.clickOff();
     },
