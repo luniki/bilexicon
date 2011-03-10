@@ -1,0 +1,18 @@
+javascripts:
+  workspace:
+
+    - public/javascripts/vendor/prototype.js
+    - public/javascripts/vendor/effects.js
+    - public/javascripts/vendor/controls.js
+    - public/javascripts/vendor/dragdrop.js
+
+    - public/javascripts/extensions.js
+    - public/javascripts/application.js
+
+    - public/javascripts/bilexicon/helpers.js
+    - public/javascripts/bilexicon/search.js
+    - public/javascripts/bilexicon/invitation.js
+    - public/javascripts/bilexicon/commands.js
+    - public/javascripts/bilexicon/commands/*.js
+    - public/javascripts/bilexicon/multibutton.js
+    - public/javascripts/bilexicon/wordclass.js
