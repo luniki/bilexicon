@@ -11,6 +11,10 @@
     <%= stylesheet_link_tag "blueprint/ie", :media => "screen, projection" %>
   <![endif]-->
   <%= stylesheet_link_tag "application", :media => "screen, projection" %>
+
+  <%= include_javascripts :workspace %>
+  <%= javascript_tag "BILEXICON.token = '#{form_authenticity_token}'" %>
+
 </head>
 
 <body>
@@ -86,7 +90,5 @@
 
 </div>
 
-<%= sprockets_include_tag %>
-<%= javascript_tag "BILEXICON.token = '#{form_authenticity_token}'" %>
 </body>
 </html>
