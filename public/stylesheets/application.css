@@ -389,8 +389,6 @@ a.multi-button {
   display: block;
   padding: 0;
   height: 15px;
-  position: relative;
-  left: -9999px;
 }
 
 a.multi-button:hover {
@@ -408,12 +406,6 @@ div.entry-line:hover, div.subentry:hover {
   background-color: #FFF;
   background-image: url(../images/hover_gradient.gif);
   background-repeat: repeat-y;
-}
-
-div.entry-line:hover a.multi-button,
-div.subentry-line:hover a.multi-button,
-div.subentry:hover a.multi-button {
-  left: 0;
 }
 
 div.subentry-line a.multi-button {
