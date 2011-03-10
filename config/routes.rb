@@ -40,7 +40,7 @@ ActionController::Routing::Routes.draw do |map|
                                        :collection => { :sort => :post }
   end
 
-  SprocketsApplication.routes(map)
+  Jammit::Routes.draw(map)
 
   # The priority is based upon order of creation: first created -> highest priority.
 
