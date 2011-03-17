@@ -93,9 +93,9 @@ BILEXICON.Commands.edit = (function () {
         var stop = function () {
           edit.remove();
           Effect.SelfHealingAppear(subentry);
-          document.stopObserving("close:forms", stop);
+          jQuery(document).unbind("closeForms", stop);
         };
-        document.observe("close:forms", stop);
+        jQuery(document).bind("closeForms", stop);
 
         edit.down(".cancel").observe("click", BILEXICON.closeForms);
         edit.down(".submit").observe("click", submit_edit_form);

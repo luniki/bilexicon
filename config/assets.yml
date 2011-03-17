@@ -6,6 +6,10 @@ javascripts:
     - public/javascripts/vendor/controls.js
     - public/javascripts/vendor/dragdrop.js
 
+    - public/javascripts/vendor/underscore.js
+    - public/javascripts/vendor/jquery-1.5.js
+    - public/javascripts/vendor/jquery-noconflict.js
+
     - public/javascripts/extensions.js
     - public/javascripts/application.js
 

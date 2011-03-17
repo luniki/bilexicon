@@ -27,13 +27,21 @@ BILEXICON.WordClass = (function () {
 
         // segment should still be shown, but remove the previous fields
         if (last === new_word_classes[other]) {
-          segment.select(".form" + (index + 1)).invoke("removeVisibility").invoke("disableChildren");
+          jQuery(".form" + (index + 1), segment)
+                .css({"visibility": "hidden"})
+                .find("input, textarea, select")
+                .attr("disabled", "disabled");
         }
 
         // segment should vanish and the other side's fields should be shown
         else {
-          segment.hide().disableChildren();
-          segment.select(".form" + (other + 1)).invoke("setVisibility");
+          jQuery(segment)
+                .hide()
+                .find("input, textarea, select")
+                .attr("disabled", "disabled");
+          jQuery(segment)
+                .find(".form" + (other + 1), segment)
+                .css({"visibility": "visible"});  
         }
       }
     });
@@ -46,14 +54,23 @@ BILEXICON.WordClass = (function () {
 
       if (segment) {
 
+        segment = jQuery(segment);
         segment.show();
 
         if (new_word_classes[index] !== new_word_classes[other]) {
-          segment.select(".form" + (index + 1)).invoke("enableChildren");
-          segment.select(".form" + (other + 1)).invoke("removeVisibility").invoke("disableChildren");
+          segment.find(".form" + (index + 1))
+                .find(":disabled")
+                .removeAttr("disabled");
+          segment.find(".form" + (other + 1))
+                .css({visibility: "hidden"})
+                .find("input, textarea, select")
+                .attr("disabled", "disabled");
         }
         else {
-          segment.select(".form" + (index + 1)).invoke("setVisibility").invoke("enableChildren");
+          segment.find(".form" + (index + 1))
+                .css({visibility: "visible"})
+                .find(":disabled")
+                .removeAttr("disabled");
         }
       }
 

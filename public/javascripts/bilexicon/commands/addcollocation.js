@@ -48,9 +48,9 @@ BILEXICON.Commands.addCollocation = function () {
 
     var stop = function () {
       li.remove();
-      document.stopObserving("close:forms", stop);
+      jQuery(document).unbind("closeForms", stop);
     };
-    document.observe("close:forms", stop);
+    jQuery(document).bind("closeForms", stop);
 
     li.down(".submit").observe("click", createCollocation);
     li.down(".cancel").observe("click", BILEXICON.closeForms);

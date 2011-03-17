@@ -37,7 +37,7 @@ BILEXICON.Commands.editLemma = function () {
     var edit = $("lemma-edit"), entry = $$(".entry").first();
     edit.remove();
     Effect.SelfHealingAppear(entry);
-    document.stopObserving("close:forms", stop);
+    jQuery(document).unbind("closeForms", stop);
   };
 
   Effect.SelfHealingFade(entry);
@@ -58,8 +58,7 @@ BILEXICON.Commands.editLemma = function () {
         $("lemma_word_class" + side).observe("change", BILEXICON.WordClass.show_additional_fields);
       });
 
-
-      document.observe("close:forms", stop);
+      jQuery(document).bind("closeForms", stop);
 
       var edit = entry.next();
       edit.down(".cancel").observe("click", BILEXICON.closeForms);

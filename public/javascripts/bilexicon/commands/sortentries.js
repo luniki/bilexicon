@@ -39,11 +39,9 @@ BILEXICON.Commands.sortEntries = function (button) {
     // destroy sortable and unmark accepting area
     Sortable.destroy(collection.id);
     collection.removeClassName("sort-context");
-
-    document.stopObserving("close:forms", stop);
+    jQuery(document).unbind("closeForms", stop);
   };
-
-  document.observe("close:forms", stop);
+  jQuery(document).bind("closeForms", stop);
 
   // show done link and hide the sort triggering multi button
   collection.insert({ before: done.appear({afterSetup: Element.scrollTo.curry(done)}).observe("click", BILEXICON.closeForms) });
