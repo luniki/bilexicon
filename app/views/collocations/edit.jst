@@ -3,29 +3,29 @@
 
   <hr class="space"/>
 
-  <% form_tag('500.html', :method => :put) do -%>
+  <form method="post" action="500.html">
 
     <div class="span-4 append-bottom" style="text-align: right">
       <strong><%= t(:form) %></strong><span class="required">*</span>
     </div>
     <div class="span-7">
-      <%= text_field_tag "collocation[form1]", '#{collocation.form1}', :class => "span-7" %>
+      <input type="text" value="{{form1}}" class="span-7" name="collocation[form1]" id="collocation_form1">
     </div>
     <div class="span-7">
-      <%= text_field_tag "collocation[form2]", '#{collocation.form2}', :class => "span-7" %>
+      <input type="text" value="{{form2}}" class="span-7" name="collocation[form2]" id="collocation_form2">
     </div>
     <div class="quiet span-4 last">
     </div>
+
 
     <div class="span-4 append-bottom clear" style="text-align: right">
       <strong><%= t(:syntax) %></strong><span class="required">*</span>
     </div>
     <div class="span-7">
-      <%= text_field_tag "collocation[syntax1]", '#{collocation.syntax1}',
-            :class => "span-7 mirror-input to-collocation_syntax2" %>
+      <input type="text" value="{{syntax1}}" class="span-7 mirror-input to-collocation_syntax2" name="collocation[syntax1]" id="collocation_syntax1">
     </div>
     <div class="span-7">
-      <%= text_field_tag "collocation[syntax2]", '#{collocation.syntax2}', :class => "span-7" %>
+      <input type="text" value="{{syntax2}}" class="span-7" name="collocation[syntax2]" id="collocation_syntax2">
     </div>
     <div class="quiet span-4 last">
     </div>
@@ -35,10 +35,10 @@
       <strong><%= t(:synonym) %></strong>
     </div>
     <div class="span-7">
-      <%= text_field_tag "collocation[synonym1]", '#{collocation.synonym1}', :class => "span-7" %>
+      <input type="text" value="{{synonym1}}" class="span-7" name="collocation[synonym1]" id="collocation_synonym1">
     </div>
     <div class="span-7">
-      <%= text_field_tag "collocation[synonym2]", '#{collocation.synonym2}', :class => "span-7" %>
+      <input type="text" value="{{synonym2}}" class="span-7" name="collocation[synonym2]" id="collocation_synonym2">
     </div>
     <div class="quiet span-4 last">
     </div>
@@ -48,23 +48,21 @@
       <strong><%= t(:meanings) %></strong>
     </div>
     <div class="span-14">
-      <%= text_field_tag "collocation[meaning_list]", '#{collocation.meaning_list}', :class => "span-14" %>
+      <input type="text" value="{{meaning_list}}" class="span-14" name="collocation[meaning_list]" id="collocation_meaning_list">
     </div>
     <div class="quiet span-4 last">
       <%= t :comma_separated %>
     </div>
 
     <div class="push-4 span-18 clear last">
-      <button class="submit">
-        <%= image_tag 'icons/tick.png' %>
+      <button class="submit tick">
         <%= t(:save) %>
       </button>
-      <button class="cancel">
-        <%= image_tag 'icons/cross.png' %>
+      <button class="cancel cross">
         <%= t(:cancel) %>
       </button>
     </div>
 
 
-  <% end %>
+  </form>
 </div>
