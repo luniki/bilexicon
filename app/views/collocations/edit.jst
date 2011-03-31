@@ -1,5 +1,3 @@
-<div id="examples-edit-template">
-<!--
 <div class="subentry-edit span-22 last"
      style="display: none;">
 
@@ -11,23 +9,23 @@
       <strong><%= t(:form) %></strong><span class="required">*</span>
     </div>
     <div class="span-7">
-      <%= text_field_tag "example[form1]", '#{example.form1}', :class => "span-7" %>
+      <%= text_field_tag "collocation[form1]", '#{collocation.form1}', :class => "span-7" %>
     </div>
     <div class="span-7">
-      <%= text_field_tag "example[form2]", '#{example.form2}', :class => "span-7" %>
+      <%= text_field_tag "collocation[form2]", '#{collocation.form2}', :class => "span-7" %>
     </div>
     <div class="quiet span-4 last">
     </div>
 
     <div class="span-4 append-bottom clear" style="text-align: right">
-      <strong><%= t(:syntax) %></strong>
+      <strong><%= t(:syntax) %></strong><span class="required">*</span>
     </div>
     <div class="span-7">
-      <%= text_field_tag "example[syntax1]", '#{example.syntax1}',
-            :class => "span-7 mirror-input to-example_syntax2" %>
+      <%= text_field_tag "collocation[syntax1]", '#{collocation.syntax1}',
+            :class => "span-7 mirror-input to-collocation_syntax2" %>
     </div>
     <div class="span-7">
-      <%= text_field_tag "example[syntax2]", '#{example.syntax2}', :class => "span-7" %>
+      <%= text_field_tag "collocation[syntax2]", '#{collocation.syntax2}', :class => "span-7" %>
     </div>
     <div class="quiet span-4 last">
     </div>
@@ -37,14 +35,24 @@
       <strong><%= t(:synonym) %></strong>
     </div>
     <div class="span-7">
-      <%= text_field_tag "example[synonym1]", '#{example.synonym1}', :class => "span-7" %>
+      <%= text_field_tag "collocation[synonym1]", '#{collocation.synonym1}', :class => "span-7" %>
     </div>
     <div class="span-7">
-      <%= text_field_tag "example[synonym2]", '#{example.synonym2}', :class => "span-7" %>
+      <%= text_field_tag "collocation[synonym2]", '#{collocation.synonym2}', :class => "span-7" %>
     </div>
     <div class="quiet span-4 last">
     </div>
 
+
+    <div class="span-4 append-bottom clear" style="text-align: right">
+      <strong><%= t(:meanings) %></strong>
+    </div>
+    <div class="span-14">
+      <%= text_field_tag "collocation[meaning_list]", '#{collocation.meaning_list}', :class => "span-14" %>
+    </div>
+    <div class="quiet span-4 last">
+      <%= t :comma_separated %>
+    </div>
 
     <div class="push-4 span-18 clear last">
       <button class="submit">
@@ -59,6 +67,4 @@
 
 
   <% end %>
-</div>
--->
 </div>
