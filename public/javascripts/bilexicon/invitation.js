@@ -1,42 +1,46 @@
 /* ------------------------------------------------------------------------
  * invitation
  * ------------------------------------------------------------------------ */
-BILEXICON.Invitation = Class.create({
+BILEXICON.Invitation = (function ($) {
+    function Invitation(element, action) {
+        this.element = element;
+        this.action = action;
 
-  initialize: function(element, action) {
-    this.element = element;
-    this.action = action;
+        _.bindAll(this, "addObservers", "accept", "remove");
 
-    this.addObservers();
-    BILEXICON.Invitation.removeAll();
-    BILEXICON.Invitation.add(this);
-  },
-
-  addObservers: function () {
-    this.element.down(".accept").observe("click", this.accept.bind(this));
-    this.element.down(".cancel").observe("click", this.remove.bind(this));
-  },
-
-  accept: function (event) {
-    this.remove(event);
-    this.action();
-  },
-
-  remove: function (event) {
-    if (event) {
-      event.stop();
+        this.addObservers();
+        Invitation.removeAll();
+        Invitation.add(this);
     }
-    this.element.remove();
-  }
-});
 
-BILEXICON.Invitation.invitations = [];
-BILEXICON.Invitation.removeAll = function () {
-  BILEXICON.Invitation.invitations.each(Element.remove);
-  BILEXICON.Invitation.invitations = [];
-};
+    Invitation.prototype.addObservers = function () {
+        $(".accept", this.element).click(this.accept);
+        $(".cancel", this.element).click(this.remove);
+    };
 
-BILEXICON.Invitation.add = function (invitation) {
-  BILEXICON.Invitation.invitations.push(invitation);
-};
+    Invitation.prototype.accept = function (event) {
+        this.remove(event);
+        this.action();
+    };
 
+    Invitation.prototype.remove = function (event) {
+        if (event) {
+            event.preventDefault();
+        }
+        $(this.element).remove();
+    };
+
+
+    Invitation.invitations = [];
+
+    Invitation.removeAll = function () {
+        $(Invitation.invitations).remove();
+        Invitation.invitations = [];
+    };
+
+    Invitation.add = function (invitation) {
+        Invitation.invitations.push(invitation);
+    };
+
+    return Invitation;
+})(jQuery);

@@ -5,65 +5,62 @@
  * ------------------------------------------------------------------------ */
 BILEXICON.Commands.editLemma = function () {
 
-  var lemma = $$(".lemma").first(),
-      entry = lemma.down(".entry"),
-      route = BILEXICON.id_to_path(lemma.id);
+    var lemma = jQuery(".lemma:first"),
+    entry = lemma.find(".entry"),
+    route = BILEXICON.id_to_path(lemma.attr("id"));
 
-  // submit entry and dismiss fade edit form and remove it
-  var submit_edit_form = function (event) {
-    event.stop();
-    var lemma = event.element().up(".lemma");
-    var edit = lemma.down(".entry-edit");
-    var r = new Ajax.Request(route, {
-      method: "put",
-      parameters: edit.down("form").serialize(true),
-      onSuccess: function (transport) {
-        edit.remove();
-        lemma.down(".entry").replace(transport.responseText);
-        lemma.down(".entry-line").highlight();
-      },
-      onFailure: function (transport) {
-        edit.replace(transport.responseText);
-        edit = lemma.down(".entry-edit");
-        edit.down(".cancel").observe("click", BILEXICON.closeForms);
-        edit.down(".submit").observe("click", submit_edit_form);
-        edit.show();
-      }
+    entry.fadeOut();
+    
+    jQuery.ajax({
+        url: route + "/edit.js",
+        dataType: "text",
+        type: "get"
+    }).error(function (jqXHR, textStatus, errorThrown) {
+        entry.effect("shake");
+    }).success(function (data) {
+        jQuery(data).insertAfter(entry);
+        
+        BILEXICON.WordClass.show_additional_fields();
+        
+        jQuery("#lemma_word_class1, #lemma_word_class2").change(BILEXICON.WordClass.show_additional_fields);
+        
+        jQuery(document).bind("closeForms", stop);
+        
+        var edit = entry.next();
+        edit.find(".cancel").click(BILEXICON.closeForms);
+        edit.find(".submit").click(submit_edit_form);
+        edit.fadeIn();
     });
-  };
 
-  // show faded entry, fade edit form and remove it
-  var stop = function (event) {
-    var edit = $("lemma-edit"), entry = $$(".entry").first();
-    edit.remove();
-    Effect.SelfHealingAppear(entry);
-    jQuery(document).unbind("closeForms", stop);
-  };
+    //////////////////////////////////////////////////////////////////////
 
-  Effect.SelfHealingFade(entry);
+    // submit entry and dismiss fade edit form and remove it
+    var submit_edit_form = function (event) {
+        event.preventDefault();
+        var lemma = jQuery(event.target).closest(".lemma");
+        var edit = lemma.find(".entry-edit");
+        jQuery.ajax({
+            url: route + ".js",
+            type: "put",
+            data: edit.find("form").serialize()
+        }).success(function (data) {
+            edit.remove();
+            lemma.find(".entry").replaceWith(data);
+            lemma.find(".entry-line").effect("highlight");
+        }).error(function (jqXHR, textStatus, errorThrown) {
+            edit.replaceWith(jqXHR.responseText);
+            edit = lemma.find(".entry-edit");
+            edit.find(".cancel").click(BILEXICON.closeForms);
+            edit.find(".submit").click(submit_edit_form);
+            edit.show();
+        });
+    };
 
-  var r = new Ajax.Request(route + "/edit", {
-    method: "get",
-
-    onFailure: function (transport) {
-      // TODO
-      entry.shake();
-    },
-
-    onSuccess: function (transport) {
-      entry.insert({ after:  transport.responseText });
-
-      BILEXICON.WordClass.show_additional_fields();
-      [1, 2].each(function (side) {
-        $("lemma_word_class" + side).observe("change", BILEXICON.WordClass.show_additional_fields);
-      });
-
-      jQuery(document).bind("closeForms", stop);
-
-      var edit = entry.next();
-      edit.down(".cancel").observe("click", BILEXICON.closeForms);
-      edit.down(".submit").observe("click", submit_edit_form);
-      Effect.SelfHealingAppear(edit);
-    }
-  });
+    // show faded entry, fade edit form and remove it
+    var stop = function (event) {
+        var edit = jQuery("#lemma-edit"), entry = jQuery(".entry:first");
+        edit.remove();
+        entry.fadeIn();
+        jQuery(document).unbind("closeForms", stop);
+    };
 };

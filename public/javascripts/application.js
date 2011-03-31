@@ -13,6 +13,12 @@ BILEXICON.closeForms = function (event) {
   jQuery(document).trigger("closeForms");
 };
 
+BILEXICON.template = function(templateString) {
+  return function() { 
+    var template = Handlebars.compile(templateString);
+    return template(arguments[0]); 
+  };
+};
 
 /* ------------------------------------------------------------------------
  * dom:loaded events

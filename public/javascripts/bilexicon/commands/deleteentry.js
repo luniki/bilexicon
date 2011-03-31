@@ -5,29 +5,25 @@
  * ------------------------------------------------------------------------ */
 BILEXICON.Commands.deleteEntry = function (button) {
 
-  var element = button.up(".subentry, .entry");
-  var resource = element.up("*[id]");
-  var route = BILEXICON.id_to_path(resource.id);
+    var element = button.closest(".subentry, .entry");
+    var resource = element.closest("[id]");
+    var route = BILEXICON.id_to_path(resource.attr("id"));
 
-  if (confirm('Sind Sie sicher?')) {
-    var r = new Ajax.Request(route, {
-      method: "delete",
-      parameters: {authenticity_token: BILEXICON.token},
-      onFailure: function (transport) {
-        // TODO
-        element.shake();
-      },
-      onSuccess: function (transport) {
-        if (element.hasClassName("subentry")) {
-          Effect.SelfHealingFade(element, {
-            duration: 0.25,
-            afterFinish: Element.remove.curry(resource)
-          });
-        }
-        else {
-          document.location = "/lemmata";
-        }
-      }
-    });
-  }
+    if (confirm('Sind Sie sicher?')) {
+        var r = jQuery.ajax({
+            url: route, 
+            type: "delete"
+        }).error(function (jqXHR, textStatus, errorThrown) {
+            // TODO
+            element.effect("shake");
+        }).success(function (data) {
+            if (element.hasClass("subentry")) {
+                element.fadeOut(function () { resource.remove(); });
+            }
+            else {
+                // TODO
+                document.location = "/lemmata";
+            }
+        });
+    }
 };

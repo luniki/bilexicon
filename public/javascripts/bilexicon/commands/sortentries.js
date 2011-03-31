@@ -6,69 +6,75 @@
  * ------------------------------------------------------------------------ */
 BILEXICON.Commands.sortEntries = function (button) {
 
-  var collection = button.up("ol"),
-      url = BILEXICON.id_to_path(collection.id) + "/sort",
-      children = collection.childElements(),
-      buttons = collection.select(".multi-button"),
-      done = $("done").cloneNode(true)
-                      .writeAttribute({id: null})
-                      .addClassName("done");
+    var collection = button.closest("ol"),
+    url = BILEXICON.id_to_path(collection.attr("id")) + "/sort",
+    children = collection.children(),
+    buttons = collection.find(".multi-button"),
+    done = jQuery("#done").clone().removeAttr("id").addClass("done");
+    
+    jQuery(document).bind("closeForms", stop);
 
-  var stop = function () {
+    // show done link and hide the sort triggering multi button
+    jQuery(done).insertBefore(collection).click(BILEXICON.closeForms).fadeIn();
 
-    // remove done link and show the sort triggering multi button
-    done.remove();
-    button.show();
+    // hide multi buttons of the subentries
+    buttons.hide();
 
-    // show multi buttons of the subentries
-    buttons.invoke("show");
+    // show drag handles
+    children.find(".multi-button")
+        .hide()
+        .after(jQuery("#drag-handle")
+               .clone()
+               .removeAttr("id")
+               .addClass("drag-handle")
+               .show());
 
-    // remove drag handles
-    $$(".drag-handle").invoke("remove");
-
-    // send new order of valencies
-    var request = new Ajax.Request(url, {
-      parameters: Sortable.serialize(collection.id, {"name": "sequence"}) +
-                  '&authenticity_token=' + BILEXICON.token,
-      onFailure: function () {
-        // TODO
-        collection.shake();
-      }
+    // create sortable and mark accepting area
+    collection.sortable({
+        axis: 'y',
+        items: children,
+        placeholder: 'ui-state-highlight column span-24 last',
+        forcePlaceholderSize: true,
+        handle: ".drag-handle",
+        opacity: 0.5,
+        tolerance: "pointer"
     });
 
-    // destroy sortable and unmark accepting area
-    Sortable.destroy(collection.id);
-    collection.removeClassName("sort-context");
-    jQuery(document).unbind("closeForms", stop);
-  };
-  jQuery(document).bind("closeForms", stop);
+    collection.addClass("sort-context");
 
-  // show done link and hide the sort triggering multi button
-  collection.insert({ before: done.appear({afterSetup: Element.scrollTo.curry(done)}).observe("click", BILEXICON.closeForms) });
+    ///////////////////////////////////////////////////////////////////////////
 
-  // hide multi buttons of the subentries
-  buttons.invoke("hide");
+    function stop () {
 
-  // show drag handles
-  children.invoke("down", ".multi-button").each(function (mb) {
-    mb.hide().insert({
-      after: $("drag-handle").cloneNode(true)
-                              .writeAttribute({id: null})
-                              .addClassName("drag-handle")
-                              .show()
-    });
-  });
+        // remove done link and show the sort triggering multi button
+        done.remove();
+        button.show();
 
-  // create sortable and mark accepting area
-  Sortable.create(collection.id, {
-    elements: children,
-    ghosting: true,
-    tag: "li",
-    format: /^(?:.*)-(.*)$/,
-    handle: "drag-handle"
-  });
-  collection.addClassName("sort-context");
+        // show multi buttons of the subentries
+        buttons.show();
+
+        // remove drag handles
+        jQuery(".drag-handle").remove();
+
+        // destroy sortable and unmark accepting area
+        collection.disableSelection();
+        collection.removeClass("sort-context");
+        jQuery(document).unbind("closeForms", stop);
+
+        // send new order of valencies
+        var sequence =_.map(collection.children(), function (element) {
+            return element.id.match(/^(?:.*)-(.*)$/)[1];
+        });
+
+        jQuery.ajax({
+            url: url,
+            type: "post",
+            data: {sequence: sequence}
+        }).error(function (jqXHR, textStatus, errorThrown) {
+            // TODO
+            collection.effect("shake");
+        });
+    }
 };
 
-BILEXICON.Commands.cancelSorting = Prototype.emptyFunction;
-
+BILEXICON.Commands.cancelSorting = function () {};

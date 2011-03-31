@@ -1,26 +1,26 @@
 /* ------------------------------------------------------------------------
  * form helpers
  * ------------------------------------------------------------------------ */
-BILEXICON.mirror_input = function (from, to) {
-  from = $(from);
-  to = $(to);
-  from.observe("blur", function (event) {
-    if (to.value === '') {
-      to.value = from.value;
-    }
-  });
-};
-
 BILEXICON.init_mirror_input = function (root) {
-  root = root || document.body;
-  root.select("input[class~='mirror-input']").each(function (from) {
-    from.classNames().grep(/^to-/).each(function (to) {
-      BILEXICON.mirror_input(from, to.substr(3));
+  jQuery("input[class~='mirror-input']", root || document.body).each(function (index) {
+    var from = jQuery(this);
+    // find classes starting with "to-"
+    var classNames = _.select(from.attr("class").split(" "), function (klass) {
+        return klass.match(/^to-/);
+    });
+      
+    // and bind mirroring callback on blur
+    _.each(classNames, function (klass) {
+        var to = jQuery("#" + klass.substr(3));
+        from.blur(function (event) {
+            if (to.val() === '') {
+                to.val(from.val());
+            }
+        });
     });
   });
 };
 
 BILEXICON.id_to_path = function (id) {
-  return "/" + id.gsub("-", "/");
+  return "/" + id.replace(/-/g, "/");
 };
-
