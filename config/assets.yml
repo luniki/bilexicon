@@ -1,4 +1,9 @@
+template_function: BILEXICON.template
+
 javascripts:
+  admin:
+    - app/views/**/*.jst
+
   workspace:
 
     - public/javascripts/vendor/prototype.js
@@ -8,7 +13,10 @@ javascripts:
 
     - public/javascripts/vendor/underscore.js
     - public/javascripts/vendor/jquery-1.5.js
+    - public/javascripts/vendor/jquery-ui-1.8.11.custom.min.js
     - public/javascripts/vendor/jquery-noconflict.js
+
+    - public/javascripts/vendor/handlebars.js
 
     - public/javascripts/extensions.js
     - public/javascripts/application.js
