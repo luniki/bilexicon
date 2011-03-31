@@ -10,9 +10,14 @@
   <!--[if IE]>
     <%= stylesheet_link_tag "blueprint/ie", :media => "screen, projection" %>
   <![endif]-->
+
+  <%= stylesheet_link_tag "overcast/jquery-ui-1.8.11.custom.css", :media => "all" %>
+
   <%= stylesheet_link_tag "application", :media => "screen, projection" %>
 
   <%= include_javascripts :workspace %>
+  <%= include_javascripts :admin if current_user_is_admin %>
+
   <%= javascript_tag "BILEXICON.token = '#{form_authenticity_token}'" %>
 
 </head>
@@ -35,9 +40,10 @@
       </a>
 
       <% form_tag(lemmata_path, :method => :get, :class => "searchform") do %>
-        <%= text_field_tag 'q', params[:q].blank? ? t(:search_hint) : params[:q], {
+        <%= text_field_tag 'q', params[:q], {
             :id => "search_input",
-            :class => "searchfield" + (params[:q].blank? ? " default-as-hint" : "")
+            :class => "searchfield",
+            :placeholder => t(:search_hint)
         } %>
         <input class="searchbutton" type="submit" name="go" value="Go" />
       <% end %>
