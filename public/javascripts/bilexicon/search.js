@@ -23,9 +23,10 @@ BILEXICON.SearchPopup = function (event) {
 
 jQuery(function ($) {
     $("#popup-search").click(BILEXICON.SearchPopup);
-
-    $("#search_input").closest("form").submit(function (event) {
-        if ($(this).val() === "") {
+    
+    var search = $("#search_input");
+    search.closest("form").submit(function (event) {
+        if (search.val() === "") {
             event.preventDefault();
             search.effect("highlight", {color:"#ff0000"});
         }
