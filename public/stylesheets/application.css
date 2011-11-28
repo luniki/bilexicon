@@ -611,3 +611,18 @@ ol li.invitation {
 .progressing .buttons * {
   visibility: hidden;
 }
+
+
+li .really-delete {
+    display: none;
+}
+
+li.confirm-delete .really-delete {
+    display: inline;
+}
+
+li.confirm-delete .delete-button,
+li.confirm-delete .multi-button
+{
+    display: none;
+}
