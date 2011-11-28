@@ -10,7 +10,7 @@ BILEXICON.Commands.editLemma = function () {
     route = BILEXICON.id_to_path(lemma.attr("id"));
 
     entry.fadeOut();
-    
+
     jQuery.ajax({
         url: route + "/edit.js",
         dataType: "text",
@@ -19,13 +19,13 @@ BILEXICON.Commands.editLemma = function () {
         entry.effect("shake");
     }).success(function (data) {
         jQuery(data).insertAfter(entry);
-        
+
         BILEXICON.WordClass.show_additional_fields();
-        
+
         jQuery("#lemma_word_class1, #lemma_word_class2").change(BILEXICON.WordClass.show_additional_fields);
-        
+
         jQuery(document).bind("closeForms", stop);
-        
+
         var edit = entry.next();
         edit.find(".cancel").click(BILEXICON.closeForms);
         edit.find(".submit").click(submit_edit_form);

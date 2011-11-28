@@ -5,8 +5,8 @@
 /**************************************\
 |------------COLOR SCHEME--------------|
 |--------------------------------------|
-- black		#000
-- white		#fff
+- black         #000
+- white         #fff
 
 #E7F8FB
 #C9EDF4
@@ -71,7 +71,9 @@ a.button, button {
 .fieldWithErrors {
   display: table;
   padding: 2px;
+  -webkit-border-radius: 2px;
   -moz-border-radius: 2px;
+  border-radius: 2px;
   background-color: #FF2299;
 }
 
@@ -386,9 +388,19 @@ th[scope="row"] {
 
 a.multi-button {
   background: transparent url(../images/small_multi.png) no-repeat scroll right top;
-  display: block;
   padding: 0;
+  margin-left: 20px;
   height: 15px;
+  float: left;
+}
+
+a.delete-button {
+  float: left;
+  margin-right: 5px;
+}
+
+a.delete-button + a.multi-button {
+  margin-left: 0px;
 }
 
 a.multi-button:hover {
@@ -409,7 +421,8 @@ div.entry-line:hover, div.subentry:hover {
 }
 
 div.subentry-line a.multi-button {
-  margin: 0.75em 0;
+  margin-top: 0.75em;
+  margin-bottom: 0.75em;
 }
 
 a.active-multi-button {
@@ -508,6 +521,10 @@ ul.multi-button-drop-down li small {
 }
 */
 
+ol li.invitation {
+  padding-bottom: 1.5em;
+}
+
 .invitation div {
   background: #3CC5DE;
   border: 1px solid #40A2B7;
@@ -516,6 +533,8 @@ ul.multi-button-drop-down li small {
   -moz-border-radius-bottomright: 1em;
   -webkit-border-bottom-left-radius: 1em;
   -webkit-border-bottom-right-radius: 1em;
+  border-bottom-right-radius: 1em;
+  border-bottom-left-radius: 1em;
 }
 
 .invitation, .invitation a {
@@ -560,4 +579,35 @@ ul.multi-button-drop-down li small {
 .inline-edit-header {
   text-align: right;
   font-weight: bold;
+}
+
+.statusbox {
+  height: 4em;
+  line-height: 4em;
+  display: none;
+  -webkit-border-radius: 7px;
+  -moz-border-radius: 7px;
+  border-radius: 7px;
+  background: #ffffcf;
+}
+
+.statusbox p {
+  color: #333;
+  font-weight: bolder;
+  padding-left: 20px;
+  margin-left: 20px;
+  background: url(../images/icons/information.png) no-repeat left center;
+}
+
+/* TODO: besser nicht span-5/6 sondern eine spezielle klasse */
+.progressing .span-5, .progressing .span-6 {
+  opacity: 0.25;
+}
+
+.progressing > .subentry .buttons {
+  background: url(../images/progress.gif) no-repeat left center;
+}
+
+.progressing .buttons * {
+  visibility: hidden;
 }

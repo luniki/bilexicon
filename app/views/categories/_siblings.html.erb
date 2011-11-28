@@ -1,0 +1,10 @@
+<ol class="lemma_categories">
+  <% siblings.each do |sibling| -%>
+  <li id="<%= sibling.id %>" class="<%= 'current' if cur == sibling %>">
+    <% link_to sibling do %>
+      <%= h sibling.name %>
+      <%= ">" if sibling.children.present? %>
+    <% end %>
+  </li>
+  <% end %>
+</ol>

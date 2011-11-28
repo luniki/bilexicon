@@ -16,9 +16,9 @@ BILEXICON.Commands.edit = (function ($) {
 
         subentry.fadeOut();
 
-        jQuery.ajax({
+        $.ajax({
             url: route + ".json",
-            method: "get"
+            type: "get"
         }).error(function (jqXHR, textStatus, errorThrown) {
             // TODO
             subentry.effect("shake");
@@ -28,13 +28,13 @@ BILEXICON.Commands.edit = (function ($) {
             var stop = function () {
                 edit.remove();
                 subentry.fadeIn();
-                jQuery(document).unbind("closeForms", stop);
+                $(document).unbind("closeForms", stop);
             };
-            jQuery(document).bind("closeForms", stop);
+            $(document).bind("closeForms", stop);
 
             edit.find(".cancel").click(BILEXICON.closeForms);
             edit.find(".submit").click(submit_edit_form);
-            
+
             BILEXICON.init_mirror_input(edit);
             edit.fadeIn(function () {
                 edit.find("input[type=text]").focus();
@@ -43,34 +43,32 @@ BILEXICON.Commands.edit = (function ($) {
 
         // submit subentry and remove edit form
         function submit_edit_form(event) {
-            event.preventDefault();
-            var edit = event.element().up(".subentry-edit");
-            var r = new Ajax.Request(route, {
-                method: "put",
-                parameters: edit.down("form").serialize(true),
-
-                // replace resource with response and highlight it
-                onSuccess: function (transport) {
-                    var id = resource.id;
-                    resource.replace(transport.responseText);
-                    $(id).down(".subentry").highlight();
-                },
-
-                // get errors from response and show them on the invalid fields
-                onFailure: function (transport) {
-                    var errors = transport.responseText.evalJSON();
-                    errors.each(function (error) {
-                        var element = edit.down("input[name*='[" + error[0]  + "]']");
-                        if (!element.parentNode.hasClassName("fieldWithErrors")) {
-                            element.wrap("span", {"class": "fieldWithErrors"}).insert({
-                                after: new Element("span", {"class": "input-error"})
-                                    .update(error[1])
-                            });
-                        }
-                        element.parentNode.next(".input-error").update(error[1]);
-                    });
-                }
+            var edit = $(this).closest(".subentry-edit");
+            
+            $.ajax({
+                url: route + ".js",
+                type: "PUT",
+                data: edit.find("form").serialize()
+            }).success(function (data) {
+                resource.replaceWith(data);
+                $("#" + resource_id).find(".subentry").effect("highlight");
+            }).error(function (jqXHR, textStatus, errorThrown) {
+                $(".fieldWithErrors input").unwrap();
+                $(".input-error").remove();
+                _.each($.parseJSON(jqXHR.responseText), function (error) {
+                    var element = edit.find("input[name*='[" + error[0]  + "]']");
+                    if (!element.parent().hasClass("fieldWithErrors")) {
+                        element
+                            .wrap('<span class="fieldWithErrors"/>')
+                            .parent()
+                            .after('<span class="input-error"/>')
+                            .next().html(error[1]);
+                    }
+                    element.parent().next(".input-error").html(error[1]);
+                });
             });
+
+            return false;
         }
     };
 }(jQuery));

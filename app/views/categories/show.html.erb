@@ -22,7 +22,54 @@
     </ul>
   </div>
 
+
   <h1><%=h @category.name %></h1>
+
+<style>
+.finder {
+  width: 100%;
+  height: 10em;
+  overflow: scroll;
+  padding-top: 1.5em;
+  padding-bottom: 1.5em;
+}
+
+.finder ol {
+  display: table-cell;
+  border-left: 1px solid black;
+  width: 20em;
+  overflow: hidden;
+  padding-left: 0.5em;
+}
+
+.finder ol:first-child {
+  border-left: none;
+}
+
+.finder li {
+  list-style-type: none;
+}
+
+.current {
+  background-color: rgba(255, 0, 0, 0.1);
+}
+</style>
+
+  <div class="finder">
+    <% @category.ancestors.each do |ancestor| -%>
+      <%= render :partial => "siblings",
+                 :object => ancestor.self_and_siblings,
+                 :locals => { :cur => ancestor } %>
+    <% end %>
+    <%= render :partial => "siblings",
+               :object => @category.self_and_siblings,
+               :locals => { :cur => @category } %>
+    <% if @category.children.present? -%>
+      <%= render :partial => "siblings",
+                 :object => @category.children,
+                 :locals => { :cur => @category } %>
+    <% end %>
+  </div>
 
 
   <h2><%= t :category_children %></h2>

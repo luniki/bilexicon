@@ -3,58 +3,55 @@
 
   <hr class="space"/>
 
-  <% form_tag('500.html', :method => :put) do -%>
+  <form method="post" action="500.html">
 
     <div class="span-4 append-bottom" style="text-align: right">
-      <strong><%= t(:form) %></strong><span class="required">*</span>
+      <strong>Form</strong><span class="required">*</span>
     </div>
     <div class="span-7">
-      <%= text_field_tag "example[form1]", '#{example.form1}', :class => "span-7" %>
+      <input type="text" value="{{form1}}" class="span-7" name="example[form1]" id="example_form1">
     </div>
     <div class="span-7">
-      <%= text_field_tag "example[form2]", '#{example.form2}', :class => "span-7" %>
+      <input type="text" value="{{form2}}" class="span-7" name="example[form2]" id="example_form2">
     </div>
     <div class="quiet span-4 last">
     </div>
 
     <div class="span-4 append-bottom clear" style="text-align: right">
-      <strong><%= t(:syntax) %></strong>
+      <strong>Syntax</strong>
     </div>
     <div class="span-7">
-      <%= text_field_tag "example[syntax1]", '#{example.syntax1}',
-            :class => "span-7 mirror-input to-example_syntax2" %>
+      <input type="text" value="{{syntax1}}" class="span-7 mirror-input to-example_syntax2" name="example[syntax1]" id="example_syntax1">
     </div>
     <div class="span-7">
-      <%= text_field_tag "example[syntax2]", '#{example.syntax2}', :class => "span-7" %>
+      <input type="text" value="{{syntax2}}" class="span-7" name="example[syntax2]" id="example_syntax2">
     </div>
     <div class="quiet span-4 last">
     </div>
 
 
     <div class="span-4 append-bottom clear" style="text-align: right">
-      <strong><%= t(:synonym) %></strong>
+      <strong>Synonym</strong>
     </div>
     <div class="span-7">
-      <%= text_field_tag "example[synonym1]", '#{example.synonym1}', :class => "span-7" %>
+      <input type="text" value="{{synonym1}}" class="span-7" name="example[synonym1]" id="example_synonym1">
     </div>
     <div class="span-7">
-      <%= text_field_tag "example[synonym2]", '#{example.synonym2}', :class => "span-7" %>
+      <input type="text" value="{{synonym2}}" class="span-7" name="example[synonym2]" id="example_synonym2">
     </div>
     <div class="quiet span-4 last">
     </div>
 
 
     <div class="push-4 span-18 clear last">
-      <button class="submit">
-        <%= image_tag 'icons/tick.png' %>
-        <%= t(:save) %>
+      <button class="submit tick">
+        speichern
       </button>
-      <button class="cancel">
-        <%= image_tag 'icons/cross.png' %>
-        <%= t(:cancel) %>
+      <button class="cancel cross">
+        abbrechen
       </button>
     </div>
 
 
-  <% end %>
+  </form>
 </div>

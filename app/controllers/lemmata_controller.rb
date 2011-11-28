@@ -67,9 +67,18 @@ class LemmataController < ApplicationController
 
   def destroy
     @lemma = Lemma.find(params[:id])
+
+    # default redirection target
+    target = lemmata_url
+
+    # but if lemma was associated to exactly one category
+    # redirect there
+    categories = @lemma.categories
+    target = category_url(categories.first)  if categories.length == 1
+
     @lemma.destroy
 
-    redirect_to(lemmata_path)
+    redirect_to(target)
   end
 
 end

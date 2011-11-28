@@ -29,7 +29,7 @@ BILEXICON.Commands.addCollocation = function () {
       }).error(function (jqXHR, textStatus, errorThrown) {
           jQuery(".fieldWithErrors input").unwrap();
           jQuery(".input-error").remove();
-          _.each(jQuery.parseJSON(jqXHR.responseText), function (error) {
+          _.each($.parseJSON(jqXHR.responseText), function (error) {
               var element = li.find("input[name*='[" + error[0]  + "]']");
               if (!element.parent().hasClass("fieldWithErrors")) {
                   element

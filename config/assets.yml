@@ -6,19 +6,20 @@ javascripts:
 
   workspace:
 
-    - public/javascripts/vendor/prototype.js
-    - public/javascripts/vendor/effects.js
-    - public/javascripts/vendor/controls.js
-    - public/javascripts/vendor/dragdrop.js
+#    - public/javascripts/vendor/prototype.js
+#    - public/javascripts/vendor/effects.js
+#    - public/javascripts/vendor/controls.js
+#    - public/javascripts/vendor/dragdrop.js
 
     - public/javascripts/vendor/underscore.js
     - public/javascripts/vendor/jquery-1.5.js
-    - public/javascripts/vendor/jquery-ui-1.8.11.custom.min.js
+#    - public/javascripts/vendor/jquery-ui-1.8.11.custom.min.js
+#    - public/javascripts/vendor/jquery-ui-1.8.15.custom.min.js
+    - public/javascripts/vendor/jquery-ui-1.8.15.custom.js
     - public/javascripts/vendor/jquery-noconflict.js
 
     - public/javascripts/vendor/handlebars.js
 
-    - public/javascripts/extensions.js
     - public/javascripts/application.js
 
     - public/javascripts/bilexicon/helpers.js
@@ -28,3 +29,4 @@ javascripts:
     - public/javascripts/bilexicon/commands/*.js
     - public/javascripts/bilexicon/multibutton.js
     - public/javascripts/bilexicon/wordclass.js
+    - public/javascripts/bilexicon/quick-delete.js
