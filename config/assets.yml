@@ -16,7 +16,7 @@ javascripts:
 #    - public/javascripts/vendor/jquery-ui-1.8.11.custom.min.js
 #    - public/javascripts/vendor/jquery-ui-1.8.15.custom.min.js
     - public/javascripts/vendor/jquery-ui-1.8.15.custom.js
-    - public/javascripts/vendor/jquery-noconflict.js
+#    - public/javascripts/vendor/jquery-noconflict.js
 
     - public/javascripts/vendor/handlebars.js
 

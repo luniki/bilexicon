@@ -7,7 +7,7 @@ BILEXICON.SearchPopup = function (event) {
         event.preventDefault();
     }
 
-    var q = jQuery('#search_term').text();
+    var q = $('#search_term').text();
     var increment = 20;
     _.each([
         'http://dict.tu-chemnitz.de/dings.cgi?query=',
@@ -27,7 +27,7 @@ jQuery(function ($) {
     $("#search_input").closest("form").submit(function (event) {
         if ($(this).val() === "") {
             event.preventDefault();
-            search.shake();
+            search.effect("highlight", {color:"#ff0000"});
         }
     });
 });
