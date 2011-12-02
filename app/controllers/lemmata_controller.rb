@@ -31,7 +31,6 @@ class LemmataController < ApplicationController
     respond_to do |format|
       format.html
       format.js { render :partial => "ajax_edit" }
-      format.pdf { render :layout => false }
     end
   end
 
