@@ -17,6 +17,68 @@
 \**************************************/
 
 
+/* semantic class names */
+.inline-edit-control, .inline-edit-control2 {
+    float:left;
+    margin-right:10px;
+    width:270px;
+}
+
+.inline-edit-control2 {
+    padding-left:280px;
+}
+
+.inline-edit-header {
+    float:left;
+    margin-right:10px;
+    width:150px;
+    margin-bottom:1.5em;
+    clear:both;
+}
+
+.inline-edit-help {
+    color:#666;
+    margin-right:0;
+    padding-right:0;
+    float:left;
+    width:150px;
+}
+
+.lemma, #head, #content, .meaning-group, .subentries {
+    margin-right:0;
+    padding-right:0;
+    float:left;
+    width:950px;
+}
+
+/**************************************/
+/*               FOOTER               */
+/**************************************/
+
+html, body {
+    height: 100%;
+}
+
+.container {
+    min-height: 100%;
+    height: auto !important;
+    height: 100%;
+    margin: 0 auto -2em;
+}
+
+#footer, .push {
+  height: 2em;
+}
+
+#footer {
+  color: #C9EDF4;
+  text-align: center;
+  margin: 0 auto;
+  float: none;
+  width: 950px;
+}
+
+
 /**************************************/
 /*              GLOBALS               */
 /**************************************/
@@ -265,17 +327,12 @@ a.button, button {
 
 .finder ol {
   float: left;
-  border-left: 1px solid black;
   min-width: 150px;
   height: 100%;
   overflow-x: hidden;
   overflow-y: scroll;
   padding: 0;
   margin: 0;
-}
-
-.finder ol:first-child {
-  border-left: none;
 }
 
 .finder li {
@@ -285,6 +342,7 @@ a.button, button {
 
 .finder .current {
     background-color: #C9EDF4;
+}
 
 /**************************************/
 /*            ADMIN BUTTONS           */
@@ -398,14 +456,6 @@ ol.examples li {
   padding: 0;
 }
 
-/**************************************/
-/*               FOOTER               */
-/**************************************/
-#footer {
-  padding-top: 3em;
-  color: #C9EDF4;
-  text-align: center;
-}
 
 /**************************************/
 /*               MISC                 */
