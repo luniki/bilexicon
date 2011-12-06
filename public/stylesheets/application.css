@@ -251,6 +251,40 @@ a.button, button {
   margin-left: 1em;
 }
 
+/**************************************/
+/*            FINDER                  */
+/**************************************/
+.finder {
+  width: 100%;
+  height: 15em;
+  border: 1px solid #ccc;
+  overflow-x: auto;
+  overflow-y: hidden;
+  white-space: nowrap;
+}
+
+.finder ol {
+  float: left;
+  border-left: 1px solid black;
+  min-width: 150px;
+  height: 100%;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  padding: 0;
+  margin: 0;
+}
+
+.finder ol:first-child {
+  border-left: none;
+}
+
+.finder li {
+  list-style-type: none;
+  padding: 0 0.5em;  
+}
+
+.finder .current {
+    background-color: #C9EDF4;
 
 /**************************************/
 /*            ADMIN BUTTONS           */
@@ -389,14 +423,13 @@ th[scope="row"] {
 a.multi-button {
   background: transparent url(../images/small_multi.png) no-repeat scroll right top;
   padding: 0;
-  margin-left: 20px;
   height: 15px;
   float: left;
 }
 
 a.delete-button {
   float: left;
-  margin-right: 5px;
+  margin-left: 5px;
 }
 
 a.delete-button + a.multi-button {

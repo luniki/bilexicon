@@ -3,8 +3,13 @@ class CategoriesController < ApplicationController
   before_filter :require_admin, :except => [:index, :show]
 
   def index
-    @categories = Category.roots
-    @orphans = Lemma.find_without_categorizations
+    @category = nil
+    @ancestors = []
+    @children = Category.roots
+    @lemmata = Lemma.find_without_categorizations
+    @siblings = []
+
+    render :action => :show
   end
 
   def show
@@ -12,6 +17,7 @@ class CategoriesController < ApplicationController
     @ancestors = @category.ancestors
     @children = @category.children
     @lemmata = @category.lemmata
+    @siblings = @category.self_and_siblings
   end
 
   def new

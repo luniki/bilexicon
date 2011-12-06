@@ -1,94 +1,75 @@
 <div class="category">
 
   <% if current_user then %>
-    <%=link_to t(:create_deck), new_user_deck_path(current_user, :category_id => @category), :class => "button"  %>
     <% if current_user_is_admin then %>
-      <%= link_to t(:edit), edit_category_path(@category), :class => "button" %>
-      <%= link_to t(:delete), @category, :confirm => t(:confirm_question), :method => :delete, :class => "button"  %>
-      <%= link_to t(:add_category), new_category_path(:category_id => @category), :class => "button"   %>
-      <%=link_to t(:add_lemma), new_lemma_path(:category_id => @category), :class => "button"  %>
+
+      <%= link_to t(:edit), edit_category_path(@category),
+          :class => "button" if @category %>
+      
+      <%= link_to t(:delete), @category,
+          :confirm => t(:confirm_question),
+          :method => :delete,
+          :class => "button"  if @category%>
+      
+      <%= link_to t(:add_category), new_category_path(:category_id => @category),
+          :class => "button" %>
+      
+      <%= link_to t(:add_lemma), new_lemma_path(:category_id => @category),
+         :class => "button" if @category %>
+
     <% end %>
     <hr />
   <% end %>
 
 
 
+  <% unless @ancestors.empty? %>
   <div class="categories">
     <ul class="ancestors">
       <li><%= link_to t(:top), categories_path %> &gt;</li>
-      <% @category.self_and_ancestors.each do |node| -%>
+      <% [@category, *@ancestors].compact.each do |node| -%>
         <li><%= link_to h(node.name), node %> &gt;</li>
       <% end %>
     </ul>
   </div>
+  <% end %>
 
 
-  <h1><%=h @category.name %></h1>
-
-<style>
-.finder {
-  width: 100%;
-  height: 10em;
-  overflow: scroll;
-  padding-top: 1.5em;
-  padding-bottom: 1.5em;
-}
-
-.finder ol {
-  display: table-cell;
-  border-left: 1px solid black;
-  width: 20em;
-  overflow: hidden;
-  padding-left: 0.5em;
-}
-
-.finder ol:first-child {
-  border-left: none;
-}
-
-.finder li {
-  list-style-type: none;
-}
-
-.current {
-  background-color: rgba(255, 0, 0, 0.1);
-}
-</style>
+  <h1><%=h (@category.try(:name) || t(:categories)) %></h1>
 
   <div class="finder">
-    <% @category.ancestors.each do |ancestor| -%>
+    <% @ancestors.each do |ancestor| -%>
       <%= render :partial => "siblings",
                  :object => ancestor.self_and_siblings,
                  :locals => { :cur => ancestor } %>
     <% end %>
-    <%= render :partial => "siblings",
-               :object => @category.self_and_siblings,
-               :locals => { :cur => @category } %>
-    <% if @category.children.present? -%>
+
+    <% if @siblings.present? -%>
       <%= render :partial => "siblings",
-                 :object => @category.children,
+                 :object => @siblings,
+                 :locals => { :cur => @category } %>
+    <% end %>
+
+    <% if @children.present? -%>
+      <%= render :partial => "siblings",
+                 :object => @children,
                  :locals => { :cur => @category } %>
     <% end %>
   </div>
 
 
-  <h2><%= t :category_children %></h2>
-
-  <ul id="children">
-    <% for child in @children -%>
-      <% content_tag_for(:li, child) do %>
-        <%= link_to h(child.name), child %>
-      <% end %>
-    <% end %>
-  </ul>
-
-
   <hr class="space" />
 
-  <h2><%= t :lemmata %></h2>
+  <% if @category -%>
+  
+    <h2><%= t :lemmata %></h2>
 
-  <% if @lemmata.empty? then -%>
-    <p><%= t :category_has_no_lemmata_yet %></p>
+    <% if @lemmata.empty? then -%>
+      <p><%= t :category_has_no_lemmata_yet %></p>
+    <% end %>
+    
+  <% elsif !@lemmata.empty? %>
+    <h2><%= t :orphaned_lemmata %></h2>
   <% end %>
 
   <ul id="lemmata">

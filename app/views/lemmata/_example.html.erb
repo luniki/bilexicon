@@ -25,9 +25,9 @@
 
     <div class="buttons span-2 last">
       <% if current_user_is_admin then %>
-        <%= render :partial => "lemmata/quick_delete" %>
         <a class="multi-button cmd-edit cmd-deleteEntry cmd-sortEntries"
            href="#"><span></span></a>
+        <%= render :partial => "lemmata/quick_delete" %>
       <% else %>
         &nbsp;
       <% end %>

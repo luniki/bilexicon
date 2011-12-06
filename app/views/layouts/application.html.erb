@@ -34,6 +34,13 @@
 
 
     <div class="column span-21 last" style="text-align: right;">
+      <% if current_user_is_admin then %>
+      <a href="<%= categories_path %>" class="button" style="display: inline; float: none; margin-right: 1.5em;">
+        <%= image_tag 'icons/user.png' %>
+        <%= t(:user_administration) %>
+      </a>
+      <% end %>
+
       <a href="<%= categories_path %>" class="button" style="display: inline; float: none; margin-right: 1.5em;">
         <%= image_tag 'icons/cards.png' %>
         <%= t(:browse_categories) %>
