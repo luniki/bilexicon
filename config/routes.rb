@@ -21,28 +21,23 @@ ActionController::Routing::Routes.draw do |map|
     lemma.resources :valencies, :collection => { :sort => :post }
     lemma.resources :collocations, :collection => { :sort => :post }
     lemma.resources :phraseologisms, :collection => { :sort => :post }
-
-    lemma.resource :google_books, :requirements => { :context_type => 'lemma' }
   end
 
   map.resources :examples
 
-  map.resources :valencies do |subentry|
-    subentry.resources :examples, :requirements => { :context_type => 'valency' },
-                                  :collection => { :sort => :post }
-    subentry.resource :google_books, :requirements => { :context_type => 'valency' }
+  map.resources :valencies do |valency|
+    valency.resources :examples, :requirements => { :context_type => 'valency' },
+                                 :collection => { :sort => :post }
   end
 
-  map.resources :collocations do |subentry|
-    subentry.resources :examples, :requirements => { :context_type => 'collocation' },
-                                  :collection => { :sort => :post }
-    subentry.resource :google_books, :requirements => { :context_type => 'collocation' }
+  map.resources :collocations do |collocation|
+    collocation.resources :examples, :requirements => { :context_type => 'collocation' },
+                                     :collection => { :sort => :post }
   end
 
-  map.resources :phraseologisms do |subentry|
-    subentry.resources :examples, :requirements => { :context_type => 'phraseologism' },
-                                  :collection => { :sort => :post }
-    subentry.resource :google_books, :requirements => { :context_type => 'phraseologism' }
+  map.resources :phraseologisms do |phraseologism|
+    phraseologism.resources :examples, :requirements => { :context_type => 'phraseologism' },
+                                       :collection => { :sort => :post }
   end
 
   Jammit::Routes.draw(map)
