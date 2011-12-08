@@ -23,15 +23,8 @@
                  :side => 2
                } %>
 
-    <div class="buttons span-2 last">
-      <% if current_user_is_admin then %>
-        <a class="multi-button cmd-edit cmd-deleteEntry cmd-addExample cmd-sortEntries"
-           href="#"><span></span></a>
-        <%= render :partial => "lemmata/quick_delete" %>
-      <% else %>
-        &nbsp;
-      <% end %>
-    </div>
+    <%= render :partial => 'lemmata/subentry_margin',
+               :locals => { :cmds => %w"edit deleteEntry addExample sortEntries" } %>
 
   </div>
 

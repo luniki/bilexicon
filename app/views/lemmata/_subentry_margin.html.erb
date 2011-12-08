@@ -1,0 +1,10 @@
+<div class="buttons span-2 last">
+  <% if current_user_is_admin then %>
+  <a class="<%= ['multi-button', *cmds.map{|c| "cmd-#{c}"}].join(" ") %>" href="#"><span></span></a>
+  <%= render :partial => "lemmata/quick_delete" %>
+  <% else %>
+    <% unless object.is_a?(Example) then %>
+      <a class="gbook-button" href="#"><%= image_tag 'icons/book_brown.png' %></a>
+    <% end %>
+  <% end %>
+</div>
