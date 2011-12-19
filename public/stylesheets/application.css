@@ -687,7 +687,7 @@ ol li.invitation {
   opacity: 0.25;
 }
 
-.progressing > .subentry .buttons {
+.progressing > .subentry .buttons, .progressing > .buttons {
   background: url(../images/progress.gif) no-repeat left center;
 }
 
@@ -700,7 +700,7 @@ li .really-delete {
     display: none;
 }
 
-li.confirm-delete .really-delete {
+li.confirm-delete > .subentry .really-delete {
     display: inline;
 }
 

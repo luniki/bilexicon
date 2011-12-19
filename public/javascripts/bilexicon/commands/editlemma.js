@@ -5,43 +5,59 @@
  * ------------------------------------------------------------------------ */
 BILEXICON.Commands.editLemma = function () {
 
-    var lemma = jQuery(".lemma:first"),
-    entry = lemma.find(".entry"),
-    route = BILEXICON.id_to_path(lemma.attr("id"));
+    var lemma = $(".lemma:first"),
+        entry = lemma.find(".entry"),
+        route = BILEXICON.id_to_path(lemma.attr("id"));
 
-    entry.fadeOut();
+    // show faded entry, fade edit form and remove it
+    var stop = function (event) {
+        $("#lemma-edit").remove();
+        $(".entry:first").show();
+        $(document).unbind("closeForms", stop);
+    };
 
-    jQuery.ajax({
-        url: route + "/edit.js",
-        dataType: "text",
-        type: "get"
-    }).error(function (jqXHR, textStatus, errorThrown) {
+
+    entry.find(".entry-line").addClass("progressing");
+
+    $.when(
+        $.ajax({
+            url: route + "/edit.js",
+            dataType: "text",
+            type: "get"
+        })
+    ).fail(function (jqXHR, textStatus, errorThrown) {
         entry.effect("shake");
-    }).success(function (data) {
-        jQuery(data).insertAfter(entry);
+    }).done(function (data) {
+
+        $(data).insertAfter(entry);
 
         BILEXICON.WordClass.show_additional_fields();
 
-        jQuery("#lemma_word_class1, #lemma_word_class2").change(BILEXICON.WordClass.show_additional_fields);
+        $(document).bind("closeForms", stop);
 
-        jQuery(document).bind("closeForms", stop);
+        $("#lemma_word_class1, #lemma_word_class2").change(BILEXICON.WordClass.show_additional_fields);
 
         var edit = entry.next();
         edit.find(".cancel").click(BILEXICON.closeForms);
         edit.find(".submit").click(submit_edit_form);
-        edit.fadeIn();
+
+        entry.hide();
+        edit.show();
+    }).always(function () {
+        entry.find(".entry-line").removeClass("progressing");
     });
 
-    //////////////////////////////////////////////////////////////////////
-
-    // submit entry and dismiss fade edit form and remove it
+    ///////////////////////////////////////////////////////////
+    // submit entry and dismiss fade edit form and remove it //
+    ///////////////////////////////////////////////////////////
     var submit_edit_form = function (event) {
         event.preventDefault();
-        var lemma = jQuery(event.target).closest(".lemma");
+        var lemma = $(event.target).closest(".lemma");
         var edit = lemma.find(".entry-edit");
-        jQuery.ajax({
+        $.ajax({
             url: route + ".js",
             type: "put",
+            dataType: "text",
             data: edit.find("form").serialize()
         }).success(function (data) {
             edit.remove();
@@ -54,13 +70,5 @@ BILEXICON.Commands.editLemma = function () {
             edit.find(".submit").click(submit_edit_form);
             edit.show();
         });
-    };
-
-    // show faded entry, fade edit form and remove it
-    var stop = function (event) {
-        var edit = jQuery("#lemma-edit"), entry = jQuery(".entry:first");
-        edit.remove();
-        entry.fadeIn();
-        jQuery(document).unbind("closeForms", stop);
     };
 };
