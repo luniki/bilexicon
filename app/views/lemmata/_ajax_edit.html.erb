@@ -80,15 +80,7 @@
       <%= t(:lemma_categories) %><span class="required">*</span>
     </div>
     <div class="span-14">
-      <% if @categories.present? -%>
-        <%= select_tag "lemma_categories",
-                      options_for_select(nested_set_options(Category) {|i| "#{'-' * i.level} #{i.name}" },
-                                          @lemma.categories.collect{|i| i.id}),
-                      {:multiple => :multiple, :size => 5, :name => "lemma[category_ids][]"} %>
-      <% else -%>
-        <span class="quiet"><%= t :categories_missing %></span>
-      <% end %>
-      <%= error_message_on @lemma, :categories, :css_class => "input-error" %>
+      <%= render :partial => "lemmata/select_category" %>
     </div>
     <div class="inline-edit-help"></div>
 

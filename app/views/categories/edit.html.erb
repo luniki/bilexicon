@@ -9,7 +9,7 @@
   </p>
   <p>
     <%= f.label :parent_id, t(:parent_category) %><br />
-    <%= f.select :parent_id, nested_set_options(Category, @category) {|i| "#{'-' * i.level} #{i.name}" }.insert(0, ["", ""]) %>
+    <%= f.select :parent_id, category_options.insert(0, ["", ""]) %>
   </p>
   <p>
     <%= f.submit t(:edit) %> <%= link_to t(:back), @category %>

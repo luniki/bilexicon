@@ -1,5 +1,11 @@
 module LemmataHelper
 
+  def category_options
+    nested_tree_options(Category) do |i, level|
+      "#{'-' * level} #{i.name}"
+    end
+  end
+
   def underline(text)
     text.gsub(/\b_([^_]+)_\b/) { |m| "<u>" + h($1) + "</u>" }
   end

@@ -41,22 +41,7 @@
       <%= t :lemma_categories %><span class="required">*</span>
     </div>
     <div class="span-18 last">
-      <% if @categories.present? -%>
-        <%
-        options = options_for_select(nested_set_options(Category) {|i| "#{'-' * i.level} #{i.name}" },
-                                     @lemma.categories.collect{|i| i.id})
-        select = select_tag "lemma_categories", options, {:multiple => :multiple, :size => 5, :name => "lemma[category_ids][]", :class => "span-9"}
-
-        if @lemma.errors.on(:categories)
-          select = ActionView::Base.field_error_proc.call(select)
-        end
-        %>
-
-        <%= select %>
-
-      <% else -%>
-        <span class="quiet lemma_categories"><%= t :categories_missing %></span>
-      <% end %>
+      <%= render :partial => "lemmata/select_category" %>
     </div>
 
     <div class="span-6 attribute"><%= t :lemma_word_class %></div>

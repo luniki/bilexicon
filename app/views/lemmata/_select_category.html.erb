@@ -1,0 +1,10 @@
+<% if @categories.present? -%>
+  <%= select_tag "lemma_categories",
+      options_for_select(category_options,
+                         @lemma.categories.collect{|i| i.id}),
+      {:multiple => :multiple, :size => 5, :name => "lemma[category_ids][]"} %>
+<% else -%>
+  <span class="quiet"><%= t :categories_missing %></span>
+<% end %>
+
+<%= error_message_on @lemma, :categories, :css_class => "input-error" %>
