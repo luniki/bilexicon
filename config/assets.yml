@@ -6,17 +6,9 @@ javascripts:
 
   workspace:
 
-#    - public/javascripts/vendor/prototype.js
-#    - public/javascripts/vendor/effects.js
-#    - public/javascripts/vendor/controls.js
-#    - public/javascripts/vendor/dragdrop.js
-
     - public/javascripts/vendor/underscore.js
-    - public/javascripts/vendor/jquery-1.5.js
-#    - public/javascripts/vendor/jquery-ui-1.8.11.custom.min.js
-#    - public/javascripts/vendor/jquery-ui-1.8.15.custom.min.js
+    - public/javascripts/vendor/jquery-1.7.1.js
     - public/javascripts/vendor/jquery-ui-1.8.15.custom.js
-#    - public/javascripts/vendor/jquery-noconflict.js
 
     - public/javascripts/vendor/handlebars.js
 
