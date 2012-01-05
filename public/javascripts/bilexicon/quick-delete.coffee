@@ -18,7 +18,7 @@ jQuery ($) ->
     item.addClass("progressing").removeClass("confirm-delete")
 
     $.ajax
-      url: BILEXICON.id_to_path item.attr "id"
+      url: BILEXICON.id_to_path(item.attr("id")) + ".js"
       type: "delete"
     .error (jqXHR, textStatus, errorThrown) ->
       item.effect("shake").removeClass "confirm-delete"

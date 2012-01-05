@@ -70,7 +70,10 @@ class CollocationsController < ApplicationController
     lemma = @collocation.lemma
     @collocation.destroy
 
-    redirect_to(lemma)
+    respond_to do |format|
+      format.js   { head 200 }
+      format.html { redirect_to(lemma) }
+    end
   end
 
   def sort

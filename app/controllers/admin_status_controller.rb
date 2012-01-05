@@ -13,7 +13,10 @@ class AdminStatusController < ApplicationController
   def destroy
     @user.admin = false
     flash[:notice] = 'User lost admin status.'  if (@user.save)
-    redirect_to(users_path)
+    respond_to do |format|
+      format.js   { head 200 }
+      format.html { redirect_to(users_path) }
+    end
   end
 
   private

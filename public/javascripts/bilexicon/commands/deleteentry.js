@@ -11,7 +11,7 @@ BILEXICON.Commands.deleteEntry = function (button) {
 
     if (confirm('Sind Sie sicher?')) {
         var r = jQuery.ajax({
-            url: route, 
+            url: route + ".js", 
             type: "delete"
         }).error(function (jqXHR, textStatus, errorThrown) {
             // TODO

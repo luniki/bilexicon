@@ -77,7 +77,11 @@ class LemmataController < ApplicationController
 
     @lemma.destroy
 
-    redirect_to(target)
+    respond_to do |format|
+      format.js   { head 200 }
+      format.html { redirect_to(target) }
+    end
+
   end
 
 end

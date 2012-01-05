@@ -44,11 +44,12 @@ BILEXICON.Commands.edit = (function ($) {
         // submit subentry and remove edit form
         function submit_edit_form(event) {
             var edit = $(this).closest(".subentry-edit");
-            
+
             $.ajax({
                 url: route + ".js",
                 type: "PUT",
-                data: edit.find("form").serialize()
+                data: edit.find("form").serialize(),
+                dataType: "text"
             }).success(function (data) {
                 resource.replaceWith(data);
                 $("#" + resource_id).find(".subentry").effect("highlight");

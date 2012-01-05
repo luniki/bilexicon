@@ -40,6 +40,9 @@ class DecksController < ApplicationController
     @deck = Deck.find(params[:id])
     @deck.destroy
 
-    redirect_to(decks_url(current_user))
+    respond_to do |format|
+      format.js   { head 200 }
+      format.html { redirect_to(decks_url(current_user)) }
+    end
   end
 end

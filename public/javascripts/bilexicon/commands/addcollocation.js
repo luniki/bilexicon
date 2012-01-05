@@ -19,7 +19,8 @@ BILEXICON.Commands.addCollocation = function () {
       var r = jQuery.ajax({
           url: location + ".js",
           type: "post",
-          data: li.find("form:first").serialize()
+          data: li.find("form:first").serialize(),
+          dataType: "text"
       }).success(function (data) {
           li.replaceWith(data);
           var created = collocations.children().last();

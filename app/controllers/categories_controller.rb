@@ -76,6 +76,9 @@ class CategoriesController < ApplicationController
     @category = Category.find(params[:id])
     @category.destroy
 
-    redirect_to(categories_url)
+    respond_to do |format|
+      format.js   { head 200 }
+      format.html { redirect_to(categories_path) }
+    end
   end
 end

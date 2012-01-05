@@ -60,7 +60,11 @@ class ExamplesController < ApplicationController
     exampleable = @example.exampleable
     @example.destroy
 
-    redirect_to_exampleable exampleable
+    respond_to do |format|
+      format.js   { head 200 }
+      format.html { redirect_to_exampleable exampleable }
+    end
+
   end
 
   def sort

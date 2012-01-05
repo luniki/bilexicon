@@ -44,6 +44,10 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @user.destroy
 
-    redirect_to(users_path)
+    respond_to do |format|
+      format.js   { head 200 }
+      format.html { redirect_to(users_path) }
+    end
+
   end
 end

@@ -1,4 +1,5 @@
 (function() {
+
   jQuery(function($) {
     $("body#page-lemmata-show .delete-button").live("click", function(event) {
       $(this).closest("li").addClass("confirm-delete");
@@ -13,7 +14,7 @@
       item = $(this).closest("li");
       item.addClass("progressing").removeClass("confirm-delete");
       return $.ajax({
-        url: BILEXICON.id_to_path(item.attr("id")),
+        url: BILEXICON.id_to_path(item.attr("id")) + ".js",
         type: "delete"
       }).error(function(jqXHR, textStatus, errorThrown) {
         return item.effect("shake").removeClass("confirm-delete");
@@ -24,4 +25,5 @@
       });
     });
   });
+
 }).call(this);
